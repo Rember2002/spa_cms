@@ -13,7 +13,7 @@ class SaveStrategicAllieRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class SaveStrategicAllieRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'name_ally' => ['required', 'unique:strategic_allies,name_ally'],
+            'image' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+
         ];
     }
 }

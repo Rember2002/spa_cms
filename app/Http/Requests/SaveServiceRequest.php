@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveServiceRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class SaveServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,12 @@ class SaveServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'name_service' => ['required', 'unique:services,name_service'],
+            'description' => ['required'],
+            'link' => ['required', 'max:255'],
+            'state' => ['required', Rule::in(['Visible', 'Disabled']),],
+
         ];
     }
 }

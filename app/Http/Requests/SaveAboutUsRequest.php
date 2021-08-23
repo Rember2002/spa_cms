@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveAboutUsRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class SaveAboutUsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,12 @@ class SaveAboutUsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'name' => ['required', 'unique:about_us,name' ,'max:255'],
+            'description' => ['required'],
+            'type' => ['required', Rule::in(['Mission', 'View', 'Value']),],
+            'image' => ['required', 'max:255'],
+
         ];
     }
 }

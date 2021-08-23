@@ -13,7 +13,7 @@ class SaveQuestionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class SaveQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'question' => ['required', 'unique:questions,question'],
+            'answer' => ['required'],
+            'year' => ['required', 'min:2020'],
+
         ];
     }
 }

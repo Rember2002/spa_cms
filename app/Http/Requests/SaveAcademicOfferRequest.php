@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveAcademicOfferRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class SaveAcademicOfferRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,12 @@ class SaveAcademicOfferRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'name_offer' => ['required', 'max:255'],
+            'description' => ['required'],
+            'image' => ['required', 'max:255'],
+            'state' => ['required', Rule::in(['Visible', 'Disabled']),],
+
         ];
     }
 }

@@ -13,7 +13,7 @@ class SaveContactUsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class SaveContactUsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'phone' => ['required', 'unique:contact_us,phone'],
+            'direction' => ['required', 'max:255'],
+            'year' => ['required', 'unique:contact_us,year']
+            
         ];
     }
 }

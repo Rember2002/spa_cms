@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveNewHomeRequest extends FormRequest
 {
@@ -24,7 +25,10 @@ class SaveNewHomeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'image' => ['required', 'unique:new_homes,image'],
+            'state' => ['required', Rule::in(['Visible', 'Disabled']),],
+
         ];
     }
 }

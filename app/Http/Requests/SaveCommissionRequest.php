@@ -13,7 +13,7 @@ class SaveCommissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class SaveCommissionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'name_comismission' => ['required', 'max:255', 'unique:commissions,name_comismission'],
+            'image' => ['required', 'max:255'],
+            'id_student_council' => ['required', 'exists:student_councils,id'],
+
         ];
     }
 }

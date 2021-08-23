@@ -13,7 +13,7 @@ class SaveSalesianExperienceHomeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class SaveSalesianExperienceHomeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'image' => ['required', 'unique:salesian_experience_homes,image', 'max:255'],
+            'description' => ['required'],
+            'year' => ['required', 'min:2020'],
+
         ];
     }
 }
