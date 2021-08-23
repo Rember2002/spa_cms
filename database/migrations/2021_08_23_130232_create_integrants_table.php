@@ -17,10 +17,10 @@ class CreateIntegrantsTable extends Migration
             $table->id();
             $table->string('name_integrant', 255)->unique();
             $table->string('image', 255);
-            $table->unsignedBigInteger('id_comission');
-            $table->foreign('id_comission')
+            $table->unsignedBigInteger('id_commission');
+            $table->foreign('id_commission')
                 ->references('id')
-                ->on('commisions');
+                ->on('commissions');
             $table->timestamps();
         });
     }
