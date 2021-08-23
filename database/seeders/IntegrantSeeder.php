@@ -14,7 +14,7 @@ class IntegrantSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('integrants')->insert([
 
             [
                 'name_integrant' => 'Nombre Integrante 1',

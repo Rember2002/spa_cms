@@ -14,7 +14,7 @@ class StudentCouncilSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('student_councils')->insert([
 
             [
                 'year' => 2021,
