@@ -19,31 +19,36 @@ class ResourceSeeder extends Seeder
             [
                 'name_resource' => 'Recurso disponible 1',
                 'description' => 'Descripcion del recurso disponible 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem et, recusandae culpa excepturi doloribus molestias nemo, quae quos eos pariatur velit perspiciatis fuga adipisci assumenda iure voluptates minus nesciunt saepe.',
-                'image' => 'url1'
+                'image' => 'url1',
+                'document' => 'url/documento',
             ],
 
             [
                 'name_resource' => 'Recurso disponible 2',
                 'description' => 'Descripcion del recurso disponible 2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem et, recusandae culpa excepturi doloribus molestias nemo, quae quos eos pariatur velit perspiciatis fuga adipisci assumenda iure voluptates minus nesciunt saepe.',
-                'image' => 'url2'
+                'image' => 'url2',
+                'document' => 'url/documento',
             ],
 
             [
                 'name_resource' => 'Recurso disponible 3',
                 'description' => 'Descripcion del recurso disponible 3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem et, recusandae culpa excepturi doloribus molestias nemo, quae quos eos pariatur velit perspiciatis fuga adipisci assumenda iure voluptates minus nesciunt saepe.',
-                'image' => 'url3'
+                'image' => 'url3',
+                'document' => 'url/documento',
             ],
 
             [
                 'name_resource' => 'Recurso disponible 4',
                 'description' => 'Descripcion del recurso disponible 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem et, recusandae culpa excepturi doloribus molestias nemo, quae quos eos pariatur velit perspiciatis fuga adipisci assumenda iure voluptates minus nesciunt saepe.',
-                'image' => 'url4'
+                'image' => 'url4',
+                'document' => 'url/documento',
             ],
 
             [
                 'name_resource' => 'Recurso disponible 5',
                 'description' => 'Descripcion del recurso disponible 5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem et, recusandae culpa excepturi doloribus molestias nemo, quae quos eos pariatur velit perspiciatis fuga adipisci assumenda iure voluptates minus nesciunt saepe.',
-                'image' => 'url5'
+                'image' => 'url5',
+                'document' => 'url/documento',
             ],
 
         ]);
