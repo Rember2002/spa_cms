@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class IntegrantSeeder extends Seeder
 {
@@ -13,6 +14,62 @@ class IntegrantSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('users')->insert([
+
+            [
+                'name_integrant' => 'Nombre Integrante 1',
+                'image' => 'url/rostro1',
+                'id_commission' => 1,
+            ],
+
+            [
+                'name_integrant' => 'Nombre Integrante 2',
+                'image' => 'url/rostro2',
+                'id_commission' => 1,
+            ],
+
+            [
+                'name_integrant' => 'Nombre Integrante 3',
+                'image' => 'url/rostro3',
+                'id_commission' => 1,
+            ],
+
+            [
+                'name_integrant' => 'Nombre Integrante 4',
+                'image' => 'url/rostro1',
+                'id_commission' => 2,
+            ],
+
+            [
+                'name_integrant' => 'Nombre Integrante 5',
+                'image' => 'url/rostro2',
+                'id_commission' => 2,
+            ],
+
+            [
+                'name_integrant' => 'Nombre Integrante 6',
+                'image' => 'url/rostro3',
+                'id_commission' => 2,
+            ],
+
+            [
+                'name_integrant' => 'Nombre Integrante 7',
+                'image' => 'url/rostro1',
+                'id_commission' => 3,
+            ],
+
+            [
+                'name_integrant' => 'Nombre Integrante 8',
+                'image' => 'url/rostro2',
+                'id_commission' => 3,
+            ],
+
+            [
+                'name_integrant' => 'Nombre Integrante 9',
+                'image' => 'url/rostro3',
+                'id_commission' => 3,
+            ],
+
+        ]);
     }
 }
