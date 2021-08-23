@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceHome extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+        "image",
+        "link",
+        "state"
+
+    ];
 }

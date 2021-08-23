@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Categorie extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+        "name",
+        "description",
+        "categories_id",
+        "categories_type"
+
+    ];
+
+    public function categorieServiceGrade()
+    {
+        return $this->morphTo();
+    }
 }

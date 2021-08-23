@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class StudentCouncil extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+        "year",
+        "image"
+
+    ];
 }

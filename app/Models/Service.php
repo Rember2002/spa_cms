@@ -8,4 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+        "name_service",
+        "description",
+        "link",
+        "state"
+
+    ];
+
+    public function images()
+    {
+
+        return $this->morphMany(Image::class, 'imageServiceNews');
+
+    }
+
+    public function categorie()
+    {
+
+        return $this->morphMany(Categorie::class, 'categorieServiceGrade');
+        
+    }
 }

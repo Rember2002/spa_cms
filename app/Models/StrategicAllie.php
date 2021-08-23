@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class StrategicAllie extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+        "name_ally",
+        "image",
+        "descripton"
+
+    ];
 }
