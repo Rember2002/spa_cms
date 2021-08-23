@@ -17,4 +17,11 @@ class Resource extends Model
         "document"
 
     ]; 
+
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
 }

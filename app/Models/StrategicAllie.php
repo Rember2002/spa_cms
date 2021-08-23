@@ -16,4 +16,11 @@ class StrategicAllie extends Model
         "descripton"
 
     ];
+
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
 }

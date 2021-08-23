@@ -18,6 +18,13 @@ class Categorie extends Model
 
     ];
 
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
+
     public function categorieServiceGrade()
     {
         return $this->morphTo();

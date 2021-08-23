@@ -15,4 +15,11 @@ class NewHome extends Model
         "status"
         
     ];
+
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
 }

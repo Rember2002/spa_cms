@@ -16,4 +16,11 @@ class SalesianExperienceHome extends Model
         "year"
 
     ];
+
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
 }

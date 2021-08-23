@@ -17,6 +17,13 @@ class Grade extends Model
         "id_academic_offer"
 
     ];
+
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
     
     public function academicOffer()
     {

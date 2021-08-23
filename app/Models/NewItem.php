@@ -18,6 +18,13 @@ class NewItem extends Model
 
     ];
 
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
+
     public function images()
     {
         return $this->morphMany(Image::class, 'imageServiceNews');

@@ -16,6 +16,13 @@ class SectionNavBar extends Model
 
     ];
 
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
+
     public function sectionNavBar()
     {
         return $this->belongsTo('App\Models\SectionNavBar', 'id_section_belong');

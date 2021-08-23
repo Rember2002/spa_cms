@@ -16,4 +16,11 @@ class ServiceHome extends Model
         "state"
 
     ];
+
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
 }

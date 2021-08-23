@@ -17,6 +17,13 @@ class Integrant extends Model
 
     ];
 
+    protected $hidden = [
+
+        "created_at",
+        "updated_at"
+
+    ];
+
     public function commision()
     {
         return $this->belongsTo('App\Models\Commision', 'id_comission');
