@@ -17,7 +17,7 @@ class CreateStrategicAlliesTable extends Migration
             $table->id();
             $table->string('name_ally', 255)->unique();
             $table->string('image', 255);
-            $table->longText('descripton');
+            $table->longText('description');
             $table->timestamps();
         });
     }
