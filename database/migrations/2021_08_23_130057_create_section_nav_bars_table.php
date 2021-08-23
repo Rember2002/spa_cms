@@ -16,7 +16,7 @@ class CreateSectionNavBarsTable extends Migration
         Schema::create('section_nav_bars', function (Blueprint $table) {
             $table->id();
             $table->string('name_section');
-            $table->unsignedBigInteger('id_section_belong')->is_null();
+            $table->unsignedBigInteger('id_section_belong')->nullable();
             $table->foreign('id_section_belong')
                 ->references('id')
                 ->on('section_nav_bars');
