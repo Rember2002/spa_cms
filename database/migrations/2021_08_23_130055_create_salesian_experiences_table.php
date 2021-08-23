@@ -20,6 +20,7 @@ class CreateSalesianExperiencesTable extends Migration
             $table->date('date');
             $table->string('place', 255);
             $table->string('image', 255);
+            $table->enum('type', ['Coro', 'Orquesta', 'Selecciones deportivas', 'Coreografia', 'Oratorio']);
             $table->timestamps();
         });
     }
