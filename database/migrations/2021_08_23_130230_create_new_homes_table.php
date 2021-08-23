@@ -15,6 +15,8 @@ class CreateNewHomesTable extends Migration
     {
         Schema::create('new_homes', function (Blueprint $table) {
             $table->id();
+            $table->string('image', 255)->unique();
+            $table->enum('status', ['Visible', 'Disabled'])->default('Visible');
             $table->timestamps();
         });
     }

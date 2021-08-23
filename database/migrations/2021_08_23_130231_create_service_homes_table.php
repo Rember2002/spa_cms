@@ -15,6 +15,9 @@ class CreateServiceHomesTable extends Migration
     {
         Schema::create('service_homes', function (Blueprint $table) {
             $table->id();
+            $table->string('image', 255)->unique();
+            $table->string('link', 255);
+            $table->enum('state', ['Visible', 'Disabled'])->default('Visible');
             $table->timestamps();
         });
     }

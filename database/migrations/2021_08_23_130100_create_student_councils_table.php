@@ -15,6 +15,8 @@ class CreateStudentCouncilsTable extends Migration
     {
         Schema::create('student_councils', function (Blueprint $table) {
             $table->id();
+            $table->year('year', 4)->unique();
+            $table->string('image', 255);
             $table->timestamps();
         });
     }

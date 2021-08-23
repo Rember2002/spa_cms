@@ -15,6 +15,9 @@ class CreateSalesianExperienceHomesTable extends Migration
     {
         Schema::create('salesian_experience_homes', function (Blueprint $table) {
             $table->id();
+            $table->string('image', 255)->unique();
+            $table->longText('description', 255);
+            $table->year('year', 4);
             $table->timestamps();
         });
     }

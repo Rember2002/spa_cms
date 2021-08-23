@@ -15,6 +15,9 @@ class CreateCarouselsTable extends Migration
     {
         Schema::create('carousels', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255)->unique();
+            $table->enum('state', ['Visible', 'Disabled'])->default('Visible');
+            $table->string('image', 255);
             $table->timestamps();
         });
     }

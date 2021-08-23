@@ -15,6 +15,10 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string('name_service', 255)->unique();
+            $table->longText('description', 255);
+            $table->string('link', 255);
+            $table->enum('state', ['Visible', 'Disabled'])->default('Visible');
             $table->timestamps();
         });
     }

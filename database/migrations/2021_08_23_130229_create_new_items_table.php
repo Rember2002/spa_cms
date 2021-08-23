@@ -15,6 +15,10 @@ class CreateNewItemsTable extends Migration
     {
         Schema::create('new_items', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 255)->unique();
+            $table->longText('content');
+            $table->date('date');
+            $table->enum('state', ['Visible', 'Disabled'])->default('Visible');
             $table->timestamps();
         });
     }

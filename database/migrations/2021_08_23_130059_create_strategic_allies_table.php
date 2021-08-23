@@ -15,6 +15,9 @@ class CreateStrategicAlliesTable extends Migration
     {
         Schema::create('strategic_allies', function (Blueprint $table) {
             $table->id();
+            $table->string('name_ally', 255)->unique();
+            $table->string('image', 255);
+            $table->longText('descripton');
             $table->timestamps();
         });
     }

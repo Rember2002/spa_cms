@@ -15,6 +15,10 @@ class CreateAcademicOffersTable extends Migration
     {
         Schema::create('academic_offers', function (Blueprint $table) {
             $table->id();
+            $table->string('name_offer', 255);
+            $table->longText('description', 255);
+            $table->string('image', 255);
+            $table->enum('state', ['Visible', 'Disabled'])->default('Visible');
             $table->timestamps();
         });
     }

@@ -15,6 +15,12 @@ class CreateCommissionsTable extends Migration
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->id();
+            $table->string('name_comismission', 255)->unique();
+            $table->string('image', 255);
+            $table->unsignedBigInteger('id_student_council');
+            $table->foreign('id_student_council')
+                ->references('id')
+                ->on('student_councils');
             $table->timestamps();
         });
     }

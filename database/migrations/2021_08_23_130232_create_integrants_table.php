@@ -15,6 +15,12 @@ class CreateIntegrantsTable extends Migration
     {
         Schema::create('integrants', function (Blueprint $table) {
             $table->id();
+            $table->string('name_integrant', 255)->unique();
+            $table->string('image', 255);
+            $table->unsignedBigInteger('id_comission');
+            $table->foreign('id_comission')
+                ->references('id')
+                ->on('commisions');
             $table->timestamps();
         });
     }

@@ -15,6 +15,13 @@ class CreateGradesTable extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
+            $table->string('name_grade', 255)->unique();
+            $table->longText('description');
+            $table->string('image', 255);
+            $table->unsignedBigInteger('id_academic_offer');
+            $table->foreign('id_academic_offer')
+                ->references('id')
+                ->on('academic_offers');
             $table->timestamps();
         });
     }

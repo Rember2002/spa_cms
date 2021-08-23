@@ -15,6 +15,11 @@ class CreateAboutUsTable extends Migration
     {
         Schema::create('about_us', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255)->unique();
+            $table->longText('description');
+            $table->enum('type', ['Mission', 'View', 'Value']);
+            $table->year('year', 4);
+            $table->string('image', 255);
             $table->timestamps();
         });
     }
