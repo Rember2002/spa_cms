@@ -25,7 +25,7 @@ class SaveCommissionRequest extends FormRequest
     {
         return [
             
-            'name_comismission' => ['required', 'max:255', 'unique:commissions,name_comismission'],
+            'name_commission' => ['required', 'max:255', 'unique:commissions,name_comismission'],
             'image' => ['required', 'max:255'],
             'id_student_council' => ['required', 'exists:student_councils,id'],
 
