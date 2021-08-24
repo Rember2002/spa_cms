@@ -16,9 +16,9 @@ class AcademicOfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Grade $grade)
+    public function index()
     {
-        // $academicOffer = AcademicOfferResource::collection(AcademicOffer::findOutFill($grade->id));
+        // $academicOffer = AcademicOfferResource::collection(AcademicOffer::findOrFail($grade->id));
 
         // return response()->json([
 
@@ -27,7 +27,7 @@ class AcademicOfferController extends Controller
 
         // ], Response::HTTP_OK);
 
-        return AcademicOfferResource::collection(AcademicOffer::findOutFill($grade->id));
+        return AcademicOfferResource::collection(AcademicOffer::all());
     }
 
     /**
