@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
     protected function invalidJson($request, ValidationException $exception)
     {
         return response()->json([
-            'response' => __('Los datos que usted ha ingresados no son validos, ¡Error!'),
+            'response' => __('Los datos que usted ha ingresado no son validos, ¡Error!'),
             'errors' => $exception->errors(),
         ], $exception->status);
     }
