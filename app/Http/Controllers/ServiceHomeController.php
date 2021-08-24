@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveServiceHomeRequest;
+use App\Http\Resources\ServiceHomeResource;
 use App\Models\ServiceHome;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class ServiceHomeController extends Controller
      */
     public function index()
     {
-        $serviceHome = ServiceHome::all();
+        $serviceHome = ServiceHomeResource::collection(ServiceHome::all());
 
         return response()->json([
 

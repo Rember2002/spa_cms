@@ -14,6 +14,13 @@ class ServiceHomeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Portada' => $this->image,
+            'Enlace' => $this->link,
+            'Estado' => $this->state,
+
+        ];
     }
 }

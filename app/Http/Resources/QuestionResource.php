@@ -14,6 +14,13 @@ class QuestionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Pregunta Frecuente' => $this->question,
+            'Respuesta' => $this->answer,
+            'Año' => $this->year, 
+
+        ];
     }
 }

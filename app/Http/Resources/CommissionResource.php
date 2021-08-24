@@ -14,6 +14,13 @@ class CommissionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Comision' => $this->name_commission,
+            'Portada' => $this->image,
+            'Consejo Estudiantil' => $this->id_student_council,
+
+        ];
     }
 }

@@ -14,6 +14,13 @@ class SalesianExperienceHomeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Portada' => $this->image,
+            'Descripcion' => $this->description,
+            'Año' => $this->year,
+
+        ];
     }
 }

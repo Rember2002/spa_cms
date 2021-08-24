@@ -14,6 +14,13 @@ class IntegrantResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Integrante' => $this->name_integrant,
+            'Perfil' => $this->image,
+            'Comision' => $this->id_commission,
+
+        ];
     }
 }

@@ -14,6 +14,14 @@ class AcademicOfferResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Oferta Academica' => $this->name_offer,
+            'Decripcion' => $this->description,
+            'Portada' => $this->image,
+            'Estado' => $this->state,
+
+        ];
     }
 }

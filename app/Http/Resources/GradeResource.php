@@ -14,6 +14,14 @@ class GradeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Grado' => $this->name_grade,
+            'Descripcion' => $this->description,
+            'Contenido Multimedia' => $this->image,
+            'Oferta Academica' => $this->id_academic_offer,
+
+        ];
     }
 }

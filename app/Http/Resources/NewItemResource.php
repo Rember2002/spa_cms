@@ -14,6 +14,13 @@ class NewItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Titulo' => $this->title,
+            'Contenido' => $this->content,
+            'Fecha Publicacion' => $this->date,
+            'Estado' => $this->state,
+
+        ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveCarouselRequest;
+use App\Http\Resources\CarouselResource;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class CarouselController extends Controller
      */
     public function index()
     {
-        $carousel = Carousel::all();
+        $carousel = CarouselResource::collection(Carousel::all());
 
         return response()->json([
 

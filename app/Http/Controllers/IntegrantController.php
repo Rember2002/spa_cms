@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveIntegrantRequest;
+use App\Http\Resources\IntegrantResource;
 use App\Models\Integrant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class IntegrantController extends Controller
      */
     public function index()
     {
-        $integrant = Integrant::all();
+        $integrant = IntegrantResource::collection(Integrant::all());
 
         return response()->json([
 

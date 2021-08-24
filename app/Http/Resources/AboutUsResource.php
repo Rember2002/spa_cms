@@ -14,6 +14,16 @@ class AboutUsResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Titulo' => $this->name,
+            'Contenido' => $this->description,
+            'Tipo de Contenido' => $this->type,
+            'Año' => $this->year,
+            'Portada' => $this->image, 
+
+        ];
+
     }
 }

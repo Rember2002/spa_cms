@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveNewHomeRequest;
+use App\Http\Resources\NewHomeResource;
 use App\Models\NewHome;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class NewHomeController extends Controller
      */
     public function index()
     {
-        $newHome = NewHome::all();
+        $newHome = NewHomeResource::collection(NewHome::all());
 
         return response()->json([
 

@@ -14,6 +14,12 @@ class NewHomeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Ïd' => $this->id,
+            'Contenido Multimedia' => $this->image,
+            'Estado' => $this->status,
+
+        ];
     }
 }

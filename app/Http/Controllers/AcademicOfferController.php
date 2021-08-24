@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveAcademicOfferRequest;
+use App\Http\Resources\AcademicOfferResource;
 use App\Models\AcademicOffer;
 use App\Models\Grade;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class AcademicOfferController extends Controller
      */
     public function index(Grade $grade)
     {
-        $academicOffer = AcademicOffer::findOutFill($grade->id);
+        $academicOffer = AcademicOfferResource::collection(AcademicOffer::findOutFill($grade->id));
 
         return response()->json([
 

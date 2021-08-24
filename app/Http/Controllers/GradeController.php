@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveGradeRequest;
+use App\Http\Resources\GradeResource;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class GradeController extends Controller
      */
     public function index()
     {
-        $grade = Grade::all();
+        $grade = GradeResource::collection(Grade::all());
 
         return response()->json([
 

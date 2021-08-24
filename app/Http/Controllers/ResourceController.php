@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveResourceRequest;
+use App\Http\Resources\ResourceResource;
 use App\Models\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $resource = Resource::all();
+        $resource = ResourceResource::collection(Resource::all());
 
         return response()->json([
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveQuestionRequest;
+use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $question = Question::all();
+        $question = QuestionResource::collection(Question::all());
 
         return response()->json([
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveSalesianExperienceRequest;
+use App\Http\Resources\SalesianExperienceResource;
 use App\Models\SalesianExperience;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class SalesianExperienceController extends Controller
      */
     public function index()
     {
-        $salesianExperience = SalesianExperience::all();
+        $salesianExperience = SalesianExperienceResource::collection(SalesianExperience::all());
 
         return response()->json([
 

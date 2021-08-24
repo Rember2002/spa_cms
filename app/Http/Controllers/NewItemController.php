@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveNewItemRequest;
+use App\Http\Resources\NewItemResource;
 use App\Models\NewItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class NewItemController extends Controller
      */
     public function index()
     {
-        $newItem =  NewItem::all();
+        $newItem = NewItemResource::collection(NewItem::all());
 
         return response()->json([
 

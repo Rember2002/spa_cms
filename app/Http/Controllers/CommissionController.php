@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveCommissionRequest;
+use App\Http\Resources\CommissionResource;
 use App\Models\Integrant;
 use App\Models\Commission;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class CommissionController extends Controller
      */
     public function index(Integrant $integrant)
     {
-        $commission = Commission::findOrFail($integrant->id);
+        $commission = CommissionResource::collection(Commission::findOrFail($integrant->id));
 
         return response()->json([
 

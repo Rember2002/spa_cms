@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveContactUsRequest;
+use App\Http\Resources\ContactUsResource;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        $contactUs = ContactUs::all();
+        $contactUs = ContactUsResource::collection(ContactUs::all());
 
         return response()->json([
 

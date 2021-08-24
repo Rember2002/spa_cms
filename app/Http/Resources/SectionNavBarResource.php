@@ -14,6 +14,13 @@ class SectionNavBarResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'Id' => $this->id,
+            'Seccion' => $this->name_section,
+            'Acceso' => $this->link,
+            'Sub Seccion' => $this->id_section_belong,
+
+        ];
     }
 }
