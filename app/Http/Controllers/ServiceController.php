@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveServiceRequest;
+use App\Http\Resources\ServiceHomeResource;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -17,14 +18,16 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $service = ServiceResource::collection(Service::all());
+        // $service = ServiceResource::collection(Service::all());
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $service,
-            "status" => Response::HTTP_OK,
+        //     "data" => $service,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return ServiceResource::collection(Service::all());
     }
 
     /**
@@ -45,15 +48,20 @@ class ServiceController extends Controller
      */
     public function store(SaveServiceRequest $request)
     {
-        $service = Service::create($request->all());
+        // $service = Service::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $service,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $service,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new ServiceResource(Service::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -64,12 +72,14 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $service,
-            "status" => Response::HTTP_OK,
+        //     "data" => $service,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new ServiceResource($service);
     }
 
     /**
@@ -92,15 +102,22 @@ class ServiceController extends Controller
      */
     public function update(SaveServiceRequest $request, Service $service)
     {
-        $service->update($request->all());
+        // $service->update($request->all());
        
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $service,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $service,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $service->update($request->all());
+
+        return (new ServiceResource($service))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -111,14 +128,19 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        $service->delete();
+        // $service->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $service,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $service,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return (new ServiceResource($service))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

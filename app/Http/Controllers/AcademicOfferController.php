@@ -18,14 +18,16 @@ class AcademicOfferController extends Controller
      */
     public function index(Grade $grade)
     {
-        $academicOffer = AcademicOfferResource::collection(AcademicOffer::findOutFill($grade->id));
+        // $academicOffer = AcademicOfferResource::collection(AcademicOffer::findOutFill($grade->id));
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $academicOffer,
-            "status" => Response::HTTP_OK,
+        //     "data" => $academicOffer,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return AcademicOfferResource::collection(AcademicOffer::findOutFill($grade->id));
     }
 
     /**
@@ -46,15 +48,20 @@ class AcademicOfferController extends Controller
      */
     public function store(SaveAcademicOfferRequest $request)
     {
-        $academicOffer = AcademicOffer::create($request->all());
+        // $academicOffer = AcademicOffer::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $academicOffer,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $academicOffer,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new AcademicOfferResource(AcademicOffer::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -65,12 +72,14 @@ class AcademicOfferController extends Controller
      */
     public function show(AcademicOffer $academicOffer)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $academicOffer,
-            "status" => Response::HTTP_OK,
+        //     "data" => $academicOffer,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new AcademicOfferResource($academicOffer);
     }
 
     /**
@@ -93,15 +102,22 @@ class AcademicOfferController extends Controller
      */
     public function update(SaveAcademicOfferRequest $request, AcademicOffer $academicOffer)
     {
-        $academicOffer->update($request->all());
+        // $academicOffer->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $academicOffer,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $academicOffer,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $academicOffer->update($request->all());
+
+        return (new AcademicOfferResource($academicOffer))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -112,14 +128,21 @@ class AcademicOfferController extends Controller
      */
     public function destroy(AcademicOffer $academicOffer)
     {
-        $academicOffer->delete();
+        // $academicOffer->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $academicOffer,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $academicOffer,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $academicOffer->delete();
+
+        return (new AcademicOfferResource($academicOffer))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

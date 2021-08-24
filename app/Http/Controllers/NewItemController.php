@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveNewItemRequest;
+use App\Http\Resources\NewHomeResource;
 use App\Http\Resources\NewItemResource;
+use App\Models\NewHome;
 use App\Models\NewItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,14 +19,16 @@ class NewItemController extends Controller
      */
     public function index()
     {
-        $newItem = NewItemResource::collection(NewItem::all());
+        // $newItem = NewItemResource::collection(NewItem::all());
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $newItem,
-            "status" => Response::HTTP_OK,
+        //     "data" => $newItem,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return NewItemResource::collection(NewItem::all());
     }
 
     /**
@@ -45,15 +49,20 @@ class NewItemController extends Controller
      */
     public function store(SaveNewItemRequest $request)
     {
-        $newItem = NewItem::create($request->all());
+        // $newItem = NewItem::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $newItem,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $newItem,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new NewHomeResource(NewHome::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -64,12 +73,14 @@ class NewItemController extends Controller
      */
     public function show(NewItem $newItem)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $newItem,
-            "status" => Response::HTTP_OK,
+        //     "data" => $newItem,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new NewItemResource($newItem);
     }
 
     /**
@@ -92,15 +103,22 @@ class NewItemController extends Controller
      */
     public function update(SaveNewItemRequest $request, NewItem $newItem)
     {
-        $newItem->update($request->all());
+        // $newItem->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $newItem,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $newItem,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $newItem->update($request->all());
+
+        return (new NewItemResource($newItem))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -111,14 +129,21 @@ class NewItemController extends Controller
      */
     public function destroy(NewItem $newItem)
     {
-        $newItem->delete();
+        // $newItem->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $newItem,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $newItem,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $newItem->delete();
+
+        return (new NewItemResource($newItem))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

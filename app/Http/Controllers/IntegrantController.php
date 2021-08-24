@@ -17,14 +17,16 @@ class IntegrantController extends Controller
      */
     public function index()
     {
-        $integrant = IntegrantResource::collection(Integrant::all());
+        // $integrant = IntegrantResource::collection(Integrant::all());
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $integrant,
-            "status" => Response::HTTP_OK,
+        //     "data" => $integrant,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return IntegrantResource::collection(Integrant::all());
     }
 
     /**
@@ -45,15 +47,20 @@ class IntegrantController extends Controller
      */
     public function store(SaveIntegrantRequest $request)
     {
-        $integrant = Integrant::create($request->all());
+        // $integrant = Integrant::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $integrant,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $integrant,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new IntegrantResource(Integrant::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -64,12 +71,14 @@ class IntegrantController extends Controller
      */
     public function show(Integrant $integrant)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" =>  $integrant,
-            "status" => Response::HTTP_OK,
+        //     "data" =>  $integrant,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new IntegrantResource($integrant);
     }
 
     /**
@@ -92,15 +101,22 @@ class IntegrantController extends Controller
      */
     public function update(SaveIntegrantRequest $request, Integrant $integrant)
     {
-        $integrant->update($request->all());
+        // $integrant->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" =>  $integrant,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" =>  $integrant,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $integrant->update($request->all());
+
+        return (new IntegrantResource($integrant))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -111,14 +127,21 @@ class IntegrantController extends Controller
      */
     public function destroy(Integrant $integrant)
     {
-        $integrant->delete();
+        // $integrant->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $integrant,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $integrant,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $integrant->delete();
+
+        return (new IntegrantResource($integrant))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

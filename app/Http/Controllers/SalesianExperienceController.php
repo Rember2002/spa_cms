@@ -17,14 +17,16 @@ class SalesianExperienceController extends Controller
      */
     public function index()
     {
-        $salesianExperience = SalesianExperienceResource::collection(SalesianExperience::all());
+        // $salesianExperience = SalesianExperienceResource::collection(SalesianExperience::all());
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $salesianExperience,
-            "status" => Response::HTTP_OK,
+        //     "data" => $salesianExperience,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return SalesianExperienceResource::collection(SalesianExperience::all());
     }
 
     /**
@@ -45,15 +47,20 @@ class SalesianExperienceController extends Controller
      */
     public function store(SaveSalesianExperienceRequest $request)
     {
-        $salesianExperience = SalesianExperience::create($request->all());
+        // $salesianExperience = SalesianExperience::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $salesianExperience,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $salesianExperience,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new SalesianExperienceResource(SalesianExperience::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -64,12 +71,14 @@ class SalesianExperienceController extends Controller
      */
     public function show(SalesianExperience $salesianExperience)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $salesianExperience,
-            "status" => Response::HTTP_OK,
+        //     "data" => $salesianExperience,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new SalesianExperienceResource($salesianExperience);
     }
 
     /**
@@ -92,15 +101,22 @@ class SalesianExperienceController extends Controller
      */
     public function update(SaveSalesianExperienceRequest $request, SalesianExperience $salesianExperience)
     {
-        $salesianExperience->update($request->all());
+        // $salesianExperience->update($request->all());
        
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $salesianExperience,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $salesianExperience,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $salesianExperience->update($request->all());
+
+        return (new SalesianExperienceResource($salesianExperience))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -111,14 +127,19 @@ class SalesianExperienceController extends Controller
      */
     public function destroy(SalesianExperience $salesianExperience)
     {
-        $salesianExperience->delete();
+        // $salesianExperience->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $salesianExperience,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $salesianExperience,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return (new SalesianExperienceResource($salesianExperience))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

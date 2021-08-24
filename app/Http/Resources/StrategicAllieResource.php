@@ -23,4 +23,13 @@ class StrategicAllieResource extends JsonResource
         
         ];
     }
+
+    public function with($request)
+    {
+        return [
+
+            'response' => true,
+
+        ];
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveStrategicAllieRequest;
+use App\Http\Resources\StrategicAllieResource;
 use App\Models\StrategicAllie;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,14 +17,16 @@ class StrategicAllieController extends Controller
      */
     public function index()
     {
-        $strategicAllie = StrategicAllie::all();
+        // $strategicAllie = StrategicAllie::all();
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $strategicAllie,
-            "status" => Response::HTTP_OK,
+        //     "data" => $strategicAllie,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return StrategicAllieResource::collection(StrategicAllie::all());
     }
 
     /**
@@ -44,15 +47,20 @@ class StrategicAllieController extends Controller
      */
     public function store(SaveStrategicAllieRequest $request)
     {
-        $strategicAllie = StrategicAllie::create($request->all());
+        // $strategicAllie = StrategicAllie::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $strategicAllie,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $strategicAllie,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new StrategicAllieResource(StrategicAllie::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -63,12 +71,14 @@ class StrategicAllieController extends Controller
      */
     public function show(StrategicAllie $strategicAllie)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $strategicAllie,
-            "status" => Response::HTTP_OK,
+        //     "data" => $strategicAllie,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new StrategicAllieResource($strategicAllie);
     }
 
     /**
@@ -91,15 +101,22 @@ class StrategicAllieController extends Controller
      */
     public function update(SaveStrategicAllieRequest $request, StrategicAllie $strategicAllie)
     {
-        $strategicAllie->update($request->all());
+        // $strategicAllie->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $strategicAllie,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $strategicAllie,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $strategicAllie->update($request->all());
+
+        return (new StrategicAllieResource($strategicAllie))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -110,14 +127,19 @@ class StrategicAllieController extends Controller
      */
     public function destroy(StrategicAllie $strategicAllie)
     {
-        $strategicAllie->delete();
+        // $strategicAllie->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $strategicAllie,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $strategicAllie,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return (new StrategicAllieResource($strategicAllie))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

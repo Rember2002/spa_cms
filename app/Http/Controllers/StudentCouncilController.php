@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveStudentCouncilRequest;
+use App\Http\Resources\StudentCouncilResource;
 use App\Models\Commission;
 use App\Models\StudentCouncil;
 use Illuminate\Http\Request;
@@ -16,14 +18,16 @@ class StudentCouncilController extends Controller
      */
     public function index(Commission $commission)
     {
-        $studentCouncil = StudentCouncil::findOrFail($commission->id);
+        // $studentCouncil = StudentCouncil::findOrFail($commission->id);
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $studentCouncil,
-            "status" => Response::HTTP_OK,
+        //     "data" => $studentCouncil,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return StudentCouncilResource::collection(StudentCouncil::findOrFail($commission->id));
     }
 
     /**
@@ -42,17 +46,22 @@ class StudentCouncilController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveStudentCouncilRequest $request)
     {
-        $studentCouncil = StudentCouncil::create($request->all());
+        // $studentCouncil = StudentCouncil::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $studentCouncil,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $studentCouncil,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new StudentCouncilResource(StudentCouncil::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);   
     }
 
     /**
@@ -63,12 +72,14 @@ class StudentCouncilController extends Controller
      */
     public function show(StudentCouncil $studentCouncil)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" =>  $studentCouncil,
-            "status" => Response::HTTP_OK,
+        //     "data" =>  $studentCouncil,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new StudentCouncilResource($studentCouncil);
     }
 
     /**
@@ -89,17 +100,24 @@ class StudentCouncilController extends Controller
      * @param  \App\Models\StudentCouncil  $studentCouncil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentCouncil $studentCouncil)
+    public function update(SaveStudentCouncilRequest $request, StudentCouncil $studentCouncil)
     {
-        $studentCouncil->update($request->all());
+        // $studentCouncil->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" =>  $studentCouncil,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" =>  $studentCouncil,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $studentCouncil->update($request->all());
+
+        return (new StudentCouncilResource($studentCouncil))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -110,14 +128,19 @@ class StudentCouncilController extends Controller
      */
     public function destroy(StudentCouncil $studentCouncil)
     {
-        $studentCouncil->delete();
+        // $studentCouncil->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $studentCouncil,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $studentCouncil,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return (new StudentCouncilResource($studentCouncil))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

@@ -17,14 +17,16 @@ class CarouselController extends Controller
      */
     public function index()
     {
-        $carousel = CarouselResource::collection(Carousel::all());
+        // $carousel = CarouselResource::collection(Carousel::all());
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $carousel,
-            "status" => Response::HTTP_OK,
+        //     "data" => $carousel,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return CarouselResource::collection(Carousel::all());
     }
 
     /**
@@ -45,15 +47,20 @@ class CarouselController extends Controller
      */
     public function store(SaveCarouselRequest $request)
     {
-        $carousel = Carousel::create($request->all());
+        // $carousel = Carousel::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $carousel,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $carousel,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new CarouselResource(Carousel::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -64,12 +71,15 @@ class CarouselController extends Controller
      */
     public function show(Carousel $carousel)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $carousel,
-            "status" => Response::HTTP_OK,
+        //     "data" => $carousel,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new CarouselResource($carousel);
+
     }
 
     /**
@@ -92,15 +102,22 @@ class CarouselController extends Controller
      */
     public function update(SaveCarouselRequest $request, Carousel $carousel)
     {
-        $carousel->update($request->all());
+        // $carousel->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $carousel,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $carousel,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $carousel->update($request->all());
+
+        return (new CarouselResource($carousel))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -111,14 +128,21 @@ class CarouselController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        $carousel->delete();
+        // $carousel->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $carousel,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $carousel,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $carousel->delete();
+
+        return (new CarouselResource($carousel))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

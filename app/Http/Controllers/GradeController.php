@@ -17,14 +17,16 @@ class GradeController extends Controller
      */
     public function index()
     {
-        $grade = GradeResource::collection(Grade::all());
+        // $grade = GradeResource::collection(Grade::all());
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $grade,
-            "status" => Response::HTTP_OK,
+        //     "data" => $grade,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return GradeResource::collection(Grade::all());
     }
 
     /**
@@ -45,15 +47,20 @@ class GradeController extends Controller
      */
     public function store(SaveGradeRequest $request)
     {
-        $grade = Grade::create($request->all());
+        // $grade = Grade::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $grade,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $grade,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new GradeResource(Grade::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -64,12 +71,14 @@ class GradeController extends Controller
      */
     public function show(Grade $grade)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $grade,
-            "status" => Response::HTTP_OK,
+        //     "data" => $grade,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new GradeResource($grade);
     }
 
     /**
@@ -92,15 +101,22 @@ class GradeController extends Controller
      */
     public function update(Request $request, Grade $grade)
     {
-        $grade->update($request->all());
+        // $grade->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $grade,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $grade,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $grade->update($request->all());
+
+        return (new GradeResource($grade))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -111,14 +127,21 @@ class GradeController extends Controller
      */
     public function destroy(Grade $grade)
     {
-        $grade->delete();
+        // $grade->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $grade,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $grade,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $grade->delete();
+
+        return (new GradeResource($grade))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveSectionNavBarRequest;
+use App\Http\Resources\SectionNavBarResource;
 use App\Models\SectionNavBar;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,14 +17,16 @@ class SectionNavBarController extends Controller
      */
     public function index()
     {
-        $sectionNavBar = SectionNavBar::all();
+        // $sectionNavBar = SectionNavBar::all();
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $sectionNavBar,
-            "status" => Response::HTTP_OK,
+        //     "data" => $sectionNavBar,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return SectionNavBarResource::collection(SectionNavBar::all());
     }
 
     /**
@@ -44,15 +47,20 @@ class SectionNavBarController extends Controller
      */
     public function store(SaveSectionNavBarRequest $request)
     {
-        $sectionNavBar = SectionNavBar::create($request->all());
+        // $sectionNavBar = SectionNavBar::create($request->all());
 
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $sectionNavBar,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $sectionNavBar,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new SectionNavBarResource(SectionNavBar::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -63,12 +71,15 @@ class SectionNavBarController extends Controller
      */
     public function show(SectionNavBar $sectionNavBar)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $sectionNavBar,
-            "status" => Response::HTTP_OK,
+        //     "data" => $sectionNavBar,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new SectionNavBarResource($sectionNavBar);
+
     }
 
     /**
@@ -91,15 +102,22 @@ class SectionNavBarController extends Controller
      */
     public function update(SaveSectionNavBarRequest $request, SectionNavBar $sectionNavBar)
     {
+        // $sectionNavBar->update($request->all());
+
+        // return response()->json([
+
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $sectionNavBar,
+        //     "status" => Response::HTTP_OK,
+
+        // ], Response::HTTP_OK);
+
         $sectionNavBar->update($request->all());
 
-        return response()->json([
-
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $sectionNavBar,
-            "status" => Response::HTTP_OK,
-
-        ], Response::HTTP_OK);
+        return (new SectionNavBarResource($sectionNavBar))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -110,14 +128,19 @@ class SectionNavBarController extends Controller
      */
     public function destroy(SectionNavBar $sectionNavBar)
     {
-        $sectionNavBar->delete();
+        // $sectionNavBar->delete();
 
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $sectionNavBar,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $sectionNavBar,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return (new SectionNavBarResource($sectionNavBar))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

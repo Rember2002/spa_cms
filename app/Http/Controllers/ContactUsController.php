@@ -17,14 +17,16 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        $contactUs = ContactUsResource::collection(ContactUs::all());
+        // $contactUs = ContactUsResource::collection(ContactUs::all());
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $contactUs,
-            "status" => Response::HTTP_OK,
+        //     "data" => $contactUs,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return ContactUsResource::collection(ContactUs::all());
     }
 
     /**
@@ -45,15 +47,20 @@ class ContactUsController extends Controller
      */
     public function store(SaveContactUsRequest $request)
     {
-        $contactUs = ContactUs::create($request->all());
+        // $contactUs = ContactUs::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $contactUs,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $contactUs,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new ContactUsResource(ContactUs::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -64,12 +71,14 @@ class ContactUsController extends Controller
      */
     public function show(ContactUs $contactUs)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $contactUs,
-            "status" => Response::HTTP_OK,
+        //     "data" => $contactUs,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new ContactUsResource($contactUs);
     }
 
     /**
@@ -92,15 +101,22 @@ class ContactUsController extends Controller
      */
     public function update(SaveContactUsRequest $request, ContactUs $contactUs)
     {
-        $contactUs->update($request->all());
+        // $contactUs->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $contactUs,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $contactUs,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $contactUs->update($request->all());
+
+        return (new ContactUsResource($contactUs))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -111,14 +127,21 @@ class ContactUsController extends Controller
      */
     public function destroy(ContactUs $contactUs)
     {
-        $contactUs->delete();
+        // $contactUs->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $contactUs,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $contactUs,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $contactUs->delete();
+
+        return (new ContactUsResource($contactUs))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

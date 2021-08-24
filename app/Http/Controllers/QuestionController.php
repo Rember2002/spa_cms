@@ -17,14 +17,16 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $question = QuestionResource::collection(Question::all());
+        // $question = QuestionResource::collection(Question::all());
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $question,
-            "status" => Response::HTTP_OK,
+        //     "data" => $question,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return QuestionResource::collection(Question::all());
     }
 
     /**
@@ -45,15 +47,20 @@ class QuestionController extends Controller
      */
     public function store(SaveQuestionRequest $request)
     {
-        $question = Question::create($request->all());
+        // $question = Question::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $question,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $question,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new QuestionResource(Question::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -64,12 +71,15 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" => $question,
-            "status" => Response::HTTP_OK,
+        //     "data" => $question,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new QuestionResource($question);
+
     }
 
     /**
@@ -92,15 +102,22 @@ class QuestionController extends Controller
      */
     public function update(SaveQuestionRequest $request, Question $question)
     {
-        $question->update($request->all());
+        // $question->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" => $question,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" => $question,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $question->update($request->all());
+
+        return (new QuestionResource($question))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -111,14 +128,21 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        $question->delete();
+        // $question->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $question,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $question,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $question->delete();
+
+        return (new QuestionResource($question))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

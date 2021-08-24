@@ -23,5 +23,15 @@ class AcademicOfferResource extends JsonResource
             'Estado' => $this->state,
 
         ];
+        
+    }
+
+    public function with($request)
+    {
+        return [
+
+            'response' => true,
+
+        ];
     }
 }

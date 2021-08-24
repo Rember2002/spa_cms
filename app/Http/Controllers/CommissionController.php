@@ -18,14 +18,16 @@ class CommissionController extends Controller
      */
     public function index(Integrant $integrant)
     {
-        $commission = CommissionResource::collection(Commission::findOrFail($integrant->id));
+        // $commission = CommissionResource::collection(Commission::findOrFail($integrant->id));
 
-        return response()->json([
+        // return response()->json([
 
-            "data" => $commission,
-            "status" => Response::HTTP_OK,
+        //     "data" => $commission,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return CommissionResource::collection(Commission::all());
     }
 
     /**
@@ -46,15 +48,20 @@ class CommissionController extends Controller
      */
     public function store(SaveCommissionRequest $request)
     {
-        $commission = Commission::create($request->all());
+        // $commission = Commission::create($request->all());
         
-        return response()->json([
+        // return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
-            "data" => $commission,
-            "status" => Response::HTTP_CREATED,
+        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
+        //     "data" => $commission,
+        //     "status" => Response::HTTP_CREATED,
 
-        ],  Response::HTTP_CREATED);
+        // ],  Response::HTTP_CREATED);
+
+        return (new CommissionResource(Commission::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -65,12 +72,14 @@ class CommissionController extends Controller
      */
     public function show(Commission $commission)
     {
-        return response()->json([
+        // return response()->json([
 
-            "data" =>  $commission,
-            "status" => Response::HTTP_OK,
+        //     "data" =>  $commission,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        return new CommissionResource($commission);
     }
 
     /**
@@ -93,15 +102,22 @@ class CommissionController extends Controller
      */
     public function update(SaveCommissionRequest $request, Commission $commission)
     {
-        $commission->update($request->all());
+        // $commission->update($request->all());
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro ha sido modificado con ¡Exito!",
-            "data" =>  $commission,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro ha sido modificado con ¡Exito!",
+        //     "data" =>  $commission,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $commission->update($request->all());
+
+        return (new CommissionResource($commission))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -112,14 +128,21 @@ class CommissionController extends Controller
      */
     public function destroy(Commission $commission)
     {
-        $commission->delete();
+        // $commission->delete();
         
-        return response()->json([
+        // return response()->json([
 
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $commission,
-            "status" => Response::HTTP_OK,
+        //     "message" => "El registro se ha eliminado con ¡Exito!",
+        //     "data" => $commission,
+        //     "status" => Response::HTTP_OK,
 
-        ], Response::HTTP_OK);
+        // ], Response::HTTP_OK);
+
+        $commission->delete();
+
+        return (new CommissionResource($commission))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }
