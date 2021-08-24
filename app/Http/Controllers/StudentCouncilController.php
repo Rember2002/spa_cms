@@ -16,7 +16,7 @@ class StudentCouncilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Commission $commission)
+    public function index()
     {
         // $studentCouncil = StudentCouncil::findOrFail($commission->id);
 
