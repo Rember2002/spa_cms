@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveAboutUsRequest;
+use App\Http\Resources\AboutUsResource;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        $aboutUs = AboutUs::all();
+        $aboutUs = AboutUsResource::collection(AboutUs::all());
 
         return response()->json([
 
