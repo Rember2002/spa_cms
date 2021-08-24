@@ -13,7 +13,7 @@ class UpdateIntegrantRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateIntegrantRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name_integrant' => ['required', 'max:255'],
+            'image' => ['required', 'max:255'],
+            'id_commission' => ['required', 'exists:commissions,id'],
         ];
     }
 }

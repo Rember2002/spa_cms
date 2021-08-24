@@ -25,7 +25,7 @@ class SaveContactUsRequest extends FormRequest
     {
         return [
             
-            'phone' => ['required', 'unique:contact_us,phone'],
+            'phone' => ['required', 'unique:contact_us,phone', 'numeric', 'regex:[0-9]{8}'],
             'direction' => ['required', 'max:255'],
             'year' => ['required', 'unique:contact_us,year']
             

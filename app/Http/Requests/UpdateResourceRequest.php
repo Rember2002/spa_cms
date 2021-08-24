@@ -13,7 +13,7 @@ class UpdateResourceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateResourceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name_resource' => ['required'],
+            'description' => ['required'],
+            'image' => ['required', 'max:255'],
+            'document' => ['required', 'max:255', 'exists:resources,document']
         ];
     }
 }

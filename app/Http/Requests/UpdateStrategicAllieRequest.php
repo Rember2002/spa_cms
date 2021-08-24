@@ -13,7 +13,7 @@ class UpdateStrategicAllieRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateStrategicAllieRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name_ally' => ['required'],
+            'image' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
         ];
     }
 }

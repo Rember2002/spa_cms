@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateServiceRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,11 @@ class UpdateServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'name_service' => ['required'],
+            'description' => ['required'],
+            'link' => ['required', 'max:255'],
+            'state' => ['required', Rule::in(['Visible', 'Disabled']),],
         ];
     }
 }

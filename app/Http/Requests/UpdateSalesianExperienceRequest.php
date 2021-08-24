@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateSalesianExperienceRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateSalesianExperienceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,12 @@ class UpdateSalesianExperienceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name_event' => ['required', 'max:255'],
+            'description' => ['required'],
+            'date' => ['required', 'min:2020-01-01'],
+            'place' => ['required', 'max:255'],
+            'image' => ['required', 'max:255'],
+            'type' => ['required', Rule::in(['Coro', 'Orquesta', 'Selecciones deportivas', 'Coreografia', 'Oratorio']),],
         ];
     }
 }

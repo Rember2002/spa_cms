@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCarouselRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateCarouselRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,9 @@ class UpdateCarouselRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'max:255'],
+            'state' => ['required', Rule::in(['Visible', 'Disabled']),],
+            'image' => ['required', 'max:255'],
         ];
     }
 }

@@ -13,7 +13,7 @@ class UpdateStudentCouncilRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateStudentCouncilRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'year' => ['required', 'min:2020'],
+            'image' => ['required', 'max:255'],
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateNewItemRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateNewItemRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,10 @@ class UpdateNewItemRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'max:255'],
+            'content' => ['required'],
+            'date' => ['required', 'min:2020-01-01'],
+            'state' => ['required', Rule::in(['Visible', 'Disabled']),],
         ];
     }
 }

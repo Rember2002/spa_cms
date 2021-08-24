@@ -13,7 +13,7 @@ class UpdateSectionNavBarRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateSectionNavBarRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name_section' => ['required', 'max:255'],
+            'link' => ['required', 'max:255'],
+            'id_section_belong' => ['required', 'exists:section_nav_bars,id', 'nullable']
         ];
     }
 }

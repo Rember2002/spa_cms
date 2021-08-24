@@ -13,7 +13,7 @@ class UpdateGradeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateGradeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name_grade' => ['required', 'max:255'],
+            'description' => ['required'],
+            'image' => ['required', 'max:255'],
+            'id_academic_offer' => ['required', 'exists:academic_offers,id'],
         ];
     }
 }
