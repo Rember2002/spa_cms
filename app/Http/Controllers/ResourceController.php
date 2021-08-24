@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveResourceRequest;
 use App\Models\Resource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ResourceController extends Controller
 {
@@ -14,7 +16,14 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        //
+        $resource = Resource::all();
+
+        return response()->json([
+
+            "data" => $resource,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +42,17 @@ class ResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveResourceRequest $request)
     {
-        //
+        $resource = Resource::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $resource,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class ResourceController extends Controller
      */
     public function show(Resource $resource)
     {
-        //
+        return response()->json([
+
+            "data" => $resource,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +89,17 @@ class ResourceController extends Controller
      * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Resource $resource)
+    public function update(SaveResourceRequest $request, Resource $resource)
     {
-        //
+        $resource->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" => $resource,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class ResourceController extends Controller
      */
     public function destroy(Resource $resource)
     {
-        //
+        $resource->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $resource,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ServiceController extends Controller
 {
@@ -14,7 +16,14 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $service = Service::all();
+
+        return response()->json([
+
+            "data" => $service,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +42,17 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveServiceRequest $request)
     {
-        //
+        $service = Service::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $service,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return response()->json([
+
+            "data" => $service,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +89,17 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(SaveServiceRequest $request, Service $service)
     {
-        //
+        $service->update($request->all());
+       
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" => $service,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $service,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

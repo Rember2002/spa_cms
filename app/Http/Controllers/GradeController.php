@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveGradeRequest;
 use App\Models\Grade;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class GradeController extends Controller
 {
@@ -14,7 +16,14 @@ class GradeController extends Controller
      */
     public function index()
     {
-        //
+        $grade = Grade::all();
+
+        return response()->json([
+
+            "data" => $grade,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +42,17 @@ class GradeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveGradeRequest $request)
     {
-        //
+        $grade = Grade::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $grade,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class GradeController extends Controller
      */
     public function show(Grade $grade)
     {
-        //
+        return response()->json([
+
+            "data" => $grade,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -69,7 +91,15 @@ class GradeController extends Controller
      */
     public function update(Request $request, Grade $grade)
     {
-        //
+        $grade->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" => $grade,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class GradeController extends Controller
      */
     public function destroy(Grade $grade)
     {
-        //
+        $grade->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $grade,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

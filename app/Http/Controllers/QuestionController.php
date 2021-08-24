@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveQuestionRequest;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class QuestionController extends Controller
 {
@@ -14,7 +16,14 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $question = Question::all();
+
+        return response()->json([
+
+            "data" => $question,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +42,17 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveQuestionRequest $request)
     {
-        //
+        $question = Question::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $question,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return response()->json([
+
+            "data" => $question,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +89,17 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(SaveQuestionRequest $request, Question $question)
     {
-        //
+        $question->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" => $question,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $question,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

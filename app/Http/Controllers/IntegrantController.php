@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveIntegrantRequest;
 use App\Models\Integrant;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class IntegrantController extends Controller
 {
@@ -14,7 +16,14 @@ class IntegrantController extends Controller
      */
     public function index()
     {
-        //
+        $integrant = Integrant::all();
+
+        return response()->json([
+
+            "data" => $integrant,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +42,17 @@ class IntegrantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveIntegrantRequest $request)
     {
-        //
+        $integrant = Integrant::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $integrant,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class IntegrantController extends Controller
      */
     public function show(Integrant $integrant)
     {
-        //
+        return response()->json([
+
+            "data" =>  $integrant,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +89,17 @@ class IntegrantController extends Controller
      * @param  \App\Models\Integrant  $integrant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Integrant $integrant)
+    public function update(SaveIntegrantRequest $request, Integrant $integrant)
     {
-        //
+        $integrant->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" =>  $integrant,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class IntegrantController extends Controller
      */
     public function destroy(Integrant $integrant)
     {
-        //
+        $integrant->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $integrant,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

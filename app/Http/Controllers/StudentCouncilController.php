@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commission;
 use App\Models\StudentCouncil;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class StudentCouncilController extends Controller
 {
@@ -12,9 +14,16 @@ class StudentCouncilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Commission $commission)
     {
-        //
+        $studentCouncil = StudentCouncil::findOrFail($commission->id);
+
+        return response()->json([
+
+            "data" => $studentCouncil,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -35,7 +44,15 @@ class StudentCouncilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $studentCouncil = StudentCouncil::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $studentCouncil,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class StudentCouncilController extends Controller
      */
     public function show(StudentCouncil $studentCouncil)
     {
-        //
+        return response()->json([
+
+            "data" =>  $studentCouncil,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -69,7 +91,15 @@ class StudentCouncilController extends Controller
      */
     public function update(Request $request, StudentCouncil $studentCouncil)
     {
-        //
+        $studentCouncil->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" =>  $studentCouncil,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class StudentCouncilController extends Controller
      */
     public function destroy(StudentCouncil $studentCouncil)
     {
-        //
+        $studentCouncil->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $studentCouncil,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveSectionNavBarRequest;
 use App\Models\SectionNavBar;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SectionNavBarController extends Controller
 {
@@ -14,7 +16,14 @@ class SectionNavBarController extends Controller
      */
     public function index()
     {
-        //
+        $sectionNavBar = SectionNavBar::all();
+
+        return response()->json([
+
+            "data" => $sectionNavBar,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +42,17 @@ class SectionNavBarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveSectionNavBarRequest $request)
     {
-        //
+        $sectionNavBar = SectionNavBar::create($request->all());
+
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $sectionNavBar,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class SectionNavBarController extends Controller
      */
     public function show(SectionNavBar $sectionNavBar)
     {
-        //
+        return response()->json([
+
+            "data" => $sectionNavBar,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +89,17 @@ class SectionNavBarController extends Controller
      * @param  \App\Models\SectionNavBar  $sectionNavBar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SectionNavBar $sectionNavBar)
+    public function update(SaveSectionNavBarRequest $request, SectionNavBar $sectionNavBar)
     {
-        //
+        $sectionNavBar->update($request->all());
+
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" => $sectionNavBar,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class SectionNavBarController extends Controller
      */
     public function destroy(SectionNavBar $sectionNavBar)
     {
-        //
+        $sectionNavBar->delete();
+
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $sectionNavBar,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveCommissionRequest;
+use App\Models\Integrant;
 use App\Models\Commission;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CommissionController extends Controller
 {
@@ -12,9 +15,16 @@ class CommissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Integrant $integrant)
     {
-        //
+        $commission = Commission::findOrFail($integrant->id);
+
+        return response()->json([
+
+            "data" => $commission,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +43,17 @@ class CommissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveCommissionRequest $request)
     {
-        //
+        $commission = Commission::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $commission,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +64,12 @@ class CommissionController extends Controller
      */
     public function show(Commission $commission)
     {
-        //
+        return response()->json([
+
+            "data" =>  $commission,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +90,17 @@ class CommissionController extends Controller
      * @param  \App\Models\Commission  $commission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Commission $commission)
+    public function update(SaveCommissionRequest $request, Commission $commission)
     {
-        //
+        $commission->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" =>  $commission,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +111,14 @@ class CommissionController extends Controller
      */
     public function destroy(Commission $commission)
     {
-        //
+        $commission->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $commission,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

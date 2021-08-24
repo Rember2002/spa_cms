@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveAcademicOfferRequest;
 use App\Models\AcademicOffer;
+use App\Models\Grade;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AcademicOfferController extends Controller
 {
@@ -12,9 +15,16 @@ class AcademicOfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Grade $grade)
     {
-        //
+        $academicOffer = AcademicOffer::findOutFill($grade->id);
+
+        return response()->json([
+
+            "data" => $academicOffer,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +43,17 @@ class AcademicOfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveAcademicOfferRequest $request)
     {
-        //
+        $academicOffer = AcademicOffer::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $academicOffer,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +64,12 @@ class AcademicOfferController extends Controller
      */
     public function show(AcademicOffer $academicOffer)
     {
-        //
+        return response()->json([
+
+            "data" => $academicOffer,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +90,17 @@ class AcademicOfferController extends Controller
      * @param  \App\Models\AcademicOffer  $academicOffer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AcademicOffer $academicOffer)
+    public function update(SaveAcademicOfferRequest $request, AcademicOffer $academicOffer)
     {
-        //
+        $academicOffer->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" => $academicOffer,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +111,14 @@ class AcademicOfferController extends Controller
      */
     public function destroy(AcademicOffer $academicOffer)
     {
-        //
+        $academicOffer->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $academicOffer,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

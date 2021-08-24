@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveContactUsRequest;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ContactUsController extends Controller
 {
@@ -14,7 +16,14 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        //
+        $contactUs = ContactUs::all();
+
+        return response()->json([
+
+            "data" => $contactUs,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +42,17 @@ class ContactUsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveContactUsRequest $request)
     {
-        //
+        $contactUs = ContactUs::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $contactUs,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class ContactUsController extends Controller
      */
     public function show(ContactUs $contactUs)
     {
-        //
+        return response()->json([
+
+            "data" => $contactUs,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +89,17 @@ class ContactUsController extends Controller
      * @param  \App\Models\ContactUs  $contactUs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactUs $contactUs)
+    public function update(SaveContactUsRequest $request, ContactUs $contactUs)
     {
-        //
+        $contactUs->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" => $contactUs,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class ContactUsController extends Controller
      */
     public function destroy(ContactUs $contactUs)
     {
-        //
+        $contactUs->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $contactUs,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }

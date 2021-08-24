@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveServiceHomeRequest;
 use App\Models\ServiceHome;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ServiceHomeController extends Controller
 {
@@ -14,7 +16,14 @@ class ServiceHomeController extends Controller
      */
     public function index()
     {
-        //
+        $serviceHome = ServiceHome::all();
+
+        return response()->json([
+
+            "data" => $serviceHome,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -33,9 +42,17 @@ class ServiceHomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveServiceHomeRequest $request)
     {
-        //
+        $serviceHome = ServiceHome::create($request->all());
+        
+        return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $serviceHome,
+            "status" => Response::HTTP_CREATED,
+
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +63,12 @@ class ServiceHomeController extends Controller
      */
     public function show(ServiceHome $serviceHome)
     {
-        //
+        return response()->json([
+
+            "data" => $serviceHome,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,9 +89,17 @@ class ServiceHomeController extends Controller
      * @param  \App\Models\ServiceHome  $serviceHome
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ServiceHome $serviceHome)
+    public function update(SaveServiceHomeRequest $request, ServiceHome $serviceHome)
     {
-        //
+        $serviceHome->update($request->all());
+        
+        return response()->json([
+
+            "message" => "El registro ha sido modificado con ¡Exito!",
+            "data" => $serviceHome,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +110,14 @@ class ServiceHomeController extends Controller
      */
     public function destroy(ServiceHome $serviceHome)
     {
-        //
+        $serviceHome->delete();
+        
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $serviceHome,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
     }
 }
