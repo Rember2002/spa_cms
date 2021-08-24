@@ -26,7 +26,7 @@ class SaveAcademicOfferRequest extends FormRequest
     {
         return [
             
-            'name_offer' => ['required', 'max:255'],
+            'name_offer' => ['required', 'max:255','unique:academic_offers,name_offer'],
             'description' => ['required'],
             'image' => ['required', 'max:255'],
             'state' => ['required', Rule::in(['Visible', 'Disabled']),],
