@@ -27,7 +27,7 @@ class StudentCouncilController extends Controller
 
         // ], Response::HTTP_OK);
 
-        return StudentCouncilResource::collection(StudentCouncil::findOrFail($commission->id));
+        return StudentCouncilResource::collection(StudentCouncil::all());
     }
 
     /**
