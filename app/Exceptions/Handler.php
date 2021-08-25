@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 use function GuzzleHttp\Promise\exception_for;
@@ -59,6 +60,13 @@ class Handler extends ExceptionHandler
                 'response' => false,
                 'errors' => 'No hemos encontrado la informacion solicitada, ¡Error!'
             ], Response::HTTP_NOT_FOUND);
+        }
+
+        if($exception instanceof RouteNotFoundException){
+            return response()->json([
+                'response' => false,
+                'errors' => 'No posee los permisos necesarios para acceder a esta ruta, ¡Error!'
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
         return parent::render($request, $exception);
