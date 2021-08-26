@@ -2,17 +2,17 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title>SPA Web Site Ricaldone</title>
-
+    
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('/fontawesome-free/css/all.min.css') }}">
         
         <!-- App.css -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 
         <!-- Styles -->
         <style>
@@ -25,7 +25,7 @@
             }
         </style>
     </head>
-    <body class="antialiased">
+    <body id="page-top" class="antialiased">
         
             <!-- App Container -->
         <div id="app">
@@ -35,19 +35,19 @@
 
 
             <!-- Import app.js -->
-       <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('/js/app.js') }}"></script>
 
-             <!-- Import app.js -->
-        <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+             <!-- Import jquery.min.js -->
+        <script src="{{ asset('/jquery/jquery.min.js') }}"></script>
 
-            <!-- Import app.js -->
-       <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <!-- Import bootstrap.bundle.min.js -->
+        <script src="{{ asset('/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-        <!-- Import app.js -->
-        <script src="{{ asset('jquery-easing/jquery.easing.min.js') }}"></script>
+            <!-- Import jquery.easing.min.js -->
+        <script src="{{ asset('/jquery-easing/jquery.easing.min.js') }}"></script>
 
-        <!-- Import app.js -->
-        <script src="{{ asset('js/sb-admin-2.js') }}"></script>
+            <!-- Import sb-admin-2.js -->
+        <script src="{{ asset('/js/sb-admin-2.js') }}"></script>
         
     </body>
 </html>
