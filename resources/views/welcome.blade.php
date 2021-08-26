@@ -26,7 +26,28 @@
         </style>
     </head>
     <body class="antialiased">
-        <div id="app"></div>
+        
+            <!-- App Container -->
+        <div id="app">
+            <!-- Content -->
+        </div>
+
+
+
+            <!-- Import app.js -->
        <script src="{{ asset('js/app.js') }}"></script>
+
+             <!-- Import app.js -->
+        <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+
+            <!-- Import app.js -->
+       <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+        <!-- Import app.js -->
+        <script src="{{ asset('jquery-easing/jquery.easing.min.js') }}"></script>
+
+        <!-- Import app.js -->
+        <script src="{{ asset('js/sb-admin-2.js') }}"></script>
+        
     </body>
 </html>

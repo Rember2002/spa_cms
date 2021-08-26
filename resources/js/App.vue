@@ -8,11 +8,11 @@
 
         
 
-        <!-- Content Wrapper -->
+            <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <Header />
-            
+
             <router-view>
                 
             </router-view>  
