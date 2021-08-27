@@ -28,7 +28,8 @@ class UpdateAboutUsRequest extends FormRequest
             'name' => ['required', 'max:255'],
             'description' => ['required'],
             'type' => ['required', Rule::in(['Mission', 'View', 'Value']),],
-            'image' => ['required',  'image', 'mimes:png,jpg,jpeg'],
+            'year' => ['required', 'numeric', 'min:2020'],
+            'image' => ['required'],
         ];
     }
 }

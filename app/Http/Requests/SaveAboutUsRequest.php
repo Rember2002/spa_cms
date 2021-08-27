@@ -29,7 +29,8 @@ class SaveAboutUsRequest extends FormRequest
             'name' => ['required', 'unique:about_us,name' ,'max:255'],
             'description' => ['required'],
             'type' => ['required', Rule::in(['Mission', 'View', 'Value']),],
-            'image' => ['required', 'image', 'mimes:png,jpg,jpeg'],
+            'year' => ['required', 'numeric', 'min:2020'],
+            'image' => ['required'],
 
         ];
     }
