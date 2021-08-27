@@ -37,7 +37,12 @@ class AuthenticateController extends Controller
                 ]);
             }
 
-        $user->createToken($request->email);
+        $token = $user->createToken($request->email)->plainTextToken;
+
+        return response()->json([
+            'response' => true,
+            'message' => $token,
+        ], Response::HTTP_OK);
     }
 
     public function logout(Request $request)
