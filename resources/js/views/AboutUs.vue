@@ -143,7 +143,10 @@
 
                 try {
                     const response = await aboutUsService.createRegisterAboutUs(formData);
+                    this.$swal("Success")
+
                     console.log(response);
+
                 } catch (error) {
                     switch (error.response.status) {
                         case 422:

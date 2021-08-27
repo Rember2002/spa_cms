@@ -2010,31 +2010,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 9:
                 response = _context.sent;
+                this.$swal("Success");
                 console.log(response);
-                _context.next = 22;
+                _context.next = 23;
                 break;
 
-              case 13:
-                _context.prev = 13;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](6);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === 422 ? 18 : 20;
+                _context.next = _context.t1 === 422 ? 19 : 21;
                 break;
 
-              case 18:
+              case 19:
                 this.errors = _context.t0.response.data.errors;
-                return _context.abrupt("break", 22);
+                return _context.abrupt("break", 23);
 
-              case 20:
+              case 21:
                 alert('Ocurrio algun error');
-                return _context.abrupt("break", 22);
+                return _context.abrupt("break", 23);
 
-              case 22:
+              case 23:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[6, 13]]);
+        }, _callee, this, [[6, 14]]);
       }));
 
       function createRegisterAboutUs() {
