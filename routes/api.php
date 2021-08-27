@@ -44,9 +44,11 @@ Route::post('register', [AuthenticateController::class, 'register']);
 
 Route::post('login', [AuthenticateController::class, 'login']);
 
+Route::apiResource('aboutus', AboutUsController::class);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     
-    Route::apiResource('aboutus', AboutUsController::class);
+  
 
     Route::apiResource('academicOffers', AcademicOfferController::class);
 
