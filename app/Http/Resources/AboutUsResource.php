@@ -20,7 +20,7 @@ class AboutUsResource extends JsonResource
             'Id' => $this->id,
             'Titulo' => $this->name,
             'Contenido' => $this->description,
-            'Tipo de Contenido' => $this->type,
+            'Tipo' => $this->type,
             'Año' => $this->year,
             'Portada' => $this->image, 
 
