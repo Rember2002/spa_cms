@@ -57,6 +57,10 @@ class AboutUsController extends Controller
 
         // ],  Response::HTTP_CREATED);
 
+        $path = $request->file('image')->store('image');
+
+        $this->image = $path;
+
         return (new AboutUsResource(AboutUs::create($request->all())))
             ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
             ->response()

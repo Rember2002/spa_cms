@@ -14,10 +14,7 @@ class AboutUsResource extends JsonResource
      */
     public function toArray($request)
     {
-        $path = $request->file('image')->store('image');
 
-        $this->image = $path;
-        
         return [
 
             'Id' => $this->id,

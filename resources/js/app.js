@@ -8,12 +8,17 @@ import BootstrapVue from 'bootstrap-vue';
 
 import VueSweetalert2 from 'vue-sweetalert2';
 
-Vue.use(BootstrapVue);
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+import store from './store';
 
 Vue.use(VueSweetalert2);
+
+Vue.use(BootstrapVue);
 
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render: h => h(App)
 });

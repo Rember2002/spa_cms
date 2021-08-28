@@ -20,12 +20,18 @@
                 <thead>
                     <tr>
                         <td>Id</td>
+                        <td>Nombre</td>
+                        <td>Descripcion</td>
+                        <td>Tipo</td>
+                        <td>Año</td>
+                        <td>Imagen</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
+                    <tr v-for="(aboutus, index) in registers" :key="index">
+                        <td>{{aboutus.Titulo}}</td>
+                        <td>{{aboutus.Titulo}}</td>
                         <td>
                             <button class="btn btn-success btn-sm"><span class="fa fa-edit"></span></button>
                             <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button>
@@ -96,10 +102,12 @@
         data(){
             return {
 
+                registers: [],
+
                 aboutusData: {
                     name: '',
                     description: '',
-                    type: [''],
+                    type: '',
                     year: '',
                     image: '',
                 },
@@ -113,6 +121,10 @@
                 errors: {},
             }
         },
+
+        mounted() {
+                this.loadRegisterAboutUs();
+            },
 
         methods: {
             attachImage() {
@@ -132,21 +144,26 @@
             showNewAboutUsModal() {
                 this.$refs.modalAboutUs.show();
             },
+            
 
             createRegisterAboutUs: async function() {
                 let formData = new FormData();
                 formData.append('name', this.aboutusData.name);
                 formData.append('description', this.aboutusData.description);
-                formData.append('year', this.aboutusData.type);
+                formData.append('type', this.aboutusData.type);
                 formData.append('year', this.aboutusData.year);
                 formData.append('image', this.aboutusData.image);
 
                 try {
                     const response = await aboutUsService.createRegisterAboutUs(formData);
-                    this.$swal("Success")
-
                     console.log(response);
-
+                    this.hideNewAboutUsModal();
+                    this.$swal.fire({
+                        icon: 'success',
+                        title: 'Exito',
+                        text: 'El registro ha sido guardado correctamente',
+                    })
+                    
                 } catch (error) {
                     switch (error.response.status) {
                         case 422:
@@ -154,11 +171,32 @@
                             break;
 
                         default:
-                            alert('Ocurrio algun error')
+                            this.hideNewAboutUsModal();
+                            this.$swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Ha ocurrido un error',
+                            })
                             break;
                     }
                 }
-            }
+            },
+
+            loadRegisterAboutUs: async function() {
+                try {
+                    const response = await aboutUsService.loadRegisterAboutUs();
+                    console.log(response);
+                    this.registers = response.data.data;
+                    console.log(registers);
+                } catch (error) {
+                    console.log(error);
+                    this.$swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No es posible cargar el contenido en estos momentos',
+                    })
+                }
+            },
         },
     }
 </script>
