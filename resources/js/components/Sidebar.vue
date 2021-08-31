@@ -39,34 +39,34 @@
         <div id="collapseHomePage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <router-link to="/aboutus" exact>
-                    <a class="collapse-item" href="login.html">Acerca de</a>
+                    <a class="collapse-item" href="">Acerca de</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Carousel</a>
+                    <a class="collapse-item" href="">Carousel</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Noticias</a>
+                    <a class="collapse-item" href="">Noticias</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Contactenos</a>
+                    <a class="collapse-item" href="">Contactenos</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Carousel</a>
+                    <a class="collapse-item" href="">Carousel</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Menu</a>
+                    <a class="collapse-item" href="">Menu</a>
+                </router-link>
+                <router-link to="/academicoffer" class="" exact>
+                    <a class="collapse-item" href="">Oferta Academica</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Oferta Academica</a>
+                    <a class="collapse-item" href="">Servicios</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Servicios</a>
+                    <a class="collapse-item" href="">Preguntas Frecuentes</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Preguntas Frecuentes</a>
-                </router-link>
-                <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Vivencia Salesiana</a>
+                    <a class="collapse-item" href="">Vivencia Salesiana</a>
                 </router-link>
             </div>
         </div>
