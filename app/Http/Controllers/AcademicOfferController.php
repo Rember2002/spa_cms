@@ -8,6 +8,7 @@ use App\Models\AcademicOffer;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class AcademicOfferController extends Controller
 {
@@ -18,15 +19,6 @@ class AcademicOfferController extends Controller
      */
     public function index()
     {
-        // $academicOffer = AcademicOfferResource::collection(AcademicOffer::findOrFail($grade->id));
-
-        // return response()->json([
-
-        //     "data" => $academicOffer,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return AcademicOfferResource::collection(AcademicOffer::all());
     }
 
@@ -46,22 +38,21 @@ class AcademicOfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveAcademicOfferRequest $request)
+    public function store(SaveAcademicOfferRequest $request, AcademicOffer $academicOffer)
     {
-        // $academicOffer = AcademicOffer::create($request->all());
-        
-        // return response()->json([
+        $academicOffer->name_offer = $request->name_offer;
+        $academicOffer->description = $request->description;
+        $academicOffer->state = $request->state;
+        $path = $request->file('image')->store('images_aboutus');
+        $academicOffer->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $academicOffer,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $academicOffer->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new AcademicOfferResource(AcademicOffer::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -72,13 +63,6 @@ class AcademicOfferController extends Controller
      */
     public function show(AcademicOffer $academicOffer)
     {
-        // return response()->json([
-
-        //     "data" => $academicOffer,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return new AcademicOfferResource($academicOffer);
     }
 
@@ -102,22 +86,25 @@ class AcademicOfferController extends Controller
      */
     public function update(SaveAcademicOfferRequest $request, AcademicOffer $academicOffer)
     {
-        // $academicOffer->update($request->all());
-        
-        // return response()->json([
+        $academicOffer->name = $request->name;
+        $academicOffer->description = $request->description;
+        $academicOffer->state = $request->state;
+        $oldPath = $academicOffer->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $academicOffer,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_aboutus');
+            $academicOffer->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $academicOffer->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $academicOffer->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new AcademicOfferResource($academicOffer))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -128,21 +115,24 @@ class AcademicOfferController extends Controller
      */
     public function destroy(AcademicOffer $academicOffer)
     {
-        // $academicOffer->delete();
-        
-        // return response()->json([
+        if ($academicOffer->delete()){
+            Storage::delete($academicOffer->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $academicOffer,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $academicOffer,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        $academicOffer->delete();
-
-        return (new AcademicOfferResource($academicOffer))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $academicOffer,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -106,9 +106,9 @@ class AboutUsController extends Controller
            
             "message" => "El registro ingresado se ha creado con ¡Exito!",
             "data" => $aboutu->save(),
-            "status" => Response::HTTP_CREATED,
+            "status" => Response::HTTP_OK,
 
-        ],  Response::HTTP_CREATED);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -138,22 +138,5 @@ class AboutUsController extends Controller
     
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        
-        $aboutu->delete();
-
-        return response()->json([
-
-            "message" => "El registro se ha eliminado con ¡Exito!",
-            "data" => $aboutu,
-            "status" => Response::HTTP_OK,
-
-        ], Response::HTTP_OK);
-
-        // $aboutUs->delete();
-
-        // return (new AboutUsResource($aboutUs))
-        //     ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-        //     ->response()
-        //     ->setStatusCode(Response::HTTP_OK);
     }
 }
