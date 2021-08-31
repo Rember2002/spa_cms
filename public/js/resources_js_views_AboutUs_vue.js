@@ -2014,6 +2014,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 // Import file aboutUsService that contains functions request routes.
  // Begin export default.
 
@@ -2021,6 +2022,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'aboutus',
   data: function data() {
     return {
+      filter: null,
       // Declare registers to use to save display data.
       registers: [],
       // Declare aboutusData to use to save data form.
@@ -2442,18 +2444,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "updateRegisterAboutUs": () => (/* binding */ updateRegisterAboutUs)
 /* harmony export */ });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
+// Import http service to use config routes API. 
+ // Function to use send request API create register.
 
 function createRegisterAboutUs(data) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/aboutus', data);
-}
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/academicOffers', data);
+} // Function to use send request API load registers.
+
 function loadRegisterAboutUs() {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/aboutus');
-}
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/academicOffers');
+} // Function to use send request API delete registers selected.
+
 function deleteAboutUsRegister(id) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("aboutus/".concat(id));
-}
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("academicOffers/".concat(id));
+} // Function to use send request API update register selected.
+
 function updateRegisterAboutUs(id, data) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/aboutus/".concat(id), data);
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/academicOffers/".concat(id), data);
 }
 
 /***/ }),
@@ -2473,14 +2480,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store */ "./resources/js/store.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+// Import Store to use centralized warehouse to components.
+ // Import Axios to use management the send and response API request.
 
+ // Function to use declare baseURL API in requests axios.
 
 function http() {
   return axios__WEBPACK_IMPORTED_MODULE_1___default().create({
+    // Important check the baseURL in server.
     baseURL: 'http://127.0.0.1:8000/api'
   });
 }
-;
+; // Function to use declare baseURL and headers in requests axios.
+
 function httpFile() {
   return axios__WEBPACK_IMPORTED_MODULE_1___default().create({
     baseURL: _store__WEBPACK_IMPORTED_MODULE_0__.default.state.apiURL,
@@ -3364,7 +3376,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "card-body table-responsive" }, [
           _c("table", { staticClass: "table" }, [
             _vm._m(3),
             _vm._v(" "),
@@ -3944,7 +3956,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
+    return _c("thead", { staticClass: "table-dark" }, [
       _c("tr", [
         _c("td", [_vm._v("Id")]),
         _vm._v(" "),

@@ -64,6 +64,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
@@ -89,6 +92,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_5__.default({
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__.default);
   }
 });
+var opts = {};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new Vuetify(opts));
 
 /***/ }),
 
@@ -119,6 +124,12 @@ var routes = [{
   name: 'aboutus',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_AboutUs_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/AboutUs.vue */ "./resources/js/views/AboutUs.vue"));
+  }
+}, {
+  path: '/academicoffer',
+  name: 'academicoffer',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_AcademicOffers_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/AcademicOffers.vue */ "./resources/js/views/AcademicOffers.vue"));
   }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
@@ -47263,10 +47274,7 @@ var render = function() {
                 _c("router-link", { attrs: { to: "/aboutus", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Acerca de")]
                   )
                 ]),
@@ -47274,10 +47282,7 @@ var render = function() {
                 _c("router-link", { attrs: { to: "", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Carousel")]
                   )
                 ]),
@@ -47285,10 +47290,7 @@ var render = function() {
                 _c("router-link", { attrs: { to: "", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Noticias")]
                   )
                 ]),
@@ -47296,10 +47298,7 @@ var render = function() {
                 _c("router-link", { attrs: { to: "", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Contactenos")]
                   )
                 ]),
@@ -47307,10 +47306,7 @@ var render = function() {
                 _c("router-link", { attrs: { to: "", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Carousel")]
                   )
                 ]),
@@ -47318,32 +47314,27 @@ var render = function() {
                 _c("router-link", { attrs: { to: "", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Menu")]
                   )
                 ]),
                 _vm._v(" "),
-                _c("router-link", { attrs: { to: "", exact: "" } }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
-                    [_vm._v("Oferta Academica")]
-                  )
-                ]),
+                _c(
+                  "router-link",
+                  { attrs: { to: "/academicoffer", exact: "" } },
+                  [
+                    _c(
+                      "a",
+                      { staticClass: "collapse-item", attrs: { href: "" } },
+                      [_vm._v("Oferta Academica")]
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c("router-link", { attrs: { to: "", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Servicios")]
                   )
                 ]),
@@ -47351,10 +47342,7 @@ var render = function() {
                 _c("router-link", { attrs: { to: "", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Preguntas Frecuentes")]
                   )
                 ]),
@@ -47362,10 +47350,7 @@ var render = function() {
                 _c("router-link", { attrs: { to: "", exact: "" } }, [
                   _c(
                     "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
+                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Vivencia Salesiana")]
                   )
                 ])
@@ -65025,7 +65010,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "resources_js_views_AboutUs_vue") return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
