@@ -7,7 +7,7 @@
     <div class="d-sm-flex align-items-center justify-content-center mb-4">
         <h1 class="mb-0 text-gray-800">Acerca de</h1>
     </div>
-
+    
         <!-- Data table. -->
     <div class="card">
             <!-- Header data table. -->
@@ -16,9 +16,10 @@
             <button class="btn btn-success btn-sm ml-auto" @click="showNewAboutUsModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
         </div>
             <!-- Content data table. -->
-        <div class="card-body">
+
+        <div class="card-body table-responsive">
             <table class="table"> 
-                <thead>
+                <thead class="table-dark">
                     <tr>
                         <td>Id</td>
                         <td>Nombre</td>
@@ -159,6 +160,7 @@
 
         data(){
             return {
+                filter: null,
                     // Declare registers to use to save display data.
                 registers: [],
 
