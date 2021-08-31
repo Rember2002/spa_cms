@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveAboutUsRequest;
+use App\Http\Requests\UpdateAboutUsRequest;
 use App\Http\Resources\AboutUsResource;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
@@ -18,15 +19,6 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        // $aboutUs = AboutUsResource::collection(AboutUs::all());
-
-        // return response()->json([
-
-        //     "data" => $aboutUs,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return AboutUsResource::collection(AboutUs::all());
     }
 
@@ -74,13 +66,6 @@ class AboutUsController extends Controller
      */
     public function show(AboutUs $aboutu)
     {
-        // return response()->json([
-
-        //     "data" => $aboutUs,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return new AboutUsResource($aboutu);
     }
 
@@ -102,24 +87,28 @@ class AboutUsController extends Controller
      * @param  \App\Models\AboutUs  $aboutUs
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveAboutUsRequest $request, AboutUs $aboutUs)
+    public function update(UpdateAboutUsRequest $request, AboutUs $aboutu)
     {
-        // $aboutUs->update($request->all());
+        $aboutu->name = $request->name;
+        $aboutu->description = $request->description;
+        $aboutu->type = $request->type;
+        $aboutu->year = $request->year;
+        $oldPath = $aboutu->image;
 
-        // return response()->json([
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_aboutus');
+            $aboutu->image = $path;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $aboutUs,
-        //     "status" => Response::HTTP_OK,
+            Storage::delete($oldPath);
+        }
 
-        // ], Response::HTTP_OK);
+            return response()->json([
+           
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $aboutu->save(),
+            "status" => Response::HTTP_CREATED,
 
-        $aboutUs->update($request->all());
-
-        return (new AboutUsResource($aboutUs))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_CREATED);
     }
 
     /**

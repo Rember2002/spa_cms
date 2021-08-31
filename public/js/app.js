@@ -46961,7 +46961,7 @@ var staticRenderFns = [
                     _c("div", { staticClass: "dropdown-list-image mr-3" }, [
                       _c("img", {
                         staticClass: "rounded-circle",
-                        attrs: { src: "img/undraw_profile_1.svg", alt: "..." }
+                        attrs: { src: "", alt: "..." }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "status-indicator bg-success" })
@@ -46991,7 +46991,7 @@ var staticRenderFns = [
                     _c("div", { staticClass: "dropdown-list-image mr-3" }, [
                       _c("img", {
                         staticClass: "rounded-circle",
-                        attrs: { src: "img/undraw_profile_2.svg", alt: "..." }
+                        attrs: { src: "", alt: "..." }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "status-indicator" })
@@ -47021,7 +47021,7 @@ var staticRenderFns = [
                     _c("div", { staticClass: "dropdown-list-image mr-3" }, [
                       _c("img", {
                         staticClass: "rounded-circle",
-                        attrs: { src: "img/undraw_profile_3.svg", alt: "..." }
+                        attrs: { src: "", alt: "..." }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "status-indicator bg-warning" })
@@ -47114,7 +47114,7 @@ var staticRenderFns = [
                 _vm._v(" "),
                 _c("img", {
                   staticClass: "img-profile rounded-circle",
-                  attrs: { src: "img/undraw_profile.svg" }
+                  attrs: { src: "" }
                 })
               ]
             ),
@@ -48254,7 +48254,7 @@ var staticRenderFns = [
                 _c("img", {
                   staticClass: "img-fluid px-3 px-sm-4 mt-3 mb-4",
                   staticStyle: { width: "25rem" },
-                  attrs: { src: "img/undraw_posting_photo.svg", alt: "..." }
+                  attrs: { src: "", alt: "..." }
                 })
               ]),
               _vm._v(" "),

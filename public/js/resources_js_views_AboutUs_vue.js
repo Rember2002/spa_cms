@@ -1968,6 +1968,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Import file aboutUsService that contains functions request routes.
  // Begin export default.
 
@@ -1975,17 +2021,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'aboutus',
   data: function data() {
     return {
-      // Declare HTTP status code.
-      HTTP_UNPROCESSABLE_ENTITY: 422,
       // Declare registers to use to save display data.
       registers: [],
       // Declare aboutusData to use to save data form.
       aboutusData: {
-        name: '',
-        description: '',
-        type: '',
-        year: '',
-        image: ''
+        Titulo: '',
+        Contenido: '',
+        Tipo: '',
+        Año: '',
+        Portada: ''
       },
       // Save default variables for use select component.    
       options: [{
@@ -1999,9 +2043,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: 'Valor'
       }],
       // Save errors to response send request.
-      errors: {},
-      // Declare object save data for update.
-      updateAboutUsData: {}
+      errors: {}
     };
   },
   // Mounted data for registers in datatable.
@@ -2013,27 +2055,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     // Method for attach image in form.
     attachImage: function attachImage() {
-      this.aboutusData.image = this.$refs.imageAboutUs.files[0];
-      var reader = new FileReader();
-      reader.addEventListener('load', function () {
-        this.$refs.imageAboutUsDisplay.src = reader.result;
-      }.bind(this), false);
-      reader.readAsDataURL(this.aboutusData.image);
+      try {
+        this.aboutusData.Portada = this.$refs.imageAboutUs.files[0];
+        var reader = new FileReader();
+        reader.addEventListener('load', function () {
+          this.$refs.imageAboutUsDisplay.src = reader.result;
+        }.bind(this), false);
+        reader.readAsDataURL(this.aboutusData.Portada); // Open swet alert use to indicate response attach image.
+
+        this.$swal.fire({
+          icon: 'success',
+          title: 'La imagen ha sido cargada exitosamente',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+      } catch (_unused) {
+        // Open swet alert use to indicate response attach image.
+        this.$swal.fire({
+          icon: 'error',
+          title: 'No se ha podido cargar la imagen',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+      }
+
+      ;
     },
-    // Close and clear data in form.
+    // Close and clear data in form create.
     hideNewAboutUsModal: function hideNewAboutUsModal() {
-      this.$refs.modalAboutUs.hide();
+      this.$refs.modalCreateAboutUs.hide();
       this.aboutusData = {
-        name: '',
-        description: '',
-        type: '',
-        year: '',
-        image: ''
+        Titulo: '',
+        Contenido: '',
+        Tipo: '',
+        Año: '',
+        Portada: ''
       };
     },
     // Event open new modal with clean form.
     showNewAboutUsModal: function showNewAboutUsModal() {
-      this.$refs.modalAboutUs.show();
+      this.$refs.modalCreateAboutUs.show();
     },
     // Function use for save data forma to send request.
     createRegisterAboutUs: function () {
@@ -2044,39 +2111,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 formData = new FormData();
-                formData.append('name', this.aboutusData.name);
-                formData.append('description', this.aboutusData.description);
-                formData.append('type', this.aboutusData.type);
-                formData.append('year', this.aboutusData.year);
-                formData.append('image', this.aboutusData.image);
+                formData.append('name', this.aboutusData.Titulo);
+                formData.append('description', this.aboutusData.Contenido);
+                formData.append('type', this.aboutusData.Tipo);
+                formData.append('year', this.aboutusData.Año);
+                formData.append('image', this.aboutusData.Portada);
                 _context.prev = 6;
                 _context.next = 9;
                 return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_1__.createRegisterAboutUs(formData);
 
               case 9:
-                // Refresh data in datatalbe.
-                this.loadRegisterAboutUs(); // Clean and close form.
-
-                this.hideNewAboutUsModal(); // Open swet alert to indicate success.
-
+                // Open swet alert to indicate success.                    
                 this.$swal.fire({
                   icon: 'success',
                   title: 'Exito',
                   text: 'El registro ha sido guardado correctamente'
-                });
+                }); // Clean and close form.
+
+                this.hideNewAboutUsModal();
                 _context.next = 24;
                 break;
 
-              case 14:
-                _context.prev = 14;
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](6);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === HTTP_UNPROCESSABLE_ENTITY ? 19 : 21;
+                _context.next = _context.t1 === 422 ? 18 : 21;
                 break;
 
-              case 19:
+              case 18:
                 // Load error validations.
-                this.errors = _context.t0.response.data.errors;
+                this.errors = _context.t0.response.data.errors; // Show swet alert indicate succeso to load data.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Existen errores en el llenado del formulario',
+                  toast: true,
+                  position: 'top-end',
+                  timer: 3000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
                 return _context.abrupt("break", 24);
 
               case 21:
@@ -2095,7 +2170,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.stop();
             }
           }
-        }, _callee, this, [[6, 14]]);
+        }, _callee, this, [[6, 13]]);
       }));
 
       function createRegisterAboutUs() {
@@ -2195,11 +2270,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       timer: 3000,
                       timerProgressBar: true,
                       icon: 'success',
-                      title: "Se ha eliminado correctamente: ".concat(aboutus.Titulo, "?")
-                    }); // Refresh data table.
-
-
-                    _this.loadRegisterAboutUs(); // Response is false delete record.
+                      title: "Se ha eliminado correctamente: ".concat(aboutus.Titulo, ".")
+                    }); // Response is false delete record.
 
                   } else if (result.isDenied) {
                     // Show swet alert to indicate response false delete register.
@@ -2210,7 +2282,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       timer: 3000,
                       timerProgressBar: true,
                       icon: 'warning',
-                      title: "Ha cancelado la operacion de eliminar: ".concat(aboutus.Titulo)
+                      title: "Ha cancelado la operacion de eliminar: ".concat(aboutus.Titulo, ".")
                     });
                   }
 
@@ -2231,21 +2303,117 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return deleteAboutUsRegister;
     }(),
-    // Function use to update dates to register select.
+    hideUpdateAboutUsModal: function hideUpdateAboutUsModal() {
+      this.$refs.modalUpdateAboutUs.hide();
+      this.aboutusData = {
+        Titulo: '',
+        Contenido: '',
+        Tipo: '',
+        Año: '',
+        Portada: ''
+      };
+    },
+    showUpdateAboutUsModal: function showUpdateAboutUsModal() {
+      this.$refs.modalUpdateAboutUs.show();
+    },
+    // Capture dates into form update.
+    updateDataAboutUs: function updateDataAboutUs(aboutus) {
+      this.aboutusData = aboutus;
+      this.showUpdateAboutUsModal();
+    },
+    // Method for update attach image in form.
+    updateImage: function updateImage() {
+      try {
+        this.aboutusData.Portada = this.$refs.imageUpdateAboutUs.files[0];
+        var reader = new FileReader();
+        reader.addEventListener('load', function () {
+          this.$refs.updateImageAboutUsDisplay.src = reader.result;
+        }.bind(this), false);
+        reader.readAsDataURL(this.aboutusData.Portada); // Open swet alert use to indicate response attach image.
+
+        this.$swal.fire({
+          icon: 'success',
+          title: 'La imagen ha sido cargada exitosamente',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+      } catch (error) {
+        // Open swet alert use to indicate response attach image.
+        this.$swal.fire({
+          icon: 'error',
+          title: "".concat(error),
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+      }
+
+      ;
+    },
+    // Function to use update register selected.
     updateRegisterAboutUs: function () {
       var _updateRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var formData, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                this.updateRegisterAboutUs = aboutus;
+                _context4.prev = 0;
+                formData = new FormData();
+                formData.append('name', this.aboutusData.Titulo);
+                formData.append('description', this.aboutusData.Contenido);
+                formData.append('type', this.aboutusData.Tipo);
+                formData.append('year', this.aboutusData.Año);
+                formData.append('image', this.aboutusData.Portada);
+                formData.append('_method', 'put');
+                _context4.next = 10;
+                return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_1__.updateRegisterAboutUs(this.aboutusData.Id, formData);
 
-              case 1:
+              case 10:
+                response = _context4.sent;
+                this.registers.map(function (aboutus) {
+                  if (aboutus.id == response.data.id) {
+                    for (var key in response.data) {
+                      aboutus[key] = response.data[key];
+                    }
+
+                    ;
+                  }
+
+                  ;
+                });
+                this.hideUpdateAboutUsModal(); // Open swet alert to indicate success.                    
+
+                this.$swal.fire({
+                  icon: 'success',
+                  title: 'Exito',
+                  text: "El registro ha sido modificado correctamente"
+                });
+                _context4.next = 19;
+                break;
+
+              case 16:
+                _context4.prev = 16;
+                _context4.t0 = _context4["catch"](0);
+                this.$swal.fire({
+                  icon: 'error',
+                  title: "".concat(_context4.t0),
+                  timer: 3000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+
+              case 19:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee4, this, [[0, 16]]);
       }));
 
       function updateRegisterAboutUs() {
@@ -2270,7 +2438,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createRegisterAboutUs": () => (/* binding */ createRegisterAboutUs),
 /* harmony export */   "loadRegisterAboutUs": () => (/* binding */ loadRegisterAboutUs),
-/* harmony export */   "deleteAboutUsRegister": () => (/* binding */ deleteAboutUsRegister)
+/* harmony export */   "deleteAboutUsRegister": () => (/* binding */ deleteAboutUsRegister),
+/* harmony export */   "updateRegisterAboutUs": () => (/* binding */ updateRegisterAboutUs)
 /* harmony export */ });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 
@@ -2282,6 +2451,9 @@ function loadRegisterAboutUs() {
 }
 function deleteAboutUsRegister(id) {
   return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("aboutus/".concat(id));
+}
+function updateRegisterAboutUs(id, data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/aboutus/".concat(id), data);
 }
 
 /***/ }),
@@ -3172,13 +3344,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container-fluid" },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
+  return _c("div", { staticClass: "container-fluid" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card" },
+      [
         _c("div", { staticClass: "card-header d-flex" }, [
           _vm._m(1),
           _vm._v(" "),
@@ -3230,7 +3402,7 @@ var render = function() {
                         staticClass: "btn btn-success btn-sm",
                         on: {
                           click: function($event) {
-                            return _vm.updateAboutUsRegister(aboutus)
+                            return _vm.updateDataAboutUs(aboutus)
                           }
                         }
                       },
@@ -3255,245 +3427,488 @@ var render = function() {
               0
             )
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          ref: "modalAboutUs",
-          attrs: {
-            "hide-footer": "",
-            size: "xl",
-            title: "Agregar Nuevo Registro"
-          }
-        },
-        [
-          _c("div", { staticClass: "d-block" }, [
-            _c(
-              "form",
-              {
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.createRegisterAboutUs.apply(null, arguments)
+        ]),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            ref: "modalCreateAboutUs",
+            attrs: {
+              "hide-footer": "",
+              size: "xl",
+              title: "Agregar Nuevo Registro"
+            }
+          },
+          [
+            _c("div", { staticClass: "d-block" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.createRegisterAboutUs.apply(null, arguments)
+                    }
                   }
-                }
-              },
-              [
-                _c("div", { staticClass: "form-row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-6" },
-                    [
-                      _c("label", { attrs: { for: "name" } }, [
-                        _vm._v("Titulo:")
+                },
+                [
+                  _c("div", { staticClass: "form-row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-6" },
+                      [
+                        _c("label", { attrs: { for: "name" } }, [
+                          _vm._v("Titulo:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.aboutusData.Titulo.length >= 1 &&
+                              _vm.aboutusData.Titulo.length < 50,
+                            type: "text",
+                            id: "name",
+                            placeholder: "Ingresar Titulo"
+                          },
+                          model: {
+                            value: _vm.aboutusData.Titulo,
+                            callback: function($$v) {
+                              _vm.$set(_vm.aboutusData, "Titulo", $$v)
+                            },
+                            expression: "aboutusData.Titulo"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.Titulo
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.Titulo[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-6" },
+                      [
+                        _c("label", { attrs: { for: "description" } }, [
+                          _vm._v("Descripcion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-textarea", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.aboutusData.Contenido.length >= 1 &&
+                              _vm.aboutusData.Contenido.length < 1000,
+                            type: "text",
+                            id: "description",
+                            placeholder: "Ingresar Descripcion"
+                          },
+                          model: {
+                            value: _vm.aboutusData.Contenido,
+                            callback: function($$v) {
+                              _vm.$set(_vm.aboutusData, "Contenido", $$v)
+                            },
+                            expression: "aboutusData.Contenido"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.Contenido
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.Contenido[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-6" },
+                      [
+                        _c("label", { attrs: { for: "type" } }, [
+                          _vm._v("Tipo:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-select", {
+                          attrs: {
+                            state: _vm.aboutusData.Tipo.length >= 1,
+                            options: _vm.options,
+                            id: "type",
+                            multiple: "",
+                            "select-size": 4
+                          },
+                          model: {
+                            value: _vm.aboutusData.Tipo,
+                            callback: function($$v) {
+                              _vm.$set(_vm.aboutusData, "Tipo", $$v)
+                            },
+                            expression: "aboutusData.Tipo"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.Tipo
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.Tipo[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-6" },
+                      [
+                        _c("label", { attrs: { for: "year" } }, [
+                          _vm._v("Año:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.aboutusData.Año >= 2020 &&
+                              _vm.aboutusData.Año < 2099,
+                            type: "text",
+                            id: "year",
+                            placeholder: "Ingresar Año"
+                          },
+                          model: {
+                            value: _vm.aboutusData.Año,
+                            callback: function($$v) {
+                              _vm.$set(_vm.aboutusData, "Año", $$v)
+                            },
+                            expression: "aboutusData.Año"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.Año
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.Año[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-md-12" }, [
+                      _c("label", { attrs: { for: "image" } }, [
+                        _vm._v("Imagen:")
                       ]),
                       _vm._v(" "),
-                      _c("b-form-input", {
+                      _vm.aboutusData.Portada.name
+                        ? _c("div", [
+                            _c("img", {
+                              ref: "imageAboutUsDisplay",
+                              attrs: { src: "", width: "700", height: "300" }
+                            })
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("input", {
+                        ref: "imageAboutUs",
                         staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.aboutusData.name.length >= 1 &&
-                            _vm.aboutusData.name.length < 50,
-                          type: "text",
-                          id: "name",
-                          placeholder: "Ingresar Titulo"
-                        },
-                        model: {
-                          value: _vm.aboutusData.name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "name", $$v)
-                          },
-                          expression: "aboutusData.name"
-                        }
+                        attrs: { type: "file", id: "image" },
+                        on: { change: _vm.attachImage }
                       }),
                       _vm._v(" "),
-                      _vm.errors.name
+                      _vm.errors.Portada
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.name[0]))]
+                            [_vm._v(_vm._s(_vm.errors.Portada[0]))]
                           )
                         : _vm._e()
-                    ],
-                    1
-                  ),
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-6" },
-                    [
-                      _c("label", { attrs: { for: "description" } }, [
-                        _vm._v("Descripcion:")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-textarea", {
-                        staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.aboutusData.description.length >= 1 &&
-                            _vm.aboutusData.description.length < 1000,
-                          type: "text",
-                          id: "description",
-                          placeholder: "Ingresar Descripcion"
-                        },
-                        model: {
-                          value: _vm.aboutusData.description,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "description", $$v)
-                          },
-                          expression: "aboutusData.description"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.description
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.description[0]))]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
+                  _c("hr"),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-6" },
-                    [
-                      _c("label", { attrs: { for: "type" } }, [
-                        _vm._v("Tipo:")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-select", {
-                        attrs: {
-                          state: _vm.aboutusData.type.length >= 1,
-                          options: _vm.options,
-                          id: "type",
-                          multiple: "",
-                          "select-size": 4
-                        },
-                        model: {
-                          value: _vm.aboutusData.type,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "type", $$v)
-                          },
-                          expression: "aboutusData.type"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.type
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.type[0]))]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-6" },
-                    [
-                      _c("label", { attrs: { for: "year" } }, [_vm._v("Año:")]),
-                      _vm._v(" "),
-                      _c("b-form-input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.aboutusData.year >= 2020 &&
-                            _vm.aboutusData.year < 2099,
-                          type: "text",
-                          id: "year",
-                          placeholder: "Ingresar Año"
-                        },
-                        model: {
-                          value: _vm.aboutusData.year,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "year", $$v)
-                          },
-                          expression: "aboutusData.year"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.year
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.year[0]))]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-12" }, [
-                    _c("label", { attrs: { for: "image" } }, [
-                      _vm._v("Imagen:")
-                    ]),
+                  _c("div", { staticClass: "text-center" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-default",
+                        attrs: { type: "button" },
+                        on: { click: _vm.hideNewAboutUsModal }
+                      },
+                      [_vm._v("Cancelar")]
+                    ),
                     _vm._v(" "),
-                    _vm.aboutusData.image.name
-                      ? _c("div", [
-                          _c("img", {
-                            ref: "imageAboutUsDisplay",
-                            attrs: { src: "", width: "700", height: "300" }
-                          })
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "imageAboutUs",
-                      staticClass: "form-control",
-                      attrs: { type: "file", id: "image" },
-                      on: { change: _vm.attachImage }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.image
-                      ? _c(
-                          "div",
-                          { staticClass: "invalid-feedback-validation" },
-                          [_vm._v(_vm._s(_vm.errors.image[0]))]
-                        )
-                      : _vm._e()
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _c("span", { staticClass: "fa fa-check" }),
+                        _vm._v("Aceptar")
+                      ]
+                    )
                   ])
-                ]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c("div", { staticClass: "text-center" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-default",
-                      attrs: { type: "button" },
-                      on: { click: _vm.hideNewAboutUsModal }
-                    },
-                    [_vm._v("Cancelar")]
-                  ),
+                ]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            ref: "modalUpdateAboutUs",
+            attrs: {
+              "hide-footer": "",
+              size: "xl",
+              title: "Modificar Registro"
+            }
+          },
+          [
+            _c("div", { staticClass: "d-block" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.updateRegisterAboutUs.apply(null, arguments)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-6" },
+                      [
+                        _c("label", { attrs: { for: "name" } }, [
+                          _vm._v("Titulo:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.aboutusData.Titulo.length >= 1 &&
+                              _vm.aboutusData.Titulo.length < 50,
+                            type: "text",
+                            id: "name",
+                            placeholder: "Ingresar Titulo"
+                          },
+                          model: {
+                            value: _vm.aboutusData.Titulo,
+                            callback: function($$v) {
+                              _vm.$set(_vm.aboutusData, "Titulo", $$v)
+                            },
+                            expression: "aboutusData.Titulo"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.Titulo
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.Titulo[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-6" },
+                      [
+                        _c("label", { attrs: { for: "description" } }, [
+                          _vm._v("Descripcion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-textarea", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.aboutusData.Contenido.length >= 1 &&
+                              _vm.aboutusData.Contenido.length < 1000,
+                            type: "text",
+                            id: "description",
+                            placeholder: "Ingresar Descripcion"
+                          },
+                          model: {
+                            value: _vm.aboutusData.Contenido,
+                            callback: function($$v) {
+                              _vm.$set(_vm.aboutusData, "Contenido", $$v)
+                            },
+                            expression: "aboutusData.Contenido"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.Contenido
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.Contenido[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-6" },
+                      [
+                        _c("label", { attrs: { for: "type" } }, [
+                          _vm._v("Tipo:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-select", {
+                          attrs: {
+                            state: _vm.aboutusData.Tipo.length >= 1,
+                            options: _vm.options,
+                            id: "type",
+                            multiple: "",
+                            "select-size": 4
+                          },
+                          model: {
+                            value: _vm.aboutusData.Tipo,
+                            callback: function($$v) {
+                              _vm.$set(_vm.aboutusData, "Tipo", $$v)
+                            },
+                            expression: "aboutusData.Tipo"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.Tipo
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.Tipo[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-6" },
+                      [
+                        _c("label", { attrs: { for: "year" } }, [
+                          _vm._v("Año:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.aboutusData.Año >= 2020 &&
+                              _vm.aboutusData.Año < 2099,
+                            type: "text",
+                            id: "year",
+                            placeholder: "Ingresar Año"
+                          },
+                          model: {
+                            value: _vm.aboutusData.Año,
+                            callback: function($$v) {
+                              _vm.$set(_vm.aboutusData, "Año", $$v)
+                            },
+                            expression: "aboutusData.Año"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.Año
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.Año[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-md-12" }, [
+                      _c("label", { attrs: { for: "image" } }, [
+                        _vm._v("Imagen:")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("img", {
+                          ref: "updateImageAboutUsDisplay",
+                          attrs: {
+                            src:
+                              _vm.$store.state.serverPath +
+                              "/storage/" +
+                              _vm.aboutusData.Portada,
+                            width: "700",
+                            height: "300"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        ref: "imageUpdateAboutUs",
+                        staticClass: "form-control",
+                        attrs: { type: "file", id: "image" },
+                        on: { change: _vm.updateImage }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.Portada
+                        ? _c(
+                            "div",
+                            { staticClass: "invalid-feedback-validation" },
+                            [_vm._v(_vm._s(_vm.errors.Portada[0]))]
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      attrs: { type: "submit" }
-                    },
-                    [
-                      _c("span", { staticClass: "fa fa-check" }),
-                      _vm._v("Aceptar")
-                    ]
-                  )
-                ])
-              ]
-            )
-          ])
-        ]
-      )
-    ],
-    1
-  )
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-center" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-default",
+                        attrs: { type: "button" },
+                        on: { click: _vm.hideUpdateAboutUsModal }
+                      },
+                      [_vm._v("Cancelar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _c("span", { staticClass: "fa fa-check" }),
+                        _vm._v("Actualizar")
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = [
   function() {

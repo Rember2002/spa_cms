@@ -11,3 +11,7 @@ export function loadRegisterAboutUs() {
 export function deleteAboutUsRegister(id) {
     return http().delete(`aboutus/${id}`)
 }
+
+export function updateRegisterAboutUs(id, data) {
+    return httpFile().post(`/aboutus/${id}`, data)
+}
