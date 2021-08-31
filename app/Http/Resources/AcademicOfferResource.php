@@ -17,7 +17,7 @@ class AcademicOfferResource extends JsonResource
         return [
 
             'Id' => $this->id,
-            'Oferta Academica' => $this->name_offer,
+            'Oferta' => $this->name_offer,
             'Decripcion' => $this->description,
             'Portada' => $this->image,
             'Estado' => $this->state,
