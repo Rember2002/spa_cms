@@ -7,6 +7,7 @@ use App\Http\Resources\AboutUsResource;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class AboutUsController extends Controller
 {
@@ -45,26 +46,24 @@ class AboutUsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveAboutUsRequest $request)
+    public function store(SaveAboutUsRequest $request, AboutUs $aboutUs)
     {
-        // $aboutUs = AboutUs::create($request->all());
+        
+        $aboutUs->name = $request->name;
+        $aboutUs->description = $request->description;
+        $aboutUs->type = $request->type;
+        $aboutUs->year = $request->year;
+        $path = $request->file('image')->store('images_aboutus');
+        $aboutUs->image = $path;
 
-        // return response()->json([
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $aboutUs,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $aboutUs->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
 
-        $path = $request->file('image')->store('image');
-
-        $this->image = $path;
-
-        return (new AboutUsResource(AboutUs::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -73,7 +72,7 @@ class AboutUsController extends Controller
      * @param  \App\Models\AboutUs  $aboutUs
      * @return \Illuminate\Http\Response
      */
-    public function show(AboutUs $aboutUs)
+    public function show(AboutUs $aboutu)
     {
         // return response()->json([
 
@@ -82,7 +81,7 @@ class AboutUsController extends Controller
 
         // ], Response::HTTP_OK);
 
-        return new AboutUsResource($aboutUs);
+        return new AboutUsResource($aboutu);
     }
 
     /**
@@ -129,23 +128,43 @@ class AboutUsController extends Controller
      * @param  \App\Models\AboutUs  $aboutUs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AboutUs $aboutUs)
+    public function destroy(AboutUs $aboutu)
     {
+        if ($aboutu->delete()){
+            Storage::delete($aboutu->image);
+
+            return response()->json([
+
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $aboutu,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $aboutu,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        
+        $aboutu->delete();
+
+        return response()->json([
+
+            "message" => "El registro se ha eliminado con ¡Exito!",
+            "data" => $aboutu,
+            "status" => Response::HTTP_OK,
+
+        ], Response::HTTP_OK);
+
         // $aboutUs->delete();
 
-        // return response()->json([
-
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $aboutUs,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
-        $aboutUs->delete();
-
-        return (new AboutUsResource($aboutUs))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        // return (new AboutUsResource($aboutUs))
+        //     ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+        //     ->response()
+        //     ->setStatusCode(Response::HTTP_OK);
     }
 }

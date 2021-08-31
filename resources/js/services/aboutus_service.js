@@ -7,3 +7,7 @@ export function createRegisterAboutUs(data) {
 export function loadRegisterAboutUs() {
     return http().get('/aboutus')
 }
+
+export function deleteAboutUsRegister(id) {
+    return http().delete(`aboutus/${id}`)
+}

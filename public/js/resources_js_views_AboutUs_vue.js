@@ -1957,12 +1957,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// Import file aboutUsService that contains functions request routes.
+ // Begin export default.
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'aboutus',
   data: function data() {
     return {
+      // Declare HTTP status code.
+      HTTP_UNPROCESSABLE_ENTITY: 422,
+      // Declare registers to use to save display data.
       registers: [],
+      // Declare aboutusData to use to save data form.
       aboutusData: {
         name: '',
         description: '',
@@ -1970,6 +1987,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         year: '',
         image: ''
       },
+      // Save default variables for use select component.    
       options: [{
         value: 'Mission',
         text: 'Mision'
@@ -1980,13 +1998,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         value: 'Value',
         text: 'Valor'
       }],
-      errors: {}
+      // Save errors to response send request.
+      errors: {},
+      // Declare object save data for update.
+      updateAboutUsData: {}
     };
   },
+  // Mounted data for registers in datatable.
   mounted: function mounted() {
+    // Call method function.
     this.loadRegisterAboutUs();
   },
+  // Declare methods for use in components.
   methods: {
+    // Method for attach image in form.
     attachImage: function attachImage() {
       this.aboutusData.image = this.$refs.imageAboutUs.files[0];
       var reader = new FileReader();
@@ -1995,15 +2020,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }.bind(this), false);
       reader.readAsDataURL(this.aboutusData.image);
     },
+    // Close and clear data in form.
     hideNewAboutUsModal: function hideNewAboutUsModal() {
       this.$refs.modalAboutUs.hide();
+      this.aboutusData = {
+        name: '',
+        description: '',
+        type: '',
+        year: '',
+        image: ''
+      };
     },
+    // Event open new modal with clean form.
     showNewAboutUsModal: function showNewAboutUsModal() {
       this.$refs.modalAboutUs.show();
     },
+    // Function use for save data forma to send request.
     createRegisterAboutUs: function () {
       var _createRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var formData, response;
+        var formData;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2019,43 +2054,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_1__.createRegisterAboutUs(formData);
 
               case 9:
-                response = _context.sent;
-                console.log(response);
-                this.hideNewAboutUsModal();
+                // Refresh data in datatalbe.
+                this.loadRegisterAboutUs(); // Clean and close form.
+
+                this.hideNewAboutUsModal(); // Open swet alert to indicate success.
+
                 this.$swal.fire({
                   icon: 'success',
                   title: 'Exito',
                   text: 'El registro ha sido guardado correctamente'
                 });
-                _context.next = 25;
+                _context.next = 24;
                 break;
 
-              case 15:
-                _context.prev = 15;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](6);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === 422 ? 20 : 22;
+                _context.next = _context.t1 === HTTP_UNPROCESSABLE_ENTITY ? 19 : 21;
                 break;
 
-              case 20:
+              case 19:
+                // Load error validations.
                 this.errors = _context.t0.response.data.errors;
-                return _context.abrupt("break", 25);
+                return _context.abrupt("break", 24);
 
-              case 22:
-                this.hideNewAboutUsModal();
+              case 21:
+                // Clean and close form. 
+                this.hideNewAboutUsModal(); // Open swet alert to indicate errors.
+
                 this.$swal.fire({
                   icon: 'error',
                   title: 'Error',
-                  text: 'Ha ocurrido un error'
+                  text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
                 });
-                return _context.abrupt("break", 25);
+                return _context.abrupt("break", 24);
 
-              case 25:
+              case 24:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[6, 15]]);
+        }, _callee, this, [[6, 14]]);
       }));
 
       function createRegisterAboutUs() {
@@ -2064,6 +2104,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return createRegisterAboutUs;
     }(),
+    // Funciont use to load and draw data in data table.
     loadRegisterAboutUs: function () {
       var _loadRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var response;
@@ -2077,28 +2118,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context2.sent;
-                console.log(response);
-                this.registers = response.data.data;
-                console.log(registers);
-                _context2.next = 13;
+                // Save data in variable.
+                this.registers = response.data.data; // Show swet alert indicate succeso to load data.
+
+                this.$swal.fire({
+                  icon: 'success',
+                  title: 'El contenido ha sido cargado',
+                  toast: true,
+                  position: 'top-end',
+                  timer: 3000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+                _context2.next = 11;
                 break;
 
-              case 9:
-                _context2.prev = 9;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
-                console.log(_context2.t0);
+                // Show swet alert to indicate error.
                 this.$swal.fire({
                   icon: 'error',
                   title: 'Error',
                   text: 'No es posible cargar el contenido en estos momentos'
                 });
 
-              case 13:
+              case 11:
+                ;
+
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 9]]);
+        }, _callee2, this, [[0, 8]]);
       }));
 
       function loadRegisterAboutUs() {
@@ -2106,6 +2159,100 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return loadRegisterAboutUs;
+    }(),
+    // Function use to delete register select.
+    deleteAboutUsRegister: function () {
+      var _deleteAboutUsRegister = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(aboutus) {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                // Open swet dialog for question to delete register.
+                this.$swal.fire({
+                  icon: 'question',
+                  title: "Desea eliminar: ".concat(aboutus.Titulo, "?"),
+                  showDenyButton: true,
+                  showCancelButton: false,
+                  confirmButtonText: "Aceptar",
+                  denyButtonText: "Cancelar" // Handling response to dialog.
+
+                }).then(function (result) {
+                  // Response is true delete record.
+                  if (result.isConfirmed) {
+                    // Call request service.
+                    _services_aboutus_service__WEBPACK_IMPORTED_MODULE_1__.deleteAboutUsRegister(aboutus.Id); // Capture id register selected.
+
+                    _this.registers = _this.registers.filter(function (obj) {
+                      return obj.id != aboutus.Id;
+                    }); // Show swet alert to indicate delete name register.
+
+                    _this.$swal.fire({
+                      toast: true,
+                      showConfirmButton: false,
+                      position: 'top-end',
+                      timer: 3000,
+                      timerProgressBar: true,
+                      icon: 'success',
+                      title: "Se ha eliminado correctamente: ".concat(aboutus.Titulo, "?")
+                    }); // Refresh data table.
+
+
+                    _this.loadRegisterAboutUs(); // Response is false delete record.
+
+                  } else if (result.isDenied) {
+                    // Show swet alert to indicate response false delete register.
+                    _this.$swal.fire({
+                      toast: true,
+                      showConfirmButton: false,
+                      position: 'top-end',
+                      timer: 3000,
+                      timerProgressBar: true,
+                      icon: 'warning',
+                      title: "Ha cancelado la operacion de eliminar: ".concat(aboutus.Titulo)
+                    });
+                  }
+
+                  ;
+                });
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function deleteAboutUsRegister(_x) {
+        return _deleteAboutUsRegister.apply(this, arguments);
+      }
+
+      return deleteAboutUsRegister;
+    }(),
+    // Function use to update dates to register select.
+    updateRegisterAboutUs: function () {
+      var _updateRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                this.updateRegisterAboutUs = aboutus;
+
+              case 1:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function updateRegisterAboutUs() {
+        return _updateRegisterAboutUs.apply(this, arguments);
+      }
+
+      return updateRegisterAboutUs;
     }()
   }
 });
@@ -2122,7 +2269,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createRegisterAboutUs": () => (/* binding */ createRegisterAboutUs),
-/* harmony export */   "loadRegisterAboutUs": () => (/* binding */ loadRegisterAboutUs)
+/* harmony export */   "loadRegisterAboutUs": () => (/* binding */ loadRegisterAboutUs),
+/* harmony export */   "deleteAboutUsRegister": () => (/* binding */ deleteAboutUsRegister)
 /* harmony export */ });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 
@@ -2131,6 +2279,9 @@ function createRegisterAboutUs(data) {
 }
 function loadRegisterAboutUs() {
   return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/aboutus');
+}
+function deleteAboutUsRegister(id) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("aboutus/".concat(id));
 }
 
 /***/ }),
@@ -3049,11 +3200,56 @@ var render = function() {
               "tbody",
               _vm._l(_vm.registers, function(aboutus, index) {
                 return _c("tr", { key: index }, [
-                  _c("td", [_vm._v(_vm._s(aboutus.Titulo))]),
+                  _c("td", [_vm._v(_vm._s(aboutus.Id))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(aboutus.Titulo))]),
                   _vm._v(" "),
-                  _vm._m(4, true)
+                  _c("td", [_vm._v(_vm._s(aboutus.Contenido))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(aboutus.Tipo))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(aboutus.Año))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("img", {
+                      staticClass: "table-image",
+                      attrs: {
+                        src:
+                          _vm.$store.state.serverPath +
+                          "/storage/" +
+                          aboutus.Portada,
+                        alt: aboutus.Titulo
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.updateAboutUsRegister(aboutus)
+                          }
+                        }
+                      },
+                      [_c("span", { staticClass: "fa fa-edit" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteAboutUsRegister(aboutus)
+                          }
+                        }
+                      },
+                      [_c("span", { staticClass: "fa fa-trash" })]
+                    )
+                  ])
                 ])
               }),
               0
@@ -3086,97 +3282,95 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "form-row" }, [
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "name" } }, [
-                      _vm._v("Titulo:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.aboutusData.name,
-                          expression: "aboutusData.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "name",
-                        placeholder: "Ingresar Titulo"
-                      },
-                      domProps: { value: _vm.aboutusData.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.aboutusData, "name", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.name
-                      ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errors.name[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "description" } }, [
-                      _vm._v("Descripcion:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.aboutusData.description,
-                          expression: "aboutusData.description"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "description",
-                        placeholder: "Ingresar Titulo"
-                      },
-                      domProps: { value: _vm.aboutusData.description },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.aboutusData,
-                            "description",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.description
-                      ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errors.description[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "form-group col-md-6" },
                     [
                       _c("label", { attrs: { for: "name" } }, [
+                        _vm._v("Titulo:")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          state:
+                            _vm.aboutusData.name.length >= 1 &&
+                            _vm.aboutusData.name.length < 50,
+                          type: "text",
+                          id: "name",
+                          placeholder: "Ingresar Titulo"
+                        },
+                        model: {
+                          value: _vm.aboutusData.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.aboutusData, "name", $$v)
+                          },
+                          expression: "aboutusData.name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.name
+                        ? _c(
+                            "div",
+                            { staticClass: "invalid-feedback-validation" },
+                            [_vm._v(_vm._s(_vm.errors.name[0]))]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group col-md-6" },
+                    [
+                      _c("label", { attrs: { for: "description" } }, [
+                        _vm._v("Descripcion:")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-textarea", {
+                        staticClass: "form-control",
+                        attrs: {
+                          state:
+                            _vm.aboutusData.description.length >= 1 &&
+                            _vm.aboutusData.description.length < 1000,
+                          type: "text",
+                          id: "description",
+                          placeholder: "Ingresar Descripcion"
+                        },
+                        model: {
+                          value: _vm.aboutusData.description,
+                          callback: function($$v) {
+                            _vm.$set(_vm.aboutusData, "description", $$v)
+                          },
+                          expression: "aboutusData.description"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.description
+                        ? _c(
+                            "div",
+                            { staticClass: "invalid-feedback-validation" },
+                            [_vm._v(_vm._s(_vm.errors.description[0]))]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group col-md-6" },
+                    [
+                      _c("label", { attrs: { for: "type" } }, [
                         _vm._v("Tipo:")
                       ]),
                       _vm._v(" "),
                       _c("b-form-select", {
                         attrs: {
+                          state: _vm.aboutusData.type.length >= 1,
                           options: _vm.options,
+                          id: "type",
                           multiple: "",
                           "select-size": 4
                         },
@@ -3190,49 +3384,51 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _vm.errors.type
-                        ? _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(_vm._s(_vm.errors.type[0]))
-                          ])
+                        ? _c(
+                            "div",
+                            { staticClass: "invalid-feedback-validation" },
+                            [_vm._v(_vm._s(_vm.errors.type[0]))]
+                          )
                         : _vm._e()
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "year" } }, [_vm._v("Año:")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
+                  _c(
+                    "div",
+                    { staticClass: "form-group col-md-6" },
+                    [
+                      _c("label", { attrs: { for: "year" } }, [_vm._v("Año:")]),
+                      _vm._v(" "),
+                      _c("b-form-input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          state:
+                            _vm.aboutusData.year >= 2020 &&
+                            _vm.aboutusData.year < 2099,
+                          type: "text",
+                          id: "year",
+                          placeholder: "Ingresar Año"
+                        },
+                        model: {
                           value: _vm.aboutusData.year,
+                          callback: function($$v) {
+                            _vm.$set(_vm.aboutusData, "year", $$v)
+                          },
                           expression: "aboutusData.year"
                         }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "numeric",
-                        id: "year",
-                        placeholder: "Ingresar Año"
-                      },
-                      domProps: { value: _vm.aboutusData.year },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.aboutusData, "year", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.year
-                      ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errors.year[0]))
-                        ])
-                      : _vm._e()
-                  ]),
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.year
+                        ? _c(
+                            "div",
+                            { staticClass: "invalid-feedback-validation" },
+                            [_vm._v(_vm._s(_vm.errors.year[0]))]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-12" }, [
                     _c("label", { attrs: { for: "image" } }, [
@@ -3256,9 +3452,11 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.image
-                      ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errors.image[0]))
-                        ])
+                      ? _c(
+                          "div",
+                          { staticClass: "invalid-feedback-validation" },
+                          [_vm._v(_vm._s(_vm.errors.image[0]))]
+                        )
                       : _vm._e()
                   ])
                 ]),
@@ -3346,20 +3544,6 @@ var staticRenderFns = [
         _c("td", [_vm._v("Imagen")]),
         _vm._v(" "),
         _c("td", [_vm._v("Acciones")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-success btn-sm" }, [
-        _c("span", { staticClass: "fa fa-edit" })
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-danger btn-sm" }, [
-        _c("span", { staticClass: "fa fa-trash" })
       ])
     ])
   }

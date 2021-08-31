@@ -10325,6 +10325,10 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%;
 }
-.invalid-feedback {
+.invalid-feedback-validation {
+    color:#ff0000;
     display: inline-block !important;
+}
+img.table-image {
+    width: 500px;
 }

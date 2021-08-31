@@ -46,11 +46,17 @@ Route::post('login', [AuthenticateController::class, 'login']);
 
 Route::apiResource('aboutus', AboutUsController::class);
 
+Route::apiResource('academicOffers', AcademicOfferController::class);
+
+Route::apiResource('contactUs', ContactUsController::class);
+
+Route::apiResource('newHomes', NewHomeController::class);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     
   
 
-    Route::apiResource('academicOffers', AcademicOfferController::class);
+    
 
     Route::apiResource('carousels', CarouselController::class);
 
@@ -58,7 +64,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::apiResource('commisions', CommissionController::class);
 
-    Route::apiResource('contactUs', ContactUsController::class);
+
 
     Route::apiResource('grades', GradeController::class);
 
@@ -66,7 +72,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::apiResource('integrants', IntegrantController::class);
 
-    Route::apiResource('newHomes', NewHomeController::class);
+
 
     Route::apiResource('newItems', NewItemController::class);
 

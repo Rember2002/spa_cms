@@ -14,7 +14,6 @@ class AboutUsResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
 
             'Id' => $this->id,
@@ -22,11 +21,12 @@ class AboutUsResource extends JsonResource
             'Contenido' => $this->description,
             'Tipo' => $this->type,
             'Año' => $this->year,
-            'Portada' => $this->image, 
-
+            'Portada' => $this->image,
+            
         ];
 
     }
+
 
     public function with($request)
     {
