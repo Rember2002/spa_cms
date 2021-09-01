@@ -11,14 +11,13 @@
         <!-- Data table. -->
     <div class="card">
             <!-- Header data table. -->
-        <div class="card-header d-flex">
+        <div class="card-body d-flex">
             <h4><span><i class="fas fa-table"></i>  Visualización de datos</span></h4>
             <button class="btn btn-success btn-sm ml-auto" @click="showNewAboutUsModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
         </div>
             <!-- Content data table. -->
-
-        <div class="card-body table-responsive">
-            <table class="table"> 
+        <div class="card-body align-items-center justify-content-center">
+            <table id="tableRegisters" class="table table-hover table-responsive table-bordered">  
                 <thead class="table-dark">
                     <tr>
                         <td>Id</td>
@@ -49,100 +48,101 @@
             </table>
         </div>
             <!-- End content data table. -->
-
-            <!-- Content modal create. -->
-        <b-modal ref="modalCreateAboutUs" hide-footer size="xl" title="Agregar Nuevo Registro">
-            <div class="d-block">
-                    <!-- Form modal create. -->
-                <form v-on:submit.prevent="createRegisterAboutUs">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="name">Titulo:</label>
-                            <b-form-input :state="aboutusData.Titulo.length >= 1 && aboutusData.Titulo.length < 50" type="text" class="form-control" id="name" v-model="aboutusData.Titulo" placeholder="Ingresar Titulo"></b-form-input>
-                            <div class="invalid-feedback-validation" v-if="errors.Titulo">{{errors.Titulo[0]}}</div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="description">Descripcion:</label>
-                            <b-form-textarea :state="aboutusData.Contenido.length >= 1 && aboutusData.Contenido.length < 1000" type="text" class="form-control" id="description" v-model="aboutusData.Contenido" placeholder="Ingresar Descripcion"></b-form-textarea>                 
-                            <div class="invalid-feedback-validation" v-if="errors.Contenido">{{errors.Contenido[0]}}</div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="type">Tipo:</label>
-                            <b-form-select :state="aboutusData.Tipo.length >= 1" v-model="aboutusData.Tipo" :options="options" id="type" multiple :select-size="4"></b-form-select>
-                            <div class="invalid-feedback-validation" v-if="errors.Tipo">{{errors.Tipo[0]}}</div>                    
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="year">Año:</label>
-                            <b-form-input :state="aboutusData.Año >= 2020 && aboutusData.Año < 2099" type="text" class="form-control" id="year" v-model="aboutusData.Año" placeholder="Ingresar Año"></b-form-input>
-                            <div class="invalid-feedback-validation" v-if="errors.Año">{{errors.Año[0]}}</div>                    
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="image">Imagen:</label>
-                            <div v-if="aboutusData.Portada.name">
-                                <img src="" ref="imageAboutUsDisplay" width="700" height="300">  
-                            </div>
-                            <input type="file" v-on:change="attachImage" ref="imageAboutUs" class="form-control" id="image"/>
-                            <div class="invalid-feedback-validation" v-if="errors.Portada">{{errors.Portada[0]}}</div>                    
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="text-center">    
-                        <button type="button" class="btn btn-default" @click="hideNewAboutUsModal">Cancelar</button>
-                        <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
-                    </div>
-                </form> 
-                    <!-- End form modal create. -->
-            </div>
-        </b-modal>
-            <!-- End modal create. -->
-
-            <!-- Content modal update. -->
-        <b-modal ref="modalUpdateAboutUs" hide-footer size="xl" title="Modificar Registro">
-            <div class="d-block">
-                    <!-- Form modal create. -->
-                <form v-on:submit.prevent="updateRegisterAboutUs">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="name">Titulo:</label>
-                            <b-form-input :state="aboutusData.Titulo.length >= 1 && aboutusData.Titulo.length < 50" type="text" class="form-control" id="name" v-model="aboutusData.Titulo" placeholder="Ingresar Titulo"></b-form-input>
-                            <div class="invalid-feedback-validation" v-if="errors.Titulo">{{errors.Titulo[0]}}</div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="description">Descripcion:</label>
-                            <b-form-textarea :state="aboutusData.Contenido.length >= 1 && aboutusData.Contenido.length < 1000" type="text" class="form-control" id="description" v-model="aboutusData.Contenido" placeholder="Ingresar Descripcion"></b-form-textarea>                 
-                            <div class="invalid-feedback-validation" v-if="errors.Contenido">{{errors.Contenido[0]}}</div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="type">Tipo:</label>
-                            <b-form-select :state="aboutusData.Tipo.length >= 1" v-model="aboutusData.Tipo" :options="options" id="type" multiple :select-size="4"></b-form-select>
-                            <div class="invalid-feedback-validation" v-if="errors.Tipo">{{errors.Tipo[0]}}</div>                    
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="year">Año:</label>
-                            <b-form-input :state="aboutusData.Año >= 2020 && aboutusData.Año < 2099" type="text" class="form-control" id="year" v-model="aboutusData.Año" placeholder="Ingresar Año"></b-form-input>
-                            <div class="invalid-feedback-validation" v-if="errors.Año">{{errors.Año[0]}}</div>                    
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="image">Imagen:</label>
-                            <div>
-                                <img :src="`${$store.state.serverPath}/storage/${aboutusData.Portada}`" ref="updateImageAboutUsDisplay" width="700" height="300">  
-                            </div>
-                            <input type="file" v-on:change="updateImage" ref="imageUpdateAboutUs" class="form-control" id="image"/>
-                            <div class="invalid-feedback-validation" v-if="errors.Portada">{{errors.Portada[0]}}</div>                    
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="text-center">    
-                        <button type="button" class="btn btn-default" @click="hideUpdateAboutUsModal">Cancelar</button>
-                        <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Actualizar</button>
-                    </div>
-                </form> 
-                    <!-- End form modal create. -->
-            </div>
-        </b-modal>
-            <!-- End modal update. -->
     </div>
         <!--End data table. -->
+
+        <!-- Content modal create. -->
+    <b-modal ref="modalCreateAboutUs" hide-footer size="xl" title="Agregar Nuevo Registro">
+        <div class="d-block">
+                <!-- Form modal create. -->
+            <form v-on:submit.prevent="createRegisterAboutUs">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Titulo:</label>
+                        <b-form-input :state="aboutusData.Titulo.length >= 1 && aboutusData.Titulo.length < 50" type="text" class="form-control" id="name" v-model="aboutusData.Titulo" placeholder="Ingresar Titulo"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.name">{{errors.name[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="description">Descripcion:</label>
+                        <b-form-textarea :state="aboutusData.Contenido.length >= 1 && aboutusData.Contenido.length < 1000" type="text" class="form-control" id="description" v-model="aboutusData.Contenido" placeholder="Ingresar Descripcion"></b-form-textarea>                 
+                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="type">Tipo:</label>
+                        <b-form-select :state="aboutusData.Tipo.length >= 1" v-model="aboutusData.Tipo" :options="options" id="type" multiple :select-size="4"></b-form-select>
+                        <div class="invalid-feedback-validation" v-if="errors.type">{{errors.type[0]}}</div>                    
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="year">Año:</label>
+                        <b-form-input :state="aboutusData.Año >= 2020 && aboutusData.Año < 2099" type="text" class="form-control" id="year" v-model="aboutusData.Año" placeholder="Ingresar Año"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="image">Imagen:</label>
+                        <div v-if="aboutusData.Portada.name">
+                            <img src="" ref="imageAboutUsDisplay" width="700" height="300">  
+                        </div>
+                        <input type="file" v-on:change="attachImage" ref="imageAboutUs" class="form-control" id="image"/>
+                        <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">    
+                    <button type="button" class="btn btn-default" @click="hideNewAboutUsModal">Cancelar</button>
+                    <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
+                </div>
+            </form> 
+                <!-- End form modal create. -->
+        </div>
+    </b-modal>
+        <!-- End modal create. -->
+
+        <!-- Content modal update. -->
+    <b-modal ref="modalUpdateAboutUs" hide-footer size="xl" title="Modificar Registro">
+        <div class="d-block">
+                <!-- Form modal update. -->
+            <form v-on:submit.prevent="updateRegisterAboutUs">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Titulo:</label>
+                        <b-form-input :state="aboutusData.Titulo.length >= 1 && aboutusData.Titulo.length < 50" type="text" class="form-control" id="name" v-model="aboutusData.Titulo" placeholder="Ingresar Titulo"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.name">{{errors.name[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="description">Descripcion:</label>
+                        <b-form-textarea :state="aboutusData.Contenido.length >= 1 && aboutusData.Contenido.length < 1000" type="text" class="form-control" id="description" v-model="aboutusData.Contenido" placeholder="Ingresar Descripcion"></b-form-textarea>                 
+                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="type">Tipo:</label>
+                        <b-form-select :state="aboutusData.Tipo.length >= 1" v-model="aboutusData.Tipo" :options="options" id="type" multiple :select-size="4"></b-form-select>
+                        <div class="invalid-feedback-validation" v-if="errors.type">{{errors.type[0]}}</div>                    
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="year">Año:</label>
+                        <b-form-input :state="aboutusData.Año >= 2020 && aboutusData.Año < 2099" type="text" class="form-control" id="year" v-model="aboutusData.Año" placeholder="Ingresar Año"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="image">Imagen:</label>
+                        <div>
+                            <img :src="`${$store.state.serverPath}/storage/${aboutusData.Portada}`" ref="updateImageAboutUsDisplay" width="700" height="300">  
+                        </div>
+                        <input type="file" v-on:change="updateImage" ref="imageUpdateAboutUs" class="form-control" id="image"/>
+                        <div class="invalid-feedback-validation" v-if="errors.Portada">{{errors.Portada[0]}}</div>                    
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">    
+                    <button type="button" class="btn btn-default" @click="hideUpdateAboutUsModal">Cancelar</button>
+                    <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Actualizar</button>
+                </div>
+            </form> 
+                <!-- End form modal update. -->
+        </div>
+    </b-modal>
+        <!-- End modal update. -->    
+
 </div>
 <!-- End container fluid. -->
 </template>
@@ -151,20 +151,30 @@
     <!-- Begin script. -->
 <script>
 
+        // Import plugin CloudTables.
+    import 'datatables.net-bs4';
+
+        // Impoort jquery to use plugin DataTable.
+    import $ from 'jquery';
+
         // Import file aboutUsService that contains functions request routes.
     import * as aboutUsService from '../services/aboutus_service';
+    
         // Begin export default.
     export default {
 
         name: 'aboutus',
 
+            // Begin data.
         data(){
             return {
-                filter: null,
+                
+                search: '',
+
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to save data form.
+                    // Declare aboutusData to use to send data in form.
                 aboutusData: {
                     Titulo: '',
                     Contenido: '',
@@ -182,18 +192,45 @@
 
                     // Save errors to response send request.
                 errors: {},
-            }
+            };
         },
+            // End data.
 
             // Mounted data for registers in datatable.
         mounted() {
-
-                    // Call method function.
-                this.loadRegisterAboutUs();
+                // Call method function.
+            this.loadRegisterAboutUs();
             },
+            // End mounted data.
 
             // Declare methods for use in components.
         methods: {
+
+                // Data tabel plugin initialization.
+            loadDataTable(){
+                this.$nextTick(() => {
+                        // Select id component Table.
+                    $(`#tableRegisters`).DataTable({
+                        'language': {
+                            "lengthMenu": "Mostrar   -_MENU_-   registros",
+                            "zeroRecords": "No se encontraron resultados",
+                            "emptyTable": "Ningún dato disponible en esta tabla",
+                            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                            "search": "Buscar:",
+                            "infoThousands": ",",
+                            "loadingRecords": "Cargando...",
+                            "paginate": {
+                                "first": "Primero",
+                                "last": "Último",
+                                "next": "Siguiente",
+                                "previous": "Anterior"
+                            },
+                            "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                        },
+                    });
+                })
+            },
 
                 // Method for attach image in form.
             attachImage() {
@@ -258,8 +295,9 @@
                 formData.append('image', this.aboutusData.Portada);
 
                 try {
-
+                        // Call request to create register in service.
                     await aboutUsService.createRegisterAboutUs(formData);
+
                         // Open swet alert to indicate success.                    
                     this.$swal.fire({
                         icon: 'success',
@@ -268,6 +306,12 @@
                     });
                         // Clean and close form.
                     this.hideNewAboutUsModal();
+
+                        // Declare variable for save request load register. 
+                    const data = await aboutUsService.loadRegisterAboutUs();
+
+                        // // Save data in registers.
+                    this.registers = data.data.data;
                     
                 } catch (error) {
                                     
@@ -299,20 +343,26 @@
                             text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento',
                         });
                         break;
-                    }
-                }
+                    };
+                };
             },  
 
-                // Funciont use to load and draw data in data table.
+                // Function use to load and draw data in data table.
             loadRegisterAboutUs: async function() {
                 try {
+                        
+                        // Save in variable the call request to load data.
                     const response = await aboutUsService.loadRegisterAboutUs();
-                        // Save data in variable.
+                        // Save data in registers.
                     this.registers = response.data.data;
+
+                        // Load DataTable plugin.
+                    this.loadDataTable();
+
                         // Show swet alert indicate succeso to load data.
                     this.$swal.fire({
                         icon: 'success',
-                        title: 'El contenido ha sido cargado',
+                        title: 'El contenido ha sido cargado correctamente',
                         toast: true,
                         position: 'top-end',
                         timer: 3000,
@@ -330,6 +380,7 @@
                     });
                 };
             },
+
                 // Function use to delete register select.
             deleteAboutUsRegister: async function(aboutus) {
 
@@ -344,12 +395,14 @@
                         // Handling response to dialog.
                 }).then((result) => {
                             // Response is true delete record.
-                    if (result.isConfirmed) {
+                    if (result.isConfirmed) { 
+
                             // Call request service.
-                        aboutUsService.deleteAboutUsRegister(aboutus.Id);
-                            // Capture id register selected.
+                       aboutUsService.deleteAboutUsRegister(aboutus.Id);
+                            // Refresh component DataTable.
                         this.registers = this.registers.filter(obj => {
-                            return obj.id != aboutus.Id;
+                            return obj.Id != aboutus.Id;
+                            
                         });
                             // Show swet alert to indicate delete name register.
                         this.$swal.fire({
@@ -361,7 +414,7 @@
                             icon: 'success',
                             title: `Se ha eliminado correctamente: ${aboutus.Titulo}.`,
                         });
-                            // Response is false delete record.
+                        // Response is false delete record.
                     } else if (result.isDenied) {
                             // Show swet alert to indicate response false delete register.
                         this.$swal.fire({
@@ -378,6 +431,7 @@
                 });
             },
 
+                // Close and clear data in form update.
             hideUpdateAboutUsModal(){
                 this.$refs.modalUpdateAboutUs.hide();
                 this.aboutusData = {
@@ -388,7 +442,7 @@
                     Portada: '',
                 };
             },
-
+                // Event open update modal with clean form.
             showUpdateAboutUsModal(){
                 this.$refs.modalUpdateAboutUs.show();
             },
@@ -466,18 +520,41 @@
 
                 } catch (error) {
 
-                    this.$swal.fire({
-                        icon: 'error',
-                        title: `${error}`,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
+                    // Validate HTTP response status code.
+                switch (error.response.status) {
+                        // Error 422 HTTP_
+                    case 422:
+                            // Load error validations.
+                        this.errors = error.response.data.errors;
+                            // Show swet alert indicate succeso to load data.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Existen errores en el llenado del formulario',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
 
-                    });
+                        });
+                        break;
+                    default:
+                            // Clean and close form. 
+                        this.hideNewAboutUsModal();
+                            // Open swet alert to indicate errors.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento',
+                        });
+                        break;
+                    };
                     
                 }
             }
             
         },
+            // End declare methods.
     }
-</script>
+</script>   
+    <!-- End script. -->

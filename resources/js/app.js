@@ -22,7 +22,3 @@ const app = new Vue({
     store,
     render: h => h(App)
 });
-
-const opts = {}
-
-export default new Vuetify(opts)

@@ -48,6 +48,6 @@
 
             <!-- Import sb-admin-2.js -->
         <script src="{{ asset('/js/sb-admin-2.js') }}"></script>
-        
+       
     </body>
 </html>

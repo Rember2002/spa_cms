@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveAcademicOfferRequest;
+use App\Http\Requests\UpdateAcademicOfferRequest;
 use App\Http\Resources\AcademicOfferResource;
 use App\Models\AcademicOffer;
 use App\Models\Grade;
@@ -84,7 +85,7 @@ class AcademicOfferController extends Controller
      * @param  \App\Models\AcademicOffer  $academicOffer
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveAcademicOfferRequest $request, AcademicOffer $academicOffer)
+    public function update(UpdateAcademicOfferRequest $request, AcademicOffer $academicOffer)
     {
         $academicOffer->name = $request->name;
         $academicOffer->description = $request->description;

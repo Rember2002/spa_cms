@@ -64,9 +64,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
@@ -92,8 +89,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_5__.default({
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__.default);
   }
 });
-var opts = {};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new Vuetify(opts));
 
 /***/ }),
 
