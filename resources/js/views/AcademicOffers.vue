@@ -151,6 +151,7 @@
     export default {
 
         name: 'academicoffer',
+        
             //Begin data.
         data(){
             return {
