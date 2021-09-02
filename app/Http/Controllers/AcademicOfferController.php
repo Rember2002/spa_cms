@@ -129,7 +129,7 @@ class AcademicOfferController extends Controller
         } else {
             return response()->json([
 
-                "message" => "No es posible eliminar el registro en estos momentos, ¡Exito!",
+                "message" => "No es posible eliminar el registro en estos momentos, ¡Error!",
                 "data" => $academicOffer,
                 "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
     
