@@ -37,7 +37,7 @@
                         <td>{{aboutus.Tipo}}</td>
                         <td>{{aboutus.Año}}</td>
                         <td>
-                            <img :src="`${$store.state.serverPath}/storage/${aboutus.Portada}`" :alt="aboutus.Titulo" class="table-image">
+                            <img :src="`${$store.state.serverPath}/storage/${aboutus.Portada}`" class="table-image">
                         </td>
                         <td>
                             <button class="btn btn-success btn-sm" @click="updateDataAboutUs(aboutus)"><span class="fa fa-edit"></span></button>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="type">Tipo:</label>
-                        <b-form-select :state="aboutusData.Tipo.length >= 1" v-model="aboutusData.Tipo" :options="options" id="type" multiple :select-size="4"></b-form-select>
+                        <b-form-select :state="aboutusData.Tipo != ''" v-model="aboutusData.Tipo" :options="options" id="type" multiple :select-size="4"></b-form-select>
                         <div class="invalid-feedback-validation" v-if="errors.type">{{errors.type[0]}}</div>                    
                     </div>
                     <div class="form-group col-md-6">
@@ -115,8 +115,8 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="type">Tipo:</label>
-                        <b-form-select :state="aboutusData.Tipo.length >= 1" v-model="aboutusData.Tipo" :options="options" id="type" multiple :select-size="4"></b-form-select>
-                        <div class="invalid-feedback-validation" v-if="errors.type">{{errors.type[0]}}</div>                    
+                        <b-form-select :state="aboutusData.Tipo != ''" v-model="aboutusData.Tipo" :options="options" id="type" multiple :select-size="4"></b-form-select>
+                        <div class="invalid-feedback-validation" v-if="errors.type">{{errors.type[0]}}</div> 
                     </div>
                     <div class="form-group col-md-6">
                         <label for="year">Año:</label>
@@ -128,8 +128,9 @@
                         <div>
                             <img :src="`${$store.state.serverPath}/storage/${aboutusData.Portada}`" ref="updateImageAboutUsDisplay" width="700" height="300">  
                         </div>
+                        <b-form-input type="text" class="form-control" id="image" v-model="aboutusData.Portada"></b-form-input>
                         <input type="file" v-on:change="updateImage" ref="imageUpdateAboutUs" class="form-control" id="image"/>
-                        <div class="invalid-feedback-validation" v-if="errors.Portada">{{errors.Portada[0]}}</div>                    
+                        <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
                 <hr>
@@ -169,8 +170,6 @@
         data(){
             return {
                 
-                search: '',
-
                     // Declare registers to use to save display data.
                 registers: [],
 
@@ -192,13 +191,14 @@
 
                     // Save errors to response send request.
                 errors: {},
+                
             };
         },
             // End data.
 
             // Mounted data for registers in datatable.
         mounted() {
-                // Call method function.
+                // Call method function to use load data.
             this.loadRegisterAboutUs();
             },
             // End mounted data.
@@ -232,7 +232,7 @@
                 })
             },
 
-                // Method for attach image in form.
+                // Method for attach image in form create.
             attachImage() {
                 try {
                     this.aboutusData.Portada = this.$refs.imageAboutUs.files[0];
@@ -280,7 +280,7 @@
                 };
             },
             
-                // Event open new modal with clean form.
+                // Event open new modal with clean form create.
             showNewAboutUsModal() {
                 this.$refs.modalCreateAboutUs.show();
             },
@@ -310,7 +310,7 @@
                         // Declare variable for save request load register. 
                     const data = await aboutUsService.loadRegisterAboutUs();
 
-                        // // Save data in registers.
+                        // Save data in registers.
                     this.registers = data.data.data;
                     
                 } catch (error) {
@@ -350,7 +350,6 @@
                 // Function use to load and draw data in data table.
             loadRegisterAboutUs: async function() {
                 try {
-                        
                         // Save in variable the call request to load data.
                     const response = await aboutUsService.loadRegisterAboutUs();
                         // Save data in registers.
@@ -442,6 +441,7 @@
                     Portada: '',
                 };
             },
+
                 // Event open update modal with clean form.
             showUpdateAboutUsModal(){
                 this.$refs.modalUpdateAboutUs.show();
@@ -449,20 +449,25 @@
 
                 // Capture dates into form update.
             updateDataAboutUs(aboutus) {
-                this.aboutusData = aboutus;
+                this.aboutusData = {...aboutus};
                 this.showUpdateAboutUsModal();
             },
 
                 // Method for update attach image in form.
             updateImage() {
                 try {
+                        // Declare value in variable.
                     this.aboutusData.Portada = this.$refs.imageUpdateAboutUs.files[0];
+
                     let reader = new FileReader();
+            
                     reader.addEventListener('load', function (){
                         this.$refs.updateImageAboutUsDisplay.src = reader.result;
                     }.bind(this), false);
 
+                        // Load mew data in variable.
                     reader.readAsDataURL(this.aboutusData.Portada);
+
                         // Open swet alert use to indicate response attach image.
                     this.$swal.fire({
                         icon: 'success',
@@ -488,6 +493,7 @@
                     });
                 };
             },
+
                 // Function to use update register selected.
             updateRegisterAboutUs: async function() {
                 try {
@@ -499,15 +505,13 @@
                     formData.append('image', this.aboutusData.Portada);
                     formData.append('_method', 'put');
                     
-                    const response = await aboutUsService.updateRegisterAboutUs(this.aboutusData.Id, formData);
+                    await aboutUsService.updateRegisterAboutUs(this.aboutusData.Id, formData);
                     
-                    this.registers.map(aboutus => {
-                        if (aboutus.id == response.data.id) {
-                            for (let key in response.data) {
-                                aboutus[key] = response.data[key];
-                            };
-                        };
-                    });
+                        // Declare variable for save request load register. 
+                    const data = await aboutUsService.loadRegisterAboutUs();
+
+                        // Save data in registers.
+                    this.registers = data.data.data;
                     
                     this.hideUpdateAboutUsModal();
 
