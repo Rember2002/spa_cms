@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveCarouselRequest;
+use App\Http\Requests\UpdateCarouselRequest;
 use App\Http\Resources\CarouselResource;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class CarouselController extends Controller
 {
@@ -17,15 +19,6 @@ class CarouselController extends Controller
      */
     public function index()
     {
-        // $carousel = CarouselResource::collection(Carousel::all());
-
-        // return response()->json([
-
-        //     "data" => $carousel,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return CarouselResource::collection(Carousel::all());
     }
 
@@ -45,22 +38,20 @@ class CarouselController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveCarouselRequest $request)
+    public function store(SaveCarouselRequest $request, Carousel $carousel)
     {
-        // $carousel = Carousel::create($request->all());
-        
-        // return response()->json([
+        $carousel->name = $request->name;
+        $carousel->state = $request->state;
+        $path = $request->file('image')->store('images_carousel');
+        $carousel->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $carousel,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $carousel->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new CarouselResource(Carousel::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -71,15 +62,7 @@ class CarouselController extends Controller
      */
     public function show(Carousel $carousel)
     {
-        // return response()->json([
-
-        //     "data" => $carousel,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return new CarouselResource($carousel);
-
     }
 
     /**
@@ -100,24 +83,26 @@ class CarouselController extends Controller
      * @param  \App\Models\Carousel  $carousel
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveCarouselRequest $request, Carousel $carousel)
+    public function update(UpdateCarouselRequest $request, Carousel $carousel)
     {
-        // $carousel->update($request->all());
-        
-        // return response()->json([
+        $carousel->name = $request->name;
+        $carousel->state = $request->state;
+        $oldPath = $carousel->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $carousel,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_carousel');
+            $carousel->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $carousel->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $carousel->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new CarouselResource($carousel))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -128,21 +113,24 @@ class CarouselController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        // $carousel->delete();
-        
-        // return response()->json([
+        if ($carousel->delete()){
+            Storage::delete($carousel->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $carousel,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $carousel,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        $carousel->delete();
-
-        return (new CarouselResource($carousel))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registro en estos momentos, ¡Error!",
+                "data" => $carousel,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
