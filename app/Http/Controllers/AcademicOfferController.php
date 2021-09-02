@@ -44,7 +44,7 @@ class AcademicOfferController extends Controller
         $academicOffer->name_offer = $request->name_offer;
         $academicOffer->description = $request->description;
         $academicOffer->state = $request->state;
-        $path = $request->file('image')->store('images_aboutus');
+        $path = $request->file('image')->store('images_academicoffer');
         $academicOffer->image = $path;
 
             return response()->json([
@@ -87,13 +87,13 @@ class AcademicOfferController extends Controller
      */
     public function update(UpdateAcademicOfferRequest $request, AcademicOffer $academicOffer)
     {
-        $academicOffer->name = $request->name;
+        $academicOffer->name_offer = $request->name_offer;
         $academicOffer->description = $request->description;
         $academicOffer->state = $request->state;
         $oldPath = $academicOffer->image;
 
         if($request->hasFile('image')) {
-            $path = $request->file('image')->store('images_aboutus');
+            $path = $request->file('image')->store('images_academicoffer');
             $academicOffer->image = $path;
 
             Storage::delete($oldPath);
@@ -101,7 +101,7 @@ class AcademicOfferController extends Controller
 
             return response()->json([
            
-            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "message" => "El registro ingresado se ha actualizado ¡Exito!",
             "data" => $academicOffer->save(),
             "status" => Response::HTTP_OK,
 

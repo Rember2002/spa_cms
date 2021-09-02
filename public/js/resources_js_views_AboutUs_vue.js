@@ -1862,12 +1862,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/aboutus_service */ "./resources/js/services/aboutus_service.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -2031,7 +2038,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   // Begin data.
   data: function data() {
     return {
-      search: '',
       // Declare registers to use to save display data.
       registers: [],
       // Declare aboutusData to use to send data in form.
@@ -2060,7 +2066,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   // End data.
   // Mounted data for registers in datatable.
   mounted: function mounted() {
-    // Call method function.
+    // Call method function to use load data.
     this.loadRegisterAboutUs();
   },
   // End mounted data.
@@ -2091,7 +2097,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         });
       });
     },
-    // Method for attach image in form.
+    // Method for attach image in form create.
     attachImage: function attachImage() {
       try {
         this.aboutusData.Portada = this.$refs.imageAboutUs.files[0];
@@ -2136,7 +2142,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Portada: ''
       };
     },
-    // Event open new modal with clean form.
+    // Event open new modal with clean form create.
     showNewAboutUsModal: function showNewAboutUsModal() {
       this.$refs.modalCreateAboutUs.show();
     },
@@ -2173,7 +2179,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 13:
                 data = _context.sent;
-                // // Save data in registers.
+                // Save data in registers.
                 this.registers = data.data.data;
                 _context.next = 29;
                 break;
@@ -2374,17 +2380,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Capture dates into form update.
     updateDataAboutUs: function updateDataAboutUs(aboutus) {
-      this.aboutusData = aboutus;
+      this.aboutusData = _objectSpread({}, aboutus);
       this.showUpdateAboutUsModal();
     },
     // Method for update attach image in form.
     updateImage: function updateImage() {
       try {
+        // Declare value in variable.
         this.aboutusData.Portada = this.$refs.imageUpdateAboutUs.files[0];
         var reader = new FileReader();
         reader.addEventListener('load', function () {
           this.$refs.updateImageAboutUsDisplay.src = reader.result;
-        }.bind(this), false);
+        }.bind(this), false); // Load mew data in variable.
+
         reader.readAsDataURL(this.aboutusData.Portada); // Open swet alert use to indicate response attach image.
 
         this.$swal.fire({
@@ -2414,7 +2422,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // Function to use update register selected.
     updateRegisterAboutUs: function () {
       var _updateRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var formData, response;
+        var formData, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -2431,18 +2439,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterAboutUs(this.aboutusData.Id, formData);
 
               case 10:
-                response = _context4.sent;
-                this.registers.map(function (aboutus) {
-                  if (aboutus.id == response.data.id) {
-                    for (var key in response.data) {
-                      aboutus[key] = response.data[key];
-                    }
+                _context4.next = 12;
+                return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs();
 
-                    ;
-                  }
-
-                  ;
-                });
+              case 12:
+                data = _context4.sent;
+                // Save data in registers.
+                this.registers = data.data.data;
                 this.hideUpdateAboutUsModal(); // Open swet alert to indicate success.                    
 
                 this.$swal.fire({
@@ -2450,17 +2453,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   title: 'Exito',
                   text: "El registro ha sido modificado correctamente"
                 });
-                _context4.next = 28;
+                _context4.next = 30;
                 break;
 
-              case 16:
-                _context4.prev = 16;
+              case 18:
+                _context4.prev = 18;
                 _context4.t0 = _context4["catch"](0);
                 _context4.t1 = _context4.t0.response.status;
-                _context4.next = _context4.t1 === 422 ? 21 : 24;
+                _context4.next = _context4.t1 === 422 ? 23 : 26;
                 break;
 
-              case 21:
+              case 23:
                 // Load error validations.
                 this.errors = _context4.t0.response.data.errors; // Show swet alert indicate succeso to load data.
 
@@ -2473,9 +2476,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   timerProgressBar: true,
                   showConfirmButton: false
                 });
-                return _context4.abrupt("break", 27);
+                return _context4.abrupt("break", 29);
 
-              case 24:
+              case 26:
                 // Clean and close form. 
                 this.hideNewAboutUsModal(); // Open swet alert to indicate errors.
 
@@ -2484,17 +2487,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   title: 'Error',
                   text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
                 });
-                return _context4.abrupt("break", 27);
+                return _context4.abrupt("break", 29);
 
-              case 27:
+              case 29:
                 ;
 
-              case 28:
+              case 30:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[0, 16]]);
+        }, _callee4, this, [[0, 18]]);
       }));
 
       function updateRegisterAboutUs() {
@@ -29931,8 +29934,7 @@ var render = function() {
                             src:
                               _vm.$store.state.serverPath +
                               "/storage/" +
-                              aboutus.Portada,
-                            alt: aboutus.Titulo
+                              aboutus.Portada
                           }
                         })
                       ]),
@@ -30084,7 +30086,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("b-form-select", {
                         attrs: {
-                          state: _vm.aboutusData.Tipo.length >= 1,
+                          state: _vm.aboutusData.Tipo != "",
                           options: _vm.options,
                           id: "type",
                           multiple: "",
@@ -30314,7 +30316,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("b-form-select", {
                         attrs: {
-                          state: _vm.aboutusData.Tipo.length >= 1,
+                          state: _vm.aboutusData.Tipo != "",
                           options: _vm.options,
                           id: "type",
                           multiple: "",
@@ -30376,40 +30378,57 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-12" }, [
-                    _c("label", { attrs: { for: "image" } }, [
-                      _vm._v("Imagen:")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("img", {
-                        ref: "updateImageAboutUsDisplay",
-                        attrs: {
-                          src:
-                            _vm.$store.state.serverPath +
-                            "/storage/" +
-                            _vm.aboutusData.Portada,
-                          width: "700",
-                          height: "300"
+                  _c(
+                    "div",
+                    { staticClass: "form-group col-md-12" },
+                    [
+                      _c("label", { attrs: { for: "image" } }, [
+                        _vm._v("Imagen:")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("img", {
+                          ref: "updateImageAboutUsDisplay",
+                          attrs: {
+                            src:
+                              _vm.$store.state.serverPath +
+                              "/storage/" +
+                              _vm.aboutusData.Portada,
+                            width: "700",
+                            height: "300"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-input", {
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "image" },
+                        model: {
+                          value: _vm.aboutusData.Portada,
+                          callback: function($$v) {
+                            _vm.$set(_vm.aboutusData, "Portada", $$v)
+                          },
+                          expression: "aboutusData.Portada"
                         }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "imageUpdateAboutUs",
-                      staticClass: "form-control",
-                      attrs: { type: "file", id: "image" },
-                      on: { change: _vm.updateImage }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.Portada
-                      ? _c(
-                          "div",
-                          { staticClass: "invalid-feedback-validation" },
-                          [_vm._v(_vm._s(_vm.errors.Portada[0]))]
-                        )
-                      : _vm._e()
-                  ])
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        ref: "imageUpdateAboutUs",
+                        staticClass: "form-control",
+                        attrs: { type: "file", id: "image" },
+                        on: { change: _vm.updateImage }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.image
+                        ? _c(
+                            "div",
+                            { staticClass: "invalid-feedback-validation" },
+                            [_vm._v(_vm._s(_vm.errors.image[0]))]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
                 ]),
                 _vm._v(" "),
                 _c("hr"),
