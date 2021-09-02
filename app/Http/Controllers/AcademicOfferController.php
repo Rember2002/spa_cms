@@ -101,7 +101,7 @@ class AcademicOfferController extends Controller
 
             return response()->json([
            
-            "message" => "El registro ingresado se ha actualizado ¡Exito!",
+            "message" => "El registro se ha modificado ¡Exito!",
             "data" => $academicOffer->save(),
             "status" => Response::HTTP_OK,
 
