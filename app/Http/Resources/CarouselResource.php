@@ -19,7 +19,7 @@ class CarouselResource extends JsonResource
             'Id' => $this->id,
             'Titulo' => $this->name,
             'Estado' => $this->state,
-            'Imagen Carousel' => $this->image,
+            'Imagen' => $this->image,
 
         ];
     }
