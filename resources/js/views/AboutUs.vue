@@ -16,7 +16,7 @@
             <button class="btn btn-success btn-sm ml-auto" @click="showNewAboutUsModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
         </div>
             <!-- Content data table. -->
-        <div class="card-body align-items-center justify-content-center">
+        <div class="card-body table-responsive  align-items-center justify-content-center">
             <table id="tableRegisters" class="table table-hover table-responsive table-bordered">  
                 <thead class="table-dark">
                     <tr>

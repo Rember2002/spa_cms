@@ -24,9 +24,9 @@ class UpdateContactUsRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => ['required', 'unique:contact_us,phone', 'numeric', 'regex:[0-9]{8}'],
+            'phone' => ['required',],
             'direction' => ['required', 'max:255'],
-            'year' => ['required', 'unique:contact_us,year']
+            'year' => ['required', 'numeric', 'min:2021', 'max:2099']
         ];
     }
 }

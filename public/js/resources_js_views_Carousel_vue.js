@@ -29830,7 +29830,8 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "card-body align-items-center justify-content-center"
+            staticClass:
+              "card-body table-responsive align-items-center justify-content-center"
           },
           [
             _c(

@@ -3,41 +3,39 @@
     <!-- Begin page content. -->
 <div class="container-fluid">
 
-     <!-- Page heading. -->
+    <!-- Page heading. -->
     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-        <h1 class="mb-0 text-gray-800">Carousel</h1>
+        <h1 class="mb-0 text-gray-800">Contactenos</h1>
     </div>
-
-    <!-- Data table. -->
-    <div class="card">
+    
+        <!-- Data table. -->
+    <div class="card d-flex">
             <!-- Header data table. -->
         <div class="card-body d-flex">
             <h4><span><i class="fas fa-table"></i>  Visualización de datos</span></h4>
-            <button class="btn btn-success btn-sm ml-auto" @click="showNewCarouselModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
+            <button class="btn btn-success btn-sm ml-auto" @click="showNewContactUsModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
         </div>
             <!-- Content data table. -->
-        <div class="card-body table-responsive align-items-center justify-content-center">
+        <div class="card-body table-responsive align-items-center justify-content-center d-flex">
             <table id="tableRegisters" class="table table-hover table-responsive table-bordered">  
                 <thead class="table-dark">
                     <tr>
                         <td>Id</td>
-                        <td>Titulo</td>
-                        <td>Estado</td>
-                        <td>Imagen</td>
+                        <td>Telefono</td>
+                        <td>Direccion</td>
+                        <td>Correspondiente</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(carousel, index) in registers" :key="index">
-                        <td>{{carousel.Id}}</td>
-                        <td>{{carousel.Titulo}}</td>
-                        <td>{{carousel.Estado}}</td>
+                    <tr v-for="(contactus, index) in registers" :key="index">
+                        <td>{{contactus.Id}}</td>
+                        <td>{{contactus.Telefono}}</td>
+                        <td>{{contactus.Direccion}}</td>
+                        <td>{{contactus.Correspondiente}}</td>
                         <td>
-                            <img :src="`${$store.state.serverPath}/storage/${carousel.Imagen}`" class="table-image">
-                        </td>
-                        <td>
-                            <button class="btn btn-success btn-sm" @click="updateDataCarousel(carousel)"><span class="fa fa-edit"></span></button>
-                            <button class="btn btn-danger btn-sm" @click="deleteCarouselRegister(carousel)"><span class="fa fa-trash"></span></button>
+                            <button class="btn btn-success btn-sm" @click="updateDataContactUs(contactus)"><span class="fa fa-edit"></span></button>
+                            <button class="btn btn-danger btn-sm" @click="deleteContactUsRegister(contactus)"><span class="fa fa-trash"></span></button>
                         </td>
                     </tr>
                 </tbody>
@@ -48,34 +46,30 @@
         <!--End data table. -->
 
         <!-- Content modal create. -->
-    <b-modal ref="modalCreateCarousel" hide-footer size="xl" title="Agregar Nuevo Registro">
+    <b-modal ref="modalCreateContactUs" hide-footer size="xl" title="Agregar Nuevo Registro">
         <div class="d-block">
                 <!-- Form modal create. -->
-            <form v-on:submit.prevent="createRegisterCarousel">
+            <form v-on:submit.prevent="createRegisterContactUs">
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="name">Titulo:</label>
-                        <b-form-input :state="carouselData.Titulo.length >= 1 && carouselData.Titulo.length < 50" type="text" class="form-control" id="name" v-model="carouselData.Titulo" placeholder="Ingresar Titulo"></b-form-input>
-                        <div class="invalid-feedback-validation" v-if="errors.name">{{errors.name[0]}}</div>
+                        <label for="phone">Telefono:</label>
+                        <b-form-input :state="contactusData.Telefono.length >= 1 && contactusData.Telefono.length < 50" type="text" class="form-control" id="phone" v-model="contactusData.Telefono" placeholder="Ingresar Telefono"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.phone">{{errors.phone[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
-                        <b-form-checkbox id="state" v-model="carouselData.Estado" name="state" value="Visible" unchecked-value="Disabled">
-                        ¿Desea que el contenido sea visible?
-                        </b-form-checkbox>       
-                        <div class="invalid-feedback-validation" v-if="errors.state">{{errors.state[0]}}</div>      
+                        <label for="direction">Direccion:</label>
+                        <b-form-textarea :state="contactusData.Direccion.length >= 1 && contactusData.Direccion.length < 1000" type="text" class="form-control" id="direction" v-model="contactusData.Direccion" placeholder="Ingresar Direccion"></b-form-textarea>                 
+                        <div class="invalid-feedback-validation" v-if="errors.direction">{{errors.direction[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="image">Imagen:</label>
-                        <div v-if="carouselData.Imagen.name">
-                            <img src="" ref="imageCarouselDisplay" width="700" height="300">  
-                        </div>
-                        <input type="file" v-on:change="attachImage" ref="imageCarousel" class="form-control" id="image"/>
-                        <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
+                        <label for="year">Correspondiente a:</label>
+                        <b-form-input :state="contactusData.Correspondiente >= 2020 && contactusData.Correspondiente < 2099" type="text" class="form-control" id="year" v-model="contactusData.Correspondiente" placeholder="Ingresar Año"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
                     </div>
                 </div>
                 <hr>
                 <div class="text-center">    
-                    <button type="button" class="btn btn-default" @click="hideNewCarouselModal">Cancelar</button>
+                    <button type="button" class="btn btn-default" @click="hideNewContactUsModal">Cancelar</button>
                     <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
                 </div>
             </form> 
@@ -84,49 +78,45 @@
     </b-modal>
         <!-- End modal create. -->
 
-    <!-- Content modal update. -->
-    <b-modal ref="modalUpdateCarousel" hide-footer size="xl" title="Modificar Registro">
+        <!-- Content modal update. -->
+    <b-modal ref="modalUpdateContactUs" hide-footer size="xl" title="Modificar Registro">
         <div class="d-block">
                 <!-- Form modal update. -->
-            <form v-on:submit.prevent="updateRegisterCarousel">
+            <form v-on:submit.prevent="updateRegisterContactUs">
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="name">Titulo:</label>
-                        <b-form-input :state="carouselData.Titulo.length >= 1 && carouselData.Titulo.length < 50" type="text" class="form-control" id="name" v-model="carouselData.Titulo" placeholder="Ingresar Titulo"></b-form-input>
-                        <div class="invalid-feedback-validation" v-if="errors.name">{{errors.name[0]}}</div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <b-form-checkbox id="state" v-model="carouselData.Estado" name="state" value="Visible" unchecked-value="Disabled">
-                        ¿Desea que el contenido sea visible?
-                        </b-form-checkbox>       
-                        <div class="invalid-feedback-validation" v-if="errors.state">{{errors.state[0]}}</div>      
+                    <div class="form-group col-md-12">
+                        <label for="phone">Telefono:</label>
+                        <b-form-input :state="contactusData.Telefono.length >= 1 && contactusData.Telefono.length < 50" type="text" class="form-control" id="phone" v-model="contactusData.Telefono" placeholder="Ingresar Telefono"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.phone">{{errors.phone[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="image">Imagen:</label>
-                        <div>
-                            <img :src="`${$store.state.serverPath}/storage/${carouselData.Imagen}`" ref="updateImageCarouselDisplay" width="700" height="300">  
-                        </div>
-                        <input type="file" v-on:change="updateImage" ref="imageUpdateCarousel" class="form-control" id="image"/>
-                        <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
+                        <label for="direction">Direccion:</label>
+                        <b-form-textarea :state="contactusData.Direccion.length >= 1 && contactusData.Direccion.length < 1000" type="text" class="form-control" id="direction" v-model="contactusData.Direccion" placeholder="Ingresar Direccion"></b-form-textarea>                 
+                        <div class="invalid-feedback-validation" v-if="errors.direction">{{errors.direction[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="year">Correspondiente a:</label>
+                        <b-form-input :state="contactusData.Correspondiente >= 2020 && contactusData.Correspondiente < 2099" type="text" class="form-control" id="year" v-model="contactusData.Correspondiente" placeholder="Ingresar Año"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
                     </div>
                 </div>
                 <hr>
                 <div class="text-center">    
-                    <button type="button" class="btn btn-default" @click="hideUpdateCarouselModal">Cancelar</button>
+                    <button type="button" class="btn btn-default" @click="hideUpdateContactUsModal">Cancelar</button>
                     <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Actualizar</button>
                 </div>
             </form> 
                 <!-- End form modal update. -->
         </div>
     </b-modal>
-        <!-- End modal update. -->  
+        <!-- End modal update. -->    
 
-    </div>
-        <!-- End container fluid. -->
+</div>
+<!-- End container fluid. -->
 </template>
     <!-- End template. -->
 
-<!-- Begin script. -->
+    <!-- Begin script. -->
 <script>
 
         // Import plugin CloudTables.
@@ -136,12 +126,12 @@
     import $ from 'jquery';
 
         // Import file aboutUsService that contains functions request routes.
-    import * as carouselService from '../services/carousel_service';
+    import * as contactUsService from '../services/contactus_service';
     
         // Begin export default.
     export default {
 
-        name: 'carousel',
+        name: 'contactus',
 
             // Begin data.
         data(){
@@ -151,10 +141,10 @@
                 registers: [],
 
                     // Declare aboutusData to use to send data in form.
-                carouselData: {
-                    Titulo: '',
-                    Estado: '',
-                    Imagen: '',
+                contactusData: {
+                    Telefono: '',
+                    Direccion: '',
+                    Correspondiente: '',
                 },
 
                     // Save errors to response send request.
@@ -166,10 +156,8 @@
 
             // Mounted data for registers in datatable.
         mounted() {
-
                 // Call method function to use load data.
-            this.loadRegisterCarousel();
-
+            this.loadRegisterContactUs();
             },
             // End mounted data.
 
@@ -202,75 +190,31 @@
                 })
             },
 
-                // Method for attach image in form create.
-            attachImage() {
-                try {
-
-                        // Declare value variable.
-                    this.carouselData.Imagen = this.$refs.imageCarousel.files[0];
-                    
-                        // Declae reader.
-                    let reader = new FileReader();
-                   
-                        // Function save event to use load image.
-                    reader.addEventListener('load', function (){
-                        this.$refs.imageCarouselDisplay.src = reader.result;
-                    }.bind(this), false);
-
-                        // Load data reader in variable.
-                    reader.readAsDataURL(this.carouselData.Imagen);
-                        
-                        // Open swet alert use to indicate response attach image.
-                    this.$swal.fire({
-                        icon: 'success',
-                        title: 'La imagen ha sido cargada exitosamente',
-                        toast: true,
-                        position: 'top-end',
-                        timer: 3000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-
-                    });
-                } catch {
-                            // Open swet alert use to indicate response attach image.
-                        this.$swal.fire({
-                        icon: 'error',
-                        title: 'No se ha podido cargar la imagen',
-                        toast: true,
-                        position: 'top-end',
-                        timer: 3000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-
-                    });
-                };
-            },
-
                 // Close and clear data in form create.
-            hideNewCarouselModal() {
-                this.$refs.modalCreateCarousel.hide();
-                this.carouselData = {
-                    Titulo: '',
-                    Estado: '',
-                    Imagen: '',
+            hideNewContactUsModal() {
+                this.$refs.modalCreateContactUs.hide();
+                this.contactusData = {
+                    Telefono: '',
+                    Direccion: '',
+                    Correspondiente: '',
                 };
             },
             
                 // Event open new modal with clean form create.
-            showNewCarouselModal() {
-                this.$refs.modalCreateCarousel.show();
+            showNewContactUsModal() {
+                this.$refs.modalCreateContactUs.show();
             },
             
                 // Function use for save data forma to send request.
-            createRegisterCarousel: async function () {
-                let formData = new FormData();
-                formData.append('name', this.carouselData.Titulo);
-                formData.append('state', this.carouselData.Estado);
-                formData.append('image', this.carouselData.Imagen);
+            createRegisterContactUs: async function () {
+                    let formData = new FormData();
+                formData.append('phone', this.contactusData.Telefono);
+                formData.append('direction', this.contactusData.Direccion);
+                formData.append('year', this.contactusData.Correspondiente);
 
                 try {
                         // Call request to create register in service.
-                    await carouselService.createRegisterCarousel(formData);
+                    await contactUsService.createRegisterContactUs(formData);
 
                         // Open swet alert to indicate success.                    
                     this.$swal.fire({
@@ -279,10 +223,10 @@
                         text: 'El registro ha sido guardado correctamente',
                     });
                         // Clean and close form.
-                    this.hideNewCarouselModal();
+                    this.hideNewContactUsModal();
 
                         // Declare variable for save request load register. 
-                    const data = await carouselService.loadRegisterCarousel();
+                    const data = await contactUsService.loadRegisterContactUs();
 
                         // Save data in registers.
                     this.registers = data.data.data;
@@ -309,7 +253,7 @@
                         break;
                     default:
                             // Clean and close form. 
-                        this.hideNewCarouselModal();
+                        this.hideNewContactUsModal();
                             // Open swet alert to indicate errors.
                         this.$swal.fire({
                             icon: 'error',
@@ -322,10 +266,10 @@
             },  
 
                 // Function use to load and draw data in data table.
-            loadRegisterCarousel() {
+            loadRegisterContactUs() {
                 
                     // Decalre Promise for call request load register.
-                carouselService.loadRegisterCarousel().then((response)=>{
+                contactUsService.loadRegisterContactUs().then((response)=>{
                      
                         // Declare variable registers to use load data in table.
                     this.registers = response.data.data;
@@ -362,11 +306,11 @@
             },
 
                 // Function use to delete register select.
-            deleteCarouselRegister(carousel) {
+            deleteContactUsRegister(contactus) {
                 
                 // Swet alert to use question delete register. 
             this.$swal.fire({
-                title: `¿Desea eliminar el registro: ${carousel.Titulo}?`,
+                title: `¿Desea eliminar el registro: ${contactus.Correspondiente}?`,
                 icon: 'question',
                 showDenyButton: true,
                 showCancelButton: false,
@@ -378,12 +322,12 @@
                     if (result.isConfirmed) {
                             
                             // Send reqeust to use delete register.
-                        carouselService.deleteCarouselRegister(carousel.Id).then((response) =>{
+                        contactUsService.deleteContactUsRegister(contactus.Id).then((response) =>{
                                 
                                 // Swet alert to use indicate success.
                             this.$swal.fire({
                                 icon: 'success',
-                                title: `El registro: ${carousel.Titulo} ha sido eliminado correctamente.`,
+                                title: `El registro: ${contactus.Correspondiente} ha sido eliminado correctamente.`,
                                 toast: true,
                                 showConfirmButton: false,
                                 position: 'top-end',
@@ -391,7 +335,7 @@
                                 timerProgressBar: true,
                             });
                                 // Decalre Promise for call request load register.
-                            carouselService.loadRegisterCarousel().then((response) => {
+                            contactUsService.loadRegisterContactUs().then((response) => {
                                 
                                     // Declare variable registers to use load data in table.
                                 this.registers = response.data.data;
@@ -403,7 +347,7 @@
                             // Swet alert to use indidcate error.
                         this.$swal.fire({
                                 icon: 'error',
-                                title: `No es posible eliminar el registro: ${carousel.Titulo} en estos momentos.`,
+                                title: `No es posible eliminar el registro: ${contactus.Correspondiente} en estos momentos.`,
                                 toast: true,
                                 showConfirmButton: false,
                                 position: 'top-end',
@@ -411,12 +355,12 @@
                                 timerProgressBar: true,
                             });
                         }));
-                        
+
                         // The result for question in this alert is denied. 
                     } else if (result.isDenied) {
                     this.$swal.fire({
                             icon: 'warning',
-                            title: `El registro;${carousel.Titulo}  no ha sido eliminado`,
+                            title: `El registro;${contactus.Correspondiente}  no ha sido eliminado`,
                             toast: true,
                             showConfirmButton: false,
                             position: 'top-end',
@@ -428,87 +372,45 @@
             },
 
                 // Close and clear data in form update.
-            hideUpdateCarouselModal(){
-                this.$refs.modalUpdateCarousel.hide();
-                this.carouselData = {
-                    Titulo: '',
-                    Estado: '',
-                    Imagen: '',
+            hideUpdateContactUsModal(){
+                this.$refs.modalUpdateContactUs.hide();
+                this.contactusData = {
+                    Telefono: '',
+                    Direccion: '',
+                    Correspondiente: '',
                 };
             },
 
                 // Event open update modal with clean form.
-            showUpdateCarouselModal(){
-                this.$refs.modalUpdateCarousel.show();
+            showUpdateContactUsModal(){
+                this.$refs.modalUpdateContactUs.show();
             },
 
                 // Capture dates into form update.
-            updateDataCarousel(carousel) {
-                this.carouselData = {...carousel};
-                this.showUpdateCarouselModal();
-            },
-
-                // Method for update attach image in form.
-            updateImage() {
-                try {
-                        // Declare value in variable.
-                    this.carouselData.Imagen = this.$refs.imageUpdateCarousel.files[0];
-
-                        // Declae reader.
-                    let reader = new FileReader();
-                        
-                         // Function save event to use load image.
-                    reader.addEventListener('load', function (){
-                        this.$refs.updateImageCarouselDisplay.src = reader.result;
-                    }.bind(this), false);
-
-                        // Load data reader in variable.
-                    reader.readAsDataURL(this.carouselData.Imagen);
-
-                        // Open swet alert use to indicate response attach image.
-                    this.$swal.fire({
-                        icon: 'success',
-                        title: 'La imagen ha sido cargada exitosamente',
-                        toast: true,
-                        position: 'top-end',
-                        timer: 3000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-
-                    });
-                } catch (error){
-                            // Open swet alert use to indicate response attach image.
-                        this.$swal.fire({
-                        icon: 'error',
-                        title: `${error}`,
-                        toast: true,
-                        position: 'top-end',
-                        timer: 3000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-
-                    });
-                };
+            updateDataContactUs(contactus) {
+                this.contactusData = {...contactus};
+                this.showUpdateContactUsModal();
             },
 
                 // Function to use update register selected.
-            updateRegisterCarousel: async function() {
+            updateRegisterContactUs: async function() {
                 try {
-                       let formData = new FormData();
-                    formData.append('name', this.carouselData.Titulo);
-                    formData.append('state', this.carouselData.Estado);
-                    formData.append('image', this.carouselData.Imagen);
+                        let formData = new FormData();
+                    formData.append('phone', this.contactusData.Telefono);
+                    formData.append('direction', this.contactusData.Direccion);
+                    formData.append('year', this.contactusData.Correspondiente);
                     formData.append('_method', 'put');
                     
-                    await carouselService.updateRegisterCarousel(this.carouselData.Id, formData);
+                        // Call request in service to update data.
+                    await contactUsService.updateRegisterContactUs(this.contactusData.Id, formData);
                     
                         // Declare variable for save request load register. 
-                    const data = await carouselService.loadRegisterCarousel();
+                    const data = await contactUsService.loadRegisterContactUs();
 
                         // Save data in registers.
                     this.registers = data.data.data;
                     
-                    this.hideUpdateCarouselModal();
+                    this.hideUpdateContactUsModal();
 
                         // Open swet alert to indicate success.                    
                     this.$swal.fire({
@@ -539,7 +441,7 @@
                         break;
                     default:
                             // Clean and close form. 
-                        this.hideUpdateCarouselModal();
+                        this.hideUpdateContactUsModal();
                             // Open swet alert to indicate errors.
                         this.$swal.fire({
                             icon: 'error',
@@ -554,7 +456,6 @@
             
         },
             // End declare methods.
-            
     }
 </script>   
     <!-- End script. -->
