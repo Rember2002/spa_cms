@@ -445,7 +445,7 @@
                                 timerProgressBar: true,
                             });
                         }));
-                        
+
                         // The result for question in this alert is denied. 
                     } else if (result.isDenied) {
                     this.$swal.fire({
@@ -538,6 +538,7 @@
                     formData.append('image', this.aboutusData.Portada);
                     formData.append('_method', 'put');
                     
+                        // Call request in service to update data.
                     await aboutUsService.updateRegisterAboutUs(this.aboutusData.Id, formData);
                     
                         // Declare variable for save request load register. 

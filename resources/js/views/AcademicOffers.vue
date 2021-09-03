@@ -513,6 +513,7 @@
                     formData.append('state', this.academicofferData.Estado);
                     formData.append('_method', 'put');
                     
+                        // Call request in service to update data.
                     await academicOfferService.updateRegisterAcademicOffer(this.academicofferData.Id, formData);
                     
                         // Declare variable for save request load register. 
