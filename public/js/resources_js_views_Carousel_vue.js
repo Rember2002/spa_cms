@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_AboutUs_vue"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_Carousel_vue"],{
 
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
 /*!**********************************************************!*\
@@ -1844,10 +1844,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/AboutUs.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/AboutUs.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Carousel.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Carousel.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1861,7 +1861,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var datatables_net_bs4__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(datatables_net_bs4__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/aboutus_service */ "./resources/js/services/aboutus_service.js");
+/* harmony import */ var _services_carousel_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/carousel_service */ "./resources/js/services/carousel_service.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2003,29 +2003,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
@@ -2034,31 +2011,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // Begin export default.
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'aboutus',
+  name: 'carousel',
   // Begin data.
   data: function data() {
     return {
       // Declare registers to use to save display data.
       registers: [],
       // Declare aboutusData to use to send data in form.
-      aboutusData: {
+      carouselData: {
         Titulo: '',
-        Contenido: '',
-        Tipo: '',
-        Año: '',
-        Portada: ''
+        Estado: '',
+        Imagen: ''
       },
-      // Save default variables for use select component.    
-      options: [{
-        value: 'Mission',
-        text: 'Mision'
-      }, {
-        value: 'View',
-        text: 'Vision'
-      }, {
-        value: 'Value',
-        text: 'Valor'
-      }],
       // Save errors to response send request.
       errors: {}
     };
@@ -2067,7 +2031,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   // Mounted data for registers in datatable.
   mounted: function mounted() {
     // Call method function to use load data.
-    this.loadRegisterAboutUs();
+    this.loadRegisterCarousel();
   },
   // End mounted data.
   // Declare methods for use in components.
@@ -2101,15 +2065,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     attachImage: function attachImage() {
       try {
         // Declare value variable.
-        this.aboutusData.Portada = this.$refs.imageAboutUs.files[0]; // Declae reader.
+        this.carouselData.Imagen = this.$refs.imageCarousel.files[0]; // Declae reader.
 
         var reader = new FileReader(); // Function save event to use load image.
 
         reader.addEventListener('load', function () {
-          this.$refs.imageAboutUsDisplay.src = reader.result;
+          this.$refs.imageCarouselDisplay.src = reader.result;
         }.bind(this), false); // Load data reader in variable.
 
-        reader.readAsDataURL(this.aboutusData.Portada); // Open swet alert use to indicate response attach image.
+        reader.readAsDataURL(this.carouselData.Imagen); // Open swet alert use to indicate response attach image.
 
         this.$swal.fire({
           icon: 'success',
@@ -2136,39 +2100,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       ;
     },
     // Close and clear data in form create.
-    hideNewAboutUsModal: function hideNewAboutUsModal() {
-      this.$refs.modalCreateAboutUs.hide();
-      this.aboutusData = {
+    hideNewCarouselModal: function hideNewCarouselModal() {
+      this.$refs.modalCreateCarousel.hide();
+      this.carouselData = {
         Titulo: '',
-        Contenido: '',
-        Tipo: '',
-        Año: '',
-        Portada: ''
+        Estado: '',
+        Imagen: ''
       };
     },
     // Event open new modal with clean form create.
-    showNewAboutUsModal: function showNewAboutUsModal() {
-      this.$refs.modalCreateAboutUs.show();
+    showNewCarouselModal: function showNewCarouselModal() {
+      this.$refs.modalCreateCarousel.show();
     },
     // Function use for save data forma to send request.
-    createRegisterAboutUs: function () {
-      var _createRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+    createRegisterCarousel: function () {
+      var _createRegisterCarousel = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var formData, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 formData = new FormData();
-                formData.append('name', this.aboutusData.Titulo);
-                formData.append('description', this.aboutusData.Contenido);
-                formData.append('type', this.aboutusData.Tipo);
-                formData.append('year', this.aboutusData.Año);
-                formData.append('image', this.aboutusData.Portada);
-                _context.prev = 6;
-                _context.next = 9;
-                return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.createRegisterAboutUs(formData);
+                formData.append('name', this.carouselData.Titulo);
+                formData.append('state', this.carouselData.Estado);
+                formData.append('image', this.carouselData.Imagen);
+                _context.prev = 4;
+                _context.next = 7;
+                return _services_carousel_service__WEBPACK_IMPORTED_MODULE_3__.createRegisterCarousel(formData);
 
-              case 9:
+              case 7:
                 // Open swet alert to indicate success.                    
                 this.$swal.fire({
                   icon: 'success',
@@ -2176,26 +2136,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   text: 'El registro ha sido guardado correctamente'
                 }); // Clean and close form.
 
-                this.hideNewAboutUsModal(); // Declare variable for save request load register. 
+                this.hideNewCarouselModal(); // Declare variable for save request load register. 
 
-                _context.next = 13;
-                return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs();
+                _context.next = 11;
+                return _services_carousel_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterCarousel();
 
-              case 13:
+              case 11:
                 data = _context.sent;
                 // Save data in registers.
                 this.registers = data.data.data;
-                _context.next = 29;
+                _context.next = 27;
                 break;
 
-              case 17:
-                _context.prev = 17;
-                _context.t0 = _context["catch"](6);
+              case 15:
+                _context.prev = 15;
+                _context.t0 = _context["catch"](4);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === 422 ? 22 : 25;
+                _context.next = _context.t1 === 422 ? 20 : 23;
                 break;
 
-              case 22:
+              case 20:
                 // Load error validations.
                 this.errors = _context.t0.response.data.errors; // Show swet alert indicate succeso to load data.
 
@@ -2208,45 +2168,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   timerProgressBar: true,
                   showConfirmButton: false
                 });
-                return _context.abrupt("break", 28);
+                return _context.abrupt("break", 26);
 
-              case 25:
+              case 23:
                 // Clean and close form. 
-                this.hideNewAboutUsModal(); // Open swet alert to indicate errors.
+                this.hideNewCarouselModal(); // Open swet alert to indicate errors.
 
                 this.$swal.fire({
                   icon: 'error',
                   title: 'Error',
                   text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
                 });
-                return _context.abrupt("break", 28);
+                return _context.abrupt("break", 26);
+
+              case 26:
+                ;
+
+              case 27:
+                ;
 
               case 28:
-                ;
-
-              case 29:
-                ;
-
-              case 30:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[6, 17]]);
+        }, _callee, this, [[4, 15]]);
       }));
 
-      function createRegisterAboutUs() {
-        return _createRegisterAboutUs.apply(this, arguments);
+      function createRegisterCarousel() {
+        return _createRegisterCarousel.apply(this, arguments);
       }
 
-      return createRegisterAboutUs;
+      return createRegisterCarousel;
     }(),
     // Function use to load and draw data in data table.
-    loadRegisterAboutUs: function loadRegisterAboutUs() {
+    loadRegisterCarousel: function loadRegisterCarousel() {
       var _this = this;
 
       // Decalre Promise for call request load register.
-      _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs().then(function (response) {
+      _services_carousel_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterCarousel().then(function (response) {
         // Declare variable registers to use load data in table.
         _this.registers = response.data.data; // Call function to use plugin DataTable.
 
@@ -2276,12 +2236,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     // Function use to delete register select.
-    deleteAboutUsRegister: function deleteAboutUsRegister(aboutus) {
+    deleteCarouselRegister: function deleteCarouselRegister(carousel) {
       var _this2 = this;
 
       // Swet alert to use question delete register. 
       this.$swal.fire({
-        title: "\xBFDesea eliminar el registro: ".concat(aboutus.Titulo, "?"),
+        title: "\xBFDesea eliminar el registro: ".concat(carousel.Titulo, "?"),
         icon: 'question',
         showDenyButton: true,
         showCancelButton: false,
@@ -2291,11 +2251,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         // The result for question in this alert is confirmed.
         if (result.isConfirmed) {
           // Send reqeust to use delete register.
-          _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.deleteAboutUsRegister(aboutus.Id).then(function (response) {
+          _services_carousel_service__WEBPACK_IMPORTED_MODULE_3__.deleteCarouselRegister(carousel.Id).then(function (response) {
             // Swet alert to use indicate success.
             _this2.$swal.fire({
               icon: 'success',
-              title: "El registro: ".concat(aboutus.Titulo, " ha sido eliminado correctamente."),
+              title: "El registro: ".concat(carousel.Titulo, " ha sido eliminado correctamente."),
               toast: true,
               showConfirmButton: false,
               position: 'top-end',
@@ -2304,7 +2264,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }); // Decalre Promise for call request load register.
 
 
-            _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs().then(function (response) {
+            _services_carousel_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterCarousel().then(function (response) {
               // Declare variable registers to use load data in table.
               _this2.registers = response.data.data;
             });
@@ -2312,7 +2272,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             // Swet alert to use indidcate error.
             _this2.$swal.fire({
               icon: 'error',
-              title: "No es posible eliminar el registro: ".concat(aboutus.Titulo, " en estos momentos."),
+              title: "No es posible eliminar el registro: ".concat(carousel.Titulo, " en estos momentos."),
               toast: true,
               showConfirmButton: false,
               position: 'top-end',
@@ -2323,7 +2283,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         } else if (result.isDenied) {
           _this2.$swal.fire({
             icon: 'warning',
-            title: "El registro;".concat(aboutus.Titulo, "  no ha sido eliminado"),
+            title: "El registro;".concat(carousel.Titulo, "  no ha sido eliminado"),
             toast: true,
             showConfirmButton: false,
             position: 'top-end',
@@ -2336,38 +2296,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     // Close and clear data in form update.
-    hideUpdateAboutUsModal: function hideUpdateAboutUsModal() {
-      this.$refs.modalUpdateAboutUs.hide();
-      this.aboutusData = {
+    hideUpdateCarouselModal: function hideUpdateCarouselModal() {
+      this.$refs.modalUpdateCarousel.hide();
+      this.carouselData = {
         Titulo: '',
-        Contenido: '',
-        Tipo: '',
-        Año: '',
-        Portada: ''
+        Estado: '',
+        Imagen: ''
       };
     },
     // Event open update modal with clean form.
-    showUpdateAboutUsModal: function showUpdateAboutUsModal() {
-      this.$refs.modalUpdateAboutUs.show();
+    showUpdateCarouselModal: function showUpdateCarouselModal() {
+      this.$refs.modalUpdateCarousel.show();
     },
     // Capture dates into form update.
-    updateDataAboutUs: function updateDataAboutUs(aboutus) {
-      this.aboutusData = _objectSpread({}, aboutus);
-      this.showUpdateAboutUsModal();
+    updateDataCarousel: function updateDataCarousel(carousel) {
+      this.carouselData = _objectSpread({}, carousel);
+      this.showUpdateCarouselModal();
     },
     // Method for update attach image in form.
     updateImage: function updateImage() {
       try {
         // Declare value in variable.
-        this.aboutusData.Portada = this.$refs.imageUpdateAboutUs.files[0]; // Declae reader.
+        this.carouselData.Imagen = this.$refs.imageUpdateCarousel.files[0]; // Declae reader.
 
         var reader = new FileReader(); // Function save event to use load image.
 
         reader.addEventListener('load', function () {
-          this.$refs.updateImageAboutUsDisplay.src = reader.result;
+          this.$refs.updateImageCarouselDisplay.src = reader.result;
         }.bind(this), false); // Load data reader in variable.
 
-        reader.readAsDataURL(this.aboutusData.Portada); // Open swet alert use to indicate response attach image.
+        reader.readAsDataURL(this.carouselData.Imagen); // Open swet alert use to indicate response attach image.
 
         this.$swal.fire({
           icon: 'success',
@@ -2394,8 +2352,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       ;
     },
     // Function to use update register selected.
-    updateRegisterAboutUs: function () {
-      var _updateRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    updateRegisterCarousel: function () {
+      var _updateRegisterCarousel = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var formData, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
@@ -2403,42 +2361,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 formData = new FormData();
-                formData.append('name', this.aboutusData.Titulo);
-                formData.append('description', this.aboutusData.Contenido);
-                formData.append('type', this.aboutusData.Tipo);
-                formData.append('year', this.aboutusData.Año);
-                formData.append('image', this.aboutusData.Portada);
-                formData.append('_method', 'put'); // Call request in service to update data.
+                formData.append('name', this.carouselData.Titulo);
+                formData.append('state', this.carouselData.Estado);
+                formData.append('image', this.carouselData.Imagen);
+                formData.append('_method', 'put');
+                _context2.next = 8;
+                return _services_carousel_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterCarousel(this.carouselData.Id, formData);
 
+              case 8:
                 _context2.next = 10;
-                return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterAboutUs(this.aboutusData.Id, formData);
+                return _services_carousel_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterCarousel();
 
               case 10:
-                _context2.next = 12;
-                return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs();
-
-              case 12:
                 data = _context2.sent;
                 // Save data in registers.
                 this.registers = data.data.data;
-                this.hideUpdateAboutUsModal(); // Open swet alert to indicate success.                    
+                this.hideUpdateCarouselModal(); // Open swet alert to indicate success.                    
 
                 this.$swal.fire({
                   icon: 'success',
                   title: 'Exito',
                   text: "El registro ha sido modificado correctamente"
                 });
-                _context2.next = 30;
+                _context2.next = 28;
                 break;
 
-              case 18:
-                _context2.prev = 18;
+              case 16:
+                _context2.prev = 16;
                 _context2.t0 = _context2["catch"](0);
                 _context2.t1 = _context2.t0.response.status;
-                _context2.next = _context2.t1 === 422 ? 23 : 26;
+                _context2.next = _context2.t1 === 422 ? 21 : 24;
                 break;
 
-              case 23:
+              case 21:
                 // Load error validations.
                 this.errors = _context2.t0.response.data.errors; // Show swet alert indicate succeso to load data.
 
@@ -2451,35 +2406,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   timerProgressBar: true,
                   showConfirmButton: false
                 });
-                return _context2.abrupt("break", 29);
+                return _context2.abrupt("break", 27);
 
-              case 26:
+              case 24:
                 // Clean and close form. 
-                this.hideUpdateAboutUsModal(); // Open swet alert to indicate errors.
+                this.hideUpdateCarouselModal(); // Open swet alert to indicate errors.
 
                 this.$swal.fire({
                   icon: 'error',
                   title: 'Error',
                   text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
                 });
-                return _context2.abrupt("break", 29);
+                return _context2.abrupt("break", 27);
 
-              case 29:
+              case 27:
                 ;
 
-              case 30:
+              case 28:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 18]]);
+        }, _callee2, this, [[0, 16]]);
       }));
 
-      function updateRegisterAboutUs() {
-        return _updateRegisterAboutUs.apply(this, arguments);
+      function updateRegisterCarousel() {
+        return _updateRegisterCarousel.apply(this, arguments);
       }
 
-      return updateRegisterAboutUs;
+      return updateRegisterCarousel;
     }()
   } // End declare methods.
 
@@ -2487,38 +2442,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./resources/js/services/aboutus_service.js":
-/*!**************************************************!*\
-  !*** ./resources/js/services/aboutus_service.js ***!
-  \**************************************************/
+/***/ "./resources/js/services/carousel_service.js":
+/*!***************************************************!*\
+  !*** ./resources/js/services/carousel_service.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createRegisterAboutUs": () => (/* binding */ createRegisterAboutUs),
-/* harmony export */   "loadRegisterAboutUs": () => (/* binding */ loadRegisterAboutUs),
-/* harmony export */   "deleteAboutUsRegister": () => (/* binding */ deleteAboutUsRegister),
-/* harmony export */   "updateRegisterAboutUs": () => (/* binding */ updateRegisterAboutUs)
+/* harmony export */   "createRegisterCarousel": () => (/* binding */ createRegisterCarousel),
+/* harmony export */   "loadRegisterCarousel": () => (/* binding */ loadRegisterCarousel),
+/* harmony export */   "deleteCarouselRegister": () => (/* binding */ deleteCarouselRegister),
+/* harmony export */   "updateRegisterCarousel": () => (/* binding */ updateRegisterCarousel)
 /* harmony export */ });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 // Import http service to use config routes API. 
  // Function to use send request API create register.
 
-function createRegisterAboutUs(data) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/aboutus', data);
+function createRegisterCarousel(data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/carousels', data);
 } // Function to use send request API load registers.
 
-function loadRegisterAboutUs() {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/aboutus');
+function loadRegisterCarousel() {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/carousels');
 } // Function to use send request API delete registers selected.
 
-function deleteAboutUsRegister(id) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("aboutus/".concat(id));
+function deleteCarouselRegister(id) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("carousels/".concat(id));
 } // Function to use send request API update register selected.
 
-function updateRegisterAboutUs(id, data) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/aboutus/".concat(id), data);
+function updateRegisterCarousel(id, data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/carousels/".concat(id), data);
 }
 
 /***/ }),
@@ -29764,10 +29719,10 @@ try {
 
 /***/ }),
 
-/***/ "./resources/js/views/AboutUs.vue":
-/*!****************************************!*\
-  !*** ./resources/js/views/AboutUs.vue ***!
-  \****************************************/
+/***/ "./resources/js/views/Carousel.vue":
+/*!*****************************************!*\
+  !*** ./resources/js/views/Carousel.vue ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29775,8 +29730,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AboutUs_vue_vue_type_template_id_5d5795bc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AboutUs.vue?vue&type=template&id=5d5795bc& */ "./resources/js/views/AboutUs.vue?vue&type=template&id=5d5795bc&");
-/* harmony import */ var _AboutUs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AboutUs.vue?vue&type=script&lang=js& */ "./resources/js/views/AboutUs.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Carousel_vue_vue_type_template_id_9cc69502___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Carousel.vue?vue&type=template&id=9cc69502& */ "./resources/js/views/Carousel.vue?vue&type=template&id=9cc69502&");
+/* harmony import */ var _Carousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Carousel.vue?vue&type=script&lang=js& */ "./resources/js/views/Carousel.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -29786,9 +29741,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _AboutUs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _AboutUs_vue_vue_type_template_id_5d5795bc___WEBPACK_IMPORTED_MODULE_0__.render,
-  _AboutUs_vue_vue_type_template_id_5d5795bc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Carousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Carousel_vue_vue_type_template_id_9cc69502___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Carousel_vue_vue_type_template_id_9cc69502___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -29798,15 +29753,15 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/AboutUs.vue"
+component.options.__file = "resources/js/views/Carousel.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/AboutUs.vue?vue&type=script&lang=js&":
-/*!*****************************************************************!*\
-  !*** ./resources/js/views/AboutUs.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************/
+/***/ "./resources/js/views/Carousel.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./resources/js/views/Carousel.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29814,32 +29769,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AboutUs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AboutUs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/AboutUs.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AboutUs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Carousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Carousel.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Carousel.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Carousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/views/AboutUs.vue?vue&type=template&id=5d5795bc&":
-/*!***********************************************************************!*\
-  !*** ./resources/js/views/AboutUs.vue?vue&type=template&id=5d5795bc& ***!
-  \***********************************************************************/
+/***/ "./resources/js/views/Carousel.vue?vue&type=template&id=9cc69502&":
+/*!************************************************************************!*\
+  !*** ./resources/js/views/Carousel.vue?vue&type=template&id=9cc69502& ***!
+  \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AboutUs_vue_vue_type_template_id_5d5795bc___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AboutUs_vue_vue_type_template_id_5d5795bc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Carousel_vue_vue_type_template_id_9cc69502___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Carousel_vue_vue_type_template_id_9cc69502___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AboutUs_vue_vue_type_template_id_5d5795bc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AboutUs.vue?vue&type=template&id=5d5795bc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/AboutUs.vue?vue&type=template&id=5d5795bc&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Carousel_vue_vue_type_template_id_9cc69502___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Carousel.vue?vue&type=template&id=9cc69502& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Carousel.vue?vue&type=template&id=9cc69502&");
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/AboutUs.vue?vue&type=template&id=5d5795bc&":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/AboutUs.vue?vue&type=template&id=5d5795bc& ***!
-  \**************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Carousel.vue?vue&type=template&id=9cc69502&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Carousel.vue?vue&type=template&id=9cc69502& ***!
+  \***************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29866,7 +29821,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-success btn-sm ml-auto",
-              on: { click: _vm.showNewAboutUsModal }
+              on: { click: _vm.showNewCarouselModal }
             },
             [_vm._m(2), _vm._v("Agregar Registro")]
           )
@@ -29890,17 +29845,13 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.registers, function(aboutus, index) {
+                  _vm._l(_vm.registers, function(carousel, index) {
                     return _c("tr", { key: index }, [
-                      _c("td", [_vm._v(_vm._s(aboutus.Id))]),
+                      _c("td", [_vm._v(_vm._s(carousel.Id))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(aboutus.Titulo))]),
+                      _c("td", [_vm._v(_vm._s(carousel.Titulo))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(aboutus.Contenido))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(aboutus.Tipo))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(aboutus.Año))]),
+                      _c("td", [_vm._v(_vm._s(carousel.Estado))]),
                       _vm._v(" "),
                       _c("td", [
                         _c("img", {
@@ -29909,7 +29860,7 @@ var render = function() {
                             src:
                               _vm.$store.state.serverPath +
                               "/storage/" +
-                              aboutus.Portada
+                              carousel.Imagen
                           }
                         })
                       ]),
@@ -29921,7 +29872,7 @@ var render = function() {
                             staticClass: "btn btn-success btn-sm",
                             on: {
                               click: function($event) {
-                                return _vm.updateDataAboutUs(aboutus)
+                                return _vm.updateDataCarousel(carousel)
                               }
                             }
                           },
@@ -29934,7 +29885,7 @@ var render = function() {
                             staticClass: "btn btn-danger btn-sm",
                             on: {
                               click: function($event) {
-                                return _vm.deleteAboutUsRegister(aboutus)
+                                return _vm.deleteCarouselRegister(carousel)
                               }
                             }
                           },
@@ -29954,7 +29905,7 @@ var render = function() {
       _c(
         "b-modal",
         {
-          ref: "modalCreateAboutUs",
+          ref: "modalCreateCarousel",
           attrs: {
             "hide-footer": "",
             size: "xl",
@@ -29969,7 +29920,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.createRegisterAboutUs.apply(null, arguments)
+                    return _vm.createRegisterCarousel.apply(null, arguments)
                   }
                 }
               },
@@ -29977,7 +29928,7 @@ var render = function() {
                 _c("div", { staticClass: "form-row" }, [
                   _c(
                     "div",
-                    { staticClass: "form-group col-md-6" },
+                    { staticClass: "form-group col-md-12" },
                     [
                       _c("label", { attrs: { for: "name" } }, [
                         _vm._v("Titulo:")
@@ -29987,18 +29938,18 @@ var render = function() {
                         staticClass: "form-control",
                         attrs: {
                           state:
-                            _vm.aboutusData.Titulo.length >= 1 &&
-                            _vm.aboutusData.Titulo.length < 50,
+                            _vm.carouselData.Titulo.length >= 1 &&
+                            _vm.carouselData.Titulo.length < 50,
                           type: "text",
                           id: "name",
                           placeholder: "Ingresar Titulo"
                         },
                         model: {
-                          value: _vm.aboutusData.Titulo,
+                          value: _vm.carouselData.Titulo,
                           callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Titulo", $$v)
+                            _vm.$set(_vm.carouselData, "Titulo", $$v)
                           },
-                          expression: "aboutusData.Titulo"
+                          expression: "carouselData.Titulo"
                         }
                       }),
                       _vm._v(" "),
@@ -30015,108 +29966,37 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "form-group col-md-6" },
+                    { staticClass: "form-group col-md-12" },
                     [
-                      _c("label", { attrs: { for: "description" } }, [
-                        _vm._v("Descripcion:")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-textarea", {
-                        staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.aboutusData.Contenido.length >= 1 &&
-                            _vm.aboutusData.Contenido.length < 1000,
-                          type: "text",
-                          id: "description",
-                          placeholder: "Ingresar Descripcion"
-                        },
-                        model: {
-                          value: _vm.aboutusData.Contenido,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Contenido", $$v)
+                      _c(
+                        "b-form-checkbox",
+                        {
+                          attrs: {
+                            id: "state",
+                            name: "state",
+                            value: "Visible",
+                            "unchecked-value": "Disabled"
                           },
-                          expression: "aboutusData.Contenido"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.description
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.description[0]))]
+                          model: {
+                            value: _vm.carouselData.Estado,
+                            callback: function($$v) {
+                              _vm.$set(_vm.carouselData, "Estado", $$v)
+                            },
+                            expression: "carouselData.Estado"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        ¿Desea que el contenido sea visible?\n                        "
                           )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-6" },
-                    [
-                      _c("label", { attrs: { for: "type" } }, [
-                        _vm._v("Tipo:")
-                      ]),
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("b-form-select", {
-                        attrs: {
-                          state: _vm.aboutusData.Tipo != "",
-                          options: _vm.options,
-                          id: "type",
-                          multiple: "",
-                          "select-size": 4
-                        },
-                        model: {
-                          value: _vm.aboutusData.Tipo,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Tipo", $$v)
-                          },
-                          expression: "aboutusData.Tipo"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.type
+                      _vm.errors.state
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.type[0]))]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-6" },
-                    [
-                      _c("label", { attrs: { for: "year" } }, [_vm._v("Año:")]),
-                      _vm._v(" "),
-                      _c("b-form-input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.aboutusData.Año >= 2020 &&
-                            _vm.aboutusData.Año < 2099,
-                          type: "text",
-                          id: "year",
-                          placeholder: "Ingresar Año"
-                        },
-                        model: {
-                          value: _vm.aboutusData.Año,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Año", $$v)
-                          },
-                          expression: "aboutusData.Año"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.year
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.year[0]))]
+                            [_vm._v(_vm._s(_vm.errors.state[0]))]
                           )
                         : _vm._e()
                     ],
@@ -30128,17 +30008,17 @@ var render = function() {
                       _vm._v("Imagen:")
                     ]),
                     _vm._v(" "),
-                    _vm.aboutusData.Portada.name
+                    _vm.carouselData.Imagen.name
                       ? _c("div", [
                           _c("img", {
-                            ref: "imageAboutUsDisplay",
+                            ref: "imageCarouselDisplay",
                             attrs: { src: "", width: "700", height: "300" }
                           })
                         ])
                       : _vm._e(),
                     _vm._v(" "),
                     _c("input", {
-                      ref: "imageAboutUs",
+                      ref: "imageCarousel",
                       staticClass: "form-control",
                       attrs: { type: "file", id: "image" },
                       on: { change: _vm.attachImage }
@@ -30162,7 +30042,7 @@ var render = function() {
                     {
                       staticClass: "btn btn-default",
                       attrs: { type: "button" },
-                      on: { click: _vm.hideNewAboutUsModal }
+                      on: { click: _vm.hideNewCarouselModal }
                     },
                     [_vm._v("Cancelar")]
                   ),
@@ -30188,7 +30068,7 @@ var render = function() {
       _c(
         "b-modal",
         {
-          ref: "modalUpdateAboutUs",
+          ref: "modalUpdateCarousel",
           attrs: { "hide-footer": "", size: "xl", title: "Modificar Registro" }
         },
         [
@@ -30199,7 +30079,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.updateRegisterAboutUs.apply(null, arguments)
+                    return _vm.updateRegisterCarousel.apply(null, arguments)
                   }
                 }
               },
@@ -30217,18 +30097,18 @@ var render = function() {
                         staticClass: "form-control",
                         attrs: {
                           state:
-                            _vm.aboutusData.Titulo.length >= 1 &&
-                            _vm.aboutusData.Titulo.length < 50,
+                            _vm.carouselData.Titulo.length >= 1 &&
+                            _vm.carouselData.Titulo.length < 50,
                           type: "text",
                           id: "name",
                           placeholder: "Ingresar Titulo"
                         },
                         model: {
-                          value: _vm.aboutusData.Titulo,
+                          value: _vm.carouselData.Titulo,
                           callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Titulo", $$v)
+                            _vm.$set(_vm.carouselData, "Titulo", $$v)
                           },
-                          expression: "aboutusData.Titulo"
+                          expression: "carouselData.Titulo"
                         }
                       }),
                       _vm._v(" "),
@@ -30247,163 +30127,75 @@ var render = function() {
                     "div",
                     { staticClass: "form-group col-md-6" },
                     [
-                      _c("label", { attrs: { for: "description" } }, [
-                        _vm._v("Descripcion:")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-textarea", {
-                        staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.aboutusData.Contenido.length >= 1 &&
-                            _vm.aboutusData.Contenido.length < 1000,
-                          type: "text",
-                          id: "description",
-                          placeholder: "Ingresar Descripcion"
-                        },
-                        model: {
-                          value: _vm.aboutusData.Contenido,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Contenido", $$v)
-                          },
-                          expression: "aboutusData.Contenido"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.description
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.description[0]))]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-6" },
-                    [
-                      _c("label", { attrs: { for: "type" } }, [
-                        _vm._v("Tipo:")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-select", {
-                        attrs: {
-                          state: _vm.aboutusData.Tipo != "",
-                          options: _vm.options,
-                          id: "type",
-                          multiple: "",
-                          "select-size": 4
-                        },
-                        model: {
-                          value: _vm.aboutusData.Tipo,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Tipo", $$v)
-                          },
-                          expression: "aboutusData.Tipo"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.type
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.type[0]))]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-6" },
-                    [
-                      _c("label", { attrs: { for: "year" } }, [_vm._v("Año:")]),
-                      _vm._v(" "),
-                      _c("b-form-input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.aboutusData.Año >= 2020 &&
-                            _vm.aboutusData.Año < 2099,
-                          type: "text",
-                          id: "year",
-                          placeholder: "Ingresar Año"
-                        },
-                        model: {
-                          value: _vm.aboutusData.Año,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Año", $$v)
-                          },
-                          expression: "aboutusData.Año"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.year
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.year[0]))]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-12" },
-                    [
-                      _c("label", { attrs: { for: "image" } }, [
-                        _vm._v("Imagen:")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c("img", {
-                          ref: "updateImageAboutUsDisplay",
+                      _c(
+                        "b-form-checkbox",
+                        {
                           attrs: {
-                            src:
-                              _vm.$store.state.serverPath +
-                              "/storage/" +
-                              _vm.aboutusData.Portada,
-                            width: "700",
-                            height: "300"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-input", {
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "image" },
-                        model: {
-                          value: _vm.aboutusData.Portada,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Portada", $$v)
+                            id: "state",
+                            name: "state",
+                            value: "Visible",
+                            "unchecked-value": "Disabled"
                           },
-                          expression: "aboutusData.Portada"
-                        }
-                      }),
+                          model: {
+                            value: _vm.carouselData.Estado,
+                            callback: function($$v) {
+                              _vm.$set(_vm.carouselData, "Estado", $$v)
+                            },
+                            expression: "carouselData.Estado"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        ¿Desea que el contenido sea visible?\n                        "
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("input", {
-                        ref: "imageUpdateAboutUs",
-                        staticClass: "form-control",
-                        attrs: { type: "file", id: "image" },
-                        on: { change: _vm.updateImage }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.image
+                      _vm.errors.state
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.image[0]))]
+                            [_vm._v(_vm._s(_vm.errors.state[0]))]
                           )
                         : _vm._e()
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-12" }, [
+                    _c("label", { attrs: { for: "image" } }, [
+                      _vm._v("Imagen:")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("img", {
+                        ref: "updateImageCarouselDisplay",
+                        attrs: {
+                          src:
+                            _vm.$store.state.serverPath +
+                            "/storage/" +
+                            _vm.carouselData.Imagen,
+                          width: "700",
+                          height: "300"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      ref: "imageUpdateCarousel",
+                      staticClass: "form-control",
+                      attrs: { type: "file", id: "image" },
+                      on: { change: _vm.updateImage }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.image
+                      ? _c(
+                          "div",
+                          { staticClass: "invalid-feedback-validation" },
+                          [_vm._v(_vm._s(_vm.errors.image[0]))]
+                        )
+                      : _vm._e()
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("hr"),
@@ -30414,7 +30206,7 @@ var render = function() {
                     {
                       staticClass: "btn btn-default",
                       attrs: { type: "button" },
-                      on: { click: _vm.hideUpdateAboutUsModal }
+                      on: { click: _vm.hideUpdateCarouselModal }
                     },
                     [_vm._v("Cancelar")]
                   ),
@@ -30450,7 +30242,7 @@ var staticRenderFns = [
       {
         staticClass: "d-sm-flex align-items-center justify-content-center mb-4"
       },
-      [_c("h1", { staticClass: "mb-0 text-gray-800" }, [_vm._v("Acerca de")])]
+      [_c("h1", { staticClass: "mb-0 text-gray-800" }, [_vm._v("Carousel")])]
     )
   },
   function() {
@@ -30478,13 +30270,9 @@ var staticRenderFns = [
       _c("tr", [
         _c("td", [_vm._v("Id")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Nombre")]),
+        _c("td", [_vm._v("Titulo")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Descripcion")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Tipo")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Año")]),
+        _c("td", [_vm._v("Estado")]),
         _vm._v(" "),
         _c("td", [_vm._v("Imagen")]),
         _vm._v(" "),

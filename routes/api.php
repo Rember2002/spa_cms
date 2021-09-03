@@ -52,13 +52,15 @@ Route::apiResource('contactUs', ContactUsController::class);
 
 Route::apiResource('newHomes', NewHomeController::class);
 
+Route::apiResource('carousels', CarouselController::class);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     
   
 
     
 
-    Route::apiResource('carousels', CarouselController::class);
+
 
     Route::apiResource('categories', CategorieController::class);
 

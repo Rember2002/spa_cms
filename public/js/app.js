@@ -126,6 +126,12 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_AcademicOffers_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/AcademicOffers.vue */ "./resources/js/views/AcademicOffers.vue"));
   }
+}, {
+  path: '/carousel',
+  name: 'carousel',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_Carousel_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Carousel.vue */ "./resources/js/views/Carousel.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
   routes: routes
@@ -47278,14 +47284,6 @@ var render = function() {
                   _c(
                     "a",
                     { staticClass: "collapse-item", attrs: { href: "" } },
-                    [_vm._v("Carousel")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("router-link", { attrs: { to: "", exact: "" } }, [
-                  _c(
-                    "a",
-                    { staticClass: "collapse-item", attrs: { href: "" } },
                     [_vm._v("Noticias")]
                   )
                 ]),
@@ -47298,7 +47296,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("router-link", { attrs: { to: "", exact: "" } }, [
+                _c("router-link", { attrs: { to: "/carousel", exact: "" } }, [
                   _c(
                     "a",
                     { staticClass: "collapse-item", attrs: { href: "" } },
@@ -65005,7 +65003,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

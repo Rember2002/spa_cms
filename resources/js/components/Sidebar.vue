@@ -42,15 +42,12 @@
                     <a class="collapse-item" href="">Acerca de</a>
                 </router-link>
                 <router-link to="" class="" exact>
-                    <a class="collapse-item" href="">Carousel</a>
-                </router-link>
-                <router-link to="" class="" exact>
                     <a class="collapse-item" href="">Noticias</a>
                 </router-link>
                 <router-link to="" class="" exact>
                     <a class="collapse-item" href="">Contactenos</a>
                 </router-link>
-                <router-link to="" class="" exact>
+                <router-link to="/carousel" class="" exact>
                     <a class="collapse-item" href="">Carousel</a>
                 </router-link>
                 <router-link to="" class="" exact>

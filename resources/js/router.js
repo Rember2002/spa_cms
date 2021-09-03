@@ -21,6 +21,11 @@ const routes = [
         path: '/academicoffer',
         name: 'academicoffer',
         component: () => import('./views/AcademicOffers.vue')
+    },
+    {
+        path: '/carousel',
+        name: 'carousel',
+        component: () => import('./views/Carousel.vue')
     }
 ];
 

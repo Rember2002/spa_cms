@@ -2068,11 +2068,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     attachImage: function attachImage() {
       try {
         // Declare value variable.
-        this.academicofferData.Portada = this.$refs.imageAcademicOffer.files[0];
-        var reader = new FileReader();
+        this.academicofferData.Portada = this.$refs.imageAcademicOffer.files[0]; // Declae reader.
+
+        var reader = new FileReader(); // Function save event to use load image.
+
         reader.addEventListener('load', function () {
           this.$refs.imageAcademicOfferDisplay.src = reader.result;
-        }.bind(this), false);
+        }.bind(this), false); // Load data reader in variable.
+
         reader.readAsDataURL(this.academicofferData.Portada); // Open swet alert use to indicate response attach image.
 
         this.$swal.fire({
@@ -2207,10 +2210,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loadRegisterAcademicOffer: function loadRegisterAcademicOffer() {
       var _this = this;
 
+      // Decalre Promise for call request load register.
       _services_academicoffers_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAcademicOffer().then(function (response) {
-        _this.registers = response.data.data;
+        // Declare variable registers to use load data in table.
+        _this.registers = response.data.data; // Call function to use plugin DataTable.
 
-        _this.loadDataTable();
+        _this.loadDataTable(); // Swet alert represent event success.
+
 
         _this.$swal.fire({
           icon: 'success',
@@ -2222,6 +2228,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           showConfirmButton: false
         });
       })["catch"](function (error) {
+        // Swet alert represent event error.
         _this.$swal.fire({
           icon: 'success',
           title: 'El contenido ha sido cargado correctamente',
@@ -2259,9 +2266,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               position: 'top-end',
               timer: 3000,
               timerProgressBar: true
-            });
+            }); // Decalre Promise for call request load register.
+
 
             _services_academicoffers_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAcademicOffer().then(function (response) {
+              // Declare variable registers to use load data in table.
               _this2.registers = response.data.data;
             });
           })["catch"](function (error) {
@@ -2313,11 +2322,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // Method for update attach image in form.
     updateImage: function updateImage() {
       try {
-        this.academicofferData.Portada = this.$refs.imageUpdateAcademicOffer.files[0];
-        var reader = new FileReader();
+        // Declare value variable.
+        this.academicofferData.Portada = this.$refs.imageUpdateAcademicOffer.files[0]; // Declae reader.
+
+        var reader = new FileReader(); // Function save event to use load image.
+
         reader.addEventListener('load', function () {
           this.$refs.updateImageAcademicOfferDisplay.src = reader.result;
-        }.bind(this), false);
+        }.bind(this), false); // Load data reader in variable.
+
         reader.readAsDataURL(this.academicofferData.Portada); // Open swet alert use to indicate response attach image.
 
         this.$swal.fire({
@@ -2358,7 +2371,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData.append('description', this.academicofferData.Descripcion);
                 formData.append('image', this.academicofferData.Portada);
                 formData.append('state', this.academicofferData.Estado);
-                formData.append('_method', 'put');
+                formData.append('_method', 'put'); // Call request in service to update data.
+
                 _context2.next = 9;
                 return _services_academicoffers_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterAcademicOffer(this.academicofferData.Id, formData);
 
