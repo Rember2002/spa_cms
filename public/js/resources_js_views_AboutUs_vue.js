@@ -2238,131 +2238,93 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return createRegisterAboutUs;
     }(),
     // Function use to load and draw data in data table.
-    loadRegisterAboutUs: function () {
-      var _loadRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs();
+    loadRegisterAboutUs: function loadRegisterAboutUs() {
+      var _this = this;
 
-              case 3:
-                response = _context2.sent;
-                // Save data in registers.
-                this.registers = response.data.data; // Load DataTable plugin.
+      _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs().then(function (response) {
+        _this.registers = response.data.data;
 
-                this.loadDataTable(); // Show swet alert indicate succeso to load data.
+        _this.loadDataTable();
 
-                this.$swal.fire({
-                  icon: 'success',
-                  title: 'El contenido ha sido cargado correctamente',
-                  toast: true,
-                  position: 'top-end',
-                  timer: 3000,
-                  timerProgressBar: true,
-                  showConfirmButton: false
-                });
-                _context2.next = 12;
-                break;
-
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](0);
-                // Show swet alert to indicate error.
-                this.$swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'No es posible cargar el contenido en estos momentos'
-                });
-
-              case 12:
-                ;
-
-              case 13:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[0, 9]]);
-      }));
-
-      function loadRegisterAboutUs() {
-        return _loadRegisterAboutUs.apply(this, arguments);
-      }
-
-      return loadRegisterAboutUs;
-    }(),
+        _this.$swal.fire({
+          icon: 'success',
+          title: 'El contenido ha sido cargado correctamente',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+      })["catch"](function (error) {
+        _this.$swal.fire({
+          icon: 'success',
+          title: 'El contenido ha sido cargado correctamente',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+      });
+    },
     // Function use to delete register select.
-    deleteAboutUsRegister: function () {
-      var _deleteAboutUsRegister = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(aboutus) {
-        var _this = this;
+    deleteAboutUsRegister: function deleteAboutUsRegister(aboutus) {
+      var _this2 = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                // Open swet dialog for question to delete register.
-                this.$swal.fire({
-                  icon: 'question',
-                  title: "Desea eliminar: ".concat(aboutus.Titulo, "?"),
-                  showDenyButton: true,
-                  showCancelButton: false,
-                  confirmButtonText: "Aceptar",
-                  denyButtonText: "Cancelar" // Handling response to dialog.
+      // Swet alert to use question delete register. 
+      this.$swal.fire({
+        title: "\xBFDesea eliminar el registro: ".concat(aboutus.Titulo, "?"),
+        icon: 'question',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Eliminar",
+        denyButtonText: "Cancelar"
+      }).then(function (result) {
+        // The result for question in this alert is confirmed.
+        if (result.isConfirmed) {
+          // Send reqeust to use delete register.
+          _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.deleteAboutUsRegister(aboutus.Id).then(function (response) {
+            // Swet alert to use indicate success.
+            _this2.$swal.fire({
+              icon: 'success',
+              title: "El registro: ".concat(aboutus.Titulo, " ha sido eliminado correctamente."),
+              toast: true,
+              showConfirmButton: false,
+              position: 'top-end',
+              timer: 3000,
+              timerProgressBar: true
+            });
 
-                }).then(function (result) {
-                  // Response is true delete record.
-                  if (result.isConfirmed) {
-                    // Call request service.
-                    _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.deleteAboutUsRegister(aboutus.Id); // Refresh component DataTable.
+            _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs().then(function (response) {
+              _this2.registers = response.data.data;
+            });
+          })["catch"](function (error) {
+            // Swet alert to use indidcate error.
+            _this2.$swal.fire({
+              icon: 'error',
+              title: "No es posible eliminar el registro: ".concat(aboutus.Titulo, " en estos momentos."),
+              toast: true,
+              showConfirmButton: false,
+              position: 'top-end',
+              timer: 3000,
+              timerProgressBar: true
+            });
+          }); // The result for question in this alert is denied. 
+        } else if (result.isDenied) {
+          _this2.$swal.fire({
+            icon: 'warning',
+            title: "El registro;".concat(aboutus.Titulo, "  no ha sido eliminado"),
+            toast: true,
+            showConfirmButton: false,
+            position: 'top-end',
+            timer: 3000,
+            timerProgressBar: true
+          });
+        }
 
-                    _this.registers = _this.registers.filter(function (obj) {
-                      return obj.Id != aboutus.Id;
-                    }); // Show swet alert to indicate delete name register.
-
-                    _this.$swal.fire({
-                      toast: true,
-                      showConfirmButton: false,
-                      position: 'top-end',
-                      timer: 3000,
-                      timerProgressBar: true,
-                      icon: 'success',
-                      title: "Se ha eliminado correctamente: ".concat(aboutus.Titulo, ".")
-                    }); // Response is false delete record.
-
-                  } else if (result.isDenied) {
-                    // Show swet alert to indicate response false delete register.
-                    _this.$swal.fire({
-                      toast: true,
-                      showConfirmButton: false,
-                      position: 'top-end',
-                      timer: 3000,
-                      timerProgressBar: true,
-                      icon: 'warning',
-                      title: "Ha cancelado la operacion de eliminar: ".concat(aboutus.Titulo, ".")
-                    });
-                  }
-
-                  ;
-                });
-
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function deleteAboutUsRegister(_x) {
-        return _deleteAboutUsRegister.apply(this, arguments);
-      }
-
-      return deleteAboutUsRegister;
-    }(),
+        ;
+      });
+    },
     // Close and clear data in form update.
     hideUpdateAboutUsModal: function hideUpdateAboutUsModal() {
       this.$refs.modalUpdateAboutUs.hide();
@@ -2421,13 +2383,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Function to use update register selected.
     updateRegisterAboutUs: function () {
-      var _updateRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var _updateRegisterAboutUs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var formData, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context4.prev = 0;
+                _context2.prev = 0;
                 formData = new FormData();
                 formData.append('name', this.aboutusData.Titulo);
                 formData.append('description', this.aboutusData.Contenido);
@@ -2435,15 +2397,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData.append('year', this.aboutusData.Año);
                 formData.append('image', this.aboutusData.Portada);
                 formData.append('_method', 'put');
-                _context4.next = 10;
+                _context2.next = 10;
                 return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterAboutUs(this.aboutusData.Id, formData);
 
               case 10:
-                _context4.next = 12;
+                _context2.next = 12;
                 return _services_aboutus_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterAboutUs();
 
               case 12:
-                data = _context4.sent;
+                data = _context2.sent;
                 // Save data in registers.
                 this.registers = data.data.data;
                 this.hideUpdateAboutUsModal(); // Open swet alert to indicate success.                    
@@ -2453,19 +2415,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   title: 'Exito',
                   text: "El registro ha sido modificado correctamente"
                 });
-                _context4.next = 30;
+                _context2.next = 30;
                 break;
 
               case 18:
-                _context4.prev = 18;
-                _context4.t0 = _context4["catch"](0);
-                _context4.t1 = _context4.t0.response.status;
-                _context4.next = _context4.t1 === 422 ? 23 : 26;
+                _context2.prev = 18;
+                _context2.t0 = _context2["catch"](0);
+                _context2.t1 = _context2.t0.response.status;
+                _context2.next = _context2.t1 === 422 ? 23 : 26;
                 break;
 
               case 23:
                 // Load error validations.
-                this.errors = _context4.t0.response.data.errors; // Show swet alert indicate succeso to load data.
+                this.errors = _context2.t0.response.data.errors; // Show swet alert indicate succeso to load data.
 
                 this.$swal.fire({
                   icon: 'error',
@@ -2476,7 +2438,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   timerProgressBar: true,
                   showConfirmButton: false
                 });
-                return _context4.abrupt("break", 29);
+                return _context2.abrupt("break", 29);
 
               case 26:
                 // Clean and close form. 
@@ -2487,17 +2449,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   title: 'Error',
                   text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
                 });
-                return _context4.abrupt("break", 29);
+                return _context2.abrupt("break", 29);
 
               case 29:
                 ;
 
               case 30:
               case "end":
-                return _context4.stop();
+                return _context2.stop();
             }
           }
-        }, _callee4, this, [[0, 18]]);
+        }, _callee2, this, [[0, 18]]);
       }));
 
       function updateRegisterAboutUs() {

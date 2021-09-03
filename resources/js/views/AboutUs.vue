@@ -348,17 +348,14 @@
             },  
 
                 // Function use to load and draw data in data table.
-            loadRegisterAboutUs: async function() {
-                try {
-                        // Save in variable the call request to load data.
-                    const response = await aboutUsService.loadRegisterAboutUs();
-                        // Save data in registers.
+            loadRegisterAboutUs() {
+
+                aboutUsService.loadRegisterAboutUs().then((response)=>{
+                     
                     this.registers = response.data.data;
 
-                        // Load DataTable plugin.
                     this.loadDataTable();
 
-                        // Show swet alert indicate succeso to load data.
                     this.$swal.fire({
                         icon: 'success',
                         title: 'El contenido ha sido cargado correctamente',
@@ -367,66 +364,81 @@
                         timer: 3000,
                         timerProgressBar: true,
                         showConfirmButton: false,
+                        })
 
-                    });
-
-                } catch (error) {
-                        // Show swet alert to indicate error.
+                }).catch((error) => {
+                    
                     this.$swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'No es posible cargar el contenido en estos momentos',
-                    });
-                };
+                        icon: 'success',
+                        title: 'El contenido ha sido cargado correctamente',
+                        toast: true,
+                        position: 'top-end',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        });
+                });
+                
+
             },
 
                 // Function use to delete register select.
-            deleteAboutUsRegister: async function(aboutus) {
-
-                    // Open swet dialog for question to delete register.
-                this.$swal.fire({
-                    icon: 'question',
-                    title: `Desea eliminar: ${aboutus.Titulo}?`,
-                    showDenyButton: true,
-                    showCancelButton: false,
-                    confirmButtonText: `Aceptar`,
-                    denyButtonText: `Cancelar`,
-                        // Handling response to dialog.
+            deleteAboutUsRegister(aboutus) {
+                
+                // Swet alert to use question delete register. 
+            this.$swal.fire({
+                title: `¿Desea eliminar el registro: ${aboutus.Titulo}?`,
+                icon: 'question',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: `Eliminar`,
+                denyButtonText: `Cancelar`,
                 }).then((result) => {
-                            // Response is true delete record.
-                    if (result.isConfirmed) { 
+                        // The result for question in this alert is confirmed.
+                    if (result.isConfirmed) {
+                            // Send reqeust to use delete register.
+                        aboutUsService.deleteAboutUsRegister(aboutus.Id).then((response) =>{
+                                // Swet alert to use indicate success.
+                            this.$swal.fire({
+                                icon: 'success',
+                                title: `El registro: ${aboutus.Titulo} ha sido eliminado correctamente.`,
+                                toast: true,
+                                showConfirmButton: false,
+                                position: 'top-end',
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
 
-                            // Call request service.
-                       aboutUsService.deleteAboutUsRegister(aboutus.Id);
-                            // Refresh component DataTable.
-                        this.registers = this.registers.filter(obj => {
-                            return obj.Id != aboutus.Id;
-                            
-                        });
-                            // Show swet alert to indicate delete name register.
+                            aboutUsService.loadRegisterAboutUs().then((response) => {
+                                
+                                this.registers = response.data.data;
+
+                            });
+
+                        }).catch((error =>{
+                            // Swet alert to use indidcate error.
                         this.$swal.fire({
-                            toast: true,
-                            showConfirmButton: false,
-                            position: 'top-end',  
-                            timer: 3000,
-                            timerProgressBar: true,
-                            icon: 'success',
-                            title: `Se ha eliminado correctamente: ${aboutus.Titulo}.`,
-                        });
-                        // Response is false delete record.
+                                icon: 'error',
+                                title: `No es posible eliminar el registro: ${aboutus.Titulo} en estos momentos.`,
+                                toast: true,
+                                showConfirmButton: false,
+                                position: 'top-end',
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                        }));
+                        // The result for question in this alert is denied. 
                     } else if (result.isDenied) {
-                            // Show swet alert to indicate response false delete register.
-                        this.$swal.fire({
+                    this.$swal.fire({
+                            icon: 'warning',
+                            title: `El registro;${aboutus.Titulo}  no ha sido eliminado`,
                             toast: true,
                             showConfirmButton: false,
-                            position: 'top-end',  
+                            position: 'top-end',
                             timer: 3000,
                             timerProgressBar: true,
-                            icon: 'warning',
-                            title: `Ha cancelado la operacion de eliminar: ${aboutus.Titulo}.`
                         });
                     };
-                    
                 });
             },
 
