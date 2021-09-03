@@ -235,13 +235,21 @@
                 // Method for attach image in form create.
             attachImage() {
                 try {
+
+                        // Declare value variable.
                     this.aboutusData.Portada = this.$refs.imageAboutUs.files[0];
+                    
+                        // Declae reader.
                     let reader = new FileReader();
+                   
+                        // Function save event to use load image.
                     reader.addEventListener('load', function (){
                         this.$refs.imageAboutUsDisplay.src = reader.result;
                     }.bind(this), false);
 
+                        // Load data reader in variable.
                     reader.readAsDataURL(this.aboutusData.Portada);
+                        
                         // Open swet alert use to indicate response attach image.
                     this.$swal.fire({
                         icon: 'success',
@@ -349,13 +357,17 @@
 
                 // Function use to load and draw data in data table.
             loadRegisterAboutUs() {
-
+                
+                    // Decalre Promise for call request load register.
                 aboutUsService.loadRegisterAboutUs().then((response)=>{
                      
+                        // Declare variable registers to use load data in table.
                     this.registers = response.data.data;
-
+                        
+                        // Call function to use plugin DataTable.
                     this.loadDataTable();
 
+                        // Swet alert represent event success.
                     this.$swal.fire({
                         icon: 'success',
                         title: 'El contenido ha sido cargado correctamente',
@@ -368,6 +380,7 @@
 
                 }).catch((error) => {
                     
+                        // Swet alert represent event error.
                     this.$swal.fire({
                         icon: 'success',
                         title: 'El contenido ha sido cargado correctamente',
@@ -394,10 +407,13 @@
                 confirmButtonText: `Eliminar`,
                 denyButtonText: `Cancelar`,
                 }).then((result) => {
+                        
                         // The result for question in this alert is confirmed.
                     if (result.isConfirmed) {
+                            
                             // Send reqeust to use delete register.
                         aboutUsService.deleteAboutUsRegister(aboutus.Id).then((response) =>{
+                                
                                 // Swet alert to use indicate success.
                             this.$swal.fire({
                                 icon: 'success',
@@ -408,14 +424,16 @@
                                 timer: 3000,
                                 timerProgressBar: true,
                             });
-
+                                // Decalre Promise for call request load register.
                             aboutUsService.loadRegisterAboutUs().then((response) => {
                                 
+                                    // Declare variable registers to use load data in table.
                                 this.registers = response.data.data;
 
                             });
 
                         }).catch((error =>{
+
                             // Swet alert to use indidcate error.
                         this.$swal.fire({
                                 icon: 'error',
@@ -427,6 +445,7 @@
                                 timerProgressBar: true,
                             });
                         }));
+                        
                         // The result for question in this alert is denied. 
                     } else if (result.isDenied) {
                     this.$swal.fire({
@@ -471,13 +490,15 @@
                         // Declare value in variable.
                     this.aboutusData.Portada = this.$refs.imageUpdateAboutUs.files[0];
 
+                        // Declae reader.
                     let reader = new FileReader();
-            
+                        
+                         // Function save event to use load image.
                     reader.addEventListener('load', function (){
                         this.$refs.updateImageAboutUsDisplay.src = reader.result;
                     }.bind(this), false);
 
-                        // Load mew data in variable.
+                        // Load data reader in variable.
                     reader.readAsDataURL(this.aboutusData.Portada);
 
                         // Open swet alert use to indicate response attach image.

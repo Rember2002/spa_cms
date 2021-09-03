@@ -212,13 +212,20 @@
                 // Method for attach image in form create.
             attachImage() {
                 try {
+                        // Declare value variable.
                     this.academicofferData.Portada = this.$refs.imageAcademicOffer.files[0];
+                        
+                        // Declae reader.
                     let reader = new FileReader();
+                        
+                        // Function save event to use load image.
                     reader.addEventListener('load', function (){
                         this.$refs.imageAcademicOfferDisplay.src = reader.result;
                     }.bind(this), false);
 
+                        // Load data reader in variable.
                     reader.readAsDataURL(this.academicofferData.Portada);
+
                         // Open swet alert use to indicate response attach image.
                     this.$swal.fire({
                         icon: 'success',
@@ -325,12 +332,16 @@
                 // Function use to load and draw data in data table.
             loadRegisterAcademicOffer() {
 
+                    // Decalre Promise for call request load register.
                 academicOfferService.loadRegisterAcademicOffer().then((response)=>{
                      
+                        // Declare variable registers to use load data in table.
                     this.registers = response.data.data;
 
+                        // Call function to use plugin DataTable.
                     this.loadDataTable();
 
+                         // Swet alert represent event success.
                     this.$swal.fire({
                         icon: 'success',
                         title: 'El contenido ha sido cargado correctamente',
@@ -342,7 +353,8 @@
                         })
 
                 }).catch((error) => {
-                    
+
+                        // Swet alert represent event error.
                     this.$swal.fire({
                         icon: 'success',
                         title: 'El contenido ha sido cargado correctamente',
@@ -369,10 +381,13 @@
                 confirmButtonText: `Eliminar`,
                 denyButtonText: `Cancelar`,
                 }).then((result) => {
+
                         // The result for question in this alert is confirmed.
                     if (result.isConfirmed) {
+
                             // Send reqeust to use delete register.
                         academicOfferService.deleteAcademicOfferRegister(academicoffer.Id).then((response) =>{
+
                                 // Swet alert to use indicate success.
                             this.$swal.fire({
                                 icon: 'success',
@@ -384,13 +399,16 @@
                                 timerProgressBar: true,
                             });
 
+                                // Decalre Promise for call request load register.
                             academicOfferService.loadRegisterAcademicOffer().then((response) => {
                                 
+                                    // Declare variable registers to use load data in table.
                                 this.registers = response.data.data;
 
                             });
 
                         }).catch((error =>{
+
                             // Swet alert to use indidcate error.
                         this.$swal.fire({
                                 icon: 'error',
@@ -402,6 +420,7 @@
                                 timerProgressBar: true,
                             });
                         }));
+                        
                         // The result for question in this alert is denied. 
                     } else if (result.isDenied) {
                     this.$swal.fire({
@@ -442,13 +461,21 @@
                 // Method for update attach image in form.
             updateImage() {
                 try {
+                        
+                        // Declare value variable.
                     this.academicofferData.Portada = this.$refs.imageUpdateAcademicOffer.files[0];
+
+                        // Declae reader.
                     let reader = new FileReader();
+
+                        // Function save event to use load image.
                     reader.addEventListener('load', function (){
                         this.$refs.updateImageAcademicOfferDisplay.src = reader.result;
                     }.bind(this), false);
 
+                        // Load data reader in variable.
                     reader.readAsDataURL(this.academicofferData.Portada);
+                        
                         // Open swet alert use to indicate response attach image.
                     this.$swal.fire({
                         icon: 'success',
@@ -461,6 +488,7 @@
 
                     });
                 } catch (error){
+                            
                             // Open swet alert use to indicate response attach image.
                         this.$swal.fire({
                         icon: 'error',

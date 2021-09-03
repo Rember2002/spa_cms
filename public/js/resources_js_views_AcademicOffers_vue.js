@@ -2067,6 +2067,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // Method for attach image in form create.
     attachImage: function attachImage() {
       try {
+        // Declare value variable.
         this.academicofferData.Portada = this.$refs.imageAcademicOffer.files[0];
         var reader = new FileReader();
         reader.addEventListener('load', function () {
