@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveContactUsRequest;
+use App\Http\Requests\UpdateContactUsRequest;
 use App\Http\Resources\ContactUsResource;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
@@ -17,15 +18,6 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        // $contactUs = ContactUsResource::collection(ContactUs::all());
-
-        // return response()->json([
-
-        //     "data" => $contactUs,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return ContactUsResource::collection(ContactUs::all());
     }
 
@@ -47,15 +39,6 @@ class ContactUsController extends Controller
      */
     public function store(SaveContactUsRequest $request)
     {
-        // $contactUs = ContactUs::create($request->all());
-        
-        // return response()->json([
-           
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $contactUs,
-        //     "status" => Response::HTTP_CREATED,
-
-        // ],  Response::HTTP_CREATED);
 
         return (new ContactUsResource(ContactUs::create($request->all())))
             ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
@@ -71,13 +54,6 @@ class ContactUsController extends Controller
      */
     public function show(ContactUs $contactUs)
     {
-        // return response()->json([
-
-        //     "data" => $contactUs,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return new ContactUsResource($contactUs);
     }
 
@@ -99,21 +75,11 @@ class ContactUsController extends Controller
      * @param  \App\Models\ContactUs  $contactUs
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveContactUsRequest $request, ContactUs $contactUs)
+    public function update(UpdateContactUsRequest $request, ContactUs $contactU)
     {
-        // $contactUs->update($request->all());
-        
-        // return response()->json([
+        $contactU->update($request->all());
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $contactUs,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
-        $contactUs->update($request->all());
-
-        return (new ContactUsResource($contactUs))
+        return (new ContactUsResource($contactU))
             ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
             ->response()
             ->setStatusCode(Response::HTTP_OK);
@@ -125,21 +91,12 @@ class ContactUsController extends Controller
      * @param  \App\Models\ContactUs  $contactUs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactUs $contactUs)
+    public function destroy(ContactUs $contactU)
     {
-        // $contactUs->delete();
-        
-        // return response()->json([
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $contactUs,
-        //     "status" => Response::HTTP_OK,
+        $contactU->delete();
 
-        // ], Response::HTTP_OK);
-
-        $contactUs->delete();
-
-        return (new ContactUsResource($contactUs))
+        return (new ContactUsResource($contactU))
             ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
             ->response()
             ->setStatusCode(Response::HTTP_OK);
