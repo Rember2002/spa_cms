@@ -578,7 +578,7 @@
                         break;
                     default:
                             // Clean and close form. 
-                        this.hideNewAboutUsModal();
+                        this.hideUpdateAboutUsModal();
                             // Open swet alert to indicate errors.
                         this.$swal.fire({
                             icon: 'error',
