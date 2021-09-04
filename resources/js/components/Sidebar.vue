@@ -59,7 +59,7 @@
                 <router-link to="" class="" exact>
                     <a class="collapse-item" href="">Servicios</a>
                 </router-link>
-                <router-link to="" class="" exact>
+                <router-link to="/questions" class="" exact>
                     <a class="collapse-item" href="">Preguntas Frecuentes</a>
                 </router-link>
                 <router-link to="" class="" exact>

@@ -54,47 +54,39 @@ Route::apiResource('newHomes', NewHomeController::class);
 
 Route::apiResource('carousels', CarouselController::class);
 
+Route::apiResource('categories', CategorieController::class);
+
+Route::apiResource('commisions', CommissionController::class);
+
+Route::apiResource('grades', GradeController::class);
+
+Route::apiResource('images', ImageController::class);
+
+Route::apiResource('integrants', IntegrantController::class);
+
+Route::apiResource('newItems', NewItemController::class);
+
+Route::apiResource('questions', QuestionController::class);
+
+Route::apiResource('resources', ResourceController::class);
+
+Route::apiResource('salesianExperiences', SalesianExperienceController::class);
+
+Route::apiResource('salesianExperienceHomes', SalesianExperienceHomeController::class);
+
+Route::apiResource('sectionNavBars', SectionNavBarController::class);
+
+Route::apiResource('services', ServiceController::class);
+
+Route::apiResource('servicesHomes', ServiceHomeController::class);
+
+Route::apiResource('strategicAllies', StrategicAllieController::class);
+
+Route::apiResource('studentCouncils', StudentCouncilController::class);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    
-  
 
     
-
-
-
-    Route::apiResource('categories', CategorieController::class);
-
-    Route::apiResource('commisions', CommissionController::class);
-
-
-
-    Route::apiResource('grades', GradeController::class);
-
-    Route::apiResource('images', ImageController::class);
-
-    Route::apiResource('integrants', IntegrantController::class);
-
-
-
-    Route::apiResource('newItems', NewItemController::class);
-
-    Route::apiResource('questions', QuestionController::class);
-
-    Route::apiResource('resources', ResourceController::class);
-
-    Route::apiResource('salesianExperiences', SalesianExperienceController::class);
-
-    Route::apiResource('salesianExperienceHomes', SalesianExperienceHomeController::class);
-
-    Route::apiResource('sectionNavBars', SectionNavBarController::class);
-
-    Route::apiResource('services', ServiceController::class);
-
-    Route::apiResource('servicesHomes', ServiceHomeController::class);
-
-    Route::apiResource('strategicAllies', StrategicAllieController::class);
-
-    Route::apiResource('studentCouncils', StudentCouncilController::class);
 
     Route::post('logout', [AuthenticateController::class, 'logout']);
 });

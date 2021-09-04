@@ -26,7 +26,7 @@ class UpdateQuestionRequest extends FormRequest
         return [
             'question' => ['required'],
             'answer' => ['required'],
-            'year' => ['required', 'min:2020'],
+            'year' => ['required', 'numeric', 'min:2020', 'max:2099'],
         ];
     }
 }
