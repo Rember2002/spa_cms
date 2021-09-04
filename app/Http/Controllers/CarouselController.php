@@ -126,7 +126,7 @@ class CarouselController extends Controller
         } else {
             return response()->json([
 
-                "message" => "No es posible eliminar el registro en estos momentos, ¡Error!",
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
                 "data" => $carousel,
                 "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
     
