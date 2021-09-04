@@ -29961,7 +29961,8 @@ var render = function() {
                             _vm.academicofferData.Oferta.length < 50,
                           type: "text",
                           id: "name_offer",
-                          placeholder: "Ingresar Oferta Academica"
+                          placeholder: "Ingresar Oferta Academica",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.academicofferData.Oferta,

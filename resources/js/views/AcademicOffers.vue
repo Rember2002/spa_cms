@@ -56,7 +56,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name_offer">Oferta Academica:</label>
-                        <b-form-input :state="academicofferData.Oferta.length >= 1 && academicofferData.Oferta.length < 50" type="text" class="form-control" id="name_offer" v-model="academicofferData.Oferta" placeholder="Ingresar Oferta Academica"></b-form-input>
+                        <b-form-input :state="academicofferData.Oferta.length >= 1 && academicofferData.Oferta.length < 50" type="text" class="form-control" id="name_offer" v-model="academicofferData.Oferta" placeholder="Ingresar Oferta Academica" autocomplete="off"></b-form-input>
                         <div class="invalid-feedback-validation" v-if="errors.name_offer">{{errors.name_offer[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">

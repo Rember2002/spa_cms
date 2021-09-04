@@ -59,12 +59,12 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Titulo:</label>
-                        <b-form-input :state="aboutusData.Titulo.length >= 1 && aboutusData.Titulo.length < 50" type="text" class="form-control" id="name" v-model="aboutusData.Titulo" placeholder="Ingresar Titulo"></b-form-input>
+                        <b-form-input :state="aboutusData.Titulo.length >= 1 && aboutusData.Titulo.length < 50" type="text" class="form-control" id="name" v-model="aboutusData.Titulo" placeholder="Ingresar Titulo" autocomplete="off"></b-form-input>
                         <div class="invalid-feedback-validation" v-if="errors.name">{{errors.name[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="aboutusData.Contenido.length >= 1 && aboutusData.Contenido.length < 1000" type="text" class="form-control" id="description" v-model="aboutusData.Contenido" placeholder="Ingresar Descripcion"></b-form-textarea>                 
+                        <b-form-textarea :state="aboutusData.Contenido.length >= 1 && aboutusData.Contenido.length < 1000" type="text" class="form-control" id="description" v-model="aboutusData.Contenido" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="year">Año:</label>
-                        <b-form-input :state="aboutusData.Año >= 2020 && aboutusData.Año < 2099" type="text" class="form-control" id="year" v-model="aboutusData.Año" placeholder="Ingresar Año"></b-form-input>
+                        <b-form-input :state="aboutusData.Año >= 2020 && aboutusData.Año < 2099" type="text" class="form-control" id="year" v-model="aboutusData.Año" placeholder="Ingresar Año" autocomplete="off"></b-form-input>
                         <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
                     </div>
                     <div class="form-group col-md-12">

@@ -29831,7 +29831,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "card-body table-responsive align-items-center justify-content-center"
+              "card-body table-responsive  align-items-center justify-content-center"
           },
           [
             _c(

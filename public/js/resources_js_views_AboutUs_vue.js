@@ -29992,7 +29992,8 @@ var render = function() {
                             _vm.aboutusData.Titulo.length < 50,
                           type: "text",
                           id: "name",
-                          placeholder: "Ingresar Titulo"
+                          placeholder: "Ingresar Titulo",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.aboutusData.Titulo,
@@ -30030,7 +30031,8 @@ var render = function() {
                             _vm.aboutusData.Contenido.length < 1000,
                           type: "text",
                           id: "description",
-                          placeholder: "Ingresar Descripcion"
+                          placeholder: "Ingresar Descripcion",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.aboutusData.Contenido,
@@ -30102,7 +30104,8 @@ var render = function() {
                             _vm.aboutusData.Año < 2099,
                           type: "text",
                           id: "year",
-                          placeholder: "Ingresar Año"
+                          placeholder: "Ingresar Año",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.aboutusData.Año,

@@ -29728,7 +29728,7 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "card d-flex" }, [
+      _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body d-flex" }, [
           _vm._m(1),
           _vm._v(" "),
@@ -29746,14 +29746,13 @@ var render = function() {
           "div",
           {
             staticClass:
-              "card-body table-responsive align-items-center justify-content-center d-flex"
+              "card-body table-responsive align-items-center justify-content-center"
           },
           [
             _c(
               "table",
               {
-                staticClass:
-                  "table table-hover table-responsive table-bordered",
+                staticClass: "table table-bordered",
                 attrs: { id: "tableRegisters" }
               },
               [
@@ -29848,7 +29847,8 @@ var render = function() {
                             _vm.contactusData.Telefono.length < 50,
                           type: "text",
                           id: "phone",
-                          placeholder: "Ingresar Telefono"
+                          placeholder: "Ingresar Telefono",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.contactusData.Telefono,
@@ -29886,7 +29886,8 @@ var render = function() {
                             _vm.contactusData.Direccion.length < 1000,
                           type: "text",
                           id: "direction",
-                          placeholder: "Ingresar Direccion"
+                          placeholder: "Ingresar Direccion",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.contactusData.Direccion,
@@ -29924,7 +29925,8 @@ var render = function() {
                             _vm.contactusData.Correspondiente < 2099,
                           type: "text",
                           id: "year",
-                          placeholder: "Ingresar Año"
+                          placeholder: "Ingresar Año",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.contactusData.Correspondiente,
@@ -30014,7 +30016,8 @@ var render = function() {
                             _vm.contactusData.Telefono.length < 50,
                           type: "text",
                           id: "phone",
-                          placeholder: "Ingresar Telefono"
+                          placeholder: "Ingresar Telefono",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.contactusData.Telefono,
@@ -30052,7 +30055,8 @@ var render = function() {
                             _vm.contactusData.Direccion.length < 1000,
                           type: "text",
                           id: "direction",
-                          placeholder: "Ingresar Direccion"
+                          placeholder: "Ingresar Direccion",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.contactusData.Direccion,
@@ -30090,7 +30094,8 @@ var render = function() {
                             _vm.contactusData.Correspondiente < 2099,
                           type: "text",
                           id: "year",
-                          placeholder: "Ingresar Año"
+                          placeholder: "Ingresar Año",
+                          autocomplete: "off"
                         },
                         model: {
                           value: _vm.contactusData.Correspondiente,

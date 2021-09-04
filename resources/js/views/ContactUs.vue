@@ -9,15 +9,15 @@
     </div>
     
         <!-- Data table. -->
-    <div class="card d-flex">
+    <div class="card">
             <!-- Header data table. -->
         <div class="card-body d-flex">
             <h4><span><i class="fas fa-table"></i>  Visualización de datos</span></h4>
             <button class="btn btn-success btn-sm ml-auto" @click="showNewContactUsModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
         </div>
             <!-- Content data table. -->
-        <div class="card-body table-responsive align-items-center justify-content-center d-flex">
-            <table id="tableRegisters" class="table table-hover table-responsive table-bordered">  
+        <div class="card-body table-responsive align-items-center justify-content-center">
+            <table id="tableRegisters" class="table table-bordered">  
                 <thead class="table-dark">
                     <tr>
                         <td>Id</td>
@@ -27,7 +27,7 @@
                         <td>Acciones</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                     <tr v-for="(contactus, index) in registers" :key="index">
                         <td>{{contactus.Id}}</td>
                         <td>{{contactus.Telefono}}</td>
@@ -53,17 +53,17 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="phone">Telefono:</label>
-                        <b-form-input :state="contactusData.Telefono.length >= 1 && contactusData.Telefono.length < 50" type="text" class="form-control" id="phone" v-model="contactusData.Telefono" placeholder="Ingresar Telefono"></b-form-input>
+                        <b-form-input :state="contactusData.Telefono.length >= 1 && contactusData.Telefono.length < 50" type="text" class="form-control" id="phone" v-model="contactusData.Telefono" placeholder="Ingresar Telefono" autocomplete="off"></b-form-input>
                         <div class="invalid-feedback-validation" v-if="errors.phone">{{errors.phone[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="direction">Direccion:</label>
-                        <b-form-textarea :state="contactusData.Direccion.length >= 1 && contactusData.Direccion.length < 1000" type="text" class="form-control" id="direction" v-model="contactusData.Direccion" placeholder="Ingresar Direccion"></b-form-textarea>                 
+                        <b-form-textarea :state="contactusData.Direccion.length >= 1 && contactusData.Direccion.length < 1000" type="text" class="form-control" id="direction" v-model="contactusData.Direccion" placeholder="Ingresar Direccion" autocomplete="off"></b-form-textarea>                 
                         <div class="invalid-feedback-validation" v-if="errors.direction">{{errors.direction[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="year">Correspondiente a:</label>
-                        <b-form-input :state="contactusData.Correspondiente >= 2020 && contactusData.Correspondiente < 2099" type="text" class="form-control" id="year" v-model="contactusData.Correspondiente" placeholder="Ingresar Año"></b-form-input>
+                        <b-form-input :state="contactusData.Correspondiente >= 2020 && contactusData.Correspondiente < 2099" type="text" class="form-control" id="year" v-model="contactusData.Correspondiente" placeholder="Ingresar Año" autocomplete="off"></b-form-input>
                         <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
                     </div>
                 </div>
@@ -86,17 +86,17 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="phone">Telefono:</label>
-                        <b-form-input :state="contactusData.Telefono.length >= 1 && contactusData.Telefono.length < 50" type="text" class="form-control" id="phone" v-model="contactusData.Telefono" placeholder="Ingresar Telefono"></b-form-input>
+                        <b-form-input :state="contactusData.Telefono.length >= 1 && contactusData.Telefono.length < 50" type="text" class="form-control" id="phone" v-model="contactusData.Telefono" placeholder="Ingresar Telefono" autocomplete="off"></b-form-input>
                         <div class="invalid-feedback-validation" v-if="errors.phone">{{errors.phone[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="direction">Direccion:</label>
-                        <b-form-textarea :state="contactusData.Direccion.length >= 1 && contactusData.Direccion.length < 1000" type="text" class="form-control" id="direction" v-model="contactusData.Direccion" placeholder="Ingresar Direccion"></b-form-textarea>                 
+                        <b-form-textarea :state="contactusData.Direccion.length >= 1 && contactusData.Direccion.length < 1000" type="text" class="form-control" id="direction" v-model="contactusData.Direccion" placeholder="Ingresar Direccion" autocomplete="off"></b-form-textarea>                 
                         <div class="invalid-feedback-validation" v-if="errors.direction">{{errors.direction[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="year">Correspondiente a:</label>
-                        <b-form-input :state="contactusData.Correspondiente >= 2020 && contactusData.Correspondiente < 2099" type="text" class="form-control" id="year" v-model="contactusData.Correspondiente" placeholder="Ingresar Año"></b-form-input>
+                        <label for="year">Correspondiente a:</label> 
+                        <b-form-input :state="contactusData.Correspondiente >= 2020 && contactusData.Correspondiente < 2099" type="text" class="form-control" id="year" v-model="contactusData.Correspondiente" placeholder="Ingresar Año" autocomplete="off"></b-form-input>
                         <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
                     </div>
                 </div>
