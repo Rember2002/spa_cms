@@ -75,6 +75,13 @@ const routes = [
         path: '/servicehome',
         name: 'servicehome',
         component: () => import('./views/ServiceHome.vue')
+    },
+
+        // Component StudentCouncil.
+    {
+        path: '/studentcouncil',
+        name: 'studentcouncil',
+        component: () => import('./views/StudentCouncil.vue')
     }
 ];
 

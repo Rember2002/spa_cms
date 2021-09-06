@@ -25,7 +25,7 @@ class SaveStudentCouncilRequest extends FormRequest
     {
         return [
             
-            'year' => ['required', 'min:2020', 'unique:student_councils,year'],
+            'year' => ['required', 'numeric', 'min:2020', 'max:2099', 'unique:student_councils,year'],
             'image' => ['required', 'max:255'],
 
         ];

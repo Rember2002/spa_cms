@@ -108,13 +108,46 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseService"
             aria-expanded="false" aria-controls="collapseService">
-            <i class="fas fa-graduation-cap"></i>
+            <i class="fas fa-file-alt"></i>
             <span>Contenido</span>
         </a>
         <div id="collapseService" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <router-link to="" class="" exact>
                     <a class="collapse-item" href="login.html">Servicio</a>
+                </router-link>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Vivencia Salesiana
+    </div>
+
+     <!-- Nav Item - Homepage Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseSalesianExperience"
+            aria-expanded="false" aria-controls="collapseService">
+            <i class="fas fa-child"></i>
+            <span>Contenido</span>
+        </a>
+        <div id="collapseSalesianExperience" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <router-link to="/studentcouncil" class="" exact>
+                    <a class="collapse-item" href="login.html">Consejo Estudiantil</a>
+                </router-link>
+                <router-link to="" class="" exact>
+                    <a class="collapse-item" href="login.html">Comisiones Estudiantiles</a>
+                </router-link>
+                <router-link to="" class="" exact>
+                    <a class="collapse-item" href="login.html">Integrantes</a>
+                </router-link>
+                <router-link to="" class="" exact>
+                    <a class="collapse-item" href="login.html">Eventos</a>
                 </router-link>
             </div>
         </div>

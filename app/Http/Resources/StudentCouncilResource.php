@@ -17,6 +17,7 @@ class StudentCouncilResource extends JsonResource
         return [
 
             'Id' => $this->id,
+            'Año' => $this->year,
             'Portada' => $this->image,
             
         ];

@@ -176,6 +176,13 @@ var routes = [// Welcome page.
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_ServiceHome_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/ServiceHome.vue */ "./resources/js/views/ServiceHome.vue"));
   }
+}, // Component StudentCouncil.
+{
+  path: '/studentcouncil',
+  name: 'studentcouncil',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_StudentCouncil_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/StudentCouncil.vue */ "./resources/js/views/StudentCouncil.vue"));
+  }
 }]; // Declare routes in router.
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
@@ -47501,9 +47508,87 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _c("hr", { staticClass: "sidebar-divider" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "sidebar-heading" }, [
+        _vm._v("\n        Vivencia Salesiana\n    ")
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "nav-item" }, [
+        _vm._m(4),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse",
+            attrs: {
+              id: "collapseSalesianExperience",
+              "aria-labelledby": "headingPages",
+              "data-parent": "#accordionSidebar"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "bg-white py-2 collapse-inner rounded" },
+              [
+                _c(
+                  "router-link",
+                  { attrs: { to: "/studentcouncil", exact: "" } },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "collapse-item",
+                        attrs: { href: "login.html" }
+                      },
+                      [_vm._v("Consejo Estudiantil")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "", exact: "" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "collapse-item",
+                      attrs: { href: "login.html" }
+                    },
+                    [_vm._v("Comisiones Estudiantiles")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "", exact: "" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "collapse-item",
+                      attrs: { href: "login.html" }
+                    },
+                    [_vm._v("Integrantes")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "", exact: "" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "collapse-item",
+                      attrs: { href: "login.html" }
+                    },
+                    [_vm._v("Eventos")]
+                  )
+                ])
+              ],
+              1
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
       _c("hr", { staticClass: "sidebar-divider d-none d-md-block" }),
       _vm._v(" "),
-      _vm._m(4)
+      _vm._m(5)
     ]
   )
 }
@@ -47599,7 +47684,30 @@ var staticRenderFns = [
         }
       },
       [
-        _c("i", { staticClass: "fas fa-graduation-cap" }),
+        _c("i", { staticClass: "fas fa-file-alt" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("Contenido")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "nav-link collapsed",
+        attrs: {
+          href: "",
+          "data-toggle": "collapse",
+          "data-target": "#collapseSalesianExperience",
+          "aria-expanded": "false",
+          "aria-controls": "collapseService"
+        }
+      },
+      [
+        _c("i", { staticClass: "fas fa-child" }),
         _vm._v(" "),
         _c("span", [_vm._v("Contenido")])
       ]
@@ -65057,7 +65165,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1,"resources_js_views_ServiceHome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1,"resources_js_views_ServiceHome_vue":1,"resources_js_views_StudentCouncil_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

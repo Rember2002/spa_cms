@@ -24,7 +24,7 @@ class UpdateStudentCouncilRequest extends FormRequest
     public function rules()
     {
         return [
-            'year' => ['required', 'min:2020'],
+            'year' => ['required', 'numeric', 'min:2020', 'max:2099'],
             'image' => ['required', 'max:255'],
         ];
     }
