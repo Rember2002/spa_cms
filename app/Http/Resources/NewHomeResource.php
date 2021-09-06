@@ -16,8 +16,8 @@ class NewHomeResource extends JsonResource
     {
         return [
 
-            'Ïd' => $this->id,
-            'Contenido Multimedia' => $this->image,
+            'Id' => $this->id,
+            'Portada' => $this->image,
             'Estado' => $this->status,
 
         ];

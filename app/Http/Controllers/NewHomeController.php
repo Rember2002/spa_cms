@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveNewHomeRequest;
+use App\Http\Requests\UpdateNewHomeRequest;
 use App\Http\Resources\NewHomeResource;
 use App\Models\NewHome;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class NewHomeController extends Controller
 {
@@ -17,14 +19,6 @@ class NewHomeController extends Controller
      */
     public function index()
     {
-        // $newHome = NewHomeResource::collection(NewHome::all());
-
-        // return response()->json([
-
-        //     "data" => $newHome,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return NewHomeResource::collection(NewHome::all());
     }
@@ -45,22 +39,20 @@ class NewHomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveNewHomeRequest $request)
+    public function store(SaveNewHomeRequest $request, NewHome $newHome)
     {
-        // $newHome = NewHome::create($request->all());
-        
-        // return response()->json([
+        $newHome->status = $request->status;
+        $path = $request->file('image')->store('images_newhome');
+        $newHome->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $newHome,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $newHome->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
 
-        return (new NewHomeResource(NewHome::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -71,12 +63,6 @@ class NewHomeController extends Controller
      */
     public function show(NewHome $newHome)
     {
-        // return response()->json([
-
-        //     "data" => $newHome,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return new NewHomeResource($newHome);
     }
@@ -99,24 +85,25 @@ class NewHomeController extends Controller
      * @param  \App\Models\NewHome  $newHome
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveNewHomeRequest $request, NewHome $newHome)
+    public function update(UpdateNewHomeRequest $request, NewHome $newHome)
     {
-        // $newHome->update($request->all());
-        
-        // return response()->json([
+        $newHome->status = $request->status;
+        $oldPath = $newHome->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $newHome,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_newhome');
+            $newHome->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $newHome->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $newHome->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new NewHomeResource($newHome))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -127,21 +114,24 @@ class NewHomeController extends Controller
      */
     public function destroy(NewHome $newHome)
     {
-        // $newHome->delete();
-        
-        // return response()->json([
+        if ($newHome->delete()){
+            Storage::delete($newHome->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $newHome,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $newHome,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        $newHome->delete();
-
-        return (new NewHomeResource($newHome))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $newHome,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

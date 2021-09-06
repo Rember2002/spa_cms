@@ -25,8 +25,8 @@ class UpdateNewHomeRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => ['required', 'unique:new_homes,image'],
-            'state' => ['required', Rule::in(['Visible', 'Disabled']),],
+            'image' => ['required'],
+            'status' => ['required', Rule::in(['Visible', 'Disabled']),],
         ];
     }
 }

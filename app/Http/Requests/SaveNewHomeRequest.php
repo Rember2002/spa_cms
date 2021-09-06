@@ -27,7 +27,7 @@ class SaveNewHomeRequest extends FormRequest
         return [
             
             'image' => ['required', 'unique:new_homes,image'],
-            'state' => ['required', Rule::in(['Visible', 'Disabled']),],
+            'status' => ['required', Rule::in(['Visible', 'Disabled']),],
 
         ];
     }

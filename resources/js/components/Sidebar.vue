@@ -41,7 +41,7 @@
                 <router-link to="/aboutus" exact>
                     <a class="collapse-item" href="">Acerca de</a>
                 </router-link>
-                <router-link to="" class="" exact>
+                <router-link to="/newhome" class="" exact>
                     <a class="collapse-item" href="">Noticias</a>
                 </router-link>
                 <router-link to="/contactus" class="" exact>

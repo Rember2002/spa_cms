@@ -106,54 +106,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _views_Welcome_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./views/Welcome.vue */ "./resources/js/views/Welcome.vue");
+// Import Vue.
+ // Import Vue Router.
 
+ // Import welcome page.
 
+ // Declare use Vue router.
 
-vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_2__.default);
-var routes = [{
+vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_2__.default); // Declare routes.
+
+var routes = [// Welcome page.
+{
   path: '/',
   name: 'welcome',
   component: _views_Welcome_vue__WEBPACK_IMPORTED_MODULE_0__.default
-}, {
+}, // Component AboutUs.
+{
   path: '/aboutus',
   name: 'aboutus',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_AboutUs_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/AboutUs.vue */ "./resources/js/views/AboutUs.vue"));
   }
-}, {
+}, // Component AcademicOffer.
+{
   path: '/academicoffer',
   name: 'academicoffer',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_AcademicOffers_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/AcademicOffers.vue */ "./resources/js/views/AcademicOffers.vue"));
   }
-}, {
+}, // Component Carousel.
+{
   path: '/carousel',
   name: 'carousel',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_Carousel_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Carousel.vue */ "./resources/js/views/Carousel.vue"));
   }
-}, {
+}, // Component ContactUs.
+{
   path: '/contactus',
   name: 'contactus',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_ContactUs_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/ContactUs.vue */ "./resources/js/views/ContactUs.vue"));
   }
-}, {
+}, // Component Questions.
+{
   path: '/questions',
   name: 'questions',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_Questions_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Questions.vue */ "./resources/js/views/Questions.vue"));
   }
-}, {
+}, // Component SalesianExperienceHome.
+{
   path: '/salesianexperiencehome',
   name: 'salesianexperiencehome',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_SalesianExperienceHome_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/SalesianExperienceHome.vue */ "./resources/js/views/SalesianExperienceHome.vue"));
   }
-}];
+}, // Component NewHome.
+{
+  path: '/newhome',
+  name: 'newhome',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_NewHome_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/NewHome.vue */ "./resources/js/views/NewHome.vue"));
+  }
+}]; // Declare routes in router.
+
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
   routes: routes
-});
+}); // Export router.
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
 /***/ }),
@@ -47298,7 +47319,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("router-link", { attrs: { to: "", exact: "" } }, [
+                _c("router-link", { attrs: { to: "/newhome", exact: "" } }, [
                   _c(
                     "a",
                     { staticClass: "collapse-item", attrs: { href: "" } },
@@ -65025,7 +65046,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
