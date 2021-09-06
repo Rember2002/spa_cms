@@ -1,11 +1,11 @@
-    <!-- Begin template. -->
+   <!-- Begin template. -->
 <template>
     <!-- Begin page content. -->
 <div class="container-fluid">
 
     <!-- Page heading. -->
     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-        <h1 class="mb-0 text-gray-800">Vivencia Salesiana</h1>
+        <h1 class="mb-0 text-gray-800">Servicios</h1>
     </div>
     
         <!-- Data table. -->
@@ -13,7 +13,7 @@
             <!-- Header data table. -->
         <div class="card-body d-flex">
             <h4><span><i class="fas fa-table"></i>  Visualización de datos</span></h4>
-            <button class="btn btn-success btn-sm ml-auto" @click="showNewSalesianExperienceHomeModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
+            <button class="btn btn-success btn-sm ml-auto" @click="showNewServiceHomeModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
         </div>
             <!-- Content data table. -->
         <div class="card-body table-responsive  align-items-center justify-content-center">
@@ -22,22 +22,22 @@
                     <tr>
                         <td>Id</td>
                         <td>Portada</td>
-                        <td>Descripcion</td>
-                        <td>Año</td>
+                        <td>Enlace</td>
+                        <td>Estado</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(salesianexperiencehome, index) in registers" :key="index">
-                        <td>{{salesianexperiencehome.Id}}</td>
+                    <tr v-for="(servicehome, index) in registers" :key="index">
+                        <td>{{servicehome.Id}}</td>
                         <td>
-                            <img :src="`${$store.state.serverPath}/storage/${salesianexperiencehome.Portada}`" class="table-image">
+                            <img :src="`${$store.state.serverPath}/storage/${servicehome.Portada}`" class="table-image">
                         </td>
-                        <td>{{salesianexperiencehome.Descripcion}}</td>
-                        <td>{{salesianexperiencehome.Año}}</td>
+                        <td><a target="_blank" :href="`${servicehome.Enlace}`"><button class="btn btn-primary"><span class="fas fa-external-link-square-alt"></span>Abiir enlace</button></a></td>
+                        <td>{{servicehome.Estado}}</td>
                         <td>
-                            <button class="btn btn-success btn-sm" @click="updateDataSalesianExperienceHome(salesianexperiencehome)"><span class="fa fa-edit"></span></button>
-                            <button class="btn btn-danger btn-sm" @click="deleteSalesianExperienceHomeRegister(salesianexperiencehome)"><span class="fa fa-trash"></span></button>
+                            <button class="btn btn-success btn-sm" @click="updateDataServiceHome(servicehome)"><span class="fa fa-edit"></span></button>
+                            <button class="btn btn-danger btn-sm" @click="deleteServiceHomeRegister(servicehome)"><span class="fa fa-trash"></span></button>
                         </td>
                     </tr>
                 </tbody>
@@ -48,33 +48,34 @@
         <!--End data table. -->
 
         <!-- Content modal create. -->
-    <b-modal ref="modalCreateSalesianExperienceHome" hide-footer size="xl" title="Agregar Nuevo Registro">
+    <b-modal ref="modalCreateServiceHome" hide-footer size="xl" title="Agregar Nuevo Registro">
         <div class="d-block">
                 <!-- Form modal create. -->
-            <form v-on:submit.prevent="createRegisterSalesianExperienceHome">
+            <form v-on:submit.prevent="createRegisterServiceHome">
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="salesianexperiencehomeData.Descripcion.length >= 1 && salesianexperiencehomeData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="salesianexperiencehomeData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
-                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                    <div class="form-group col-md-6">
+                        <label for="link">Enlace:</label>
+                        <b-form-input :state="servicehomeData.Enlace.length >= 1 && servicehomeData.Enlace.length < 50" type="text" class="form-control" id="link" v-model="servicehomeData.Enlace" placeholder="Ingresar Enlace" autocomplete="off"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.link">{{errors.link[0]}}</div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="year">Año:</label>
-                        <b-form-input :state="salesianexperiencehomeData.Año >= 2020 && salesianexperiencehomeData.Año < 2099" type="text" class="form-control" id="year" v-model="salesianexperiencehomeData.Año" placeholder="Ingresar Año" autocomplete="off"></b-form-input>
-                        <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
+                    <div class="form-group col-md-6">
+                        <b-form-checkbox id="state" v-model="servicehomeData.Estado" name="state" value="Visible" unchecked-value="Disabled">
+                        ¿Desea que el contenido sea visible?
+                        </b-form-checkbox> 
+                        <div class="invalid-feedback-validation" v-if="errors.state">{{errors.state[0]}}</div>       
                     </div>
                     <div class="form-group col-md-12">
                         <label for="image">Imagen:</label>
-                        <div v-if="salesianexperiencehomeData.Portada.name">
-                            <img src="" ref="imageSalesianExperienceHomeDisplay" width="700" height="300">  
+                        <div v-if="servicehomeData.Portada.name">
+                            <img src="" ref="imageServiceHomeDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="attachImage" ref="imageSalesianExperienceHome" class="form-control" id="image"/>
+                        <input type="file" v-on:change="attachImage" ref="imageServiceHome" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
                 <hr>
                 <div class="text-center">    
-                    <button type="button" class="btn btn-default" @click="hideNewSalesianExperienceHomeModal">Cancelar</button>
+                    <button type="button" class="btn btn-default" @click="hideNewServiceHomeModal">Cancelar</button>
                     <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
                 </div>
             </form> 
@@ -84,33 +85,34 @@
         <!-- End modal create. -->
 
         <!-- Content modal update. -->
-    <b-modal ref="modalUpdateSalesianExperienceHome" hide-footer size="xl" title="Modificar Registro">
+    <b-modal ref="modalUpdateServiceHome" hide-footer size="xl" title="Modificar Registro">
         <div class="d-block">
                 <!-- Form modal update. -->
-            <form v-on:submit.prevent="updateRegisterSalesianExperienceHome">
+            <form v-on:submit.prevent="updateRegisterServiceHome">
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="salesianexperiencehomeData.Descripcion.length >= 1 && salesianexperiencehomeData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="salesianexperiencehomeData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
-                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                   <div class="form-group col-md-6">
+                        <label for="link">Enlace:</label>
+                        <b-form-input :state="servicehomeData.Enlace.length >= 1 && servicehomeData.Enlace.length < 50" type="text" class="form-control" id="link" v-model="servicehomeData.Enlace" placeholder="Ingresar Enlace" autocomplete="off"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.link">{{errors.link[0]}}</div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="year">Año:</label>
-                        <b-form-input :state="salesianexperiencehomeData.Año >= 2020 && salesianexperiencehomeData.Año < 2099" type="text" class="form-control" id="year" v-model="salesianexperiencehomeData.Año" placeholder="Ingresar Año" autocomplete="off"></b-form-input>
-                        <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
+                    <div class="form-group col-md-6">
+                        <b-form-checkbox id="state" v-model="servicehomeData.Estado" name="state" value="Visible" unchecked-value="Disabled">
+                        ¿Desea que el contenido sea visible?
+                        </b-form-checkbox> 
+                        <div class="invalid-feedback-validation" v-if="errors.state">{{errors.state[0]}}</div>       
                     </div>
                     <div class="form-group col-md-12">
                         <label for="image">Imagen:</label>
                         <div>
-                            <img :src="`${$store.state.serverPath}/storage/${salesianexperiencehomeData.Portada}`" ref="updateImageSalesianExperienceHomeDisplay" width="700" height="300">  
+                            <img :src="`${$store.state.serverPath}/storage/${servicehomeData.Portada}`" ref="updateImageServiceHomeDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="updateImage" ref="updateImageSalesianExperienceHome" class="form-control" id="image"/>
+                        <input type="file" v-on:change="updateImage" ref="updateImageServiceHome" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
                 <hr>
                 <div class="text-center">    
-                    <button type="button" class="btn btn-default" @click="hideUpdateSalesianExperienceHomeModal">Cancelar</button>
+                    <button type="button" class="btn btn-default" @click="hideUpdateServiceHomeModal">Cancelar</button>
                     <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Actualizar</button>
                 </div>
             </form> 
@@ -124,7 +126,7 @@
 </template>
     <!-- End template. -->
 
-        <!-- Begin script. -->
+<!-- Begin script. -->
 <script>
 
         // Import plugin CloudTables.
@@ -134,12 +136,12 @@
     import $ from 'jquery';
 
         // Import file aboutUsService that contains functions request routes.
-    import * as SalesianExperienceHomeService from '../services/salesianshome_service';
+    import * as serviceHomeService from '../services/servicehome_service';
     
         // Begin export default.
     export default {
 
-        name: 'salesianexperiencehome',
+        name: 'servicehome',
 
             // Begin data.
         data(){
@@ -149,10 +151,10 @@
                 registers: [],
 
                     // Declare aboutusData to use to send data in form.
-                salesianexperiencehomeData: {
+                servicehomeData: {
                     Portada: '',
-                    Descripcion: '',
-                    Año: '',
+                    Estado: '',
+                    Enlace: '',
                 },
 
                     // Save errors to response send request.
@@ -165,7 +167,7 @@
             // Mounted data for registers in datatable.
         mounted() {
                 // Call method function to use load data.
-            this.loadRegisterSalesianExperienceHome();
+            this.loadRegisterServiceHome();
             },
             // End mounted data.
 
@@ -203,18 +205,18 @@
                 try {
 
                         // Declare value variable.
-                    this.salesianexperiencehomeData.Portada = this.$refs.imageSalesianExperienceHome.files[0];
+                    this.servicehomeData.Portada = this.$refs.imageServiceHome.files[0];
                     
                         // Declae reader.
                     let reader = new FileReader();
                    
                         // Function save event to use load image.
                     reader.addEventListener('load', function (){
-                        this.$refs.imageSalesianExperienceHomeDisplay.src = reader.result;
+                        this.$refs.imageServiceHomeDisplay.src = reader.result;
                     }.bind(this), false);
 
                         // Load data reader in variable.
-                    reader.readAsDataURL(this.salesianexperiencehomeData.Portada);
+                    reader.readAsDataURL(this.servicehomeData.Portada);
                         
                         // Open swet alert use to indicate response attach image.
                     this.$swal.fire({
@@ -243,30 +245,30 @@
             },
 
                 // Close and clear data in form create.
-            hideNewSalesianExperienceHomeModal() {
-                this.$refs.modalCreateSalesianExperienceHome.hide();
-                this.salesianexperiencehomeData = {
+            hideNewServiceHomeModal() {
+                this.$refs.modalCreateServiceHome.hide();
+                this.servicehomeData = {
                     Portada: '',
-                    Descripcion: '',
-                    Año: '',
+                    Estado: '',
+                    Enlace: '',
                 };
             },
             
                 // Event open new modal with clean form create.
-            showNewSalesianExperienceHomeModal() {
-                this.$refs.modalCreateSalesianExperienceHome.show();
+            showNewServiceHomeModal() {
+                this.$refs.modalCreateServiceHome.show();
             },
             
                 // Function use for save data forma to send request.
-            createRegisterSalesianExperienceHome: async function () {
+            createRegisterServiceHome: async function () {
                 let formData = new FormData();
-                formData.append('image', this.salesianexperiencehomeData.Portada);
-                formData.append('description', this.salesianexperiencehomeData.Descripcion);
-                formData.append('year', this.salesianexperiencehomeData.Año);
+                formData.append('image', this.servicehomeData.Portada);
+                formData.append('state', this.servicehomeData.Estado);
+                formData.append('link', this.servicehomeData.Enlace);
 
                 try {
                         // Call request to create register in service.
-                    await SalesianExperienceHomeService.createRegisterSalesianExperienceHome(formData);
+                    await serviceHomeService.createRegisterServiceHome(formData);
 
                         // Open swet alert to indicate success.                    
                     this.$swal.fire({
@@ -275,10 +277,10 @@
                         text: 'El registro ha sido guardado correctamente',
                     });
                         // Clean and close form.
-                    this.hideNewSalesianExperienceHomeModal();
+                    this.hideNewServiceHomeModal();
 
                         // Declare variable for save request load register. 
-                    const data = await SalesianExperienceHomeService.loadRegisterSalesianExperienceHome();
+                    const data = await serviceHomeService.loadRegisterServiceHome();
 
                         // Save data in registers.
                     this.registers = data.data.data;
@@ -305,7 +307,7 @@
                         break;
                     default:
                             // Clean and close form. 
-                        this.hideNewSalesianExperienceHomeModal();
+                        this.hideNewServiceHomeModal();
                             // Open swet alert to indicate errors.
                         this.$swal.fire({
                             icon: 'error',
@@ -318,10 +320,10 @@
             },  
 
                 // Function use to load and draw data in data table.
-            loadRegisterSalesianExperienceHome() {
+            loadRegisterServiceHome() {
                 
                     // Decalre Promise for call request load register.
-                SalesianExperienceHomeService.loadRegisterSalesianExperienceHome().then((response)=>{
+                serviceHomeService.loadRegisterServiceHome().then((response)=>{
                      
                         // Declare variable registers to use load data in table.
                     this.registers = response.data.data;
@@ -358,11 +360,11 @@
             },
 
                 // Function use to delete register select.
-            deleteSalesianExperienceHomeRegister(salesianexperiencehome) {
+            deleteServiceHomeRegister(servicehome) {
                 
                 // Swet alert to use question delete register. 
             this.$swal.fire({
-                title: `¿Desea eliminar el registro: ${salesianexperiencehome.Id}?`,
+                title: `¿Desea eliminar el registro: ${servicehome.Id}?`,
                 icon: 'question',
                 showDenyButton: true,
                 showCancelButton: false,
@@ -374,12 +376,12 @@
                     if (result.isConfirmed) {
                             
                             // Send reqeust to use delete register.
-                        SalesianExperienceHomeService.deleteSalesianExperienceHomeRegister(salesianexperiencehome.Id).then((response) =>{
+                        serviceHomeService.deleteServiceHomeRegister(servicehome.Id).then((response) =>{
                                 
                                 // Swet alert to use indicate success.
                             this.$swal.fire({
                                 icon: 'success',
-                                title: `El registro: ${salesianexperiencehome.Id} ha sido eliminado correctamente.`,
+                                title: `El registro: ${servicehome.Id} ha sido eliminado correctamente.`,
                                 toast: true,
                                 showConfirmButton: false,
                                 position: 'top-end',
@@ -387,7 +389,7 @@
                                 timerProgressBar: true,
                             });
                                 // Decalre Promise for call request load register.
-                            SalesianExperienceHomeService.loadRegisterSalesianExperienceHome().then((response) => {
+                            serviceHomeService.loadRegisterServiceHome().then((response) => {
                                 
                                     // Declare variable registers to use load data in table.
                                 this.registers = response.data.data;
@@ -399,7 +401,7 @@
                             // Swet alert to use indidcate error.
                         this.$swal.fire({
                                 icon: 'error',
-                                title: `No es posible eliminar el registro: ${salesianexperiencehome.Id} en estos momentos.`,
+                                title: `No es posible eliminar el registro: ${servicehome.Id} en estos momentos.`,
                                 toast: true,
                                 showConfirmButton: false,
                                 position: 'top-end',
@@ -412,7 +414,7 @@
                     } else if (result.isDenied) {
                     this.$swal.fire({
                             icon: 'warning',
-                            title: `El registro; ${salesianexperiencehome.Id}  no ha sido eliminado`,
+                            title: `El registro: ${servicehome.Id}  no ha sido eliminado`,
                             toast: true,
                             showConfirmButton: false,
                             position: 'top-end',
@@ -424,42 +426,42 @@
             },
 
                 // Close and clear data in form update.
-            hideUpdateSalesianExperienceHomeModal(){
-                this.$refs.modalUpdateSalesianExperienceHome.hide();
-                this.salesianexperiencehomeData = {
+            hideUpdateServiceHomeModal(){
+                this.$refs.modalUpdateServiceHome.hide();
+                this.servicehomeData = {
                     Portada: '',
-                    Descripcion: '',
-                    Año: '',
+                    Estado: '',
+                    Enlace: '',
                 };
             },
 
                 // Event open update modal with clean form.
-            showUpdateSalesianExperienceHomeModal(){
-                this.$refs.modalUpdateSalesianExperienceHome.show();
+            showUpdateServiceHomeModal(){
+                this.$refs.modalUpdateServiceHome.show();
             },
 
                 // Capture dates into form update.
-            updateDataSalesianExperienceHome(salesianexperiencehome) {
-                this.salesianexperiencehomeData = {...salesianexperiencehome};
-                this.showUpdateSalesianExperienceHomeModal();
+            updateDataServiceHome(servicehome) {
+                this.servicehomeData = {...servicehome};
+                this.showUpdateServiceHomeModal();
             },
 
                 // Method for update attach image in form.
             updateImage() {
                 try {
                         // Declare value in variable.
-                    this.salesianexperiencehomeData.Portada = this.$refs.updateImageSalesianExperienceHome.files[0];
+                    this.servicehomeData.Portada = this.$refs.updateImageServiceHome.files[0];
 
                         // Declae reader.
                     let reader = new FileReader();
                         
                          // Function save event to use load image.
                     reader.addEventListener('load', function (){
-                        this.$refs.updateImageSalesianExperienceHomeDisplay.src = reader.result;
+                        this.$refs.updateImageServiceHomeDisplay.src = reader.result;
                     }.bind(this), false);
 
                         // Load data reader in variable.
-                    reader.readAsDataURL(this.salesianexperiencehomeData.Portada);
+                    reader.readAsDataURL(this.servicehomeData.Portada);
 
                         // Open swet alert use to indicate response attach image.
                     this.$swal.fire({
@@ -488,24 +490,24 @@
             },
 
                 // Function to use update register selected.
-            updateRegisterSalesianExperienceHome: async function() {
+            updateRegisterServiceHome: async function() {
                 try {
                         let formData = new FormData();
-                    formData.append('image', this.salesianexperiencehomeData.Portada);
-                    formData.append('description', this.salesianexperiencehomeData.Descripcion);
-                    formData.append('year', this.salesianexperiencehomeData.Año);
+                    formData.append('image', this.servicehomeData.Portada);
+                    formData.append('state', this.servicehomeData.Estado);
+                    formData.append('link', this.servicehomeData.Enlace);
                     formData.append('_method', 'put');
                     
                         // Call request in service to update data.
-                    await SalesianExperienceHomeService.updateRegisterSalesianExperienceHome(this.salesianexperiencehomeData.Id, formData);
+                    await serviceHomeService.updateRegisterServiceHome(this.servicehomeData.Id, formData);
                     
                         // Declare variable for save request load register. 
-                    const data = await SalesianExperienceHomeService.loadRegisterSalesianExperienceHome();
+                    const data = await serviceHomeService.loadRegisterServiceHome();
 
                         // Save data in registers.
                     this.registers = data.data.data;
                     
-                    this.hideUpdateSalesianExperienceHomeModal();
+                    this.hideUpdateServiceHomeModal();
 
                         // Open swet alert to indicate success.                    
                     this.$swal.fire({
@@ -536,7 +538,7 @@
                         break;
                     default:
                             // Clean and close form. 
-                        this.hideUpdateSalesianExperienceHomeModal();
+                        this.hideUpdateServiceHomeModal();
                             // Open swet alert to indicate errors.
                         this.$swal.fire({
                             icon: 'error',

@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_SalesianExperienceHome_vue"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_ServiceHome_vue"],{
 
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
 /*!**********************************************************!*\
@@ -1844,10 +1844,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/SalesianExperienceHome.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/SalesianExperienceHome.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/ServiceHome.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/ServiceHome.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1861,7 +1861,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var datatables_net_bs4__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(datatables_net_bs4__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_salesianshome_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/salesianshome_service */ "./resources/js/services/salesianshome_service.js");
+/* harmony import */ var _services_servicehome_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/servicehome_service */ "./resources/js/services/servicehome_service.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2001,6 +2001,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
@@ -2009,17 +2011,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // Begin export default.
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'salesianexperiencehome',
+  name: 'servicehome',
   // Begin data.
   data: function data() {
     return {
       // Declare registers to use to save display data.
       registers: [],
       // Declare aboutusData to use to send data in form.
-      salesianexperiencehomeData: {
+      servicehomeData: {
         Portada: '',
-        Descripcion: '',
-        Año: ''
+        Estado: '',
+        Enlace: ''
       },
       // Save errors to response send request.
       errors: {}
@@ -2029,7 +2031,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   // Mounted data for registers in datatable.
   mounted: function mounted() {
     // Call method function to use load data.
-    this.loadRegisterSalesianExperienceHome();
+    this.loadRegisterServiceHome();
   },
   // End mounted data.
   // Declare methods for use in components.
@@ -2063,15 +2065,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     attachImage: function attachImage() {
       try {
         // Declare value variable.
-        this.salesianexperiencehomeData.Portada = this.$refs.imageSalesianExperienceHome.files[0]; // Declae reader.
+        this.servicehomeData.Portada = this.$refs.imageServiceHome.files[0]; // Declae reader.
 
         var reader = new FileReader(); // Function save event to use load image.
 
         reader.addEventListener('load', function () {
-          this.$refs.imageSalesianExperienceHomeDisplay.src = reader.result;
+          this.$refs.imageServiceHomeDisplay.src = reader.result;
         }.bind(this), false); // Load data reader in variable.
 
-        reader.readAsDataURL(this.salesianexperiencehomeData.Portada); // Open swet alert use to indicate response attach image.
+        reader.readAsDataURL(this.servicehomeData.Portada); // Open swet alert use to indicate response attach image.
 
         this.$swal.fire({
           icon: 'success',
@@ -2098,33 +2100,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       ;
     },
     // Close and clear data in form create.
-    hideNewSalesianExperienceHomeModal: function hideNewSalesianExperienceHomeModal() {
-      this.$refs.modalCreateSalesianExperienceHome.hide();
-      this.salesianexperiencehomeData = {
+    hideNewServiceHomeModal: function hideNewServiceHomeModal() {
+      this.$refs.modalCreateServiceHome.hide();
+      this.servicehomeData = {
         Portada: '',
-        Descripcion: '',
-        Año: ''
+        Estado: '',
+        Enlace: ''
       };
     },
     // Event open new modal with clean form create.
-    showNewSalesianExperienceHomeModal: function showNewSalesianExperienceHomeModal() {
-      this.$refs.modalCreateSalesianExperienceHome.show();
+    showNewServiceHomeModal: function showNewServiceHomeModal() {
+      this.$refs.modalCreateServiceHome.show();
     },
     // Function use for save data forma to send request.
-    createRegisterSalesianExperienceHome: function () {
-      var _createRegisterSalesianExperienceHome = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+    createRegisterServiceHome: function () {
+      var _createRegisterServiceHome = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var formData, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 formData = new FormData();
-                formData.append('image', this.salesianexperiencehomeData.Portada);
-                formData.append('description', this.salesianexperiencehomeData.Descripcion);
-                formData.append('year', this.salesianexperiencehomeData.Año);
+                formData.append('image', this.servicehomeData.Portada);
+                formData.append('state', this.servicehomeData.Estado);
+                formData.append('link', this.servicehomeData.Enlace);
                 _context.prev = 4;
                 _context.next = 7;
-                return _services_salesianshome_service__WEBPACK_IMPORTED_MODULE_3__.createRegisterSalesianExperienceHome(formData);
+                return _services_servicehome_service__WEBPACK_IMPORTED_MODULE_3__.createRegisterServiceHome(formData);
 
               case 7:
                 // Open swet alert to indicate success.                    
@@ -2134,10 +2136,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   text: 'El registro ha sido guardado correctamente'
                 }); // Clean and close form.
 
-                this.hideNewSalesianExperienceHomeModal(); // Declare variable for save request load register. 
+                this.hideNewServiceHomeModal(); // Declare variable for save request load register. 
 
                 _context.next = 11;
-                return _services_salesianshome_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterSalesianExperienceHome();
+                return _services_servicehome_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterServiceHome();
 
               case 11:
                 data = _context.sent;
@@ -2170,7 +2172,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 23:
                 // Clean and close form. 
-                this.hideNewSalesianExperienceHomeModal(); // Open swet alert to indicate errors.
+                this.hideNewServiceHomeModal(); // Open swet alert to indicate errors.
 
                 this.$swal.fire({
                   icon: 'error',
@@ -2193,18 +2195,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this, [[4, 15]]);
       }));
 
-      function createRegisterSalesianExperienceHome() {
-        return _createRegisterSalesianExperienceHome.apply(this, arguments);
+      function createRegisterServiceHome() {
+        return _createRegisterServiceHome.apply(this, arguments);
       }
 
-      return createRegisterSalesianExperienceHome;
+      return createRegisterServiceHome;
     }(),
     // Function use to load and draw data in data table.
-    loadRegisterSalesianExperienceHome: function loadRegisterSalesianExperienceHome() {
+    loadRegisterServiceHome: function loadRegisterServiceHome() {
       var _this = this;
 
       // Decalre Promise for call request load register.
-      _services_salesianshome_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterSalesianExperienceHome().then(function (response) {
+      _services_servicehome_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterServiceHome().then(function (response) {
         // Declare variable registers to use load data in table.
         _this.registers = response.data.data; // Call function to use plugin DataTable.
 
@@ -2234,12 +2236,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     // Function use to delete register select.
-    deleteSalesianExperienceHomeRegister: function deleteSalesianExperienceHomeRegister(salesianexperiencehome) {
+    deleteServiceHomeRegister: function deleteServiceHomeRegister(servicehome) {
       var _this2 = this;
 
       // Swet alert to use question delete register. 
       this.$swal.fire({
-        title: "\xBFDesea eliminar el registro: ".concat(salesianexperiencehome.Id, "?"),
+        title: "\xBFDesea eliminar el registro: ".concat(servicehome.Id, "?"),
         icon: 'question',
         showDenyButton: true,
         showCancelButton: false,
@@ -2249,11 +2251,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         // The result for question in this alert is confirmed.
         if (result.isConfirmed) {
           // Send reqeust to use delete register.
-          _services_salesianshome_service__WEBPACK_IMPORTED_MODULE_3__.deleteSalesianExperienceHomeRegister(salesianexperiencehome.Id).then(function (response) {
+          _services_servicehome_service__WEBPACK_IMPORTED_MODULE_3__.deleteServiceHomeRegister(servicehome.Id).then(function (response) {
             // Swet alert to use indicate success.
             _this2.$swal.fire({
               icon: 'success',
-              title: "El registro: ".concat(salesianexperiencehome.Id, " ha sido eliminado correctamente."),
+              title: "El registro: ".concat(servicehome.Id, " ha sido eliminado correctamente."),
               toast: true,
               showConfirmButton: false,
               position: 'top-end',
@@ -2262,7 +2264,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }); // Decalre Promise for call request load register.
 
 
-            _services_salesianshome_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterSalesianExperienceHome().then(function (response) {
+            _services_servicehome_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterServiceHome().then(function (response) {
               // Declare variable registers to use load data in table.
               _this2.registers = response.data.data;
             });
@@ -2270,7 +2272,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             // Swet alert to use indidcate error.
             _this2.$swal.fire({
               icon: 'error',
-              title: "No es posible eliminar el registro: ".concat(salesianexperiencehome.Id, " en estos momentos."),
+              title: "No es posible eliminar el registro: ".concat(servicehome.Id, " en estos momentos."),
               toast: true,
               showConfirmButton: false,
               position: 'top-end',
@@ -2281,7 +2283,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         } else if (result.isDenied) {
           _this2.$swal.fire({
             icon: 'warning',
-            title: "El registro; ".concat(salesianexperiencehome.Id, "  no ha sido eliminado"),
+            title: "El registro: ".concat(servicehome.Id, "  no ha sido eliminado"),
             toast: true,
             showConfirmButton: false,
             position: 'top-end',
@@ -2294,36 +2296,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     // Close and clear data in form update.
-    hideUpdateSalesianExperienceHomeModal: function hideUpdateSalesianExperienceHomeModal() {
-      this.$refs.modalUpdateSalesianExperienceHome.hide();
-      this.salesianexperiencehomeData = {
+    hideUpdateServiceHomeModal: function hideUpdateServiceHomeModal() {
+      this.$refs.modalUpdateServiceHome.hide();
+      this.servicehomeData = {
         Portada: '',
-        Descripcion: '',
-        Año: ''
+        Estado: '',
+        Enlace: ''
       };
     },
     // Event open update modal with clean form.
-    showUpdateSalesianExperienceHomeModal: function showUpdateSalesianExperienceHomeModal() {
-      this.$refs.modalUpdateSalesianExperienceHome.show();
+    showUpdateServiceHomeModal: function showUpdateServiceHomeModal() {
+      this.$refs.modalUpdateServiceHome.show();
     },
     // Capture dates into form update.
-    updateDataSalesianExperienceHome: function updateDataSalesianExperienceHome(salesianexperiencehome) {
-      this.salesianexperiencehomeData = _objectSpread({}, salesianexperiencehome);
-      this.showUpdateSalesianExperienceHomeModal();
+    updateDataServiceHome: function updateDataServiceHome(servicehome) {
+      this.servicehomeData = _objectSpread({}, servicehome);
+      this.showUpdateServiceHomeModal();
     },
     // Method for update attach image in form.
     updateImage: function updateImage() {
       try {
         // Declare value in variable.
-        this.salesianexperiencehomeData.Portada = this.$refs.updateImageSalesianExperienceHome.files[0]; // Declae reader.
+        this.servicehomeData.Portada = this.$refs.updateImageServiceHome.files[0]; // Declae reader.
 
         var reader = new FileReader(); // Function save event to use load image.
 
         reader.addEventListener('load', function () {
-          this.$refs.updateImageSalesianExperienceHomeDisplay.src = reader.result;
+          this.$refs.updateImageServiceHomeDisplay.src = reader.result;
         }.bind(this), false); // Load data reader in variable.
 
-        reader.readAsDataURL(this.salesianexperiencehomeData.Portada); // Open swet alert use to indicate response attach image.
+        reader.readAsDataURL(this.servicehomeData.Portada); // Open swet alert use to indicate response attach image.
 
         this.$swal.fire({
           icon: 'success',
@@ -2350,8 +2352,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       ;
     },
     // Function to use update register selected.
-    updateRegisterSalesianExperienceHome: function () {
-      var _updateRegisterSalesianExperienceHome = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    updateRegisterServiceHome: function () {
+      var _updateRegisterServiceHome = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var formData, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
@@ -2359,23 +2361,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 formData = new FormData();
-                formData.append('image', this.salesianexperiencehomeData.Portada);
-                formData.append('description', this.salesianexperiencehomeData.Descripcion);
-                formData.append('year', this.salesianexperiencehomeData.Año);
+                formData.append('image', this.servicehomeData.Portada);
+                formData.append('state', this.servicehomeData.Estado);
+                formData.append('link', this.servicehomeData.Enlace);
                 formData.append('_method', 'put'); // Call request in service to update data.
 
                 _context2.next = 8;
-                return _services_salesianshome_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterSalesianExperienceHome(this.salesianexperiencehomeData.Id, formData);
+                return _services_servicehome_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterServiceHome(this.servicehomeData.Id, formData);
 
               case 8:
                 _context2.next = 10;
-                return _services_salesianshome_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterSalesianExperienceHome();
+                return _services_servicehome_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterServiceHome();
 
               case 10:
                 data = _context2.sent;
                 // Save data in registers.
                 this.registers = data.data.data;
-                this.hideUpdateSalesianExperienceHomeModal(); // Open swet alert to indicate success.                    
+                this.hideUpdateServiceHomeModal(); // Open swet alert to indicate success.                    
 
                 this.$swal.fire({
                   icon: 'success',
@@ -2409,7 +2411,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 24:
                 // Clean and close form. 
-                this.hideUpdateSalesianExperienceHomeModal(); // Open swet alert to indicate errors.
+                this.hideUpdateServiceHomeModal(); // Open swet alert to indicate errors.
 
                 this.$swal.fire({
                   icon: 'error',
@@ -2429,11 +2431,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, this, [[0, 16]]);
       }));
 
-      function updateRegisterSalesianExperienceHome() {
-        return _updateRegisterSalesianExperienceHome.apply(this, arguments);
+      function updateRegisterServiceHome() {
+        return _updateRegisterServiceHome.apply(this, arguments);
       }
 
-      return updateRegisterSalesianExperienceHome;
+      return updateRegisterServiceHome;
     }()
   } // End declare methods.
 
@@ -2480,38 +2482,38 @@ function httpFile() {
 
 /***/ }),
 
-/***/ "./resources/js/services/salesianshome_service.js":
-/*!********************************************************!*\
-  !*** ./resources/js/services/salesianshome_service.js ***!
-  \********************************************************/
+/***/ "./resources/js/services/servicehome_service.js":
+/*!******************************************************!*\
+  !*** ./resources/js/services/servicehome_service.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createRegisterSalesianExperienceHome": () => (/* binding */ createRegisterSalesianExperienceHome),
-/* harmony export */   "loadRegisterSalesianExperienceHome": () => (/* binding */ loadRegisterSalesianExperienceHome),
-/* harmony export */   "deleteSalesianExperienceHomeRegister": () => (/* binding */ deleteSalesianExperienceHomeRegister),
-/* harmony export */   "updateRegisterSalesianExperienceHome": () => (/* binding */ updateRegisterSalesianExperienceHome)
+/* harmony export */   "createRegisterServiceHome": () => (/* binding */ createRegisterServiceHome),
+/* harmony export */   "loadRegisterServiceHome": () => (/* binding */ loadRegisterServiceHome),
+/* harmony export */   "deleteServiceHomeRegister": () => (/* binding */ deleteServiceHomeRegister),
+/* harmony export */   "updateRegisterServiceHome": () => (/* binding */ updateRegisterServiceHome)
 /* harmony export */ });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 // Import http service to use config routes API. 
  // Function to use send request API create register.
 
-function createRegisterSalesianExperienceHome(data) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/salesianExperienceHomes', data);
+function createRegisterServiceHome(data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/servicesHomes', data);
 } // Function to use send request API load registers.
 
-function loadRegisterSalesianExperienceHome() {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/salesianExperienceHomes');
+function loadRegisterServiceHome() {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/servicesHomes');
 } // Function to use send request API delete registers selected.
 
-function deleteSalesianExperienceHomeRegister(id) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("salesianExperienceHomes/".concat(id));
+function deleteServiceHomeRegister(id) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("servicesHomes/".concat(id));
 } // Function to use send request API update register selected.
 
-function updateRegisterSalesianExperienceHome(id, data) {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/salesianExperienceHomes/".concat(id), data);
+function updateRegisterServiceHome(id, data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/servicesHomes/".concat(id), data);
 }
 
 /***/ }),
@@ -29718,10 +29720,10 @@ try {
 
 /***/ }),
 
-/***/ "./resources/js/views/SalesianExperienceHome.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/views/SalesianExperienceHome.vue ***!
-  \*******************************************************/
+/***/ "./resources/js/views/ServiceHome.vue":
+/*!********************************************!*\
+  !*** ./resources/js/views/ServiceHome.vue ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29729,8 +29731,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _SalesianExperienceHome_vue_vue_type_template_id_54a12c32___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SalesianExperienceHome.vue?vue&type=template&id=54a12c32& */ "./resources/js/views/SalesianExperienceHome.vue?vue&type=template&id=54a12c32&");
-/* harmony import */ var _SalesianExperienceHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SalesianExperienceHome.vue?vue&type=script&lang=js& */ "./resources/js/views/SalesianExperienceHome.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ServiceHome_vue_vue_type_template_id_6cd59a36___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ServiceHome.vue?vue&type=template&id=6cd59a36& */ "./resources/js/views/ServiceHome.vue?vue&type=template&id=6cd59a36&");
+/* harmony import */ var _ServiceHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ServiceHome.vue?vue&type=script&lang=js& */ "./resources/js/views/ServiceHome.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -29740,9 +29742,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _SalesianExperienceHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _SalesianExperienceHome_vue_vue_type_template_id_54a12c32___WEBPACK_IMPORTED_MODULE_0__.render,
-  _SalesianExperienceHome_vue_vue_type_template_id_54a12c32___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ServiceHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ServiceHome_vue_vue_type_template_id_6cd59a36___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ServiceHome_vue_vue_type_template_id_6cd59a36___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -29752,15 +29754,15 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/SalesianExperienceHome.vue"
+component.options.__file = "resources/js/views/ServiceHome.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/SalesianExperienceHome.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/views/SalesianExperienceHome.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
+/***/ "./resources/js/views/ServiceHome.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/views/ServiceHome.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29768,32 +29770,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesianExperienceHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SalesianExperienceHome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/SalesianExperienceHome.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesianExperienceHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ServiceHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServiceHome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/ServiceHome.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ServiceHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/views/SalesianExperienceHome.vue?vue&type=template&id=54a12c32&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/views/SalesianExperienceHome.vue?vue&type=template&id=54a12c32& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/views/ServiceHome.vue?vue&type=template&id=6cd59a36&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/views/ServiceHome.vue?vue&type=template&id=6cd59a36& ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesianExperienceHome_vue_vue_type_template_id_54a12c32___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesianExperienceHome_vue_vue_type_template_id_54a12c32___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServiceHome_vue_vue_type_template_id_6cd59a36___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServiceHome_vue_vue_type_template_id_6cd59a36___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesianExperienceHome_vue_vue_type_template_id_54a12c32___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SalesianExperienceHome.vue?vue&type=template&id=54a12c32& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/SalesianExperienceHome.vue?vue&type=template&id=54a12c32&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServiceHome_vue_vue_type_template_id_6cd59a36___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServiceHome.vue?vue&type=template&id=6cd59a36& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/ServiceHome.vue?vue&type=template&id=6cd59a36&");
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/SalesianExperienceHome.vue?vue&type=template&id=54a12c32&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/SalesianExperienceHome.vue?vue&type=template&id=54a12c32& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/ServiceHome.vue?vue&type=template&id=6cd59a36&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/ServiceHome.vue?vue&type=template&id=6cd59a36& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29820,7 +29822,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-success btn-sm ml-auto",
-              on: { click: _vm.showNewSalesianExperienceHomeModal }
+              on: { click: _vm.showNewServiceHomeModal }
             },
             [_vm._m(2), _vm._v("Agregar Registro")]
           )
@@ -29845,12 +29847,9 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.registers, function(
-                    salesianexperiencehome,
-                    index
-                  ) {
+                  _vm._l(_vm.registers, function(servicehome, index) {
                     return _c("tr", { key: index }, [
-                      _c("td", [_vm._v(_vm._s(salesianexperiencehome.Id))]),
+                      _c("td", [_vm._v(_vm._s(servicehome.Id))]),
                       _vm._v(" "),
                       _c("td", [
                         _c("img", {
@@ -29859,16 +29858,25 @@ var render = function() {
                             src:
                               _vm.$store.state.serverPath +
                               "/storage/" +
-                              salesianexperiencehome.Portada
+                              servicehome.Portada
                           }
                         })
                       ]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._v(_vm._s(salesianexperiencehome.Descripcion))
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              target: "_blank",
+                              href: "" + servicehome.Enlace
+                            }
+                          },
+                          [_vm._m(4, true)]
+                        )
                       ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(salesianexperiencehome.Año))]),
+                      _c("td", [_vm._v(_vm._s(servicehome.Estado))]),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -29877,9 +29885,7 @@ var render = function() {
                             staticClass: "btn btn-success btn-sm",
                             on: {
                               click: function($event) {
-                                return _vm.updateDataSalesianExperienceHome(
-                                  salesianexperiencehome
-                                )
+                                return _vm.updateDataServiceHome(servicehome)
                               }
                             }
                           },
@@ -29892,8 +29898,8 @@ var render = function() {
                             staticClass: "btn btn-danger btn-sm",
                             on: {
                               click: function($event) {
-                                return _vm.deleteSalesianExperienceHomeRegister(
-                                  salesianexperiencehome
+                                return _vm.deleteServiceHomeRegister(
+                                  servicehome
                                 )
                               }
                             }
@@ -29914,7 +29920,7 @@ var render = function() {
       _c(
         "b-modal",
         {
-          ref: "modalCreateSalesianExperienceHome",
+          ref: "modalCreateServiceHome",
           attrs: {
             "hide-footer": "",
             size: "xl",
@@ -29929,10 +29935,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.createRegisterSalesianExperienceHome.apply(
-                      null,
-                      arguments
-                    )
+                    return _vm.createRegisterServiceHome.apply(null, arguments)
                   }
                 }
               },
@@ -29940,43 +29943,37 @@ var render = function() {
                 _c("div", { staticClass: "form-row" }, [
                   _c(
                     "div",
-                    { staticClass: "form-group col-md-12" },
+                    { staticClass: "form-group col-md-6" },
                     [
-                      _c("label", { attrs: { for: "description" } }, [
-                        _vm._v("Descripcion:")
+                      _c("label", { attrs: { for: "link" } }, [
+                        _vm._v("Enlace:")
                       ]),
                       _vm._v(" "),
-                      _c("b-form-textarea", {
+                      _c("b-form-input", {
                         staticClass: "form-control",
                         attrs: {
                           state:
-                            _vm.salesianexperiencehomeData.Descripcion.length >=
-                              1 &&
-                            _vm.salesianexperiencehomeData.Descripcion.length <
-                              1000,
+                            _vm.servicehomeData.Enlace.length >= 1 &&
+                            _vm.servicehomeData.Enlace.length < 50,
                           type: "text",
-                          id: "description",
-                          placeholder: "Ingresar Descripcion",
+                          id: "link",
+                          placeholder: "Ingresar Enlace",
                           autocomplete: "off"
                         },
                         model: {
-                          value: _vm.salesianexperiencehomeData.Descripcion,
+                          value: _vm.servicehomeData.Enlace,
                           callback: function($$v) {
-                            _vm.$set(
-                              _vm.salesianexperiencehomeData,
-                              "Descripcion",
-                              $$v
-                            )
+                            _vm.$set(_vm.servicehomeData, "Enlace", $$v)
                           },
-                          expression: "salesianexperiencehomeData.Descripcion"
+                          expression: "servicehomeData.Enlace"
                         }
                       }),
                       _vm._v(" "),
-                      _vm.errors.description
+                      _vm.errors.link
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.description[0]))]
+                            [_vm._v(_vm._s(_vm.errors.link[0]))]
                           )
                         : _vm._e()
                     ],
@@ -29985,35 +29982,37 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "form-group col-md-12" },
+                    { staticClass: "form-group col-md-6" },
                     [
-                      _c("label", { attrs: { for: "year" } }, [_vm._v("Año:")]),
-                      _vm._v(" "),
-                      _c("b-form-input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.salesianexperiencehomeData.Año >= 2020 &&
-                            _vm.salesianexperiencehomeData.Año < 2099,
-                          type: "text",
-                          id: "year",
-                          placeholder: "Ingresar Año",
-                          autocomplete: "off"
-                        },
-                        model: {
-                          value: _vm.salesianexperiencehomeData.Año,
-                          callback: function($$v) {
-                            _vm.$set(_vm.salesianexperiencehomeData, "Año", $$v)
+                      _c(
+                        "b-form-checkbox",
+                        {
+                          attrs: {
+                            id: "state",
+                            name: "state",
+                            value: "Visible",
+                            "unchecked-value": "Disabled"
                           },
-                          expression: "salesianexperiencehomeData.Año"
-                        }
-                      }),
+                          model: {
+                            value: _vm.servicehomeData.Estado,
+                            callback: function($$v) {
+                              _vm.$set(_vm.servicehomeData, "Estado", $$v)
+                            },
+                            expression: "servicehomeData.Estado"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        ¿Desea que el contenido sea visible?\n                        "
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
-                      _vm.errors.year
+                      _vm.errors.state
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.year[0]))]
+                            [_vm._v(_vm._s(_vm.errors.state[0]))]
                           )
                         : _vm._e()
                     ],
@@ -30025,17 +30024,17 @@ var render = function() {
                       _vm._v("Imagen:")
                     ]),
                     _vm._v(" "),
-                    _vm.salesianexperiencehomeData.Portada.name
+                    _vm.servicehomeData.Portada.name
                       ? _c("div", [
                           _c("img", {
-                            ref: "imageSalesianExperienceHomeDisplay",
+                            ref: "imageServiceHomeDisplay",
                             attrs: { src: "", width: "700", height: "300" }
                           })
                         ])
                       : _vm._e(),
                     _vm._v(" "),
                     _c("input", {
-                      ref: "imageSalesianExperienceHome",
+                      ref: "imageServiceHome",
                       staticClass: "form-control",
                       attrs: { type: "file", id: "image" },
                       on: { change: _vm.attachImage }
@@ -30059,7 +30058,7 @@ var render = function() {
                     {
                       staticClass: "btn btn-default",
                       attrs: { type: "button" },
-                      on: { click: _vm.hideNewSalesianExperienceHomeModal }
+                      on: { click: _vm.hideNewServiceHomeModal }
                     },
                     [_vm._v("Cancelar")]
                   ),
@@ -30085,7 +30084,7 @@ var render = function() {
       _c(
         "b-modal",
         {
-          ref: "modalUpdateSalesianExperienceHome",
+          ref: "modalUpdateServiceHome",
           attrs: { "hide-footer": "", size: "xl", title: "Modificar Registro" }
         },
         [
@@ -30096,10 +30095,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.updateRegisterSalesianExperienceHome.apply(
-                      null,
-                      arguments
-                    )
+                    return _vm.updateRegisterServiceHome.apply(null, arguments)
                   }
                 }
               },
@@ -30107,43 +30103,37 @@ var render = function() {
                 _c("div", { staticClass: "form-row" }, [
                   _c(
                     "div",
-                    { staticClass: "form-group col-md-12" },
+                    { staticClass: "form-group col-md-6" },
                     [
-                      _c("label", { attrs: { for: "description" } }, [
-                        _vm._v("Descripcion:")
+                      _c("label", { attrs: { for: "link" } }, [
+                        _vm._v("Enlace:")
                       ]),
                       _vm._v(" "),
-                      _c("b-form-textarea", {
+                      _c("b-form-input", {
                         staticClass: "form-control",
                         attrs: {
                           state:
-                            _vm.salesianexperiencehomeData.Descripcion.length >=
-                              1 &&
-                            _vm.salesianexperiencehomeData.Descripcion.length <
-                              1000,
+                            _vm.servicehomeData.Enlace.length >= 1 &&
+                            _vm.servicehomeData.Enlace.length < 50,
                           type: "text",
-                          id: "description",
-                          placeholder: "Ingresar Descripcion",
+                          id: "link",
+                          placeholder: "Ingresar Enlace",
                           autocomplete: "off"
                         },
                         model: {
-                          value: _vm.salesianexperiencehomeData.Descripcion,
+                          value: _vm.servicehomeData.Enlace,
                           callback: function($$v) {
-                            _vm.$set(
-                              _vm.salesianexperiencehomeData,
-                              "Descripcion",
-                              $$v
-                            )
+                            _vm.$set(_vm.servicehomeData, "Enlace", $$v)
                           },
-                          expression: "salesianexperiencehomeData.Descripcion"
+                          expression: "servicehomeData.Enlace"
                         }
                       }),
                       _vm._v(" "),
-                      _vm.errors.description
+                      _vm.errors.link
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.description[0]))]
+                            [_vm._v(_vm._s(_vm.errors.link[0]))]
                           )
                         : _vm._e()
                     ],
@@ -30152,35 +30142,37 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "form-group col-md-12" },
+                    { staticClass: "form-group col-md-6" },
                     [
-                      _c("label", { attrs: { for: "year" } }, [_vm._v("Año:")]),
-                      _vm._v(" "),
-                      _c("b-form-input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          state:
-                            _vm.salesianexperiencehomeData.Año >= 2020 &&
-                            _vm.salesianexperiencehomeData.Año < 2099,
-                          type: "text",
-                          id: "year",
-                          placeholder: "Ingresar Año",
-                          autocomplete: "off"
-                        },
-                        model: {
-                          value: _vm.salesianexperiencehomeData.Año,
-                          callback: function($$v) {
-                            _vm.$set(_vm.salesianexperiencehomeData, "Año", $$v)
+                      _c(
+                        "b-form-checkbox",
+                        {
+                          attrs: {
+                            id: "state",
+                            name: "state",
+                            value: "Visible",
+                            "unchecked-value": "Disabled"
                           },
-                          expression: "salesianexperiencehomeData.Año"
-                        }
-                      }),
+                          model: {
+                            value: _vm.servicehomeData.Estado,
+                            callback: function($$v) {
+                              _vm.$set(_vm.servicehomeData, "Estado", $$v)
+                            },
+                            expression: "servicehomeData.Estado"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        ¿Desea que el contenido sea visible?\n                        "
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
-                      _vm.errors.year
+                      _vm.errors.state
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.year[0]))]
+                            [_vm._v(_vm._s(_vm.errors.state[0]))]
                           )
                         : _vm._e()
                     ],
@@ -30194,12 +30186,12 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", [
                       _c("img", {
-                        ref: "updateImageSalesianExperienceHomeDisplay",
+                        ref: "updateImageServiceHomeDisplay",
                         attrs: {
                           src:
                             _vm.$store.state.serverPath +
                             "/storage/" +
-                            _vm.salesianexperiencehomeData.Portada,
+                            _vm.servicehomeData.Portada,
                           width: "700",
                           height: "300"
                         }
@@ -30207,7 +30199,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("input", {
-                      ref: "updateImageSalesianExperienceHome",
+                      ref: "updateImageServiceHome",
                       staticClass: "form-control",
                       attrs: { type: "file", id: "image" },
                       on: { change: _vm.updateImage }
@@ -30231,7 +30223,7 @@ var render = function() {
                     {
                       staticClass: "btn btn-default",
                       attrs: { type: "button" },
-                      on: { click: _vm.hideUpdateSalesianExperienceHomeModal }
+                      on: { click: _vm.hideUpdateServiceHomeModal }
                     },
                     [_vm._v("Cancelar")]
                   ),
@@ -30267,11 +30259,7 @@ var staticRenderFns = [
       {
         staticClass: "d-sm-flex align-items-center justify-content-center mb-4"
       },
-      [
-        _c("h1", { staticClass: "mb-0 text-gray-800" }, [
-          _vm._v("Vivencia Salesiana")
-        ])
-      ]
+      [_c("h1", { staticClass: "mb-0 text-gray-800" }, [_vm._v("Servicios")])]
     )
   },
   function() {
@@ -30301,12 +30289,21 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("td", [_vm._v("Portada")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Descripcion")]),
+        _c("td", [_vm._v("Enlace")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Año")]),
+        _c("td", [_vm._v("Estado")]),
         _vm._v(" "),
         _c("td", [_vm._v("Acciones")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-primary" }, [
+      _c("span", { staticClass: "fas fa-external-link-square-alt" }),
+      _vm._v("Abiir enlace")
     ])
   }
 ]

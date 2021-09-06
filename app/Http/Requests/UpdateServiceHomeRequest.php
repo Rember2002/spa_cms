@@ -25,7 +25,7 @@ class UpdateServiceHomeRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => ['required', 'unique:service_homes,image', 'max:255'],
+            'image' => ['required', 'max:255'],
             'link' => ['required', 'max:255'],
             'state' => ['required', Rule::in(['Visible', 'Disabled']),],
         ];

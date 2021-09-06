@@ -56,7 +56,7 @@
                 <router-link to="/academicoffer" class="" exact>
                     <a class="collapse-item" href="">Oferta Academica</a>
                 </router-link>
-                <router-link to="" class="" exact>
+                <router-link to="/servicehome" class="" exact>
                     <a class="collapse-item" href="">Servicios</a>
                 </router-link>
                 <router-link to="/questions" class="" exact>

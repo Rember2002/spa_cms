@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveServiceHomeRequest;
+use App\Http\Requests\UpdateServiceHomeRequest;
 use App\Http\Resources\ServiceHomeResource;
 use App\Models\ServiceHome;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceHomeController extends Controller
 {
@@ -17,14 +19,6 @@ class ServiceHomeController extends Controller
      */
     public function index()
     {
-        // $serviceHome = ServiceHomeResource::collection(ServiceHome::all());
-
-        // return response()->json([
-
-        //     "data" => $serviceHome,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return ServiceHomeResource::collection(ServiceHome::all());
 
@@ -46,22 +40,20 @@ class ServiceHomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveServiceHomeRequest $request)
+    public function store(SaveServiceHomeRequest $request, ServiceHome $serviceHome)
     {
-        // $serviceHome = ServiceHome::create($request->all());
-        
-        // return response()->json([
+        $serviceHome->state = $request->state;
+        $serviceHome->link = $request->link;
+        $path = $request->file('image')->store('images_servicehome');
+        $serviceHome->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $serviceHome,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $serviceHome->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new ServiceHomeResource(ServiceHome::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -72,12 +64,6 @@ class ServiceHomeController extends Controller
      */
     public function show(ServiceHome $serviceHome)
     {
-        // return response()->json([
-
-        //     "data" => $serviceHome,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return new ServiceHomeResource($serviceHome);
     }
@@ -100,24 +86,26 @@ class ServiceHomeController extends Controller
      * @param  \App\Models\ServiceHome  $serviceHome
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveServiceHomeRequest $request, ServiceHome $serviceHome)
+    public function update(UpdateServiceHomeRequest $request, ServiceHome $servicesHome)
     {
-        // $serviceHome->update($request->all());
-        
-        // return response()->json([
+        $servicesHome->state = $request->state;
+        $servicesHome->link = $request->link;
+        $oldPath = $servicesHome->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $serviceHome,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_servicehome');
+            $servicesHome->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $serviceHome->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $servicesHome->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new ServiceHomeResource($serviceHome))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -126,21 +114,26 @@ class ServiceHomeController extends Controller
      * @param  \App\Models\ServiceHome  $serviceHome
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServiceHome $serviceHome)
+    public function destroy(ServiceHome $servicesHome)
     {
-        // $serviceHome->delete();
-        
-        // return response()->json([
+        if ($servicesHome->delete()){
+            Storage::delete($servicesHome->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $serviceHome,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $servicesHome,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        return (new ServiceHomeResource($serviceHome))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $servicesHome,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

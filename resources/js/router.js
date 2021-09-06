@@ -68,6 +68,13 @@ const routes = [
         path: '/newhome',
         name: 'newhome',
         component: () => import('./views/NewHome.vue')
+    },
+
+        // Component ServiceHome.
+    {
+        path: '/servicehome',
+        name: 'servicehome',
+        component: () => import('./views/ServiceHome.vue')
     }
 ];
 
