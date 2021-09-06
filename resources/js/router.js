@@ -34,8 +34,13 @@ const routes = [
     },
     {
         path: '/questions',
-        name: 'contactus',
+        name: 'questions',
         component: () => import('./views/Questions.vue')
+    },
+    {
+        path: '/salesianexperiencehome',
+        name: 'salesianexperiencehome',
+        component: () => import('./views/SalesianExperienceHome.vue')
     }
 ];
 

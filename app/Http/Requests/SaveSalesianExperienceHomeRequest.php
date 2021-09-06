@@ -27,7 +27,7 @@ class SaveSalesianExperienceHomeRequest extends FormRequest
             
             'image' => ['required', 'unique:salesian_experience_homes,image', 'max:255'],
             'description' => ['required'],
-            'year' => ['required', 'min:2020'],
+            'year' => ['required', 'numeric', 'min:2020', 'max:2099'],
 
         ];
     }

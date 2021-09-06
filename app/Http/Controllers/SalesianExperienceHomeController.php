@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveSalesianExperienceHomeRequest;
+use App\Http\Requests\UpdateSalesianExperienceHomeRequest;
 use App\Http\Resources\SalesianExperienceHomeResource;
 use App\Http\Resources\SalesianExperienceResource;
 use App\Models\SalesianExperienceHome;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class SalesianExperienceHomeController extends Controller
 {
@@ -18,14 +20,6 @@ class SalesianExperienceHomeController extends Controller
      */
     public function index()
     {
-        // $salesianExperienceHome = SalesianExperienceResource::collection(SalesianExperienceHome::all());
-
-        // return response()->json([
-
-        //     "data" => $salesianExperienceHome,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return SalesianExperienceHomeResource::collection(SalesianExperienceHome::all());
     }
@@ -46,22 +40,20 @@ class SalesianExperienceHomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveSalesianExperienceHomeRequest $request)
+    public function store(SaveSalesianExperienceHomeRequest $request, SalesianExperienceHome $salesianExperienceHome)
     {
-        // $salesianExperienceHome = SalesianExperienceHome::create($request->all());
-        
-        // return response()->json([
+        $salesianExperienceHome->description = $request->description;
+        $salesianExperienceHome->year = $request->year;
+        $path = $request->file('image')->store('images_salesianexperiencehome');
+        $salesianExperienceHome->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $salesianExperienceHome,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $salesianExperienceHome->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new SalesianExperienceHomeResource(SalesianExperienceHome::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -72,13 +64,7 @@ class SalesianExperienceHomeController extends Controller
      */
     public function show(SalesianExperienceHome $salesianExperienceHome)
     {
-        // return response()->json([
-
-        //     "data" => $salesianExperienceHome,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
+        
         return new SalesianExperienceHomeResource($salesianExperienceHome);
 
     }
@@ -101,24 +87,26 @@ class SalesianExperienceHomeController extends Controller
      * @param  \App\Models\SalesianExperienceHome  $salesianExperienceHome
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveSalesianExperienceHomeRequest $request, SalesianExperienceHome $salesianExperienceHome)
+    public function update(UpdateSalesianExperienceHomeRequest $request, SalesianExperienceHome $salesianExperienceHome)
     {
-        // $salesianExperienceHome->update($request->all());
-        
-        // return response()->json([
+        $salesianExperienceHome->description = $request->description;
+        $salesianExperienceHome->year = $request->year;
+        $oldPath = $salesianExperienceHome->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $salesianExperienceHome,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_salesianexperiencehome');
+            $salesianExperienceHome->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $salesianExperienceHome->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $salesianExperienceHome->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new SalesianExperienceHomeResource($salesianExperienceHome))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -129,19 +117,24 @@ class SalesianExperienceHomeController extends Controller
      */
     public function destroy(SalesianExperienceHome $salesianExperienceHome)
     {
-        // $salesianExperienceHome->delete();
-        
-        // return response()->json([
+        if ($salesianExperienceHome->delete()){
+            Storage::delete($salesianExperienceHome->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $salesianExperienceHome,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $salesianExperienceHome,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        return (new SalesianExperienceHomeResource($salesianExperienceHome))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $salesianExperienceHome,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

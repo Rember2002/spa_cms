@@ -26,7 +26,7 @@ class UpdateSalesianExperienceHomeRequest extends FormRequest
         return [
             'image' => ['required', 'max:255'],
             'description' => ['required'],
-            'year' => ['required', 'min:2020'],
+            'year' => ['required', 'numeric', 'min:2020', 'max:2099'],
         ];
     }
 }

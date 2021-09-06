@@ -62,7 +62,7 @@
                 <router-link to="/questions" class="" exact>
                     <a class="collapse-item" href="">Preguntas Frecuentes</a>
                 </router-link>
-                <router-link to="" class="" exact>
+                <router-link to="/salesianexperiencehome" class="" exact>
                     <a class="collapse-item" href="">Vivencia Salesiana</a>
                 </router-link>
             </div>
