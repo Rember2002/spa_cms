@@ -140,7 +140,7 @@
                 <router-link to="/studentcouncil" class="" exact>
                     <a class="collapse-item" href="login.html">Consejo Estudiantil</a>
                 </router-link>
-                <router-link to="" class="" exact>
+                <router-link to="/commission" class="" exact>
                     <a class="collapse-item" href="login.html">Comisiones Estudiantiles</a>
                 </router-link>
                 <router-link to="" class="" exact>

@@ -82,6 +82,13 @@ const routes = [
         path: '/studentcouncil',
         name: 'studentcouncil',
         component: () => import('./views/StudentCouncil.vue')
+    },
+
+        // Component StudentCouncil.
+    {
+        path: '/commission',
+        name: 'commission',
+        component: () => import('./views/Commission.vue')
     }
 ];
 

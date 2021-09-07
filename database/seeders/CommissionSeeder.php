@@ -17,19 +17,19 @@ class CommissionSeeder extends Seeder
         DB::table('commissions')->insert([
 
             [
-                'name_comismission' => 'Comunicaciones',
+                'name_commission' => 'Comunicaciones',
                 'image' => 'url/comunicaciones',
                 'id_student_council' => 1,
             ],
             
             [
-                'name_comismission' => 'Deportiva',
+                'name_commission' => 'Deportiva',
                 'image' => 'url/desportiva',
                 'id_student_council' => 1,
             ],
 
             [
-                'name_comismission' => 'Evangelizacion',
+                'name_commission' => 'Evangelizacion',
                 'image' => 'url/evangelizacion',
                 'id_student_council' => 1,
             ],

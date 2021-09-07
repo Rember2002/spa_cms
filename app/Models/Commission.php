@@ -11,7 +11,7 @@ class Commission extends Model
 
     protected $fillable = [
 
-        "name_comismission",
+        "name_commission",
         "image",
         "id_student_council"
 

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveCommissionRequest;
+use App\Http\Requests\UpdateCommissionRequest;
 use App\Http\Resources\CommissionResource;
-use App\Models\Integrant;
 use App\Models\Commission;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CommissionController extends Controller
 {
@@ -16,18 +18,9 @@ class CommissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Integrant $integrant)
+    public function index()
     {
-        // $commission = CommissionResource::collection(Commission::findOrFail($integrant->id));
-
-        // return response()->json([
-
-        //     "data" => $commission,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
-        return CommissionResource::collection(Commission::all());
+        return CommissionResource::collection(DB::select('SELECT C.id, C.name_commission, C.image, S.year, C.id_student_council FROM commissions C INNER JOIN student_councils S ON C.id_student_council = S.id'));
     }
 
     /**
@@ -46,22 +39,20 @@ class CommissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveCommissionRequest $request)
+    public function store(SaveCommissionRequest $request, Commission $commission)
     {
-        // $commission = Commission::create($request->all());
-        
-        // return response()->json([
+        $commission->name_commission = $request->name_commission;
+        $commission->id_student_council = $request->id_student_council;
+        $path = $request->file('image')->store('images_commission');
+        $commission->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $commission,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $commission->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new CommissionResource(Commission::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -72,12 +63,6 @@ class CommissionController extends Controller
      */
     public function show(Commission $commission)
     {
-        // return response()->json([
-
-        //     "data" =>  $commission,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return new CommissionResource($commission);
     }
@@ -100,24 +85,26 @@ class CommissionController extends Controller
      * @param  \App\Models\Commission  $commission
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveCommissionRequest $request, Commission $commission)
+    public function update(UpdateCommissionRequest $request, Commission $commision)
     {
-        // $commission->update($request->all());
-        
-        // return response()->json([
+        $commision->name_commission = $request->name_commission;
+        $commision->id_student_council = $request->id_student_council;
+        $oldPath = $commision->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" =>  $commission,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_commission');
+            $commision->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $commission->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $commision->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new CommissionResource($commission))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -126,23 +113,26 @@ class CommissionController extends Controller
      * @param  \App\Models\Commission  $commission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Commission $commission)
+    public function destroy(Commission $commision)
     {
-        // $commission->delete();
-        
-        // return response()->json([
+        if ($commision->delete()){
+            Storage::delete($commision->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $commission,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $commision,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        $commission->delete();
-
-        return (new CommissionResource($commission))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $commision,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

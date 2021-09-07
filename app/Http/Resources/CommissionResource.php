@@ -18,8 +18,9 @@ class CommissionResource extends JsonResource
 
             'Id' => $this->id,
             'Comision' => $this->name_commission,
-            'Portada' => $this->image,
-            'Consejo Estudiantil' => $this->id_student_council,
+            'Imagen' => $this->image,
+            'Consejo' => $this->id_student_council,
+            'Año' => $this->year,
 
         ];
     }
