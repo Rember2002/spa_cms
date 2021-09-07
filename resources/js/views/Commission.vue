@@ -143,6 +143,9 @@
 
         // Import file aboutUsService that contains functions request routes.
     import * as commissionService from '../services/commission_service';
+
+         // Import file aboutUsService that contains functions request routes.
+    import * as studentcouncilService from '../services/studentcouncil_service';
     
         // Begin export default.
     export default {
@@ -377,7 +380,7 @@
             loadRegisterStudentCouncil() {
                 
                     // Declare Promise for call request load data in select component.
-                commissionService.loadRegisterStudentCouncil().then((response) => {
+                studentcouncilService.loadRegisterStudentCouncil().then((response) => {
 
                         // Declare variable registers to use load data in select.
                     this.options = response.data.data;

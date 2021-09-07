@@ -1862,6 +1862,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _services_commission_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/commission_service */ "./resources/js/services/commission_service.js");
+/* harmony import */ var _services_studentcouncil_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/studentcouncil_service */ "./resources/js/services/studentcouncil_service.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2011,6 +2012,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
+
+ // Import file aboutUsService that contains functions request routes.
 
  // Import file aboutUsService that contains functions request routes.
 
@@ -2251,7 +2254,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       // Declare Promise for call request load data in select component.
-      _services_commission_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterStudentCouncil().then(function (response) {
+      _services_studentcouncil_service__WEBPACK_IMPORTED_MODULE_4__.loadRegisterStudentCouncil().then(function (response) {
         // Declare variable registers to use load data in select.
         _this2.options = response.data.data;
       })["catch"](function (error) {
@@ -2479,8 +2482,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createRegisterCommission": () => (/* binding */ createRegisterCommission),
 /* harmony export */   "loadRegisterCommission": () => (/* binding */ loadRegisterCommission),
 /* harmony export */   "deleteCommissionRegister": () => (/* binding */ deleteCommissionRegister),
-/* harmony export */   "updateRegisterCommission": () => (/* binding */ updateRegisterCommission),
-/* harmony export */   "loadRegisterStudentCouncil": () => (/* binding */ loadRegisterStudentCouncil)
+/* harmony export */   "updateRegisterCommission": () => (/* binding */ updateRegisterCommission)
 /* harmony export */ });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 // Import http service to use config routes API. 
@@ -2500,10 +2502,6 @@ function deleteCommissionRegister(id) {
 
 function updateRegisterCommission(id, data) {
   return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/commisions/".concat(id), data);
-} // Function to use send request API load registers.
-
-function loadRegisterStudentCouncil() {
-  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/studentCouncils');
 }
 
 /***/ }),
@@ -2543,6 +2541,42 @@ function httpFile() {
       'Content-Type': 'multipart/form-data'
     }
   });
+}
+
+/***/ }),
+
+/***/ "./resources/js/services/studentcouncil_service.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/services/studentcouncil_service.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createRegisterStudentCouncil": () => (/* binding */ createRegisterStudentCouncil),
+/* harmony export */   "loadRegisterStudentCouncil": () => (/* binding */ loadRegisterStudentCouncil),
+/* harmony export */   "deleteStudentCouncilRegister": () => (/* binding */ deleteStudentCouncilRegister),
+/* harmony export */   "updateRegisterStudentCouncil": () => (/* binding */ updateRegisterStudentCouncil)
+/* harmony export */ });
+/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
+// Import http service to use config routes API. 
+ // Function to use send request API create register.
+
+function createRegisterStudentCouncil(data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/studentCouncils', data);
+} // Function to use send request API load registers.
+
+function loadRegisterStudentCouncil() {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get('/studentCouncils');
+} // Function to use send request API delete registers selected.
+
+function deleteStudentCouncilRegister(id) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("studentCouncils/".concat(id));
+} // Function to use send request API update register selected.
+
+function updateRegisterStudentCouncil(id, data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/studentCouncils/".concat(id), data);
 }
 
 /***/ }),

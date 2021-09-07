@@ -17,8 +17,3 @@ export function deleteCommissionRegister(id) {
 export function updateRegisterCommission(id, data) {
     return httpFile().post(`/commisions/${id}`, data)
 }
-
-    // Function to use send request API load registers.
-export function loadRegisterStudentCouncil() {
-    return http().get('/studentCouncils')
-}
