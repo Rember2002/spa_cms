@@ -59,13 +59,13 @@
                         <div class="invalid-feedback-validation" v-if="errors.name_commission">{{errors.name_commission[0]}}</div>
                     </div>
                     <div class="form-group col-md-6" >
-                        <label for="id_student_council">Tipo:</label>
+                        <label for="id_student_council">Consejo Estudiantil:</label>
                         <br>
-                        <b-form-select v-model="commissionData.Consejo" class="form-select" id="id_student_council" v-for="(commission, index) in options" :key="index">
+                        <b-form-select placeholder="Seleccione una opcion" v-model="commissionData.Consejo" :state="commissionData.Consejo != ''" class="form-select" id="id_student_council" v-for="(commission, index) in options" :key="index">
+                            <b-form-select-option value="null" disabled selected>Selecciona una opción</b-form-select-option>
                             <b-form-select-option :value="commission.Id">{{commission.Año}}</b-form-select-option>
                         </b-form-select>
-                        <div class="mt-3">Selected: <strong>{{commissionData.Consejo}}</strong></div>
-                        <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
+                        <div class="invalid-feedback-validation" v-if="errors.id_student_council">{{errors.id_student_council[0]}}</div>                    
                     </div>
                     <div class="form-group col-md-12">
                         <label for="image">Imagen:</label>
@@ -99,13 +99,13 @@
                         <div class="invalid-feedback-validation" v-if="errors.name_commission">{{errors.name_commission[0]}}</div>
                     </div>
                     <div class="form-group col-md-6" >
-                        <label for="id_student_council">Tipo:</label>
+                        <label for="id_student_council">Consejo Estudiantil:</label>
                         <br>
-                        <b-form-select v-model="commissionData.Consejo" class="form-select" id="id_student_council" v-for="(commission, index) in options" :key="index">
+                        <b-form-select placeholder="Seleccione una opcion" v-model="commissionData.Consejo" :state="commissionData.Consejo != ''" class="form-select" id="id_student_council" v-for="(commission, index) in options" :key="index">
+                            <b-form-select-option value="null" disabled selected>Selecciona una opción</b-form-select-option>
                             <b-form-select-option :value="commission.Id">{{commission.Año}}</b-form-select-option>
                         </b-form-select>
-                        <div class="mt-3">Selected: <strong>{{commissionData.Consejo}}</strong></div>
-                        <div class="invalid-feedback-validation" v-if="errors.year">{{errors.year[0]}}</div>                    
+                        <div class="invalid-feedback-validation" v-if="errors.id_student_council">{{errors.id_student_council[0]}}</div>                    
                     </div>
                     <div class="form-group col-md-12">
                         <label for="image">Imagen:</label>

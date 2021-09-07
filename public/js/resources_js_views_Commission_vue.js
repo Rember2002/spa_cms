@@ -30003,7 +30003,7 @@ var render = function() {
                     { staticClass: "form-group col-md-6" },
                     [
                       _c("label", { attrs: { for: "id_student_council" } }, [
-                        _vm._v("Tipo:")
+                        _vm._v("Consejo Estudiantil:")
                       ]),
                       _vm._v(" "),
                       _c("br"),
@@ -30014,7 +30014,11 @@ var render = function() {
                           {
                             key: index,
                             staticClass: "form-select",
-                            attrs: { id: "id_student_council" },
+                            attrs: {
+                              placeholder: "Seleccione una opcion",
+                              state: _vm.commissionData.Consejo != "",
+                              id: "id_student_council"
+                            },
                             model: {
                               value: _vm.commissionData.Consejo,
                               callback: function($$v) {
@@ -30026,6 +30030,18 @@ var render = function() {
                           [
                             _c(
                               "b-form-select-option",
+                              {
+                                attrs: {
+                                  value: "null",
+                                  disabled: "",
+                                  selected: ""
+                                }
+                              },
+                              [_vm._v("Selecciona una opción")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-form-select-option",
                               { attrs: { value: commission.Id } },
                               [_vm._v(_vm._s(commission.Año))]
                             )
@@ -30034,18 +30050,11 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "mt-3" }, [
-                        _vm._v("Selected: "),
-                        _c("strong", [
-                          _vm._v(_vm._s(_vm.commissionData.Consejo))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm.errors.year
+                      _vm.errors.id_student_council
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.year[0]))]
+                            [_vm._v(_vm._s(_vm.errors.id_student_council[0]))]
                           )
                         : _vm._e()
                     ],
@@ -30178,7 +30187,7 @@ var render = function() {
                     { staticClass: "form-group col-md-6" },
                     [
                       _c("label", { attrs: { for: "id_student_council" } }, [
-                        _vm._v("Tipo:")
+                        _vm._v("Consejo Estudiantil:")
                       ]),
                       _vm._v(" "),
                       _c("br"),
@@ -30189,7 +30198,11 @@ var render = function() {
                           {
                             key: index,
                             staticClass: "form-select",
-                            attrs: { id: "id_student_council" },
+                            attrs: {
+                              placeholder: "Seleccione una opcion",
+                              state: _vm.commissionData.Consejo != "",
+                              id: "id_student_council"
+                            },
                             model: {
                               value: _vm.commissionData.Consejo,
                               callback: function($$v) {
@@ -30201,6 +30214,18 @@ var render = function() {
                           [
                             _c(
                               "b-form-select-option",
+                              {
+                                attrs: {
+                                  value: "null",
+                                  disabled: "",
+                                  selected: ""
+                                }
+                              },
+                              [_vm._v("Selecciona una opción")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-form-select-option",
                               { attrs: { value: commission.Id } },
                               [_vm._v(_vm._s(commission.Año))]
                             )
@@ -30209,18 +30234,11 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "mt-3" }, [
-                        _vm._v("Selected: "),
-                        _c("strong", [
-                          _vm._v(_vm._s(_vm.commissionData.Consejo))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm.errors.year
+                      _vm.errors.id_student_council
                         ? _c(
                             "div",
                             { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.year[0]))]
+                            [_vm._v(_vm._s(_vm.errors.id_student_council[0]))]
                           )
                         : _vm._e()
                     ],
