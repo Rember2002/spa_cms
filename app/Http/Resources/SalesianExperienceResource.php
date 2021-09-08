@@ -17,7 +17,7 @@ class SalesianExperienceResource extends JsonResource
         return [
 
             'Id' => $this->id,
-            'Evento' => $this->name_evento,
+            'Evento' => $this->name_event,
             'Descripcion' => $this->description,
             'Fecha' => $this->date,
             'Lugar' => $this->place,

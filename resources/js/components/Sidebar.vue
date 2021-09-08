@@ -171,7 +171,7 @@
                 <router-link to="/integrant" class="" exact>
                     <a class="collapse-item" href="login.html">Integrantes</a>
                 </router-link>
-                <router-link to="" class="" exact>
+                <router-link to="/salesianexperience" class="" exact>
                     <a class="collapse-item" href="login.html">Eventos</a>
                 </router-link>
             </div>

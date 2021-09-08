@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveSalesianExperienceRequest;
+use App\Http\Requests\UpdateSalesianExperienceRequest;
 use App\Http\Resources\SalesianExperienceResource;
 use App\Models\SalesianExperience;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class SalesianExperienceController extends Controller
 {
@@ -17,14 +19,6 @@ class SalesianExperienceController extends Controller
      */
     public function index()
     {
-        // $salesianExperience = SalesianExperienceResource::collection(SalesianExperience::all());
-
-        // return response()->json([
-
-        //     "data" => $salesianExperience,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return SalesianExperienceResource::collection(SalesianExperience::all());
     }
@@ -45,22 +39,23 @@ class SalesianExperienceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveSalesianExperienceRequest $request)
+    public function store(SaveSalesianExperienceRequest $request, SalesianExperience $salesianExperience)
     {
-        // $salesianExperience = SalesianExperience::create($request->all());
-        
-        // return response()->json([
+        $salesianExperience->name_event = $request->name_event;
+        $salesianExperience->description = $request->description;
+        $salesianExperience->date = $request->date;
+        $salesianExperience->place = $request->place;
+        $salesianExperience->type = $request->type;
+        $path = $request->file('image')->store('images_eventexperience');
+        $salesianExperience->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $salesianExperience,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $salesianExperience->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new SalesianExperienceResource(SalesianExperience::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -99,24 +94,29 @@ class SalesianExperienceController extends Controller
      * @param  \App\Models\SalesianExperience  $salesianExperience
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveSalesianExperienceRequest $request, SalesianExperience $salesianExperience)
+    public function update(UpdateSalesianExperienceRequest $request, SalesianExperience $salesianExperience)
     {
-        // $salesianExperience->update($request->all());
-       
-        // return response()->json([
+        $salesianExperience->name_event = $request->name_event;
+        $salesianExperience->description = $request->description;
+        $salesianExperience->date = $request->date;
+        $salesianExperience->place = $request->place;
+        $salesianExperience->type = $request->type;
+        $oldPath = $salesianExperience->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $salesianExperience,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_eventexperience');
+            $salesianExperience->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $salesianExperience->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $salesianExperience->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new SalesianExperienceResource($salesianExperience))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -127,19 +127,24 @@ class SalesianExperienceController extends Controller
      */
     public function destroy(SalesianExperience $salesianExperience)
     {
-        // $salesianExperience->delete();
-        
-        // return response()->json([
+        if ($salesianExperience->delete()){
+            Storage::delete($salesianExperience->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $salesianExperience,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $salesianExperience,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        return (new SalesianExperienceResource($salesianExperience))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $salesianExperience,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

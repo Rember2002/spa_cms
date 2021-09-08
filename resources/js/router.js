@@ -103,6 +103,13 @@ const routes = [
         path: '/strategically',
         name: 'strategically',
         component: () => import('./views/StrategicAlly.vue')
+    },
+
+        // Component StudentCouncil.
+    {
+        path: '/salesianexperience',
+        name: 'salesianexperience',
+        component: () => import('./views/SalesianExperience.vue')
     }
 ];
 

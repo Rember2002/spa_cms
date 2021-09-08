@@ -27,7 +27,7 @@ class UpdateSalesianExperienceRequest extends FormRequest
         return [
             'name_event' => ['required', 'max:255'],
             'description' => ['required'],
-            'date' => ['required', 'min:2020-01-01'],
+            'date' => ['required', 'date'],
             'place' => ['required', 'max:255'],
             'image' => ['required', 'max:255'],
             'type' => ['required', Rule::in(['Coro', 'Orquesta', 'Selecciones deportivas', 'Coreografia', 'Oratorio']),],
