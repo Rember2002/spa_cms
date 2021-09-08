@@ -13,7 +13,7 @@ class Integrant extends Model
 
         "name_integrant",
         "image",
-        "id_comission"
+        "id_commission"
 
     ];
 

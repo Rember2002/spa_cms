@@ -190,6 +190,13 @@ var routes = [// Welcome page.
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_Commission_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Commission.vue */ "./resources/js/views/Commission.vue"));
   }
+}, // Component StudentCouncil.
+{
+  path: '/integrant',
+  name: 'integrant',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_Integrant_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Integrant.vue */ "./resources/js/views/Integrant.vue"));
+  }
 }]; // Declare routes in router.
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
@@ -47565,7 +47572,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("router-link", { attrs: { to: "", exact: "" } }, [
+                _c("router-link", { attrs: { to: "/integrant", exact: "" } }, [
                   _c(
                     "a",
                     {
@@ -65172,7 +65179,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1,"resources_js_views_ServiceHome_vue":1,"resources_js_views_StudentCouncil_vue":1,"resources_js_views_Commission_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1,"resources_js_views_ServiceHome_vue":1,"resources_js_views_StudentCouncil_vue":1,"resources_js_views_Commission_vue":1,"resources_js_views_Integrant_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

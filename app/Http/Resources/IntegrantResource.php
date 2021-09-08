@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use phpDocumentor\Reflection\Types\This;
 
 class IntegrantResource extends JsonResource
 {
@@ -19,7 +20,9 @@ class IntegrantResource extends JsonResource
             'Id' => $this->id,
             'Integrante' => $this->name_integrant,
             'Perfil' => $this->image,
-            'Comision' => $this->id_commission,
+            'Comision' => $this->name_commission,
+            'Consejo' => $this->year,
+            'ComisionId' => $this->id_commission,
 
         ];
     }

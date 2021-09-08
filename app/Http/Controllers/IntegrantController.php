@@ -7,6 +7,8 @@ use App\Http\Resources\IntegrantResource;
 use App\Models\Integrant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class IntegrantController extends Controller
 {
@@ -17,16 +19,7 @@ class IntegrantController extends Controller
      */
     public function index()
     {
-        // $integrant = IntegrantResource::collection(Integrant::all());
-
-        // return response()->json([
-
-        //     "data" => $integrant,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
-        return IntegrantResource::collection(Integrant::all());
+        return IntegrantResource::collection(DB::select('SELECT i.id, i.name_integrant, i.image, i.id_commission, c.name_commission, s.year FROM integrants i INNER JOIN commissions c ON i.id_commission=c.id INNER JOIN student_councils s ON c.id_student_council = s.id'));
     }
 
     /**
@@ -45,22 +38,20 @@ class IntegrantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveIntegrantRequest $request)
+    public function store(SaveIntegrantRequest $request, Integrant $integrant)
     {
-        // $integrant = Integrant::create($request->all());
-        
-        // return response()->json([
+        $integrant->name_integrant = $request->name_integrant;
+        $integrant->id_commission = $request->id_commission;
+        $path = $request->file('image')->store('images_integrants');
+        $integrant->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $integrant,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $integrant->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new IntegrantResource(Integrant::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -71,13 +62,6 @@ class IntegrantController extends Controller
      */
     public function show(Integrant $integrant)
     {
-        // return response()->json([
-
-        //     "data" =>  $integrant,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return new IntegrantResource($integrant);
     }
 
@@ -101,22 +85,24 @@ class IntegrantController extends Controller
      */
     public function update(SaveIntegrantRequest $request, Integrant $integrant)
     {
-        // $integrant->update($request->all());
-        
-        // return response()->json([
+        $integrant->name_integrant = $request->name_integrant;
+        $integrant->id_commission = $request->id_commission;
+        $oldPath = $integrant->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" =>  $integrant,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_commission');
+            $integrant->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $integrant->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $integrant->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new IntegrantResource($integrant))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -127,21 +113,24 @@ class IntegrantController extends Controller
      */
     public function destroy(Integrant $integrant)
     {
-        // $integrant->delete();
-        
-        // return response()->json([
+        if ($integrant->delete()){
+            Storage::delete($integrant->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $integrant,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $integrant,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        $integrant->delete();
-
-        return (new IntegrantResource($integrant))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $integrant,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
