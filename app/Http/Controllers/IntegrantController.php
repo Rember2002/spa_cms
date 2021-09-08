@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveIntegrantRequest;
+use App\Http\Requests\UpdateIntegrantRequest;
 use App\Http\Resources\IntegrantResource;
 use App\Models\Integrant;
 use Illuminate\Http\Request;
@@ -83,7 +84,7 @@ class IntegrantController extends Controller
      * @param  \App\Models\Integrant  $integrant
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveIntegrantRequest $request, Integrant $integrant)
+    public function update(UpdateIntegrantRequest $request, Integrant $integrant)
     {
         $integrant->name_integrant = $request->name_integrant;
         $integrant->id_commission = $request->id_commission;
