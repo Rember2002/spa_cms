@@ -27,7 +27,7 @@ class SaveStrategicAllieRequest extends FormRequest
 
             'name_ally' => ['required', 'unique:strategic_allies,name_ally'],
             'image' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
+            'description' => ['required'],
 
         ];
     }

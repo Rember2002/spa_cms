@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveStrategicAllieRequest;
+use App\Http\Requests\UpdateStrategicAllieRequest;
 use App\Http\Resources\StrategicAllieResource;
 use App\Models\StrategicAllie;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class StrategicAllieController extends Controller
 {
@@ -17,14 +19,6 @@ class StrategicAllieController extends Controller
      */
     public function index()
     {
-        // $strategicAllie = StrategicAllie::all();
-
-        // return response()->json([
-
-        //     "data" => $strategicAllie,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return StrategicAllieResource::collection(StrategicAllie::all());
     }
@@ -45,22 +39,20 @@ class StrategicAllieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveStrategicAllieRequest $request)
+    public function store(SaveStrategicAllieRequest $request, StrategicAllie $strategicAlly)
     {
-        // $strategicAllie = StrategicAllie::create($request->all());
-        
-        // return response()->json([
+        $strategicAlly->name_ally = $request->name_ally;
+        $strategicAlly->description = $request->description;
+        $path = $request->file('image')->store('images_strategically');
+        $strategicAlly->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $strategicAllie,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $strategicAlly->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new StrategicAllieResource(StrategicAllie::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -69,16 +61,9 @@ class StrategicAllieController extends Controller
      * @param  \App\Models\StrategicAllie  $strategicAllie
      * @return \Illuminate\Http\Response
      */
-    public function show(StrategicAllie $strategicAllie)
+    public function show(StrategicAllie $strategicAlly)
     {
-        // return response()->json([
-
-        //     "data" => $strategicAllie,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
-        return new StrategicAllieResource($strategicAllie);
+        return new StrategicAllieResource($strategicAlly);
     }
 
     /**
@@ -99,24 +84,26 @@ class StrategicAllieController extends Controller
      * @param  \App\Models\StrategicAllie  $strategicAllie
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveStrategicAllieRequest $request, StrategicAllie $strategicAllie)
+    public function update(UpdateStrategicAllieRequest $request, StrategicAllie $strategicAlly)
     {
-        // $strategicAllie->update($request->all());
-        
-        // return response()->json([
+        $strategicAlly->name_ally = $request->name_ally;
+        $strategicAlly->description = $request->description;
+        $oldPath = $strategicAlly->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $strategicAllie,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_strategically');
+            $strategicAlly->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $strategicAllie->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $strategicAlly->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new StrategicAllieResource($strategicAllie))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -125,21 +112,26 @@ class StrategicAllieController extends Controller
      * @param  \App\Models\StrategicAllie  $strategicAllie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StrategicAllie $strategicAllie)
+    public function destroy(StrategicAllie $strategicAlly)
     {
-        // $strategicAllie->delete();
-        
-        // return response()->json([
+        if ($strategicAlly->delete()){
+            Storage::delete($strategicAlly->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $strategicAllie,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $strategicAlly,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        return (new StrategicAllieResource($strategicAllie))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $strategicAlly,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

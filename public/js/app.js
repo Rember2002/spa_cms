@@ -197,6 +197,13 @@ var routes = [// Welcome page.
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_Integrant_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Integrant.vue */ "./resources/js/views/Integrant.vue"));
   }
+}, // Component StudentCouncil.
+{
+  path: '/strategically',
+  name: 'strategically',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_StrategicAlly_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/StrategicAlly.vue */ "./resources/js/views/StrategicAlly.vue"));
+  }
 }]; // Declare routes in router.
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
@@ -47339,14 +47346,6 @@ var render = function() {
               "div",
               { staticClass: "bg-white py-2 collapse-inner rounded" },
               [
-                _c("router-link", { attrs: { to: "/aboutus", exact: "" } }, [
-                  _c(
-                    "a",
-                    { staticClass: "collapse-item", attrs: { href: "" } },
-                    [_vm._v("Acerca de")]
-                  )
-                ]),
-                _vm._v(" "),
                 _c("router-link", { attrs: { to: "/newhome", exact: "" } }, [
                   _c(
                     "a",
@@ -47432,11 +47431,67 @@ var render = function() {
       _c("hr", { staticClass: "sidebar-divider" }),
       _vm._v(" "),
       _c("div", { staticClass: "sidebar-heading" }, [
-        _vm._v("\n        Oferta Academica\n    ")
+        _vm._v("\n        Acerca de\n    ")
       ]),
       _vm._v(" "),
       _c("li", { staticClass: "nav-item" }, [
         _vm._m(2),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse",
+            attrs: {
+              id: "collapseAboutUs",
+              "aria-labelledby": "headingPages",
+              "data-parent": "#accordionSidebar"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "bg-white py-2 collapse-inner rounded" },
+              [
+                _c("router-link", { attrs: { to: "/aboutus", exact: "" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "collapse-item",
+                      attrs: { href: "login.html" }
+                    },
+                    [_vm._v("Nosotros")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  { attrs: { to: "/strategically", exact: "" } },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "collapse-item",
+                        attrs: { href: "login.html" }
+                      },
+                      [_vm._v("Aliados Estrategicos")]
+                    )
+                  ]
+                )
+              ],
+              1
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "sidebar-divider" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "sidebar-heading" }, [
+        _vm._v("\n        Oferta Academica\n    ")
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "nav-item" }, [
+        _vm._m(3),
         _vm._v(" "),
         _c(
           "div",
@@ -47488,7 +47543,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("li", { staticClass: "nav-item" }, [
-        _vm._m(3),
+        _vm._m(4),
         _vm._v(" "),
         _c(
           "div",
@@ -47529,7 +47584,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("li", { staticClass: "nav-item" }, [
-        _vm._m(4),
+        _vm._m(5),
         _vm._v(" "),
         _c(
           "div",
@@ -47602,7 +47657,7 @@ var render = function() {
       _vm._v(" "),
       _c("hr", { staticClass: "sidebar-divider d-none d-md-block" }),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(6)
     ]
   )
 }
@@ -47655,6 +47710,29 @@ var staticRenderFns = [
         _c("i", { staticClass: "fas fa-home" }),
         _vm._v(" "),
         _c("span", [_vm._v("Pagina Principal")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "nav-link collapsed",
+        attrs: {
+          href: "",
+          "data-toggle": "collapse",
+          "data-target": "#collapseAboutUs",
+          "aria-expanded": "false",
+          "aria-controls": "collapseService"
+        }
+      },
+      [
+        _c("i", { staticClass: "fas fa-landmark" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("Contenido")])
       ]
     )
   },
@@ -65179,7 +65257,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1,"resources_js_views_ServiceHome_vue":1,"resources_js_views_StudentCouncil_vue":1,"resources_js_views_Commission_vue":1,"resources_js_views_Integrant_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1,"resources_js_views_ServiceHome_vue":1,"resources_js_views_StudentCouncil_vue":1,"resources_js_views_Commission_vue":1,"resources_js_views_Integrant_vue":1,"resources_js_views_StrategicAlly_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

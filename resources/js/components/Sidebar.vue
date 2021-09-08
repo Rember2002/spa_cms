@@ -38,9 +38,6 @@
         </a>
         <div id="collapseHomePage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <router-link to="/aboutus" exact>
-                    <a class="collapse-item" href="">Acerca de</a>
-                </router-link>
                 <router-link to="/newhome" class="" exact>
                     <a class="collapse-item" href="">Noticias</a>
                 </router-link>
@@ -74,10 +71,38 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
+        Acerca de
+    </div>
+
+    <!-- Nav Item - About us Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseAboutUs"
+            aria-expanded="false" aria-controls="collapseService">
+            <i class="fas fa-landmark"></i>
+            <span>Contenido</span>
+        </a>
+        <div id="collapseAboutUs" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <router-link to="/aboutus" class="" exact>
+                    <a class="collapse-item" href="login.html">Nosotros</a>
+                </router-link>
+                <router-link to="/strategically" class="" exact>
+                    <a class="collapse-item" href="login.html">Aliados Estrategicos</a>
+                </router-link>
+            </div>
+        </div>
+        
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
         Oferta Academica
     </div>
 
-    <!-- Nav Item - Homepage Collapse Menu -->
+    <!-- Nav Item - Academic Offer Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseOffer"
             aria-expanded="false" aria-controls="collapseOffer">
@@ -104,7 +129,7 @@
         Servicios
     </div>
 
-     <!-- Nav Item - Homepage Collapse Menu -->
+     <!-- Nav Item - Service Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseService"
             aria-expanded="false" aria-controls="collapseService">
@@ -128,7 +153,7 @@
         Vivencia Salesiana
     </div>
 
-     <!-- Nav Item - Homepage Collapse Menu -->
+     <!-- Nav Item - Salesian Experience Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseSalesianExperience"
             aria-expanded="false" aria-controls="collapseService">

@@ -26,7 +26,7 @@ class UpdateStrategicAllieRequest extends FormRequest
         return [
             'name_ally' => ['required'],
             'image' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
+            'description' => ['required'],
         ];
     }
 }

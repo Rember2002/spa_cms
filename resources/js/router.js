@@ -96,6 +96,13 @@ const routes = [
         path: '/integrant',
         name: 'integrant',
         component: () => import('./views/Integrant.vue')
+    },
+
+        // Component StudentCouncil.
+    {
+        path: '/strategically',
+        name: 'strategically',
+        component: () => import('./views/StrategicAlly.vue')
     }
 ];
 
