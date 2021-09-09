@@ -42,8 +42,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SalesianExperienceSeeder::class);
 
-        $this->call(SectionNavBarSeeder::class);
-
         $this->call(ServiceHomeSeeder::class);
 
         $this->call(ServiceSeeder::class);

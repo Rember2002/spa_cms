@@ -16,7 +16,6 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SalesianExperienceController;
 use App\Http\Controllers\SalesianExperienceHomeController;
-use App\Http\Controllers\SectionNavBarController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceHomeController;
 use App\Http\Controllers\StrategicAllieController;
