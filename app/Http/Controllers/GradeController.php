@@ -7,6 +7,8 @@ use App\Http\Resources\GradeResource;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class GradeController extends Controller
 {
@@ -17,16 +19,9 @@ class GradeController extends Controller
      */
     public function index()
     {
-        // $grade = GradeResource::collection(Grade::all());
-
-        // return response()->json([
-
-        //     "data" => $grade,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
-        return GradeResource::collection(Grade::all());
+        return GradeResource::collection(DB::
+        select('SELECT g.id, g.name_grade, g.description, g.image, g.id_academic_offer, a.name_offer 
+        FROM grades g INNER JOIN academic_offers a ON g.id_academic_offer = a.id'));
     }
 
     /**
@@ -45,22 +40,22 @@ class GradeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveGradeRequest $request)
+    public function store(SaveGradeRequest $request, Grade $grade)
     {
-        // $grade = Grade::create($request->all());
-        
-        // return response()->json([
+        $grade->name_grade = $request->name_grade;
+        $grade->description = $request->description;
+        $grade->id_academic_offer = $request->id_academic_offer;
+        $path = $request->file('image')->store('images_grades');
+        $grade->image = $path;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $grade,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $grade->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
 
-        return (new GradeResource(Grade::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -71,12 +66,6 @@ class GradeController extends Controller
      */
     public function show(Grade $grade)
     {
-        // return response()->json([
-
-        //     "data" => $grade,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return new GradeResource($grade);
     }
@@ -101,22 +90,25 @@ class GradeController extends Controller
      */
     public function update(Request $request, Grade $grade)
     {
-        // $grade->update($request->all());
-        
-        // return response()->json([
+        $grade->name_grade = $request->name_grade;
+        $grade->description = $request->description;
+        $grade->id_academic_offer = $request->id_academic_offer;
+        $oldPath = $grade->image;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $grade,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images_grades');
+            $grade->image = $path;
 
-        // ], Response::HTTP_OK);
+            Storage::delete($oldPath);
+        }
 
-        $grade->update($request->all());
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $grade->save(),
+            "status" => Response::HTTP_OK,
 
-        return (new GradeResource($grade))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -127,21 +119,24 @@ class GradeController extends Controller
      */
     public function destroy(Grade $grade)
     {
-        // $grade->delete();
-        
-        // return response()->json([
+        if ($grade->delete()){
+            Storage::delete($grade->image);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $grade,
-        //     "status" => Response::HTTP_OK,
+            return response()->json([
 
-        // ], Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $grade,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
 
-        $grade->delete();
-
-        return (new GradeResource($grade))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $grade,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

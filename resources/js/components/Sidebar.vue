@@ -111,7 +111,7 @@
         </a>
         <div id="collapseOffer" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <router-link to="" class="" exact>
+                <router-link to="/grade" class="" exact>
                     <a class="collapse-item" href="login.html">Grados</a>
                 </router-link>
                 <router-link to="" class="" exact>

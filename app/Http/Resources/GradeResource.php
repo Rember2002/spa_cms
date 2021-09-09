@@ -19,8 +19,10 @@ class GradeResource extends JsonResource
             'Id' => $this->id,
             'Grado' => $this->name_grade,
             'Descripcion' => $this->description,
-            'Contenido Multimedia' => $this->image,
-            'Oferta Academica' => $this->id_academic_offer,
+            'Imagen' => $this->image,
+            'Academica' => $this->name_offer,
+            'AcademicaId' => $this->id_academic_offer,
+
 
         ];
     }
