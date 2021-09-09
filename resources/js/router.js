@@ -111,6 +111,13 @@ const routes = [
         name: 'salesianexperience',
         component: () => import('./views/SalesianExperience.vue')
     },
+
+        // Component Resource.
+    {
+        path: '/resource',
+        name: 'resource',
+        component: () => import('./views/Resource.vue')
+    },
 ];
 
     // Declare routes in router.

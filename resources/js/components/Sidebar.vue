@@ -133,7 +133,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseService"
             aria-expanded="false" aria-controls="collapseService">
-            <i class="fas fa-file-alt"></i>
+            <i class="fas fa-archive"></i>
             <span>Contenido</span>
         </a>
         <div id="collapseService" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -180,6 +180,27 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+
+     <!-- Heading -->
+    <div class="sidebar-heading">
+        Recursos
+    </div>
+
+     <!-- Nav Item - Salesian Experience Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseResource"
+            aria-expanded="false" aria-controls="collapseService">
+            <i class="fas fa-file-alt"></i>
+            <span>Contenido</span>
+        </a>
+        <div id="collapseResource" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <router-link to="/resource" class="" exact>
+                    <a class="collapse-item" href="login.html">Documentos</a>
+                </router-link>
+            </div>
+        </div>
+    </li>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

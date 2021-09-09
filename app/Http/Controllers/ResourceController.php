@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveResourceRequest;
+use App\Http\Requests\UpdateResourceRequest;
 use App\Http\Resources\ResourceResource;
 use App\Models\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class ResourceController extends Controller
 {
@@ -17,17 +19,7 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        // $resource = ResourceResource::collection(Resource::all());
-
-        // return response()->json([
-
-        //     "data" => $resource,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
-
         return ResourceResource::collection(Resource::all());
-
     }
 
     /**
@@ -46,22 +38,22 @@ class ResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveResourceRequest $request)
+    public function store(SaveResourceRequest $request, Resource $resource)
     {
-        // $resource = Resource::create($request->all());
-        
-        // return response()->json([
+        $resource->name_resource = $request->name_resource;
+        $resource->description = $request->description;
+        $pathImage = $request->file('image')->store('images_resource');
+        $resource->image = $pathImage;
+        $pathDocument = $request->file('document')->store('document_resource');
+        $resource->document = $pathDocument;
+
+            return response()->json([
            
-        //     "message" => "El registro ingresado se ha creado con ¡Exito!",
-        //     "data" => $resource,
-        //     "status" => Response::HTTP_CREATED,
+            "message" => "El registro ingresado se ha creado con ¡Exito!",
+            "data" => $resource->save(),
+            "status" => Response::HTTP_CREATED,
 
-        // ],  Response::HTTP_CREATED);
-
-        return (new ResourceResource(Resource::create($request->all())))
-            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        ],  Response::HTTP_CREATED);
     }
 
     /**
@@ -72,12 +64,6 @@ class ResourceController extends Controller
      */
     public function show(Resource $resource)
     {
-        // return response()->json([
-
-        //     "data" => $resource,
-        //     "status" => Response::HTTP_OK,
-
-        // ], Response::HTTP_OK);
 
         return new ResourceResource($resource);
 
@@ -101,24 +87,46 @@ class ResourceController extends Controller
      * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveResourceRequest $request, Resource $resource)
+    public function update(UpdateResourceRequest $request, Resource $resource)
     {
-        // $resource->update($request->all());
         
-        // return response()->json([
+        $resource->name_resource = $request->name_resource;
+        $resource->description = $request->description;
+        $oldPathImage = $resource->image;
+        $oldPathDocument = $resource->document;
 
-        //     "message" => "El registro ha sido modificado con ¡Exito!",
-        //     "data" => $resource,
-        //     "status" => Response::HTTP_OK,
+        if($request->hasFile('image')) {
 
-        // ], Response::HTTP_OK);
+            $pathImage = $request->file('image')->store('images_resource');
+            $resource->image = $pathImage;
 
-        $resource->update($request->all());
+            Storage::delete($oldPathImage);
 
-        return (new ResourceResource($resource))
-            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+            if($request->hasFile('document')){
+                
+                $pathDocument = $request->file('document')->store('document_resource');
+                $resource->document = $pathDocument;
+
+                Storage::delete($oldPathDocument);
+
+                
+            }   return response()->json([
+           
+                "message" => "El registro se ha modificado ¡Exito!",
+                "data" => $resource->save(),
+                "status" => Response::HTTP_OK,
+    
+            ],  Response::HTTP_OK);
+            
+        }
+
+            return response()->json([
+           
+            "message" => "El registro se ha modificado ¡Exito!",
+            "data" => $resource->save(),
+            "status" => Response::HTTP_OK,
+
+        ],  Response::HTTP_OK);
     }
 
     /**
@@ -129,19 +137,27 @@ class ResourceController extends Controller
      */
     public function destroy(Resource $resource)
     {
-        // $resource->delete();
-        
-        // return response()->json([
+        if ($resource->delete()){
+            
+            Storage::delete($resource->document);
 
-        //     "message" => "El registro se ha eliminado con ¡Exito!",
-        //     "data" => $resource,
-        //     "status" => Response::HTTP_OK,
+            Storage::delete($resource->image);
 
-        // ], Response::HTTP_OK);
+            return response()->json([
 
-        return (new ResourceResource($resource))
-            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
-            ->response()
-            ->setStatusCode(Response::HTTP_OK);
+                "message" => "El registro se ha eliminado con ¡Exito!",
+                "data" => $resource,
+                "status" => Response::HTTP_OK,
+    
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+
+                "message" => "No es posible eliminar el registrlo en estos momentos ¡Error!",
+                "data" => $resource,
+                "status" => Response::HTTP_INTERNAL_SERVER_ERROR,
+    
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
