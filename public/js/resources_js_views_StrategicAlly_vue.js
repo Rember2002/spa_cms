@@ -2105,6 +2105,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Logo: '',
         Descripcion: ''
       };
+      this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewStrategicAllyModal: function showNewStrategicAllyModal() {
@@ -2301,6 +2302,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Logo: '',
         Descripcion: ''
       };
+      this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateStrategicAllyModal: function showUpdateStrategicAllyModal() {

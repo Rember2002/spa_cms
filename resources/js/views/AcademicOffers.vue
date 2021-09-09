@@ -261,6 +261,8 @@
                     Portada: '',
                     Estado: '',
                 };
+                this.errors = {};
+                
             },
             
                 // Event open new modal with clean form create.
@@ -314,6 +316,7 @@
                             showConfirmButton: false,
 
                         });
+
                         break;
                     default:
                             // Clean and close form. 
@@ -445,6 +448,7 @@
                     Portada: '',
                     Estado: '',
                 };
+                this.errors = {};
             },
             
                 // Event open update modal with clean form.

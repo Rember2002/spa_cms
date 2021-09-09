@@ -2111,6 +2111,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Portada: '',
         Estado: ''
       };
+      this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewAcademicOfferModal: function showNewAcademicOfferModal() {
@@ -2309,6 +2310,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Portada: '',
         Estado: ''
       };
+      this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateAcademicOfferModal: function showUpdateAcademicOfferModal() {

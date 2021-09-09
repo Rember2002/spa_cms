@@ -2182,6 +2182,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Portada: '',
         Vivencia: ''
       };
+      this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewSalesianExperienceModal: function showNewSalesianExperienceModal() {
@@ -2384,6 +2385,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Portada: '',
         Vivencia: ''
       };
+      this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateSalesianExperienceModal: function showUpdateSalesianExperienceModal() {

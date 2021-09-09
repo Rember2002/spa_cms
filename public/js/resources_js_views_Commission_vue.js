@@ -2120,6 +2120,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Consejo: '',
         Imagen: ''
       };
+      this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewCommissionModal: function showNewCommissionModal() {
@@ -2330,6 +2331,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Consejo: '',
         Imagen: ''
       };
+      this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateCommissionModal: function showUpdateCommissionModal() {

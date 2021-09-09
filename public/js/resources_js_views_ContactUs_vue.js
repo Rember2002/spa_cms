@@ -2059,6 +2059,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Direccion: '',
         Correspondiente: ''
       };
+      this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewContactUsModal: function showNewContactUsModal() {
@@ -2255,6 +2256,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Direccion: '',
         Correspondiente: ''
       };
+      this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateContactUsModal: function showUpdateContactUsModal() {

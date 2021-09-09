@@ -211,6 +211,13 @@ var routes = [// Welcome page.
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_SalesianExperience_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/SalesianExperience.vue */ "./resources/js/views/SalesianExperience.vue"));
   }
+}, // Component Resource.
+{
+  path: '/resource',
+  name: 'resource',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_Resource_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Resource.vue */ "./resources/js/views/Resource.vue"));
+  }
 }]; // Declare routes in router.
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
@@ -47668,7 +47675,46 @@ var render = function() {
       _vm._v(" "),
       _c("hr", { staticClass: "sidebar-divider d-none d-md-block" }),
       _vm._v(" "),
-      _vm._m(6)
+      _c("div", { staticClass: "sidebar-heading" }, [
+        _vm._v("\n        Recursos\n    ")
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "nav-item" }, [
+        _vm._m(6),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse",
+            attrs: {
+              id: "collapseResource",
+              "aria-labelledby": "headingPages",
+              "data-parent": "#accordionSidebar"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "bg-white py-2 collapse-inner rounded" },
+              [
+                _c("router-link", { attrs: { to: "/resource", exact: "" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "collapse-item",
+                      attrs: { href: "login.html" }
+                    },
+                    [_vm._v("Documentos")]
+                  )
+                ])
+              ],
+              1
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(7)
     ]
   )
 }
@@ -47787,7 +47833,7 @@ var staticRenderFns = [
         }
       },
       [
-        _c("i", { staticClass: "fas fa-file-alt" }),
+        _c("i", { staticClass: "fas fa-archive" }),
         _vm._v(" "),
         _c("span", [_vm._v("Contenido")])
       ]
@@ -47811,6 +47857,29 @@ var staticRenderFns = [
       },
       [
         _c("i", { staticClass: "fas fa-child" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("Contenido")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "nav-link collapsed",
+        attrs: {
+          href: "",
+          "data-toggle": "collapse",
+          "data-target": "#collapseResource",
+          "aria-expanded": "false",
+          "aria-controls": "collapseService"
+        }
+      },
+      [
+        _c("i", { staticClass: "fas fa-file-alt" }),
         _vm._v(" "),
         _c("span", [_vm._v("Contenido")])
       ]
@@ -65268,7 +65337,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1,"resources_js_views_ServiceHome_vue":1,"resources_js_views_StudentCouncil_vue":1,"resources_js_views_Commission_vue":1,"resources_js_views_Integrant_vue":1,"resources_js_views_StrategicAlly_vue":1,"resources_js_views_SalesianExperience_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_AboutUs_vue":1,"resources_js_views_AcademicOffers_vue":1,"resources_js_views_Carousel_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Questions_vue":1,"resources_js_views_SalesianExperienceHome_vue":1,"resources_js_views_NewHome_vue":1,"resources_js_views_ServiceHome_vue":1,"resources_js_views_StudentCouncil_vue":1,"resources_js_views_Commission_vue":1,"resources_js_views_Integrant_vue":1,"resources_js_views_StrategicAlly_vue":1,"resources_js_views_SalesianExperience_vue":1,"resources_js_views_Resource_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

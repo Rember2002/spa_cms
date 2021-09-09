@@ -328,6 +328,7 @@
                     Portada: '',
                     Vivencia: '',
                 };
+                this.errors = {};
             },
             
                 // Event open new modal with clean form create.
@@ -515,6 +516,7 @@
                     Portada: '',
                     Vivencia: '',
                 };
+                this.errors = {};
             },
 
                 // Event open update modal with clean form.

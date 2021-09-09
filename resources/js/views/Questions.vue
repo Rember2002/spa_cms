@@ -198,6 +198,7 @@
                     Respuesta: '',
                     Año: '',
                 };
+                this.errors = {};
             },
             
                 // Event open new modal with clean form create.
@@ -379,6 +380,7 @@
                     Respuesta: '',
                     Año: '',
                 };
+                this.errors = {};
             },
 
                 // Event open update modal with clean form.

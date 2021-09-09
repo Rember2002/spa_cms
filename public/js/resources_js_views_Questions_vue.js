@@ -2059,6 +2059,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Respuesta: '',
         Año: ''
       };
+      this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewQuestionsModal: function showNewQuestionsModal() {
@@ -2255,6 +2256,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Respuesta: '',
         Año: ''
       };
+      this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateQuestionsModal: function showUpdateQuestionsModal() {

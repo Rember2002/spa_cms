@@ -2090,6 +2090,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Año: '',
         Portada: ''
       };
+      this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewStudentCouncilModal: function showNewStudentCouncilModal() {
@@ -2284,6 +2285,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Año: '',
         Portada: ''
       };
+      this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateStudentCouncilModal: function showUpdateStudentCouncilModal() {

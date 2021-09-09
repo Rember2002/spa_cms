@@ -254,6 +254,7 @@
                     Estado: '',
                     Imagen: '',
                 };
+                this.errors = {};
             },
             
                 // Event open new modal with clean form create.
@@ -433,6 +434,7 @@
                     Estado: '',
                     Imagen: '',
                 };
+                this.errors = {};
             },
 
                 // Event open update modal with clean form.

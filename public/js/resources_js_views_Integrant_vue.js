@@ -2122,6 +2122,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Comision: '',
         ComisionId: ''
       };
+      this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewIntegrantModal: function showNewIntegrantModal() {
@@ -2343,6 +2344,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Comision: '',
         ComisionId: ''
       };
+      this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateIntegrantModal: function showUpdateIntegrantModal() {
