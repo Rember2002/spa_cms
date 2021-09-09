@@ -2025,7 +2025,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
@@ -30363,61 +30362,44 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group col-md-12" },
-                    [
-                      _c("label", { attrs: { for: "image" } }, [
-                        _vm._v("Imagen:")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c("img", {
-                          ref: "updateImageAboutUsDisplay",
-                          attrs: {
-                            src:
-                              _vm.$store.state.serverPath +
-                              "/storage/" +
-                              _vm.aboutusData.Portada,
-                            width: "700",
-                            height: "300"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-input", {
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "image" },
-                        model: {
-                          value: _vm.aboutusData.Portada,
-                          callback: function($$v) {
-                            _vm.$set(_vm.aboutusData, "Portada", $$v)
-                          },
-                          expression: "aboutusData.Portada"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        ref: "imageUpdateAboutUs",
-                        staticClass: "form-control",
+                  _c("div", { staticClass: "form-group col-md-12" }, [
+                    _c("label", { attrs: { for: "image" } }, [
+                      _vm._v("Imagen:")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("img", {
+                        ref: "updateImageAboutUsDisplay",
                         attrs: {
-                          accept: "image/png,image/jpeg",
-                          type: "file",
-                          id: "image"
-                        },
-                        on: { change: _vm.updateImage }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.image
-                        ? _c(
-                            "div",
-                            { staticClass: "invalid-feedback-validation" },
-                            [_vm._v(_vm._s(_vm.errors.image[0]))]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  )
+                          src:
+                            _vm.$store.state.serverPath +
+                            "/storage/" +
+                            _vm.aboutusData.Portada,
+                          width: "700",
+                          height: "300"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      ref: "imageUpdateAboutUs",
+                      staticClass: "form-control",
+                      attrs: {
+                        accept: "image/png,image/jpeg",
+                        type: "file",
+                        id: "image"
+                      },
+                      on: { change: _vm.updateImage }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.image
+                      ? _c(
+                          "div",
+                          { staticClass: "invalid-feedback-validation" },
+                          [_vm._v(_vm._s(_vm.errors.image[0]))]
+                        )
+                      : _vm._e()
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("hr"),
