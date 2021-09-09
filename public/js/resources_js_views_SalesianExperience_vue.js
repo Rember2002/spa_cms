@@ -2086,7 +2086,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         value: 'Orquesta',
         text: 'Orquesta'
       }, {
-        value: 'Selecciones Deportivas',
+        value: 'Selecciones deportivas',
         text: 'Selecciones Deportivas'
       }, {
         value: 'Coreografia',
@@ -30602,7 +30602,7 @@ var staticRenderFns = [
       },
       [
         _c("h1", { staticClass: "mb-0 text-gray-800" }, [
-          _vm._v("Experiencias Salesianas Eventos")
+          _vm._v("Vivencias Salesianas Eventos")
         ])
       ]
     )

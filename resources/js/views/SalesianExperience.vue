@@ -5,7 +5,7 @@
 
     <!-- Page heading. -->
     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-        <h1 class="mb-0 text-gray-800">Experiencias Salesianas Eventos</h1>
+        <h1 class="mb-0 text-gray-800">Vivencias Salesianas Eventos</h1>
     </div>
     
         <!-- Data table. -->
@@ -225,7 +225,7 @@
                 options: [
                     { value: 'Coro', text: 'Coro' },
                     { value: 'Orquesta', text: 'Orquesta' },
-                    { value: 'Selecciones Deportivas', text: 'Selecciones Deportivas' },
+                    { value: 'Selecciones deportivas', text: 'Selecciones Deportivas' },
                     { value: 'Coreografia', text: 'Coreografia' },
                     { value: 'Oratorio', text: 'Oratorio' },
                 ],
