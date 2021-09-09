@@ -61,7 +61,7 @@
                         <div v-if="studentcouncilData.Portada.name">
                             <img src="" ref="imageStudentCouncilDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="attachImage" ref="imageStudentCouncil" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="attachImage" ref="imageStudentCouncil" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                         <div>
                             <img :src="`${$store.state.serverPath}/storage/${studentcouncilData.Portada}`" ref="updateImageStudentCouncilDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="updateImage" ref="updateImageStudentCouncil" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="updateImage" ref="updateImageStudentCouncil" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>

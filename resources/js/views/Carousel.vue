@@ -69,7 +69,7 @@
                         <div v-if="carouselData.Imagen.name">
                             <img src="" ref="imageCarouselDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="attachImage" ref="imageCarousel" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="attachImage" ref="imageCarousel" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         <div>
                             <img :src="`${$store.state.serverPath}/storage/${carouselData.Imagen}`" ref="updateImageCarouselDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="updateImage" ref="imageUpdateCarousel" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="updateImage" ref="imageUpdateCarousel" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>

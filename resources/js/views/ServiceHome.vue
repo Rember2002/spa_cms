@@ -68,8 +68,8 @@
                         <label for="image">Imagen:</label>
                         <div v-if="servicehomeData.Portada.name">
                             <img src="" ref="imageServiceHomeDisplay" width="700" height="300">  
-                        </div>
-                        <input type="file" v-on:change="attachImage" ref="imageServiceHome" class="form-control" id="image"/>
+                        </div> 
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="attachImage" ref="imageServiceHome" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         <div>
                             <img :src="`${$store.state.serverPath}/storage/${servicehomeData.Portada}`" ref="updateImageServiceHomeDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="updateImage" ref="updateImageServiceHome" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="updateImage" ref="updateImageServiceHome" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>

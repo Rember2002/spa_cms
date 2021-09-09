@@ -89,7 +89,7 @@
                         <div v-if="salesianexperienceData.Portada.name">
                             <img src="" ref="imageSalesianExperienceDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="attachImage" ref="imageSalesianExperience" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="attachImage" ref="imageSalesianExperience" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                         <div>
                             <img :src="`${$store.state.serverPath}/storage/${salesianexperienceData.Portada}`" ref="updateImageSalesianExperienceDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="updateImage" ref="updateImageSalesianExperience" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="updateImage" ref="updateImageSalesianExperience" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>

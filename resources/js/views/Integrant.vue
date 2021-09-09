@@ -72,7 +72,7 @@
                         <div v-if="integrantData.Perfil.name">
                             <img src="" ref="imageIntegrantDisplay" width="225" height="225">  
                         </div>
-                        <input type="file" v-on:change="attachImage" ref="imageIntegrant" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="attachImage" ref="imageIntegrant" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                         <div>
                             <img :src="`${$store.state.serverPath}/storage/${integrantData.Perfil}`" ref="updateImageIntegrantDisplay" width="225" height="225">  
                         </div>
-                        <input type="file" v-on:change="updateImage" ref="updateImageIntegrant" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="updateImage" ref="updateImageIntegrant" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>

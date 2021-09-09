@@ -30038,7 +30038,11 @@ var render = function() {
                     _c("input", {
                       ref: "imageServiceHome",
                       staticClass: "form-control",
-                      attrs: { type: "file", id: "image" },
+                      attrs: {
+                        accept: "image/png,image/jpeg",
+                        type: "file",
+                        id: "image"
+                      },
                       on: { change: _vm.attachImage }
                     }),
                     _vm._v(" "),
@@ -30203,7 +30207,11 @@ var render = function() {
                     _c("input", {
                       ref: "updateImageServiceHome",
                       staticClass: "form-control",
-                      attrs: { type: "file", id: "image" },
+                      attrs: {
+                        accept: "image/png,image/jpeg",
+                        type: "file",
+                        id: "image"
+                      },
                       on: { change: _vm.updateImage }
                     }),
                     _vm._v(" "),

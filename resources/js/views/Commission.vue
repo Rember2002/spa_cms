@@ -72,7 +72,7 @@
                         <div v-if="commissionData.Imagen.name">
                             <img src="" ref="imageCommissionDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="attachImage" ref="imageCommission" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="attachImage" ref="imageCommission" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                         <div>
                             <img :src="`${$store.state.serverPath}/storage/${commissionData.Imagen}`"  ref="updateImageCommissionDisplay" width="700" height="300">  
                         </div>
-                        <input type="file" v-on:change="updateImage" ref="updateImageCommission" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="updateImage" ref="updateImageCommission" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>

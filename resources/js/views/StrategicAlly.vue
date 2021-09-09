@@ -68,7 +68,7 @@
                         <div  class="text-center" v-if="strategicallyData.Logo.name">
                             <img src="" ref="imageStrategicAllyDisplay" width="450" height="250">  
                         </div>
-                        <input type="file" v-on:change="attachImage" ref="imageStrategicAlly" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="attachImage" ref="imageStrategicAlly" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                         <div class="text-center">
                             <img :src="`${$store.state.serverPath}/storage/${strategicallyData.Logo}`" class="table-image" ref="updateImageStrategicAllyDisplay"  width="450" height="250">  
                         </div>
-                        <input type="file" v-on:change="updateImage" ref="updateImageStrategicAlly" class="form-control" id="image"/>
+                        <input accept="image/png,image/jpeg" type="file" v-on:change="updateImage" ref="updateImageStrategicAlly" class="form-control" id="image"/>
                         <div class="invalid-feedback-validation" v-if="errors.image">{{errors.image[0]}}</div>                    
                     </div>
                 </div>
