@@ -27,7 +27,7 @@ class UpdateResourceRequest extends FormRequest
             'name_resource' => ['required'],
             'description' => ['required'],
             'image' => ['required', 'max:255'],
-            'document' => ['required', 'max:255', 'exists:resources,document']
+            'document' => ['required', 'max:255']
         ];
     }
 }
