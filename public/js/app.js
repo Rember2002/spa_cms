@@ -183,28 +183,28 @@ var routes = [// Welcome page.
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_StudentCouncil_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/StudentCouncil.vue */ "./resources/js/views/StudentCouncil.vue"));
   }
-}, // Component StudentCouncil.
+}, // Component Commission.
 {
   path: '/commission',
   name: 'commission',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_Commission_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Commission.vue */ "./resources/js/views/Commission.vue"));
   }
-}, // Component StudentCouncil.
+}, // Component Integrant.
 {
   path: '/integrant',
   name: 'integrant',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_Integrant_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Integrant.vue */ "./resources/js/views/Integrant.vue"));
   }
-}, // Component StudentCouncil.
+}, // Component StrategicAlly.
 {
   path: '/strategically',
   name: 'strategically',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_StrategicAlly_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/StrategicAlly.vue */ "./resources/js/views/StrategicAlly.vue"));
   }
-}, // Component StudentCouncil.
+}, // Component SalesianExperience.
 {
   path: '/salesianexperience',
   name: 'salesianexperience',

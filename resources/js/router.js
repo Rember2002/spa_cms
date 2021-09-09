@@ -84,33 +84,33 @@ const routes = [
         component: () => import('./views/StudentCouncil.vue')
     },
 
-        // Component StudentCouncil.
+        // Component Commission.
     {
         path: '/commission',
         name: 'commission',
         component: () => import('./views/Commission.vue')
     },
 
-        // Component StudentCouncil.
+        // Component Integrant.
     {
         path: '/integrant',
         name: 'integrant',
         component: () => import('./views/Integrant.vue')
     },
 
-        // Component StudentCouncil.
+        // Component StrategicAlly.
     {
         path: '/strategically',
         name: 'strategically',
         component: () => import('./views/StrategicAlly.vue')
     },
 
-        // Component StudentCouncil.
+        // Component SalesianExperience.
     {
         path: '/salesianexperience',
         name: 'salesianexperience',
         component: () => import('./views/SalesianExperience.vue')
-    }
+    },
 ];
 
     // Declare routes in router.

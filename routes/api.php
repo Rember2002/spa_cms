@@ -74,8 +74,6 @@ Route::apiResource('salesianExperiences', SalesianExperienceController::class);
 
 Route::apiResource('salesianExperienceHomes', SalesianExperienceHomeController::class);
 
-Route::apiResource('sectionNavBars', SectionNavBarController::class);
-
 Route::apiResource('services', ServiceController::class);
 
 Route::apiResource('servicesHomes', ServiceHomeController::class);
