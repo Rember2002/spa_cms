@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveServiceRequest;
+use App\Http\Requests\UpdateServiceRequest;
 use App\Http\Resources\ServiceHomeResource;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
@@ -77,7 +78,7 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveServiceRequest $request, Service $service)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
         $service->update($request->all());
 
@@ -95,6 +96,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        $service->delete();
+
         return (new ServiceResource($service))
             ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
             ->response()

@@ -125,6 +125,13 @@ const routes = [
         name: 'grade',
         component: () => import('./views/Grade.vue')
     },
+
+        // Component Resource.
+    {
+        path: '/service',
+        name: 'service',
+        component: () => import('./views/Service.vue')
+    },
 ];
 
     // Declare routes in router.
