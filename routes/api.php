@@ -53,13 +53,9 @@ Route::apiResource('newHomes', NewHomeController::class);
 
 Route::apiResource('carousels', CarouselController::class);
 
-Route::apiResource('categories', CategorieController::class);
-
 Route::apiResource('commisions', CommissionController::class);
 
 Route::apiResource('grades', GradeController::class);
-
-Route::apiResource('images', ImageController::class);
 
 Route::apiResource('integrants', IntegrantController::class);
 
