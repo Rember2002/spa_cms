@@ -20,6 +20,8 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceHomeController;
 use App\Http\Controllers\StrategicAllieController;
 use App\Http\Controllers\StudentCouncilController;
+use App\Models\CategorieGrade;
+use App\Models\CategorieService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +50,10 @@ Route::apiResource('aboutus', AboutUsController::class);
 Route::apiResource('academicOffers', AcademicOfferController::class);
 
 Route::apiResource('contactUs', ContactUsController::class);
+
+Route::apiResource('categorieGrade', CategorieGrade::class);
+
+Route::apiResource('categorieService', CategorieService::class);
 
 Route::apiResource('newHomes', NewHomeController::class);
 
