@@ -47398,14 +47398,6 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("router-link", { attrs: { to: "", exact: "" } }, [
-                  _c(
-                    "a",
-                    { staticClass: "collapse-item", attrs: { href: "" } },
-                    [_vm._v("Menu")]
-                  )
-                ]),
-                _vm._v(" "),
                 _c(
                   "router-link",
                   { attrs: { to: "/academicoffer", exact: "" } },

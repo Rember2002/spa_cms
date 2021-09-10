@@ -47,9 +47,6 @@
                 <router-link to="/carousel" class="" exact>
                     <a class="collapse-item" href="">Carousel</a>
                 </router-link>
-                <router-link to="" class="" exact>
-                    <a class="collapse-item" href="">Menu</a>
-                </router-link>
                 <router-link to="/academicoffer" class="" exact>
                     <a class="collapse-item" href="">Oferta Academica</a>
                 </router-link>

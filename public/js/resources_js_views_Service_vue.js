@@ -1862,6 +1862,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _services_services_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/services_service */ "./resources/js/services/services_service.js");
+/* harmony import */ var _services_categorieservices_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/categorieservices_service */ "./resources/js/services/categorieservices_service.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2007,8 +2008,103 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
+
+ // Import file academicOfferService that contains functions request routes.
 
  // Import file academicOfferService that contains functions request routes.
 
@@ -2020,13 +2116,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       // Declare registers to use to save display data.
+      categories: [],
+      // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare serviceData to use to send data in form.
       serviceData: {
         Servicio: '',
         Descripcion: '',
         Enlace: '',
         Estado: ''
+      },
+      // Declare categorieServiceData to use to send data in form.
+      categorieServiceData: {
+        Categoria: '',
+        Descripcion: '',
+        ServicioId: '',
+        Servicio: ''
       },
       // Save errors to response send request.
       errors: {}
@@ -2079,6 +2184,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // Event open new modal with clean form create.
     showNewServiceModal: function showNewServiceModal() {
       this.$refs.modalCreateService.show();
+    },
+    // Close and clear data in form create.
+    hideNewCategorieServiceModal: function hideNewCategorieServiceModal() {
+      this.$refs.modalCreateCategorieService.hide();
+      this.categorieServiceData = {
+        Categoria: '',
+        Descripcion: '',
+        ServicioId: '',
+        Servicio: ''
+      }, this.errors = {};
+    },
+    // Event open new modal with clean form create.
+    showNewCategorieServiceModal: function showNewCategorieServiceModal(service) {
+      this.$refs.modalCreateCategorieService.show();
+      this.categorieServiceData.ServicioId = service.Id;
+    },
+    // Event open modal show data in table.
+    ShowModalCategorieService: function ShowModalCategorieService(service) {
+      // Modal open.
+      this.$refs.modalShowCategorieService.show(); // Call fuction to load data.
+
+      this.loadRegisteCategorierService(service);
     },
     // Function use for save data forma to send request.
     createRegisterService: function () {
@@ -2170,6 +2297,87 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return createRegisterService;
     }(),
+    // Function use for save data forma to send request.
+    createRegisterCategorieService: function () {
+      var _createRegisterCategorieService = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var formData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                formData = new FormData();
+                formData.append('name_categorie', this.categorieServiceData.Categoria);
+                formData.append('description', this.categorieServiceData.Descripcion);
+                formData.append('id_service', this.categorieServiceData.ServicioId);
+                _context2.prev = 4;
+                _context2.next = 7;
+                return _services_categorieservices_service__WEBPACK_IMPORTED_MODULE_4__.createRegisterCategorieService(formData);
+
+              case 7:
+                // Open swet alert to indicate success.                    
+                this.$swal.fire({
+                  icon: 'success',
+                  title: 'Exito',
+                  text: 'El registro ha sido guardado correctamente'
+                }); // Clean and close form.
+
+                this.hideNewCategorieServiceModal();
+                _context2.next = 23;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](4);
+                _context2.t1 = _context2.t0.response.status;
+                _context2.next = _context2.t1 === 422 ? 16 : 19;
+                break;
+
+              case 16:
+                // Load error validations.
+                this.errors = _context2.t0.response.data.errors; // Show swet alert indicate succeso to load data.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Existen errores en el llenado del formulario',
+                  toast: true,
+                  position: 'top-end',
+                  timer: 3000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+                return _context2.abrupt("break", 22);
+
+              case 19:
+                // Clean and close form. 
+                this.hideNewCategorieServiceModal(); // Open swet alert to indicate errors.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
+                });
+                return _context2.abrupt("break", 22);
+
+              case 22:
+                ;
+
+              case 23:
+                ;
+
+              case 24:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[4, 11]]);
+      }));
+
+      function createRegisterCategorieService() {
+        return _createRegisterCategorieService.apply(this, arguments);
+      }
+
+      return createRegisterCategorieService;
+    }(),
     // Function use to load and draw data in data table.
     loadRegisterService: function loadRegisterService() {
       var _this = this;
@@ -2204,9 +2412,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         });
       });
     },
+    // Function use to load and draw data in data table.
+    loadRegisteCategorierService: function loadRegisteCategorierService(service) {
+      var _this2 = this;
+
+      // Decalre Promise for call request load register.
+      _services_categorieservices_service__WEBPACK_IMPORTED_MODULE_4__.loadRegisterCategorieService(service).then(function (response) {
+        // Declare variable registers to use load data in table.
+        _this2.categories = response.data.data;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
     // Function use to delete register select.
     deleteServiceRegister: function deleteServiceRegister(service) {
-      var _this2 = this;
+      var _this3 = this;
 
       // Swet alert to use question delete register. 
       this.$swal.fire({
@@ -2222,7 +2442,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           // Send reqeust to use delete register.
           _services_services_service__WEBPACK_IMPORTED_MODULE_3__.deleteServiceRegister(service.Id).then(function (response) {
             // Swet alert to use indicate success.
-            _this2.$swal.fire({
+            _this3.$swal.fire({
               icon: 'success',
               title: "El registro: ".concat(service.Servicio, " ha sido eliminado correctamente."),
               toast: true,
@@ -2235,11 +2455,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             _services_services_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterService().then(function (response) {
               // Declare variable registers to use load data in table.
-              _this2.registers = response.data.data;
+              _this3.registers = response.data.data;
             });
           })["catch"](function (error) {
             // Swet alert to use indidcate error.
-            _this2.$swal.fire({
+            _this3.$swal.fire({
               icon: 'error',
               title: "No es posible eliminar el registro: ".concat(service.Servicio, " en estos momentos."),
               toast: true,
@@ -2250,9 +2470,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             });
           }); // The result for question in this alert is denied. 
         } else if (result.isDenied) {
-          _this2.$swal.fire({
+          _this3.$swal.fire({
             icon: 'warning',
             title: "El registro;".concat(service.Servicio, "  no ha sido eliminado"),
+            toast: true,
+            showConfirmButton: false,
+            position: 'top-end',
+            timer: 3000,
+            timerProgressBar: true
+          });
+        }
+
+        ;
+      });
+    },
+    // Function use to delete register select.
+    deleteCategorieServiceRegister: function deleteCategorieServiceRegister(service) {
+      var _this4 = this;
+
+      // Swet alert to use question delete register. 
+      this.$swal.fire({
+        title: "\xBFDesea eliminar el registro: ".concat(service.Categoria, "?"),
+        icon: 'question',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Eliminar",
+        denyButtonText: "Cancelar"
+      }).then(function (result) {
+        // The result for question in this alert is confirmed.
+        if (result.isConfirmed) {
+          // Send reqeust to use delete register.
+          _services_categorieservices_service__WEBPACK_IMPORTED_MODULE_4__.deleteCategorieServiceRegister(service.Id).then(function (response) {
+            // Swet alert to use indicate success.
+            _this4.$swal.fire({
+              icon: 'success',
+              title: "El registro: ".concat(service.Categoria, " ha sido eliminado correctamente."),
+              toast: true,
+              showConfirmButton: false,
+              position: 'top-end',
+              timer: 3000,
+              timerProgressBar: true
+            }); // Call function to use load data.
+
+
+            _this4.loadRegisteCategorierService(service.ServicioId);
+          })["catch"](function (error) {
+            // Swet alert to use indidcate error.
+            _this4.$swal.fire({
+              icon: 'error',
+              title: "No es posible eliminar el registro: ".concat(service.Categoria, " en estos momentos."),
+              toast: true,
+              showConfirmButton: false,
+              position: 'top-end',
+              timer: 3000,
+              timerProgressBar: true
+            });
+          }); // The result for question in this alert is denied. 
+        } else if (result.isDenied) {
+          _this4.$swal.fire({
+            icon: 'warning',
+            title: "El registro: ".concat(service.Categoria, "  no ha sido eliminado"),
             toast: true,
             showConfirmButton: false,
             position: 'top-end',
@@ -2279,20 +2556,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     showUpdateServiceModal: function showUpdateServiceModal() {
       this.$refs.modalUpdateService.show();
     },
+    // Close and clear data in form update.
+    hideUpdateCategorieServiceModal: function hideUpdateCategorieServiceModal(service) {
+      // Close modal.
+      this.$refs.modalUpdateCategorieService.hide(); // Clean data.
+
+      this.categorieServiceData = {
+        Categoria: '',
+        Descripcion: '',
+        ServicioId: '',
+        Servicio: ''
+      }, // Clean error.
+      this.errors = {}; // Load data.
+
+      this.loadRegisteCategorierService(service);
+    },
+    // Event open update modal with clean form.
+    showUpdateCategorieServiceModal: function showUpdateCategorieServiceModal() {
+      this.$refs.modalUpdateCategorieService.show();
+    },
     // Capture dates into form update.
     updateDataService: function updateDataService(service) {
       this.serviceData = _objectSpread({}, service);
       this.showUpdateServiceModal();
     },
+    // Capture dates into form update.
+    updateDataCategorieService: function updateDataCategorieService(service) {
+      this.categorieServiceData = _objectSpread({}, service);
+      this.showUpdateCategorieServiceModal();
+    },
     // Function to use update register selected.
     updateRegisterService: function () {
-      var _updateRegisterService = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var _updateRegisterService = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var formData, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.prev = 0;
+                _context3.prev = 0;
                 formData = new FormData();
                 formData.append('name_service', this.serviceData.Servicio);
                 formData.append('description', this.serviceData.Descripcion);
@@ -2300,15 +2601,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData.append('state', this.serviceData.Estado);
                 formData.append('_method', 'put'); // Call request in service to update data.
 
-                _context2.next = 9;
+                _context3.next = 9;
                 return _services_services_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterService(this.serviceData.Id, formData);
 
               case 9:
-                _context2.next = 11;
+                _context3.next = 11;
                 return _services_services_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterService();
 
               case 11:
-                data = _context2.sent;
+                data = _context3.sent;
                 // Save data in registers.
                 this.registers = data.data.data;
                 this.hideUpdateServiceModal(); // Open swet alert to indicate success.                    
@@ -2318,19 +2619,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   title: 'Exito',
                   text: "El registro ha sido modificado correctamente"
                 });
-                _context2.next = 29;
+                _context3.next = 29;
                 break;
 
               case 17:
-                _context2.prev = 17;
-                _context2.t0 = _context2["catch"](0);
-                _context2.t1 = _context2.t0.response.status;
-                _context2.next = _context2.t1 === 422 ? 22 : 25;
+                _context3.prev = 17;
+                _context3.t0 = _context3["catch"](0);
+                _context3.t1 = _context3.t0.response.status;
+                _context3.next = _context3.t1 === 422 ? 22 : 25;
                 break;
 
               case 22:
                 // Load error validations.
-                this.errors = _context2.t0.response.data.errors; // Show swet alert indicate succeso to load data.
+                this.errors = _context3.t0.response.data.errors; // Show swet alert indicate succeso to load data.
 
                 this.$swal.fire({
                   icon: 'error',
@@ -2341,7 +2642,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   timerProgressBar: true,
                   showConfirmButton: false
                 });
-                return _context2.abrupt("break", 28);
+                return _context3.abrupt("break", 28);
 
               case 25:
                 // Clean and close form. 
@@ -2352,17 +2653,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   title: 'Error',
                   text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
                 });
-                return _context2.abrupt("break", 28);
+                return _context3.abrupt("break", 28);
 
               case 28:
                 ;
 
               case 29:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this, [[0, 17]]);
+        }, _callee3, this, [[0, 17]]);
       }));
 
       function updateRegisterService() {
@@ -2370,10 +2671,126 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return updateRegisterService;
+    }(),
+    // Function to use update register selected.
+    updateRegisterCategorieService: function () {
+      var _updateRegisterCategorieService = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var formData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                formData = new FormData();
+                formData.append('name_categorie', this.categorieServiceData.Categoria);
+                formData.append('description', this.categorieServiceData.Descripcion);
+                formData.append('id_service', this.categorieServiceData.ServicioId);
+                formData.append('_method', 'put'); // Call request in service to update data.
+
+                _context4.next = 8;
+                return _services_categorieservices_service__WEBPACK_IMPORTED_MODULE_4__.updateRegisterCategorieService(this.categorieServiceData.Id, formData);
+
+              case 8:
+                // Call fuction close modal.        
+                this.hideUpdateCategorieServiceModal(this.categorieServiceData.ServicioId); // Open swet alert to indicate success.                    
+
+                this.$swal.fire({
+                  icon: 'success',
+                  title: 'Exito',
+                  text: "El registro ha sido modificado correctamente"
+                });
+                _context4.next = 24;
+                break;
+
+              case 12:
+                _context4.prev = 12;
+                _context4.t0 = _context4["catch"](0);
+                _context4.t1 = _context4.t0.response.status;
+                _context4.next = _context4.t1 === 422 ? 17 : 20;
+                break;
+
+              case 17:
+                // Load error validations.
+                this.errors = _context4.t0.response.data.errors; // Show swet alert indicate succeso to load data.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Existen errores en el llenado del formulario',
+                  toast: true,
+                  position: 'top-end',
+                  timer: 3000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+                return _context4.abrupt("break", 23);
+
+              case 20:
+                // Clean and close form. 
+                this.hideUpdateCategorieServiceModal(this.categorieServiceData.Id); // Open swet alert to indicate errors.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
+                });
+                return _context4.abrupt("break", 23);
+
+              case 23:
+                ;
+
+              case 24:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 12]]);
+      }));
+
+      function updateRegisterCategorieService() {
+        return _updateRegisterCategorieService.apply(this, arguments);
+      }
+
+      return updateRegisterCategorieService;
     }()
   } // End declare methods.
 
 }); // End export default.
+
+/***/ }),
+
+/***/ "./resources/js/services/categorieservices_service.js":
+/*!************************************************************!*\
+  !*** ./resources/js/services/categorieservices_service.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createRegisterCategorieService": () => (/* binding */ createRegisterCategorieService),
+/* harmony export */   "loadRegisterCategorieService": () => (/* binding */ loadRegisterCategorieService),
+/* harmony export */   "deleteCategorieServiceRegister": () => (/* binding */ deleteCategorieServiceRegister),
+/* harmony export */   "updateRegisterCategorieService": () => (/* binding */ updateRegisterCategorieService)
+/* harmony export */ });
+/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
+// Import http service to use config routes API. 
+ // Function to use send request API create register.
+
+function createRegisterCategorieService(data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/categorieService', data);
+} // Function to use send request API load registers.
+
+function loadRegisterCategorieService(id) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get("/categorieService/".concat(id));
+} // Function to use send request API delete registers selected.
+
+function deleteCategorieServiceRegister(id) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("categorieService/".concat(id));
+} // Function to use send request API update register selected.
+
+function updateRegisterCategorieService(id, data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/categorieService/".concat(id), data);
+}
 
 /***/ }),
 
@@ -29766,7 +30183,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "card-body table-responsive  align-items-center justify-content-center"
+              "card-body table-responsive align-items-center justify-content-center"
           },
           [
             _c(
@@ -29804,6 +30221,37 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(service.Estado))]),
                       _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.ShowModalCategorieService(
+                                  service.Id,
+                                  service.Servicio
+                                )
+                              }
+                            }
+                          },
+                          [_c("span", { staticClass: "fa fa-eye" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.showNewCategorieServiceModal(service)
+                              }
+                            }
+                          },
+                          [_c("span", { staticClass: "fa fa-plus" })]
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c("td", [
                         _c(
                           "button",
@@ -29840,6 +30288,404 @@ var render = function() {
           ]
         )
       ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "modalShowCategorieService",
+          attrs: { "hide-footer": "", size: "xl", title: "Categorias Servicio" }
+        },
+        [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-hover table-bordered",
+                attrs: { id: "tableRegistersCategorie" }
+              },
+              [
+                _c("thead", [
+                  _c("tr", [
+                    _c("td", [_vm._v("Categoria")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Descripcion")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Acciones")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.categories, function(service, index) {
+                    return _c("tr", { key: index }, [
+                      _c("td", [_vm._v(_vm._s(service.Categoria))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(service.Descripcion))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.updateDataCategorieService(service)
+                              }
+                            }
+                          },
+                          [_c("span", { staticClass: "fa fa-edit" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteCategorieServiceRegister(
+                                  service
+                                )
+                              }
+                            }
+                          },
+                          [_c("span", { staticClass: "fa fa-trash" })]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "modalCreateCategorieService",
+          attrs: { "hide-footer": "", size: "sm", title: "Agregar Categoria" }
+        },
+        [
+          _c("div", { staticClass: "d-block" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.createRegisterCategorieService.apply(
+                      null,
+                      arguments
+                    )
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "form-row" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-12" },
+                      [
+                        _c("label", { attrs: { for: "name_categorie" } }, [
+                          _vm._v("Nombre:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.categorieServiceData.Categoria.length >= 1 &&
+                              _vm.categorieServiceData.Categoria.length < 50,
+                            type: "text",
+                            id: "name_categorie",
+                            placeholder: "Ingresar Nombre",
+                            autocomplete: "off"
+                          },
+                          model: {
+                            value: _vm.categorieServiceData.Categoria,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.categorieServiceData,
+                                "Categoria",
+                                $$v
+                              )
+                            },
+                            expression: "categorieServiceData.Categoria"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.name_categorie
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.name_categorie[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-12" },
+                      [
+                        _c("label", { attrs: { for: "description" } }, [
+                          _vm._v("Descripcion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-textarea", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.categorieServiceData.Descripcion.length >=
+                                1 &&
+                              _vm.categorieServiceData.Descripcion.length <
+                                1000,
+                            type: "text",
+                            id: "description",
+                            placeholder: "Ingresar Descripcion",
+                            autocomplete: "off"
+                          },
+                          model: {
+                            value: _vm.categorieServiceData.Descripcion,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.categorieServiceData,
+                                "Descripcion",
+                                $$v
+                              )
+                            },
+                            expression: "categorieServiceData.Descripcion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.description
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.description[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("b-form-input", {
+                      staticClass: "hidden",
+                      attrs: { id: "id_service" },
+                      model: {
+                        value: _vm.categorieServiceData.ServicioId,
+                        callback: function($$v) {
+                          _vm.$set(_vm.categorieServiceData, "ServicioId", $$v)
+                        },
+                        expression: "categorieServiceData.ServicioId"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button" },
+                      on: { click: _vm.hideNewCategorieServiceModal }
+                    },
+                    [_vm._v("Cancelar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _c("span", { staticClass: "fa fa-check" }),
+                      _vm._v("Aceptar")
+                    ]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "modalUpdateCategorieService",
+          attrs: { "hide-footer": "", size: "sm", title: "Modificar Categoria" }
+        },
+        [
+          _c("div", { staticClass: "d-block" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.updateRegisterCategorieService.apply(
+                      null,
+                      arguments
+                    )
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "form-row" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-12" },
+                      [
+                        _c("label", { attrs: { for: "name_categorie" } }, [
+                          _vm._v("Nombre:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.categorieServiceData.Categoria.length >= 1 &&
+                              _vm.categorieServiceData.Categoria.length < 50,
+                            type: "text",
+                            id: "name_categorie",
+                            placeholder: "Ingresar Nombre",
+                            autocomplete: "off"
+                          },
+                          model: {
+                            value: _vm.categorieServiceData.Categoria,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.categorieServiceData,
+                                "Categoria",
+                                $$v
+                              )
+                            },
+                            expression: "categorieServiceData.Categoria"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.name_categorie
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.name_categorie[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-12" },
+                      [
+                        _c("label", { attrs: { for: "description" } }, [
+                          _vm._v("Descripcion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-textarea", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.categorieServiceData.Descripcion.length >=
+                                1 &&
+                              _vm.categorieServiceData.Descripcion.length <
+                                1000,
+                            type: "text",
+                            id: "description",
+                            placeholder: "Ingresar Descripcion",
+                            autocomplete: "off"
+                          },
+                          model: {
+                            value: _vm.categorieServiceData.Descripcion,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.categorieServiceData,
+                                "Descripcion",
+                                $$v
+                              )
+                            },
+                            expression: "categorieServiceData.Descripcion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.description
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.description[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("b-form-input", {
+                      staticClass: "hidden",
+                      attrs: { id: "id_service" },
+                      model: {
+                        value: _vm.categorieServiceData.ServicioId,
+                        callback: function($$v) {
+                          _vm.$set(_vm.categorieServiceData, "ServicioId", $$v)
+                        },
+                        expression: "categorieServiceData.ServicioId"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.hideUpdateCategorieServiceModal(
+                            _vm.categorieServiceData.ServicioId
+                          )
+                        }
+                      }
+                    },
+                    [_vm._v("Cancelar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _c("span", { staticClass: "fa fa-check" }),
+                      _vm._v("Aceptar")
+                    ]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c(
         "b-modal",
@@ -30309,6 +31155,8 @@ var staticRenderFns = [
         _c("td", [_vm._v("Enlace")]),
         _vm._v(" "),
         _c("td", [_vm._v("Estado")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("Categorias")]),
         _vm._v(" "),
         _c("td", [_vm._v("Acciones")])
       ])

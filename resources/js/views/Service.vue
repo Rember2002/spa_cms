@@ -16,7 +16,7 @@
             <button class="btn btn-success btn-sm ml-auto" @click="showNewServiceModal"><span><i class="fa fa-plus"></i></span>Agregar Registro</button>
         </div>
             <!-- Content data table. -->
-        <div class="card-body table-responsive  align-items-center justify-content-center">
+        <div class="card-body table-responsive align-items-center justify-content-center">
             <table id="tableRegisters" class="table table-hover table-responsive table-bordered">  
                 <thead class="table-dark">
                     <tr>
@@ -25,6 +25,7 @@
                         <td>Descripcion</td>
                         <td>Enlace</td>
                         <td>Estado</td>
+                        <td>Categorias</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
@@ -35,6 +36,10 @@
                         <td>{{service.Descripcion}}</td>
                         <td><a target="_blank" :href="`${service.Enlace}`"><button class="btn btn-primary"><span class="fas fa-external-link-square-alt"></span>Abiir enlace</button></a></td>
                         <td>{{service.Estado}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-warning btn-sm" @click="ShowModalCategorieService(service.Id, service.Servicio)"><span class="fa fa-eye"></span></button>
+                            <button class="btn btn-success btn-sm" @click="showNewCategorieServiceModal(service)"><span class="fa fa-plus"></span></button>
+                        </td>
                         <td>
                             <button class="btn btn-success btn-sm" @click="updateDataService(service)"><span class="fa fa-edit"></span></button>
                             <button class="btn btn-danger btn-sm" @click="deleteServiceRegister(service)"><span class="fa fa-trash"></span></button>
@@ -46,6 +51,94 @@
             <!-- End content data table. -->
     </div>
         <!--End data table. -->
+
+        <!-- Begin show table modal -->
+
+    <b-modal ref="modalShowCategorieService" hide-footer size="xl" title="Categorias Servicio">
+        <div class="card">
+                <table id="tableRegistersCategorie" class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <td>Categoria</td>
+                        <td>Descripcion</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(service, index) in categories" :key="index">
+                        <td>{{service.Categoria}}</td>
+                        <td>{{service.Descripcion}}</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" @click="updateDataCategorieService(service)"><span class="fa fa-edit"></span></button>
+                            <button class="btn btn-danger btn-sm" @click="deleteCategorieServiceRegister(service)"><span class="fa fa-trash"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+               </table>
+        </div>
+    </b-modal>
+
+        <!-- End show table modal -->
+
+        <!-- Begin show table modal create -->
+
+    <b-modal ref="modalCreateCategorieService" hide-footer size="sm" title="Agregar Categoria">
+        <div class="d-block">
+            <!-- Form modal create. -->
+            <form v-on:submit.prevent="createRegisterCategorieService">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="name_categorie">Nombre:</label>
+                        <b-form-input :state="categorieServiceData.Categoria.length >= 1 && categorieServiceData.Categoria.length < 50" type="text" class="form-control" id="name_categorie" v-model="categorieServiceData.Categoria" placeholder="Ingresar Nombre" autocomplete="off"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.name_categorie">{{errors.name_categorie[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="description">Descripcion:</label>
+                        <b-form-textarea :state="categorieServiceData.Descripcion.length >= 1 && categorieServiceData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="categorieServiceData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                    </div>
+                    <b-form-input id="id_service" v-model="categorieServiceData.ServicioId" class="hidden"></b-form-input>
+                </div>
+                <hr>
+                <div class="text-center">    
+                    <button type="button" class="btn btn-default" @click="hideNewCategorieServiceModal">Cancelar</button>
+                    <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
+                </div>
+            </form> 
+                <!-- End form modal create. -->
+        </div>
+    </b-modal>
+
+    <!-- Begin show table modal create -->
+
+    <b-modal ref="modalUpdateCategorieService" hide-footer size="sm" title="Modificar Categoria">
+        <div class="d-block">
+            <!-- Form modal create. -->
+            <form v-on:submit.prevent="updateRegisterCategorieService">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="name_categorie">Nombre:</label>
+                        <b-form-input :state="categorieServiceData.Categoria.length >= 1 && categorieServiceData.Categoria.length < 50" type="text" class="form-control" id="name_categorie" v-model="categorieServiceData.Categoria" placeholder="Ingresar Nombre" autocomplete="off"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.name_categorie">{{errors.name_categorie[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="description">Descripcion:</label>
+                        <b-form-textarea :state="categorieServiceData.Descripcion.length >= 1 && categorieServiceData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="categorieServiceData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                    </div>
+                    <b-form-input id="id_service" v-model="categorieServiceData.ServicioId" class="hidden"></b-form-input>
+                </div>
+                <hr>
+                <div class="text-center">    
+                    <button type="button" class="btn btn-default" @click="hideUpdateCategorieServiceModal(categorieServiceData.ServicioId)">Cancelar</button>
+                    <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
+                </div>
+            </form> 
+                <!-- End form modal create. -->
+        </div>
+    </b-modal>
+
+        <!-- End show table modal create -->    
 
         <!-- Content modal create. -->
     <b-modal ref="modalCreateService" hide-footer size="xl" title="Agregar Nuevo Registro">
@@ -142,6 +235,9 @@
         // Import file academicOfferService that contains functions request routes.
     import * as servicesService from '../services/services_service';
 
+        // Import file academicOfferService that contains functions request routes.
+    import * as categorieservicesService from '../services/categorieservices_service';
+
         // Begin export default.
     export default {
 
@@ -152,14 +248,25 @@
             return {
 
                     // Declare registers to use to save display data.
+                categories: [],
+
+                    // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare serviceData to use to send data in form.
                 serviceData: {
                     Servicio: '',
                     Descripcion: '',
                     Enlace: '',
                     Estado: '',
+                },
+
+                    // Declare categorieServiceData to use to send data in form.
+                categorieServiceData: {
+                    Categoria: '',
+                    Descripcion: '',
+                    ServicioId: '',
+                    Servicio: '',
                 },
 
                     // Save errors to response send request.
@@ -173,6 +280,7 @@
         mounted() {   
                 // Call method function to use load data.
             this.loadRegisterService();
+
         },
         
             // Declare methods for use in components.
@@ -204,7 +312,6 @@
                 })
             },
 
-
                 // Close and clear data in form create.
             hideNewServiceModal() {
                 this.$refs.modalCreateService.hide();
@@ -221,6 +328,36 @@
                 // Event open new modal with clean form create.
             showNewServiceModal() {
                 this.$refs.modalCreateService.show();
+            },
+
+                // Close and clear data in form create.
+            hideNewCategorieServiceModal() {
+                this.$refs.modalCreateCategorieService.hide();
+                this.categorieServiceData = {
+                    Categoria: '',
+                    Descripcion: '',
+                    ServicioId: '',
+                    Servicio: '',
+                },
+                this.errors = {};
+                
+            },
+            
+                // Event open new modal with clean form create.
+            showNewCategorieServiceModal(service) {
+                this.$refs.modalCreateCategorieService.show();
+
+                this.categorieServiceData.ServicioId = service.Id;
+            },
+
+                // Event open modal show data in table.
+            ShowModalCategorieService(service) {
+
+                    // Modal open.
+                this.$refs.modalShowCategorieService.show();
+
+                    // Call fuction to load data.
+                this.loadRegisteCategorierService(service);
             },
             
                 // Function use for save data forma to send request.
@@ -283,7 +420,61 @@
                         break;
                     };
                 };
-            },  
+            }, 
+            
+                // Function use for save data forma to send request.
+            createRegisterCategorieService: async function () {
+                let formData = new FormData();
+                    formData.append('name_categorie', this.categorieServiceData.Categoria);
+                    formData.append('description', this.categorieServiceData.Descripcion);
+                    formData.append('id_service', this.categorieServiceData.ServicioId)
+                try {
+                        // Call request to create register in service.
+                    await categorieservicesService.createRegisterCategorieService(formData);
+
+                        // Open swet alert to indicate success.                    
+                    this.$swal.fire({
+                        icon: 'success',
+                        title: 'Exito',
+                        text: 'El registro ha sido guardado correctamente',
+                    });
+                        // Clean and close form.
+                    this.hideNewCategorieServiceModal();
+                    
+                } catch (error) {
+                                    
+                    // Validate HTTP response status code.
+                switch (error.response.status) {
+                        // Error 422 HTTP_
+                    case 422:
+                            // Load error validations.
+                        this.errors = error.response.data.errors;
+                            // Show swet alert indicate succeso to load data.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Existen errores en el llenado del formulario',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+
+                        });
+
+                        break;
+                    default:
+                            // Clean and close form. 
+                        this.hideNewCategorieServiceModal();
+                            // Open swet alert to indicate errors.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento',
+                        });
+                        break;
+                    };
+                };
+            }, 
 
                 // Function use to load and draw data in data table.
             loadRegisterService() {
@@ -324,6 +515,23 @@
                 
 
             },
+
+                // Function use to load and draw data in data table.
+            loadRegisteCategorierService(service) {
+
+                    // Decalre Promise for call request load register.
+                categorieservicesService.loadRegisterCategorieService(service).then((response)=>{
+                     
+                    // Declare variable registers to use load data in table.
+                this.categories = response.data.data;
+
+                }).catch((error) => {
+                    console.error(error);
+                });
+                
+
+            },
+
 
                 // Function use to delete register select.
             deleteServiceRegister(service) {
@@ -392,6 +600,68 @@
                 });
             },
 
+                // Function use to delete register select.
+            deleteCategorieServiceRegister(service) {
+                
+                // Swet alert to use question delete register. 
+            this.$swal.fire({
+                title: `¿Desea eliminar el registro: ${service.Categoria}?`,
+                icon: 'question',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: `Eliminar`,
+                denyButtonText: `Cancelar`,
+                }).then((result) => {
+
+                        // The result for question in this alert is confirmed.
+                    if (result.isConfirmed) {
+
+                            // Send reqeust to use delete register.
+                        categorieservicesService.deleteCategorieServiceRegister(service.Id).then((response) =>{
+
+                                // Swet alert to use indicate success.
+                            this.$swal.fire({
+                                icon: 'success',
+                                title: `El registro: ${service.Categoria} ha sido eliminado correctamente.`,
+                                toast: true,
+                                showConfirmButton: false,
+                                position: 'top-end',
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+
+                                // Call function to use load data.
+                            this.loadRegisteCategorierService(service.ServicioId);
+
+                        }).catch((error =>{
+
+                            // Swet alert to use indidcate error.
+                        this.$swal.fire({
+                                icon: 'error',
+                                title: `No es posible eliminar el registro: ${service.Categoria} en estos momentos.`,
+                                toast: true,
+                                showConfirmButton: false,
+                                position: 'top-end',
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                        }));
+                        
+                        // The result for question in this alert is denied. 
+                    } else if (result.isDenied) {
+                    this.$swal.fire({
+                            icon: 'warning',
+                            title: `El registro: ${service.Categoria}  no ha sido eliminado`,
+                            toast: true,
+                            showConfirmButton: false,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                    };
+                });
+            },
+
                 // Close and clear data in form update.
             hideUpdateServiceModal(){
                 this.$refs.modalUpdateService.hide();
@@ -409,10 +679,42 @@
                 this.$refs.modalUpdateService.show();
             },
 
+                // Close and clear data in form update.
+            hideUpdateCategorieServiceModal(service){
+                
+                    // Close modal.
+                this.$refs.modalUpdateCategorieService.hide();
+                
+                    // Clean data.
+                this.categorieServiceData = {
+                    Categoria: '',
+                    Descripcion: '',
+                    ServicioId: '',
+                    Servicio: '',
+                },
+
+                    // Clean error.
+                this.errors = {};
+
+                    // Load data.
+                this.loadRegisteCategorierService(service);
+            },
+            
+                // Event open update modal with clean form.
+            showUpdateCategorieServiceModal(){
+                this.$refs.modalUpdateCategorieService.show();
+            },
+
                 // Capture dates into form update.
             updateDataService(service) {
                 this.serviceData = {...service};
                 this.showUpdateServiceModal();
+            },
+
+            // Capture dates into form update.
+            updateDataCategorieService(service) {
+                this.categorieServiceData = {...service};
+                this.showUpdateCategorieServiceModal();
             },
 
                 // Function to use update register selected.
@@ -466,6 +768,66 @@
                     default:
                             // Clean and close form. 
                         this.hideUpdateServiceModal();
+                            // Open swet alert to indicate errors.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento',
+                        });
+                        break;
+                    };
+                    
+                }
+            },
+
+             // Function to use update register selected.
+            updateRegisterCategorieService: async function() {
+
+                try {
+                        let formData = new FormData();
+                    formData.append('name_categorie', this.categorieServiceData.Categoria);
+                    formData.append('description', this.categorieServiceData.Descripcion);
+                    formData.append('id_service', this.categorieServiceData.ServicioId);
+                    formData.append('_method', 'put');
+
+                    
+                        // Call request in service to update data.
+                    await categorieservicesService.updateRegisterCategorieService(this.categorieServiceData.Id, formData);
+
+                        // Call fuction close modal.        
+                    this.hideUpdateCategorieServiceModal(this.categorieServiceData.ServicioId);
+
+                        // Open swet alert to indicate success.                    
+                    this.$swal.fire({
+                        icon: 'success',
+                        title: 'Exito',
+                        text: `El registro ha sido modificado correctamente`,
+                    });
+
+                } catch (error) {
+
+                    // Validate HTTP response status code.
+                switch (error.response.status) {
+                        // Error 422 HTTP_
+                    case 422:
+                            // Load error validations.
+                        this.errors = error.response.data.errors;
+                            // Show swet alert indicate succeso to load data.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Existen errores en el llenado del formulario',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+
+                        });
+                        break;
+                    default:
+                            // Clean and close form. 
+                       this.hideUpdateCategorieServiceModal(this.categorieServiceData.Id);
+
                             // Open swet alert to indicate errors.
                         this.$swal.fire({
                             icon: 'error',

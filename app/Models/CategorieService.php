@@ -24,7 +24,7 @@ class CategorieService extends Model
 
     ];
 
-    public function grade()
+    public function service()
     {
         return $this->belongsTo('App\Models\Service', 'id_service');
   

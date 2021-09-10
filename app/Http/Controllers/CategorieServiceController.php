@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveCategorieServiceRequest;
+use App\Http\Resources\CategorieServiceResource;
 use App\Models\CategorieService;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
+
+use function PHPUnit\Framework\returnSelf;
 
 class CategorieServiceController extends Controller
 {
@@ -14,7 +21,9 @@ class CategorieServiceController extends Controller
      */
     public function index()
     {
-        //
+        return  CategorieServiceResource::collection(CategorieService::select('categorie_services.id', 'categorie_services.name_categorie', 'categorie_services.description', 'categorie_services.id_service', 'services.name_service')
+            ->join('services', 'categorie_services.id_service', '=', 'services.id')
+            ->get());
     }
 
     /**
@@ -33,9 +42,12 @@ class CategorieServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveCategorieServiceRequest $request)
     {
-        //
+        return (new CategorieServiceResource(CategorieService::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -44,9 +56,13 @@ class CategorieServiceController extends Controller
      * @param  \App\Models\CategorieService  $categorieService
      * @return \Illuminate\Http\Response
      */
-    public function show(CategorieService $categorieService)
-    {
-        //
+    public function show($categorieService)
+    
+    {  
+        return  CategorieServiceResource::collection(CategorieService::select('categorie_services.id', 'categorie_services.name_categorie', 'categorie_services.description', 'categorie_services.id_service', 'services.name_service')
+            ->join('services', 'categorie_services.id_service', '=', 'services.id')
+            ->where('services.id',$categorieService)
+            ->get());
     }
 
     /**
@@ -69,7 +85,12 @@ class CategorieServiceController extends Controller
      */
     public function update(Request $request, CategorieService $categorieService)
     {
-        //
+        $categorieService->update($request->all());
+
+        return (new CategorieServiceResource($categorieService))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +101,11 @@ class CategorieServiceController extends Controller
      */
     public function destroy(CategorieService $categorieService)
     {
-        //
+        $categorieService->delete();
+
+        return (new CategorieServiceResource($categorieService))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

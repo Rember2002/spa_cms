@@ -13,7 +13,7 @@ class SaveCategorieServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,7 +27,7 @@ class SaveCategorieServiceRequest extends FormRequest
             
             "name_categorie" => ['required', 'max:255', 'unique:categorie_grades,name_categorie'],
             "description" => ['required', ],
-            "id_service" => ['required', 'exists:service, id'],
+            "id_service" => ['required'],
 
         ];
     }

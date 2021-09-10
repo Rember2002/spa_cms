@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategorieGradeResource;
 use App\Models\CategorieGrade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class CategorieGradeController extends Controller
 {
@@ -14,7 +17,8 @@ class CategorieGradeController extends Controller
      */
     public function index()
     {
-        //
+        return CategorieGradeResource::collection(DB::select('SELECT c.id, c.name_categorie, c.description, c.id_grade, g.name_grade 
+        FROM categorie_grades c INNER JOIN grades g ON c.id_grade = g.id'));
     }
 
     /**
@@ -35,7 +39,10 @@ class CategorieGradeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return (new CategorieGradeResource(CategorieGrade::create($request->all())))
+            ->additional(["message" => "El registro ingresado se ha creado con ¡Exito!",])
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +53,7 @@ class CategorieGradeController extends Controller
      */
     public function show(CategorieGrade $categorieGrade)
     {
-        //
+        return new CategorieGradeResource($categorieGrade);
     }
 
     /**
@@ -69,7 +76,12 @@ class CategorieGradeController extends Controller
      */
     public function update(Request $request, CategorieGrade $categorieGrade)
     {
-        //
+        $categorieGrade->update($request->all());
+
+        return (new CategorieGradeResource($categorieGrade))
+            ->additional(["message" => "El registro ha sido modificado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +92,11 @@ class CategorieGradeController extends Controller
      */
     public function destroy(CategorieGrade $categorieGrade)
     {
-        //
+        $categorieGrade->delete();
+
+        return (new CategorieGradeResource($categorieGrade))
+            ->additional(["message" => "El registro se ha eliminado con ¡Exito!"])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

@@ -4,11 +4,9 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AcademicOfferController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CarouselController;
-use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\GradeController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\IntegrantController;
 use App\Http\Controllers\NewHomeController;
 use App\Http\Controllers\NewItemController;
@@ -20,8 +18,8 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceHomeController;
 use App\Http\Controllers\StrategicAllieController;
 use App\Http\Controllers\StudentCouncilController;
-use App\Models\CategorieGrade;
-use App\Models\CategorieService;
+use App\Http\Controllers\CategorieGradeController;
+use App\Http\Controllers\CategorieServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,9 +49,9 @@ Route::apiResource('academicOffers', AcademicOfferController::class);
 
 Route::apiResource('contactUs', ContactUsController::class);
 
-Route::apiResource('categorieGrade', CategorieGrade::class);
+Route::apiResource('categorieGrade', CategorieGradeController::class);
 
-Route::apiResource('categorieService', CategorieService::class);
+Route::apiResource('categorieService', CategorieServiceController::class);
 
 Route::apiResource('newHomes', NewHomeController::class);
 
