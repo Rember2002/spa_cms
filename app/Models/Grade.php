@@ -32,10 +32,4 @@ class Grade extends Model
   
     }
 
-    public function categorie()
-    {
-
-        return $this->morphMany(Categorie::class, 'categorieServiceGrade');
-        
-    }
 }

@@ -25,8 +25,4 @@ class NewItem extends Model
 
     ];
 
-    public function images()
-    {
-        return $this->morphMany(Image::class, 'imageServiceNews');
-    }
 }

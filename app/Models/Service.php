@@ -25,17 +25,4 @@ class Service extends Model
 
     ];
 
-    public function images()
-    {
-
-        return $this->morphMany(Image::class, 'imageServiceNews');
-
-    }
-
-    public function categorie()
-    {
-
-        return $this->morphMany(Categorie::class, 'categorieServiceGrade');
-        
-    }
 }
