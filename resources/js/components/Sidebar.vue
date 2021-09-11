@@ -111,9 +111,6 @@
                 <router-link to="/grade" class="" exact>
                     <a class="collapse-item" href="login.html">Grados</a>
                 </router-link>
-                <router-link to="" class="" exact>
-                    <a class="collapse-item" href="login.html">Categorias</a>
-                </router-link>
             </div>
         </div>
     </li>

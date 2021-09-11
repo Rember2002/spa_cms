@@ -47537,17 +47537,6 @@ var render = function() {
                     },
                     [_vm._v("Grados")]
                   )
-                ]),
-                _vm._v(" "),
-                _c("router-link", { attrs: { to: "", exact: "" } }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { href: "login.html" }
-                    },
-                    [_vm._v("Categorias")]
-                  )
                 ])
               ],
               1
