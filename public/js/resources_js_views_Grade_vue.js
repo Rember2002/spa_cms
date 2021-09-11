@@ -1863,6 +1863,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _services_grade_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/grade_service */ "./resources/js/services/grade_service.js");
 /* harmony import */ var _services_academicoffers_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/academicoffers_service */ "./resources/js/services/academicoffers_service.js");
+/* harmony import */ var _services_categoriegrade_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/categoriegrade_service */ "./resources/js/services/categoriegrade_service.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2022,12 +2023,107 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
  // Import file aboutUsService that contains functions request routes.
 
  // Import file aboutUsService that contains functions request routes.
+
+ // Import file categorieGradeService that contains functions request rules.
 
  // Begin export default.
 
@@ -2036,15 +2132,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   // Begin data.
   data: function data() {
     return {
+      // Declare categories to use to save display data.
+      categories: [],
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare Grade to use to send data in form.
       gradeData: {
         Grado: '',
         Descripcion: '',
         Imagen: '',
         Academica: '',
         AcademicaId: ''
+      },
+      // Declare categorieGradeData to use to send data in form.
+      categorieGradeData: {
+        Categoria: '',
+        Descripcion: '',
+        GradoId: '',
+        Grado: ''
       },
       // Save default variables for use select component.    
       options: [],
@@ -2142,6 +2247,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     showNewGradeModal: function showNewGradeModal() {
       this.$refs.modalCreateGrade.show();
     },
+    // Close and clear data in form create.
+    hideNewCategorieGradeModal: function hideNewCategorieGradeModal() {
+      this.$refs.modalCreateCategorieGrade.hide();
+      this.categorieGradeData = {
+        Categoria: '',
+        Descripcion: '',
+        GradoId: '',
+        Grado: ''
+      }, this.errors = {};
+    },
+    // Event open new modal with clean form create.
+    showNewCategorieGradeModal: function showNewCategorieGradeModal(grade) {
+      this.$refs.modalCreateCategorieGrade.show();
+      this.categorieGradeData.GradoId = grade.Id;
+    },
+    // Event open modal show data in table.
+    ShowModalCategorieGrade: function ShowModalCategorieGrade(grade) {
+      // Modal open.
+      this.$refs.modalShowCategorieGrade.show(); // Call fuction to load data.
+
+      this.loadRegisterCategorieGrade(grade);
+    },
     // Function use for save data forma to send request.
     createRegisterGrade: function () {
       var _createRegisterGrade = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2232,6 +2359,87 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return createRegisterGrade;
     }(),
+    // Function use for save data forma to send request.
+    createRegisterCategorieGrade: function () {
+      var _createRegisterCategorieGrade = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var formData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                formData = new FormData();
+                formData.append('name_categorie', this.categorieGradeData.Categoria);
+                formData.append('description', this.categorieGradeData.Descripcion);
+                formData.append('id_grade', this.categorieGradeData.GradoId);
+                _context2.prev = 4;
+                _context2.next = 7;
+                return _services_categoriegrade_service__WEBPACK_IMPORTED_MODULE_5__.createRegisterCategorieGrade(formData);
+
+              case 7:
+                // Open swet alert to indicate success.                    
+                this.$swal.fire({
+                  icon: 'success',
+                  title: 'Exito',
+                  text: 'El registro ha sido guardado correctamente'
+                }); // Clean and close form.
+
+                this.hideNewCategorieGradeModal();
+                _context2.next = 23;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](4);
+                _context2.t1 = _context2.t0.response.status;
+                _context2.next = _context2.t1 === 422 ? 16 : 19;
+                break;
+
+              case 16:
+                // Load error validations.
+                this.errors = _context2.t0.response.data.errors; // Show swet alert indicate succeso to load data.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Existen errores en el llenado del formulario',
+                  toast: true,
+                  position: 'top-end',
+                  timer: 3000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+                return _context2.abrupt("break", 22);
+
+              case 19:
+                // Clean and close form. 
+                this.hideNewCategorieGradeModal(); // Open swet alert to indicate errors.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
+                });
+                return _context2.abrupt("break", 22);
+
+              case 22:
+                ;
+
+              case 23:
+                ;
+
+              case 24:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[4, 11]]);
+      }));
+
+      function createRegisterCategorieGrade() {
+        return _createRegisterCategorieGrade.apply(this, arguments);
+      }
+
+      return createRegisterCategorieGrade;
+    }(),
     // Function use to load and draw data in data table.
     loadRegisterGrade: function loadRegisterGrade() {
       var _this = this;
@@ -2267,20 +2475,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     // Function use to load and draw data in data table.
-    loadRegisterAcademicOffer: function loadRegisterAcademicOffer() {
+    loadRegisterCategorieGrade: function loadRegisterCategorieGrade(grade) {
       var _this2 = this;
+
+      // Decalre Promise for call request load register.
+      _services_categoriegrade_service__WEBPACK_IMPORTED_MODULE_5__.loadRegisterCategorieGrade(grade).then(function (response) {
+        // Declare variable registers to use load data in table.
+        _this2.categories = response.data.data;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    // Function use to load and draw data in data table.
+    loadRegisterAcademicOffer: function loadRegisterAcademicOffer() {
+      var _this3 = this;
 
       // Decalre Promise for call request load register.
       _services_academicoffers_service__WEBPACK_IMPORTED_MODULE_4__.loadRegisterAcademicOffer().then(function (response) {
         // Declare variable registers to use load data in table.
-        _this2.options = response.data.data;
+        _this3.options = response.data.data;
       })["catch"](function (error) {
         console.error(error);
       });
     },
     // Function use to delete register select.
     deleteGradeRegister: function deleteGradeRegister(grade) {
-      var _this3 = this;
+      var _this4 = this;
 
       // Swet alert to use question delete register. 
       this.$swal.fire({
@@ -2296,7 +2516,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           // Send reqeust to use delete register.
           _services_grade_service__WEBPACK_IMPORTED_MODULE_3__.deleteGradeRegister(grade.Id).then(function (response) {
             // Swet alert to use indicate success.
-            _this3.$swal.fire({
+            _this4.$swal.fire({
               icon: 'success',
               title: "El registro: ".concat(grade.Grado, " ha sido eliminado correctamente."),
               toast: true,
@@ -2309,11 +2529,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             _services_grade_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterGrade().then(function (response) {
               // Declare variable registers to use load data in table.
-              _this3.registers = response.data.data;
+              _this4.registers = response.data.data;
             });
           })["catch"](function (error) {
             // Swet alert to use indidcate error.
-            _this3.$swal.fire({
+            _this4.$swal.fire({
               icon: 'error',
               title: "No es posible eliminar el registro: ".concat(grade.Grado, " en estos momentos."),
               toast: true,
@@ -2324,9 +2544,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             });
           }); // The result for question in this alert is denied. 
         } else if (result.isDenied) {
-          _this3.$swal.fire({
+          _this4.$swal.fire({
             icon: 'warning',
             title: "El registro;".concat(grade.Grado, "  no ha sido eliminado"),
+            toast: true,
+            showConfirmButton: false,
+            position: 'top-end',
+            timer: 3000,
+            timerProgressBar: true
+          });
+        }
+
+        ;
+      });
+    },
+    // Function use to delete register select.
+    deleteCategorieGradeRegister: function deleteCategorieGradeRegister(grade) {
+      var _this5 = this;
+
+      // Swet alert to use question delete register. 
+      this.$swal.fire({
+        title: "\xBFDesea eliminar el registro: ".concat(grade.Categoria, "?"),
+        icon: 'question',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Eliminar",
+        denyButtonText: "Cancelar"
+      }).then(function (result) {
+        // The result for question in this alert is confirmed.
+        if (result.isConfirmed) {
+          // Send reqeust to use delete register.
+          _services_categoriegrade_service__WEBPACK_IMPORTED_MODULE_5__.deleteCategorieGradeRegister(grade.Id).then(function (response) {
+            // Swet alert to use indicate success.
+            _this5.$swal.fire({
+              icon: 'success',
+              title: "El registro: ".concat(grade.Categoria, " ha sido eliminado correctamente."),
+              toast: true,
+              showConfirmButton: false,
+              position: 'top-end',
+              timer: 3000,
+              timerProgressBar: true
+            }); // Call function to use load data.
+
+
+            _this5.loadRegisterCategorieGrade(grade.GradoId);
+          })["catch"](function (error) {
+            // Swet alert to use indidcate error.
+            _this5.$swal.fire({
+              icon: 'error',
+              title: "No es posible eliminar el registro: ".concat(grade.Categoria, " en estos momentos."),
+              toast: true,
+              showConfirmButton: false,
+              position: 'top-end',
+              timer: 3000,
+              timerProgressBar: true
+            });
+          }); // The result for question in this alert is denied. 
+        } else if (result.isDenied) {
+          _this5.$swal.fire({
+            icon: 'warning',
+            title: "El registro: ".concat(grade.Categoria, "  no ha sido eliminado"),
             toast: true,
             showConfirmButton: false,
             position: 'top-end',
@@ -2341,7 +2618,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // Close and clear data in form update.
     hideUpdateGradeModal: function hideUpdateGradeModal() {
       this.$refs.modalUpdateGrade.hide();
-      this.aboutusData = {
+      this.gradeData = {
         Grado: '',
         Descripcion: '',
         Imagen: '',
@@ -2353,6 +2630,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // Event open update modal with clean form.
     showUpdateGradeModal: function showUpdateGradeModal() {
       this.$refs.modalUpdateGrade.show();
+    },
+    // Close and clear data in form update.
+    hideUpdateCategorieGradeModal: function hideUpdateCategorieGradeModal(grade) {
+      // Close modal.
+      this.$refs.modalUpdateCategorieGrade.hide(); // Clean data.
+
+      this.categorieGradeData = {
+        Categoria: '',
+        Descripcion: '',
+        GradoId: '',
+        Grado: ''
+      }, // Clean error.
+      this.errors = {}; // Load data.
+
+      this.loadRegisterCategorieGrade(grade);
+    },
+    // Event open update modal with clean form.
+    showUpdateCategorieGradeModal: function showUpdateCategorieGradeModal() {
+      this.$refs.modalUpdateCategorieGrade.show();
     },
     // Capture dates into form update.
     updateDataGrade: function updateDataGrade(grade) {
@@ -2397,53 +2693,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       ;
     },
+    // Capture dates into form update.
+    updateDataCategorieGrade: function updateDataCategorieGrade(grade) {
+      this.categorieGradeData = _objectSpread({}, grade);
+      this.showUpdateCategorieGradeModal();
+    },
     // Function to use update register selected.
-    updateRegisterGrade: function () {
-      var _updateRegisterGrade = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var formData, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+    updateRegisterCategorieGrade: function () {
+      var _updateRegisterCategorieGrade = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var formData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.prev = 0;
+                _context3.prev = 0;
                 formData = new FormData();
-                formData.append('name_grade', this.gradeData.Grado);
-                formData.append('description', this.gradeData.Descripcion);
-                formData.append('id_academic_offer', this.gradeData.AcademicaId);
-                formData.append('image', this.gradeData.Imagen);
+                formData.append('name_categorie', this.categorieGradeData.Categoria);
+                formData.append('description', this.categorieGradeData.Descripcion);
+                formData.append('id_grade', this.categorieGradeData.GradoId);
                 formData.append('_method', 'put'); // Call request in service to update data.
 
-                _context2.next = 9;
-                return _services_grade_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterGrade(this.gradeData.Id, formData);
+                _context3.next = 8;
+                return _services_categoriegrade_service__WEBPACK_IMPORTED_MODULE_5__.updateRegisterCategorieGrade(this.categorieGradeData.Id, formData);
 
-              case 9:
-                _context2.next = 11;
-                return _services_grade_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterGrade();
-
-              case 11:
-                data = _context2.sent;
-                // Save data in registers.
-                this.registers = data.data.data;
-                this.hideUpdateGradeModal(); // Open swet alert to indicate success.                    
+              case 8:
+                // Call fuction close modal.        
+                this.hideUpdateCategorieGradeModal(this.categorieGradeData.GradoId); // Open swet alert to indicate success.                    
 
                 this.$swal.fire({
                   icon: 'success',
                   title: 'Exito',
                   text: "El registro ha sido modificado correctamente"
                 });
-                _context2.next = 29;
+                _context3.next = 24;
+                break;
+
+              case 12:
+                _context3.prev = 12;
+                _context3.t0 = _context3["catch"](0);
+                _context3.t1 = _context3.t0.response.status;
+                _context3.next = _context3.t1 === 422 ? 17 : 20;
                 break;
 
               case 17:
-                _context2.prev = 17;
-                _context2.t0 = _context2["catch"](0);
-                _context2.t1 = _context2.t0.response.status;
-                _context2.next = _context2.t1 === 422 ? 22 : 25;
-                break;
-
-              case 22:
                 // Load error validations.
-                this.errors = _context2.t0.response.data.errors; // Show swet alert indicate succeso to load data.
+                this.errors = _context3.t0.response.data.errors; // Show swet alert indicate succeso to load data.
 
                 this.$swal.fire({
                   icon: 'error',
@@ -2454,7 +2748,94 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   timerProgressBar: true,
                   showConfirmButton: false
                 });
-                return _context2.abrupt("break", 28);
+                return _context3.abrupt("break", 23);
+
+              case 20:
+                // Clean and close form. 
+                this.hideUpdateCategorieGradeModal(this.categorieGradeData.GradoId); // Open swet alert to indicate errors.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
+                });
+                return _context3.abrupt("break", 23);
+
+              case 23:
+                ;
+
+              case 24:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 12]]);
+      }));
+
+      function updateRegisterCategorieGrade() {
+        return _updateRegisterCategorieGrade.apply(this, arguments);
+      }
+
+      return updateRegisterCategorieGrade;
+    }(),
+    // Function to use update register selected.
+    updateRegisterGrade: function () {
+      var _updateRegisterGrade = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var formData, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                formData = new FormData();
+                formData.append('name_grade', this.gradeData.Grado);
+                formData.append('description', this.gradeData.Descripcion);
+                formData.append('id_academic_offer', this.gradeData.AcademicaId);
+                formData.append('image', this.gradeData.Imagen);
+                formData.append('_method', 'put'); // Call request in service to update data.
+
+                _context4.next = 9;
+                return _services_grade_service__WEBPACK_IMPORTED_MODULE_3__.updateRegisterGrade(this.gradeData.Id, formData);
+
+              case 9:
+                _context4.next = 11;
+                return _services_grade_service__WEBPACK_IMPORTED_MODULE_3__.loadRegisterGrade();
+
+              case 11:
+                data = _context4.sent;
+                // Save data in registers.
+                this.registers = data.data.data;
+                this.hideUpdateGradeModal(); // Open swet alert to indicate success.                    
+
+                this.$swal.fire({
+                  icon: 'success',
+                  title: 'Exito',
+                  text: "El registro ha sido modificado correctamente"
+                });
+                _context4.next = 29;
+                break;
+
+              case 17:
+                _context4.prev = 17;
+                _context4.t0 = _context4["catch"](0);
+                _context4.t1 = _context4.t0.response.status;
+                _context4.next = _context4.t1 === 422 ? 22 : 25;
+                break;
+
+              case 22:
+                // Load error validations.
+                this.errors = _context4.t0.response.data.errors; // Show swet alert indicate succeso to load data.
+
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Existen errores en el llenado del formulario',
+                  toast: true,
+                  position: 'top-end',
+                  timer: 3000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+                return _context4.abrupt("break", 28);
 
               case 25:
                 // Clean and close form. 
@@ -2465,17 +2846,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   title: 'Error',
                   text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento'
                 });
-                return _context2.abrupt("break", 28);
+                return _context4.abrupt("break", 28);
 
               case 28:
                 ;
 
               case 29:
               case "end":
-                return _context2.stop();
+                return _context4.stop();
             }
           }
-        }, _callee2, this, [[0, 17]]);
+        }, _callee4, this, [[0, 17]]);
       }));
 
       function updateRegisterGrade() {
@@ -2522,6 +2903,42 @@ function deleteAcademicOfferRegister(id) {
 
 function updateRegisterAcademicOffer(id, data) {
   return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/academicOffers/".concat(id), data);
+}
+
+/***/ }),
+
+/***/ "./resources/js/services/categoriegrade_service.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/services/categoriegrade_service.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createRegisterCategorieGrade": () => (/* binding */ createRegisterCategorieGrade),
+/* harmony export */   "loadRegisterCategorieGrade": () => (/* binding */ loadRegisterCategorieGrade),
+/* harmony export */   "deleteCategorieGradeRegister": () => (/* binding */ deleteCategorieGradeRegister),
+/* harmony export */   "updateRegisterCategorieGrade": () => (/* binding */ updateRegisterCategorieGrade)
+/* harmony export */ });
+/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
+// Import http service to use config routes API. 
+ // Function to use send request API create register.
+
+function createRegisterCategorieGrade(data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post('/categorieGrade', data);
+} // Function to use send request API load registers.
+
+function loadRegisterCategorieGrade(id) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)().get("/categorieGrade/".concat(id));
+} // Function to use send request API delete registers selected.
+
+function deleteCategorieGradeRegister(id) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.http)()["delete"]("categorieGrade/".concat(id));
+} // Function to use send request API update register selected.
+
+function updateRegisterCategorieGrade(id, data) {
+  return (0,_http_service__WEBPACK_IMPORTED_MODULE_0__.httpFile)().post("/categorieGrade/".concat(id), data);
 }
 
 /***/ }),
@@ -29952,6 +30369,37 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.ShowModalCategorieGrade(
+                                  grade.Id,
+                                  grade.Grado
+                                )
+                              }
+                            }
+                          },
+                          [_c("span", { staticClass: "fa fa-eye" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.showNewCategorieGradeModal(grade)
+                              }
+                            }
+                          },
+                          [_c("span", { staticClass: "fa fa-plus" })]
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c("td", [
                         _c(
                           "button",
@@ -29988,6 +30436,390 @@ var render = function() {
           ]
         )
       ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "modalShowCategorieGrade",
+          attrs: { "hide-footer": "", size: "xl", title: "Categorias Grado" }
+        },
+        [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-hover table-bordered",
+                attrs: { id: "tableRegistersCategorie" }
+              },
+              [
+                _c("thead", [
+                  _c("tr", [
+                    _c("td", [_vm._v("Categoria")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Descripcion")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Acciones")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.categories, function(grade, index) {
+                    return _c("tr", { key: index }, [
+                      _c("td", [_vm._v(_vm._s(grade.Categoria))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(grade.Descripcion))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.updateDataCategorieGrade(grade)
+                              }
+                            }
+                          },
+                          [_c("span", { staticClass: "fa fa-edit" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteCategorieGradeRegister(grade)
+                              }
+                            }
+                          },
+                          [_c("span", { staticClass: "fa fa-trash" })]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "modalCreateCategorieGrade",
+          attrs: { "hide-footer": "", size: "sm", title: "Agregar Categoria" }
+        },
+        [
+          _c("div", { staticClass: "d-block" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.createRegisterCategorieGrade.apply(
+                      null,
+                      arguments
+                    )
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "form-row" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-12" },
+                      [
+                        _c("label", { attrs: { for: "name_categorie" } }, [
+                          _vm._v("Nombre:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.categorieGradeData.Categoria.length >= 1 &&
+                              _vm.categorieGradeData.Categoria.length < 50,
+                            type: "text",
+                            id: "name_categorie",
+                            placeholder: "Ingresar Nombre",
+                            autocomplete: "off"
+                          },
+                          model: {
+                            value: _vm.categorieGradeData.Categoria,
+                            callback: function($$v) {
+                              _vm.$set(_vm.categorieGradeData, "Categoria", $$v)
+                            },
+                            expression: "categorieGradeData.Categoria"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.name_categorie
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.name_categorie[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-12" },
+                      [
+                        _c("label", { attrs: { for: "description" } }, [
+                          _vm._v("Descripcion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-textarea", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.categorieGradeData.Descripcion.length >= 1 &&
+                              _vm.categorieGradeData.Descripcion.length < 1000,
+                            type: "text",
+                            id: "description",
+                            placeholder: "Ingresar Descripcion",
+                            autocomplete: "off"
+                          },
+                          model: {
+                            value: _vm.categorieGradeData.Descripcion,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.categorieGradeData,
+                                "Descripcion",
+                                $$v
+                              )
+                            },
+                            expression: "categorieGradeData.Descripcion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.description
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.description[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("b-form-input", {
+                      staticClass: "hidden",
+                      attrs: { id: "id_grades" },
+                      model: {
+                        value: _vm.categorieGradeData.GradoId,
+                        callback: function($$v) {
+                          _vm.$set(_vm.categorieGradeData, "GradoId", $$v)
+                        },
+                        expression: "categorieGradeData.GradoId"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button" },
+                      on: { click: _vm.hideNewCategorieGradeModal }
+                    },
+                    [_vm._v("Cancelar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _c("span", { staticClass: "fa fa-check" }),
+                      _vm._v("Aceptar")
+                    ]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "modalUpdateCategorieGrade",
+          attrs: { "hide-footer": "", size: "sm", title: "Modificar Categoria" }
+        },
+        [
+          _c("div", { staticClass: "d-block" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.updateRegisterCategorieGrade.apply(
+                      null,
+                      arguments
+                    )
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "form-row" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-12" },
+                      [
+                        _c("label", { attrs: { for: "name_categorie" } }, [
+                          _vm._v("Nombre:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.categorieGradeData.Categoria.length >= 1 &&
+                              _vm.categorieGradeData.Categoria.length < 50,
+                            type: "text",
+                            id: "name_categorie",
+                            placeholder: "Ingresar Nombre",
+                            autocomplete: "off"
+                          },
+                          model: {
+                            value: _vm.categorieGradeData.Categoria,
+                            callback: function($$v) {
+                              _vm.$set(_vm.categorieGradeData, "Categoria", $$v)
+                            },
+                            expression: "categorieGradeData.Categoria"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.name_categorie
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.name_categorie[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md-12" },
+                      [
+                        _c("label", { attrs: { for: "description" } }, [
+                          _vm._v("Descripcion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("b-form-textarea", {
+                          staticClass: "form-control",
+                          attrs: {
+                            state:
+                              _vm.categorieGradeData.Descripcion.length >= 1 &&
+                              _vm.categorieGradeData.Descripcion.length < 1000,
+                            type: "text",
+                            id: "description",
+                            placeholder: "Ingresar Descripcion",
+                            autocomplete: "off"
+                          },
+                          model: {
+                            value: _vm.categorieGradeData.Descripcion,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.categorieGradeData,
+                                "Descripcion",
+                                $$v
+                              )
+                            },
+                            expression: "categorieGradeData.Descripcion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.description
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback-validation" },
+                              [_vm._v(_vm._s(_vm.errors.description[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("b-form-input", {
+                      staticClass: "hidden",
+                      attrs: { id: "id_grade" },
+                      model: {
+                        value: _vm.categorieGradeData.GradoId,
+                        callback: function($$v) {
+                          _vm.$set(_vm.categorieGradeData, "GradoId", $$v)
+                        },
+                        expression: "categorieGradeData.GradoId"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.hideUpdateCategorieGradeModal(
+                            _vm.categorieGradeData.GradoId
+                          )
+                        }
+                      }
+                    },
+                    [_vm._v("Cancelar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _c("span", { staticClass: "fa fa-check" }),
+                      _vm._v("Aceptar")
+                    ]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c(
         "b-modal",
@@ -30499,6 +31331,8 @@ var staticRenderFns = [
         _c("td", [_vm._v("Oferta Academica")]),
         _vm._v(" "),
         _c("td", [_vm._v("Imagen")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("Categorias")]),
         _vm._v(" "),
         _c("td", [_vm._v("Acciones")])
       ])

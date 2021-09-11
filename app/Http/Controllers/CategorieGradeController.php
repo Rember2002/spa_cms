@@ -17,8 +17,11 @@ class CategorieGradeController extends Controller
      */
     public function index()
     {
-        return CategorieGradeResource::collection(DB::select('SELECT c.id, c.name_categorie, c.description, c.id_grade, g.name_grade 
-        FROM categorie_grades c INNER JOIN grades g ON c.id_grade = g.id'));
+
+        return  CategorieGradeResource::collection(CategorieGrade::
+        select('categorie_grades.id', 'categorie_grades.name_categorie', 'categorie_grades.description', 'categorie_grades.id_grade', 'grades.name_grade')
+        ->join('grades', 'categorie_grades.id_grade', '=', 'grades.id')
+        ->get());
     }
 
     /**
@@ -51,9 +54,13 @@ class CategorieGradeController extends Controller
      * @param  \App\Models\CategorieGrade  $categorieGrade
      * @return \Illuminate\Http\Response
      */
-    public function show(CategorieGrade $categorieGrade)
+    public function show($categorieGrade)
     {
-        return new CategorieGradeResource($categorieGrade);
+        return  CategorieGradeResource::collection(CategorieGrade::
+        select('categorie_grades.id', 'categorie_grades.name_categorie', 'categorie_grades.description', 'categorie_grades.id_grade', 'grades.name_grade')
+            ->join('grades', 'categorie_grades.id_grade', '=', 'grades.id')
+            ->where('grades.id',$categorieGrade)
+            ->get());
     }
 
     /**

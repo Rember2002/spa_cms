@@ -14,14 +14,14 @@ class CategorieGradeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
 
         return [
 
             'Id' => $this->id,
             'Categoria' => $this->name_categorie,
             'Descripcion' => $this->description,
-            'GradeId' => $this->id_grade,
+            'GradoId' => $this->id_grade,
+            'Grado' => $this->name_grade,
 
         ];
     }

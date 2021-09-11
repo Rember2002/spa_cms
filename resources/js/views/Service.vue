@@ -36,10 +36,10 @@
                         <td>{{service.Descripcion}}</td>
                         <td><a target="_blank" :href="`${service.Enlace}`"><button class="btn btn-primary"><span class="fas fa-external-link-square-alt"></span>Abiir enlace</button></a></td>
                         <td>{{service.Estado}}</td>
-                        <td class="text-center">
-                            <button class="btn btn-warning btn-sm" @click="ShowModalCategorieService(service.Id, service.Servicio)"><span class="fa fa-eye"></span></button>
-                            <button class="btn btn-success btn-sm" @click="showNewCategorieServiceModal(service)"><span class="fa fa-plus"></span></button>
-                        </td>
+                            <td class="text-center">
+                                <button class="btn btn-warning btn-sm" @click="ShowModalCategorieService(service.Id, service.Servicio)"><span class="fa fa-eye"></span></button>
+                                <button class="btn btn-success btn-sm" @click="showNewCategorieServiceModal(service)"><span class="fa fa-plus"></span></button>
+                            </td>
                         <td>
                             <button class="btn btn-success btn-sm" @click="updateDataService(service)"><span class="fa fa-edit"></span></button>
                             <button class="btn btn-danger btn-sm" @click="deleteServiceRegister(service)"><span class="fa fa-trash"></span></button>
@@ -109,7 +109,7 @@
         </div>
     </b-modal>
 
-    <!-- Begin show table modal create -->
+    <!-- Begin show table modal update -->
 
     <b-modal ref="modalUpdateCategorieService" hide-footer size="sm" title="Modificar Categoria">
         <div class="d-block">
@@ -138,7 +138,7 @@
         </div>
     </b-modal>
 
-        <!-- End show table modal create -->    
+        <!-- End show table modal update -->    
 
         <!-- Content modal create. -->
     <b-modal ref="modalCreateService" hide-footer size="xl" title="Agregar Nuevo Registro">
@@ -711,7 +711,7 @@
                 this.showUpdateServiceModal();
             },
 
-            // Capture dates into form update.
+                // Capture dates into form update.
             updateDataCategorieService(service) {
                 this.categorieServiceData = {...service};
                 this.showUpdateCategorieServiceModal();
@@ -780,7 +780,7 @@
                 }
             },
 
-             // Function to use update register selected.
+                // Function to use update register selected.
             updateRegisterCategorieService: async function() {
 
                 try {

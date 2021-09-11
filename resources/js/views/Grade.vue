@@ -25,6 +25,7 @@
                         <td>Descripcion</td>
                         <td>Oferta Academica</td>
                         <td>Imagen</td>
+                        <td>Categorias</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
@@ -37,6 +38,10 @@
                         <td>
                             <img :src="`${$store.state.serverPath}/storage/${grade.Imagen}`" class="banner-grade-image">
                         </td>
+                        <td class="text-center">
+                            <button class="btn btn-warning btn-sm" @click="ShowModalCategorieGrade(grade.Id, grade.Grado)"><span class="fa fa-eye"></span></button>
+                            <button class="btn btn-success btn-sm" @click="showNewCategorieGradeModal(grade)"><span class="fa fa-plus"></span></button>
+                        </td>
                         <td>
                             <button class="btn btn-success btn-sm" @click="updateDataGrade(grade)"><span class="fa fa-edit"></span></button>
                             <button class="btn btn-danger btn-sm" @click="deleteGradeRegister(grade)"><span class="fa fa-trash"></span></button>
@@ -48,6 +53,94 @@
             <!-- End content data table. -->
     </div>
         <!--End data table. -->
+
+        <!-- Begin show table modal -->
+
+    <b-modal ref="modalShowCategorieGrade" hide-footer size="xl" title="Categorias Grado">
+        <div class="card">
+                <table id="tableRegistersCategorie" class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <td>Categoria</td>
+                        <td>Descripcion</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(grade, index) in categories" :key="index">
+                        <td>{{grade.Categoria}}</td>
+                        <td>{{grade.Descripcion}}</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" @click="updateDataCategorieGrade(grade)"><span class="fa fa-edit"></span></button>
+                            <button class="btn btn-danger btn-sm" @click="deleteCategorieGradeRegister(grade)"><span class="fa fa-trash"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+               </table>
+        </div>
+    </b-modal>
+
+        <!-- End show table modal -->
+
+        <!-- Begin show table modal create -->
+
+    <b-modal ref="modalCreateCategorieGrade" hide-footer size="sm" title="Agregar Categoria">
+        <div class="d-block">
+            <!-- Form modal create. -->
+            <form v-on:submit.prevent="createRegisterCategorieGrade">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="name_categorie">Nombre:</label>
+                        <b-form-input :state="categorieGradeData.Categoria.length >= 1 && categorieGradeData.Categoria.length < 50" type="text" class="form-control" id="name_categorie" v-model="categorieGradeData.Categoria" placeholder="Ingresar Nombre" autocomplete="off"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.name_categorie">{{errors.name_categorie[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="description">Descripcion:</label>
+                        <b-form-textarea :state="categorieGradeData.Descripcion.length >= 1 && categorieGradeData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="categorieGradeData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                    </div>
+                    <b-form-input id="id_grades" v-model="categorieGradeData.GradoId" class="hidden"></b-form-input>
+                </div>
+                <hr>
+                <div class="text-center">    
+                    <button type="button" class="btn btn-default" @click="hideNewCategorieGradeModal">Cancelar</button>
+                    <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
+                </div>
+            </form> 
+                <!-- End form modal create. -->
+        </div>
+    </b-modal>
+
+    <!-- Begin show table modal update -->
+
+    <b-modal ref="modalUpdateCategorieGrade" hide-footer size="sm" title="Modificar Categoria">
+        <div class="d-block">
+            <!-- Form modal create. -->
+            <form v-on:submit.prevent="updateRegisterCategorieGrade">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="name_categorie">Nombre:</label>
+                        <b-form-input :state="categorieGradeData.Categoria.length >= 1 && categorieGradeData.Categoria.length < 50" type="text" class="form-control" id="name_categorie" v-model="categorieGradeData.Categoria" placeholder="Ingresar Nombre" autocomplete="off"></b-form-input>
+                        <div class="invalid-feedback-validation" v-if="errors.name_categorie">{{errors.name_categorie[0]}}</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="description">Descripcion:</label>
+                        <b-form-textarea :state="categorieGradeData.Descripcion.length >= 1 && categorieGradeData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="categorieGradeData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                    </div>
+                    <b-form-input id="id_grade" v-model="categorieGradeData.GradoId" class="hidden"></b-form-input>
+                </div>
+                <hr>
+                <div class="text-center">    
+                    <button type="button" class="btn btn-default" @click="hideUpdateCategorieGradeModal(categorieGradeData.GradoId)">Cancelar</button>
+                    <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
+                </div>
+            </form> 
+                <!-- End form modal create. -->
+        </div>
+    </b-modal>
+
+        <!-- End show table modal update -->      
 
         <!-- Content modal create. -->
     <b-modal ref="modalCreateGrade" hide-footer size="xl" title="Agregar Nuevo Registro">
@@ -156,8 +249,11 @@
         // Import file aboutUsService that contains functions request routes.
     import * as gradeService from '../services/grade_service';
 
-    // Import file aboutUsService that contains functions request routes.
+        // Import file aboutUsService that contains functions request routes.
     import * as academicOfferService from '../services/academicoffers_service';
+
+        // Import file categorieGradeService that contains functions request rules.
+    import * as categorieGradeService from '../services/categoriegrade_service';
     
         // Begin export default.
     export default {
@@ -167,17 +263,28 @@
             // Begin data.
         data(){
             return {
+
+                    // Declare categories to use to save display data.
+                categories: [],
                 
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare Grade to use to send data in form.
                 gradeData: {
                     Grado: '',
                     Descripcion: '',
                     Imagen: '',
                     Academica: '',
                     AcademicaId: '',
+                },
+
+                // Declare categorieGradeData to use to send data in form.
+                categorieGradeData: {
+                    Categoria: '',
+                    Descripcion: '',
+                    GradoId: '',
+                    Grado: '',
                 },
 
                     // Save default variables for use select component.    
@@ -290,6 +397,37 @@
             showNewGradeModal() {
                 this.$refs.modalCreateGrade.show();
             },
+
+
+            // Close and clear data in form create.
+            hideNewCategorieGradeModal() {
+                this.$refs.modalCreateCategorieGrade.hide();
+                this.categorieGradeData = {
+                    Categoria: '',
+                    Descripcion: '',
+                    GradoId: '',
+                    Grado: '',
+                },
+                this.errors = {};
+                
+            },
+            
+                // Event open new modal with clean form create.
+            showNewCategorieGradeModal(grade) {
+                this.$refs.modalCreateCategorieGrade.show();
+
+                this.categorieGradeData.GradoId = grade.Id;
+            },
+
+                // Event open modal show data in table.
+            ShowModalCategorieGrade(grade) {
+
+                    // Modal open.
+                this.$refs.modalShowCategorieGrade.show();
+
+                    // Call fuction to load data.
+                this.loadRegisterCategorieGrade(grade);
+            },
             
                 // Function use for save data forma to send request.
             createRegisterGrade: async function () {
@@ -352,6 +490,60 @@
                 };
             },  
 
+                // Function use for save data forma to send request.
+            createRegisterCategorieGrade: async function () {
+                let formData = new FormData();
+                    formData.append('name_categorie', this.categorieGradeData.Categoria);
+                    formData.append('description', this.categorieGradeData.Descripcion);
+                    formData.append('id_grade', this.categorieGradeData.GradoId)
+                try {
+                        // Call request to create register in service.
+                    await categorieGradeService.createRegisterCategorieGrade(formData);
+
+                        // Open swet alert to indicate success.                    
+                    this.$swal.fire({
+                        icon: 'success',
+                        title: 'Exito',
+                        text: 'El registro ha sido guardado correctamente',
+                    });
+                        // Clean and close form.
+                    this.hideNewCategorieGradeModal();
+                    
+                } catch (error) {
+                                    
+                    // Validate HTTP response status code.
+                switch (error.response.status) {
+                        // Error 422 HTTP_
+                    case 422:
+                            // Load error validations.
+                        this.errors = error.response.data.errors;
+                            // Show swet alert indicate succeso to load data.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Existen errores en el llenado del formulario',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+
+                        });
+
+                        break;
+                    default:
+                            // Clean and close form. 
+                        this.hideNewCategorieGradeModal();
+                            // Open swet alert to indicate errors.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento',
+                        });
+                        break;
+                    };
+                };
+            }, 
+
                 // Function use to load and draw data in data table.
             loadRegisterGrade() {
                 
@@ -391,6 +583,23 @@
                 
 
             },
+
+                // Function use to load and draw data in data table.
+            loadRegisterCategorieGrade(grade) {
+
+                    // Decalre Promise for call request load register.
+                categorieGradeService.loadRegisterCategorieGrade(grade).then((response)=>{
+                     
+                    // Declare variable registers to use load data in table.
+                this.categories = response.data.data;
+
+                }).catch((error) => {
+                    console.error(error);
+                });
+                
+
+            },
+
 
                 // Function use to load and draw data in data table.
             loadRegisterAcademicOffer() {
@@ -474,10 +683,72 @@
                 });
             },
 
+            // Function use to delete register select.
+            deleteCategorieGradeRegister(grade) {
+                
+                // Swet alert to use question delete register. 
+            this.$swal.fire({
+                title: `¿Desea eliminar el registro: ${grade.Categoria}?`,
+                icon: 'question',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: `Eliminar`,
+                denyButtonText: `Cancelar`,
+                }).then((result) => {
+
+                        // The result for question in this alert is confirmed.
+                    if (result.isConfirmed) {
+
+                            // Send reqeust to use delete register.
+                        categorieGradeService.deleteCategorieGradeRegister(grade.Id).then((response) =>{
+
+                                // Swet alert to use indicate success.
+                            this.$swal.fire({
+                                icon: 'success',
+                                title: `El registro: ${grade.Categoria} ha sido eliminado correctamente.`,
+                                toast: true,
+                                showConfirmButton: false,
+                                position: 'top-end',
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+
+                                // Call function to use load data.
+                            this.loadRegisterCategorieGrade(grade.GradoId);
+
+                        }).catch((error =>{
+
+                            // Swet alert to use indidcate error.
+                        this.$swal.fire({
+                                icon: 'error',
+                                title: `No es posible eliminar el registro: ${grade.Categoria} en estos momentos.`,
+                                toast: true,
+                                showConfirmButton: false,
+                                position: 'top-end',
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                        }));
+                        
+                        // The result for question in this alert is denied. 
+                    } else if (result.isDenied) {
+                    this.$swal.fire({
+                            icon: 'warning',
+                            title: `El registro: ${grade.Categoria}  no ha sido eliminado`,
+                            toast: true,
+                            showConfirmButton: false,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                    };
+                });
+            },
+
                 // Close and clear data in form update.
             hideUpdateGradeModal(){
                 this.$refs.modalUpdateGrade.hide();
-                 this.aboutusData = {
+                 this.gradeData = {
                     Grado: '',
                     Descripcion: '',
                     Imagen: '',
@@ -490,6 +761,32 @@
                 // Event open update modal with clean form.
             showUpdateGradeModal(){
                 this.$refs.modalUpdateGrade.show();
+            },
+
+            // Close and clear data in form update.
+            hideUpdateCategorieGradeModal(grade){
+                
+                    // Close modal.
+                this.$refs.modalUpdateCategorieGrade.hide();
+                
+                    // Clean data.
+                this.categorieGradeData = {
+                    Categoria: '',
+                    Descripcion: '',
+                    GradoId: '',
+                    Grado: '',
+                },
+
+                    // Clean error.
+                this.errors = {};
+
+                    // Load data.
+                this.loadRegisterCategorieGrade(grade);
+            },
+            
+                // Event open update modal with clean form.
+            showUpdateCategorieGradeModal(){
+                this.$refs.modalUpdateCategorieGrade.show();
             },
 
                 // Capture dates into form update.
@@ -539,6 +836,72 @@
 
                     });
                 };
+            },
+
+                // Capture dates into form update.
+            updateDataCategorieGrade(grade) {
+                this.categorieGradeData = {...grade};
+                this.showUpdateCategorieGradeModal();
+            },
+
+             // Function to use update register selected.
+            updateRegisterCategorieGrade: async function() {
+
+                try {
+                        let formData = new FormData();
+                    formData.append('name_categorie', this.categorieGradeData.Categoria);
+                    formData.append('description', this.categorieGradeData.Descripcion);
+                    formData.append('id_grade', this.categorieGradeData.GradoId);
+                    formData.append('_method', 'put');
+
+                    
+                        // Call request in service to update data.
+                    await categorieGradeService.updateRegisterCategorieGrade(this.categorieGradeData.Id, formData);
+
+                        // Call fuction close modal.        
+                    this.hideUpdateCategorieGradeModal(this.categorieGradeData.GradoId);
+
+                        // Open swet alert to indicate success.                    
+                    this.$swal.fire({
+                        icon: 'success',
+                        title: 'Exito',
+                        text: `El registro ha sido modificado correctamente`,
+                    });
+
+                } catch (error) {
+
+                    // Validate HTTP response status code.
+                switch (error.response.status) {
+                        // Error 422 HTTP_
+                    case 422:
+                            // Load error validations.
+                        this.errors = error.response.data.errors;
+                            // Show swet alert indicate succeso to load data.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Existen errores en el llenado del formulario',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+
+                        });
+                        break;
+                    default:
+                            // Clean and close form. 
+                       this.hideUpdateCategorieGradeModal(this.categorieGradeData.GradoId);
+
+                            // Open swet alert to indicate errors.
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ha ocurrido un error, vuelve a intentarlo en otro momento',
+                        });
+                        break;
+                    };
+                    
+                }
             },
 
                 // Function to use update register selected.
