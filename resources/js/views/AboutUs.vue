@@ -33,7 +33,7 @@
                     <tr v-for="(aboutus, index) in registers" :key="index">
                         <td>{{aboutus.Id}}</td>
                         <td>{{aboutus.Titulo}}</td>
-                        <td>{{aboutus.Contenido}}</td>
+                        <td  v-html="aboutus.Contenido"></td>
                         <td>{{aboutus.Tipo}}</td>
                         <td>{{aboutus.Año}}</td>
                         <td>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="aboutusData.Contenido.length >= 1 && aboutusData.Contenido.length < 1000" type="text" class="form-control" id="description" v-model="aboutusData.Contenido" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="aboutusData.Contenido" :config="editorConfig"></ckeditor>
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
@@ -110,8 +110,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="aboutusData.Contenido.length >= 1 && aboutusData.Contenido.length < 1000" type="text" class="form-control" id="description" v-model="aboutusData.Contenido" placeholder="Ingresar Descripcion"></b-form-textarea>                 
-                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                        <ckeditor id="description" :editor="editor" v-model="aboutusData.Contenido" :config="editorConfig"></ckeditor>                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="type">Tipo:</label>
@@ -159,6 +158,8 @@
 
         // Import file aboutUsService that contains functions request routes.
     import * as aboutUsService from '../services/aboutus_service';
+
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     
         // Begin export default.
     export default {
@@ -168,6 +169,13 @@
             // Begin data.
         data(){
             return {
+                    
+                    // Declare classic editor.
+                editor: ClassicEditor,
+               
+                editorConfig: {
+                    // The configuration of the editor.
+                },
                 
                     // Declare registers to use to save display data.
                 registers: [],
