@@ -34,7 +34,7 @@
                         <td>
                             <img :src="`${$store.state.serverPath}/storage/${strategically.Logo}`" class="logo-image">
                         </td>
-                        <td>{{strategically.Descripcion}}</td>
+                        <td  v-html="strategically.Descripcion"></td>
                         <td>
                             <button class="btn btn-success btn-sm" @click="updateDataStrategicAlly(strategically)"><span class="fa fa-edit"></span></button>
                             <button class="btn btn-danger btn-sm" @click="deleteStrategicAllyRegister(strategically)"><span class="fa fa-trash"></span></button>
@@ -154,7 +154,6 @@
                 editorConfig: {
                     // The configuration of the editor.
                 },
-                
                 
                     // Declare registers to use to save display data.
                 registers: [],

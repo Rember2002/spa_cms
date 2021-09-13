@@ -30251,7 +30251,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(service.Servicio))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(service.Descripcion))]),
+                      _c("td", {
+                        domProps: { innerHTML: _vm._s(service.Descripcion) }
+                      }),
                       _vm._v(" "),
                       _c("td", [
                         _c(

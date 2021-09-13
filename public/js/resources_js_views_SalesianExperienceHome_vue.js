@@ -29901,9 +29901,11 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("td", [
-                        _vm._v(_vm._s(salesianexperiencehome.Descripcion))
-                      ]),
+                      _c("td", {
+                        domProps: {
+                          innerHTML: _vm._s(salesianexperiencehome.Descripcion)
+                        }
+                      }),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(salesianexperiencehome.Año))]),
                       _vm._v(" "),

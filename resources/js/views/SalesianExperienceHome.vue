@@ -33,7 +33,7 @@
                         <td>
                             <img :src="`${$store.state.serverPath}/storage/${salesianexperiencehome.Portada}`" class="table-image">
                         </td>
-                        <td>{{salesianexperiencehome.Descripcion}}</td>
+                        <td  v-html="salesianexperiencehome.Descripcion"></td>
                         <td>{{salesianexperiencehome.Año}}</td>
                         <td>
                             <button class="btn btn-success btn-sm" @click="updateDataSalesianExperienceHome(salesianexperiencehome)"><span class="fa fa-edit"></span></button>

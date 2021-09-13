@@ -30512,7 +30512,9 @@ var render = function() {
                     return _c("tr", { key: index }, [
                       _c("td", [_vm._v(_vm._s(grade.Categoria))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(grade.Descripcion))]),
+                      _c("td", {
+                        domProps: { innerHTML: _vm._s(grade.Description) }
+                      }),
                       _vm._v(" "),
                       _c("td", [
                         _c(

@@ -34,7 +34,7 @@
                     <tr v-for="(salesianexperience, index) in registers" :key="index">
                         <td>{{salesianexperience.Id}}</td>
                         <td>{{salesianexperience.Evento}}</td>
-                        <td>{{salesianexperience.Descripcion}}</td>
+                        <td  v-html="salesianexperience.Descripcion"></td>
                         <td>{{salesianexperience.Fecha}}</td>
                         <td>{{salesianexperience.Lugar}}</td>
                         <td>

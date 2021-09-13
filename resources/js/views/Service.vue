@@ -33,7 +33,7 @@
                     <tr v-for="(service, index) in registers" :key="index">
                         <td>{{service.Id}}</td>
                         <td>{{service.Servicio}}</td>
-                        <td>{{service.Descripcion}}</td>
+                        <td  v-html="service.Descripcion"></td>
                         <td><a target="_blank" :href="`${service.Enlace}`"><button class="btn btn-primary"><span class="fas fa-external-link-square-alt"></span>Abiir enlace</button></a></td>
                         <td>{{service.Estado}}</td>
                             <td class="text-center">

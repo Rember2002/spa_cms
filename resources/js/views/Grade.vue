@@ -69,7 +69,7 @@
                 <tbody>
                     <tr v-for="(grade, index) in categories" :key="index">
                         <td>{{grade.Categoria}}</td>
-                        <td>{{grade.Descripcion}}</td>
+                       <td  v-html="grade.Description"></td>
                         <td>
                             <button class="btn btn-success btn-sm" @click="updateDataCategorieGrade(grade)"><span class="fa fa-edit"></span></button>
                             <button class="btn btn-danger btn-sm" @click="deleteCategorieGradeRegister(grade)"><span class="fa fa-trash"></span></button>
