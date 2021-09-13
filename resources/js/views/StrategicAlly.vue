@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion Alianza:</label>
-                        <b-form-textarea :state="strategicallyData.Descripcion.length >= 1 && strategicallyData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="strategicallyData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="strategicallyData.Descripcion" :config="editorConfig"></ckeditor>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
@@ -96,7 +96,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion Alianza:</label>
-                        <b-form-textarea :state="strategicallyData.Descripcion.length >= 1 && strategicallyData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="strategicallyData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="strategicallyData.Descripcion" :config="editorConfig"></ckeditor>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
@@ -133,8 +133,11 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file strategicAllyService that contains functions request routes.
     import * as strategicallyService from '../services/strategically_service';
+
+        // Import ClassicEditor to use in component long text.
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     
         // Begin export default.
     export default {
@@ -144,11 +147,19 @@
             // Begin data.
         data(){
             return {
+
+                    // Declare classic editor.
+                editor: ClassicEditor,
+               
+                editorConfig: {
+                    // The configuration of the editor.
+                },
+                
                 
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare strategicAllyData to use to send data in form.
                 strategicallyData: {
                     Aliado: '',
                     Logo: '',
@@ -244,23 +255,33 @@
 
                 // Close and clear data in form create.
             hideNewStrategicAllyModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateStrategicAlly.hide();
+
+                    // Clean data.
                 this.strategicallyData = {
                     Aliado: '',
                     Logo: '',
                     Descripcion: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewStrategicAllyModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateStrategicAlly.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterStrategicAlly: async function () {
-                let formData = new FormData();
+
+                        // Declare FormData.
+                    let formData = new FormData();
                 formData.append('name_ally', this.strategicallyData.Aliado);
                 formData.append('image', this.strategicallyData.Logo);
                 formData.append('description', this.strategicallyData.Descripcion);
@@ -426,23 +447,35 @@
 
                 // Close and clear data in form update.
             hideUpdateStrategicAllyModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateStrategicAlly.hide();
+
+                    // Clean data.
                 this.strategicallyData = {
                     Aliado: '',
                     Logo: '',
                     Descripcion: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateStrategicAllyModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateStrategicAlly.show();
             },
 
                 // Capture dates into form update.
             updateDataStrategicAlly(strategically) {
+
+                    // Save data to use laod in inputs.
                 this.strategicallyData = {...strategically};
+
+                    // Show modal.
                 this.showUpdateStrategicAllyModal();
             },
 
@@ -492,6 +525,8 @@
                 // Function to use update register selected.
             updateRegisterStrategicAlly: async function() {
                 try {
+
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_ally', this.strategicallyData.Aliado);
                     formData.append('image', this.strategicallyData.Logo);

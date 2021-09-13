@@ -123,7 +123,7 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file newHomeService that contains functions request routes.
     import * as newHomeService from '../services/newhome_service';
     
         // Begin export default.
@@ -138,7 +138,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare newHomeData to use to send data in form.
                 newhomeData: {
                     Estado: '',
                     Portada: '',
@@ -233,7 +233,11 @@
 
                 // Close and clear data in form create.
             hideNewNewHomeModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateNewHome.hide();
+
+                    // Clean data.
                 this.newhomeData = {
                     Estado: '',
                     Portada: '',
@@ -413,22 +417,33 @@
 
                 // Close and clear data in form update.
             hideUpdateNewHomeModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateNewHome.hide();
+
+                    // Clean data.
                 this.newhomeData = {
                     Estado: '',
                     Portada: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateNewHomeModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateNewHome.show();
             },
 
                 // Capture dates into form update.
-            updateDataNewHome(newhome) {
+            updateDataNewHome(newhome) {    
+                    // Save data to use laod in inputs.
                 this.newhomeData = {...newhome};
+
+                    // Show modal.
                 this.showUpdateNewHomeModal();
             },
 
@@ -478,6 +493,7 @@
                 // Function to use update register selected.
             updateRegisterNewHome: async function() {
                 try {
+                            // Declare in FormData.
                         let formData = new FormData();
                     formData.append('status', this.newhomeData.Estado);
                     formData.append('image', this.newhomeData.Portada);

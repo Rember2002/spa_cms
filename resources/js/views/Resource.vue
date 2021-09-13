@@ -147,7 +147,7 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file resourceService that contains functions request routes.
     import * as resourceService from '../services/resource_service';
     
         // Begin export default.
@@ -162,7 +162,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare resourceData to use to send data in form.
                 resourceData: {
                     Nombre: '',
                     Descripcion: '',
@@ -292,24 +292,34 @@
 
                 // Close and clear data in form create.
             hideNewResourceModal() {
+                    
+                    // Close modal.
                 this.$refs.modalCreateResource.hide();
+
+                    // Clean data.
                 this.aboutusData = {
                     Nombre: '',
                     Descripcion: '',
                     Portada: '',
                     Archivo: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewResourceModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateResource.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterResource: async function () {
-                let formData = new FormData();
+
+                            // Declare FormData.
+                        let formData = new FormData();
                     formData.append('name_resource', this.resourceData.Nombre);
                     formData.append('description', this.resourceData.Descripcion);
                     formData.append('image', this.resourceData.Portada);
@@ -476,24 +486,36 @@
 
                 // Close and clear data in form update.
             hideUpdateResourceModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateResource.hide();
+
+                    // Clean data.
                 this.resourceData = {
                     Nombre: '',
                     Descripcion: '',
                     Portada: '',
                     Archivo: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateResourceModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateResource.show();
             },
 
                 // Capture dates into form update.
             updateDataResource(resource) {
+
+                    // Save data to use load in inputs.
                 this.resourceData = {...resource};
+
+                    // Show modal.
                 this.showUpdateResourceModal();
             },
 
@@ -575,7 +597,8 @@
 
                 // Function to use update register selected.
             updateRegisterResource: async function() {
-                try {
+                try {       
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_resource', this.resourceData.Nombre);
                     formData.append('description', this.resourceData.Descripcion);

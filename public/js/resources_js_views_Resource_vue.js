@@ -2018,7 +2018,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file resourceService that contains functions request routes.
 
  // Begin export default.
 
@@ -2029,7 +2029,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare resourceData to use to send data in form.
       resourceData: {
         Nombre: '',
         Descripcion: '',
@@ -2144,17 +2144,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewResourceModal: function hideNewResourceModal() {
-      this.$refs.modalCreateResource.hide();
+      // Close modal.
+      this.$refs.modalCreateResource.hide(); // Clean data.
+
       this.aboutusData = {
         Nombre: '',
         Descripcion: '',
         Portada: '',
         Archivo: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewResourceModal: function showNewResourceModal() {
+      // Show modal.
       this.$refs.modalCreateResource.show();
     },
     // Function use for save data forma to send request.
@@ -2165,6 +2169,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('name_resource', this.resourceData.Nombre);
                 formData.append('description', this.resourceData.Descripcion);
@@ -2343,22 +2348,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateResourceModal: function hideUpdateResourceModal() {
-      this.$refs.modalUpdateResource.hide();
+      // Close modal.
+      this.$refs.modalUpdateResource.hide(); // Clean data.
+
       this.resourceData = {
         Nombre: '',
         Descripcion: '',
         Portada: '',
         Archivo: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateResourceModal: function showUpdateResourceModal() {
+      // Show modal.
       this.$refs.modalUpdateResource.show();
     },
     // Capture dates into form update.
     updateDataResource: function updateDataResource(resource) {
-      this.resourceData = _objectSpread({}, resource);
+      // Save data to use load in inputs.
+      this.resourceData = _objectSpread({}, resource); // Show modal.
+
       this.showUpdateResourceModal();
     },
     // Method for update attach image in form.
@@ -2438,6 +2449,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('name_resource', this.resourceData.Nombre);
                 formData.append('description', this.resourceData.Descripcion);

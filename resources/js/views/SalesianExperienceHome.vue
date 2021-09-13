@@ -55,7 +55,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="salesianexperiencehomeData.Descripcion.length >= 1 && salesianexperiencehomeData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="salesianexperiencehomeData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="salesianexperiencehomeData.Descripcion" :config="editorConfig"></ckeditor>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
@@ -91,7 +91,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="salesianexperiencehomeData.Descripcion.length >= 1 && salesianexperiencehomeData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="salesianexperiencehomeData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="salesianexperiencehomeData.Descripcion" :config="editorConfig"></ckeditor>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-12">
@@ -133,8 +133,11 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file salesianExperienceService that contains functions request routes.
     import * as SalesianExperienceHomeService from '../services/salesianshome_service';
+
+        // Import ClassicEditor to use in component long text.
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     
         // Begin export default.
     export default {
@@ -144,11 +147,18 @@
             // Begin data.
         data(){
             return {
+
+                    // Declare classic editor.
+                editor: ClassicEditor,
+               
+                editorConfig: {
+                    // The configuration of the editor.
+                },
                 
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare salesianExperienceHomeData to use to send data in form.
                 salesianexperiencehomeData: {
                     Portada: '',
                     Descripcion: '',
@@ -244,23 +254,33 @@
 
                 // Close and clear data in form create.
             hideNewSalesianExperienceHomeModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateSalesianExperienceHome.hide();
+
+                    // Clean data.
                 this.salesianexperiencehomeData = {
                     Portada: '',
                     Descripcion: '',
                     Año: '',
                 };
+
+                    // Clean error.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewSalesianExperienceHomeModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateSalesianExperienceHome.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterSalesianExperienceHome: async function () {
-                let formData = new FormData();
+
+                        // Declare FormData.
+                    let formData = new FormData();
                 formData.append('image', this.salesianexperiencehomeData.Portada);
                 formData.append('description', this.salesianexperiencehomeData.Descripcion);
                 formData.append('year', this.salesianexperiencehomeData.Año);
@@ -426,23 +446,35 @@
 
                 // Close and clear data in form update.
             hideUpdateSalesianExperienceHomeModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateSalesianExperienceHome.hide();
+
+                    // Declare FormData.
                 this.salesianexperiencehomeData = {
                     Portada: '',
                     Descripcion: '',
                     Año: '',
                 };
+
+                    // Declare errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateSalesianExperienceHomeModal(){
+
+                    // Show modal
                 this.$refs.modalUpdateSalesianExperienceHome.show();
             },
 
                 // Capture dates into form update.
             updateDataSalesianExperienceHome(salesianexperiencehome) {
+
+                    // Save data to use load in inputs.
                 this.salesianexperiencehomeData = {...salesianexperiencehome};
+
+                    // Show modal.
                 this.showUpdateSalesianExperienceHomeModal();
             },
 
@@ -491,7 +523,8 @@
 
                 // Function to use update register selected.
             updateRegisterSalesianExperienceHome: async function() {
-                try {
+                try {   
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('image', this.salesianexperiencehomeData.Portada);
                     formData.append('description', this.salesianexperiencehomeData.Descripcion);

@@ -1996,7 +1996,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file contacUsService that contains functions request routes.
 
  // Begin export default.
 
@@ -2007,7 +2007,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare contactUsData to use to send data in form.
       contactusData: {
         Telefono: '',
         Direccion: '',
@@ -2053,16 +2053,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewContactUsModal: function hideNewContactUsModal() {
-      this.$refs.modalCreateContactUs.hide();
+      // Close modal.
+      this.$refs.modalCreateContactUs.hide(); // Clean data.
+
       this.contactusData = {
         Telefono: '',
         Direccion: '',
         Correspondiente: ''
-      };
+      }; // Clena error.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewContactUsModal: function showNewContactUsModal() {
+      // Show modal.
       this.$refs.modalCreateContactUs.show();
     },
     // Function use for save data forma to send request.
@@ -2073,6 +2077,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('phone', this.contactusData.Telefono);
                 formData.append('direction', this.contactusData.Direccion);
@@ -2250,12 +2255,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateContactUsModal: function hideUpdateContactUsModal() {
-      this.$refs.modalUpdateContactUs.hide();
+      // Close modal.
+      this.$refs.modalUpdateContactUs.hide(); // Clean data.
+
       this.contactusData = {
         Telefono: '',
         Direccion: '',
         Correspondiente: ''
-      };
+      }; // Clean error.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
@@ -2264,7 +2272,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Capture dates into form update.
     updateDataContactUs: function updateDataContactUs(contactus) {
-      this.contactusData = _objectSpread({}, contactus);
+      // Save data to use load in inputs.
+      this.contactusData = _objectSpread({}, contactus); // Show modal.
+
       this.showUpdateContactUsModal();
     },
     // Function to use update register selected.
@@ -2276,6 +2286,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('phone', this.contactusData.Telefono);
                 formData.append('direction', this.contactusData.Direccion);

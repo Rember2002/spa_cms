@@ -142,10 +142,10 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file integrantService that contains functions request routes.
     import * as integrantService from '../services/instegrant_service';
 
-         // Import file aboutUsService that contains functions request routes.
+         // Import file commissionService that contains functions request routes.
     import * as commissionService from '../services/commission_service';
     
         // Begin export default.
@@ -160,7 +160,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare integrantData to use to send data in form.
                 integrantData: {
                     Integrante: '',
                     Perfil: '',
@@ -264,24 +264,33 @@
 
                 // Close and clear data in form create.
             hideNewIntegrantModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateIntegrant.hide();
+
+                    // Clean data.
                 this.integrantData = {
                     Integrante: '',
                     Perfil: '',
                     Comision: '',
                     ComisionId: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewIntegrantModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateIntegrant.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterIntegrant: async function () {
-                let formData = new FormData();
+                       // Declare FormData
+                    let formData = new FormData();
                 formData.append('name_integrant', this.integrantData.Integrante);
                 formData.append('id_commission', this.integrantData.ComisionId);
                 formData.append('image', this.integrantData.Perfil);
@@ -474,24 +483,35 @@
 
                 // Close and clear data in form update.
             hideUpdateIntegrantModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateIntegrant.hide();
+
+                    // Clean data.
                 this.integrantData = {
                     Integrante: '',
                     Perfil: '',
                     Comision: '',
                     ComisionId: '',
                 };
+                    // Clean error.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateIntegrantModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateIntegrant.show();
             },
 
                 // Capture dates into form update.
             updateDataIntegrant(integrant) {
+
+                    // Save data to use laod data in inputs.
                 this.integrantData = {...integrant};
+
+                    // Show modal.
                 this.showUpdateIntegrantModal();
             },
 
@@ -540,7 +560,8 @@
 
                 // Function to use update register selected.
             updateRegisterIntegrant: async function() {
-                try {
+                try {       
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_integrant', this.integrantData.Integrante);
                     formData.append('id_commission', this.integrantData.ComisionId);

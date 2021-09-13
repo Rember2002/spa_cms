@@ -2006,7 +2006,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file carosuelService that contains functions request routes.
 
  // Begin export default.
 
@@ -2017,7 +2017,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare carouselData to use to send data in form.
       carouselData: {
         Titulo: '',
         Estado: '',
@@ -2101,16 +2101,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewCarouselModal: function hideNewCarouselModal() {
-      this.$refs.modalCreateCarousel.hide();
+      // Close modal.
+      this.$refs.modalCreateCarousel.hide(); // Clean data.
+
       this.carouselData = {
         Titulo: '',
         Estado: '',
         Imagen: ''
-      };
+      }; // Clean error.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewCarouselModal: function showNewCarouselModal() {
+      // Show modal.
       this.$refs.modalCreateCarousel.show();
     },
     // Function use for save data forma to send request.
@@ -2121,6 +2125,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('name', this.carouselData.Titulo);
                 formData.append('state', this.carouselData.Estado);
@@ -2298,21 +2303,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateCarouselModal: function hideUpdateCarouselModal() {
-      this.$refs.modalUpdateCarousel.hide();
+      // Close modal.
+      this.$refs.modalUpdateCarousel.hide(); // Clean data.
+
       this.carouselData = {
         Titulo: '',
         Estado: '',
         Imagen: ''
-      };
+      }; // Clean error.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateCarouselModal: function showUpdateCarouselModal() {
+      //  Show modal.
       this.$refs.modalUpdateCarousel.show();
     },
     // Capture dates into form update.
     updateDataCarousel: function updateDataCarousel(carousel) {
-      this.carouselData = _objectSpread({}, carousel);
+      // Save data to use load in inputs.
+      this.carouselData = _objectSpread({}, carousel); // Show modal.
+
       this.showUpdateCarouselModal();
     },
     // Method for update attach image in form.
@@ -2362,6 +2373,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('name', this.carouselData.Titulo);
                 formData.append('state', this.carouselData.Estado);

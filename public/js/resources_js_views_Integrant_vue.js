@@ -2014,9 +2014,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file integrantService that contains functions request routes.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file commissionService that contains functions request routes.
 
  // Begin export default.
 
@@ -2027,7 +2027,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare integrantData to use to send data in form.
       integrantData: {
         Integrante: '',
         Perfil: '',
@@ -2115,17 +2115,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewIntegrantModal: function hideNewIntegrantModal() {
-      this.$refs.modalCreateIntegrant.hide();
+      // Close modal.
+      this.$refs.modalCreateIntegrant.hide(); // Clean data.
+
       this.integrantData = {
         Integrante: '',
         Perfil: '',
         Comision: '',
         ComisionId: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewIntegrantModal: function showNewIntegrantModal() {
+      // Show modal.
       this.$refs.modalCreateIntegrant.show();
     },
     // Function use for save data forma to send request.
@@ -2136,6 +2140,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Declare FormData
                 formData = new FormData();
                 formData.append('name_integrant', this.integrantData.Integrante);
                 formData.append('id_commission', this.integrantData.ComisionId);
@@ -2337,22 +2342,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateIntegrantModal: function hideUpdateIntegrantModal() {
-      this.$refs.modalUpdateIntegrant.hide();
+      // Close modal.
+      this.$refs.modalUpdateIntegrant.hide(); // Clean data.
+
       this.integrantData = {
         Integrante: '',
         Perfil: '',
         Comision: '',
         ComisionId: ''
-      };
+      }; // Clean error.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateIntegrantModal: function showUpdateIntegrantModal() {
+      // Show modal.
       this.$refs.modalUpdateIntegrant.show();
     },
     // Capture dates into form update.
     updateDataIntegrant: function updateDataIntegrant(integrant) {
-      this.integrantData = _objectSpread({}, integrant);
+      // Save data to use laod data in inputs.
+      this.integrantData = _objectSpread({}, integrant); // Show modal.
+
       this.showUpdateIntegrantModal();
     },
     // Method for update attach image in form.
@@ -2402,6 +2413,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('name_integrant', this.integrantData.Integrante);
                 formData.append('id_commission', this.integrantData.ComisionId);

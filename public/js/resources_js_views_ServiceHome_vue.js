@@ -2006,7 +2006,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file serviceHomeService that contains functions request routes.
 
  // Begin export default.
 
@@ -2017,7 +2017,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare serviceHomeData to use to send data in form.
       servicehomeData: {
         Portada: '',
         Estado: '',
@@ -2101,16 +2101,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewServiceHomeModal: function hideNewServiceHomeModal() {
-      this.$refs.modalCreateServiceHome.hide();
+      // Close modal.
+      this.$refs.modalCreateServiceHome.hide(); // Clean data.
+
       this.servicehomeData = {
         Portada: '',
         Estado: '',
         Enlace: ''
-      };
+      }; // Clean error.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewServiceHomeModal: function showNewServiceHomeModal() {
+      // Show modal.
       this.$refs.modalCreateServiceHome.show();
     },
     // Function use for save data forma to send request.
@@ -2121,6 +2125,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('image', this.servicehomeData.Portada);
                 formData.append('state', this.servicehomeData.Estado);
@@ -2298,21 +2303,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateServiceHomeModal: function hideUpdateServiceHomeModal() {
-      this.$refs.modalUpdateServiceHome.hide();
+      // Close modal.
+      this.$refs.modalUpdateServiceHome.hide(); // Clean data.
+
       this.servicehomeData = {
         Portada: '',
         Estado: '',
         Enlace: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateServiceHomeModal: function showUpdateServiceHomeModal() {
+      // Show modal.
       this.$refs.modalUpdateServiceHome.show();
     },
     // Capture dates into form update.
     updateDataServiceHome: function updateDataServiceHome(servicehome) {
-      this.servicehomeData = _objectSpread({}, servicehome);
+      // Save data to use load in inputs.
+      this.servicehomeData = _objectSpread({}, servicehome); // Show modal.
+
       this.showUpdateServiceHomeModal();
     },
     // Method for update attach image in form.
@@ -2362,6 +2373,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData
                 formData = new FormData();
                 formData.append('image', this.servicehomeData.Portada);
                 formData.append('state', this.servicehomeData.Estado);

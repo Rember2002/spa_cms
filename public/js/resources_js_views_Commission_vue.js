@@ -2013,9 +2013,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file commissionService that contains functions request routes.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file studentCouncilService that contains functions request routes.
 
  // Begin export default.
 
@@ -2026,7 +2026,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare commissionData to use to send data in form.
       commissionData: {
         Comision: '',
         Consejo: '',
@@ -2114,12 +2114,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewCommissionModal: function hideNewCommissionModal() {
-      this.$refs.modalCreateCommission.hide();
+      // Close modal.
+      this.$refs.modalCreateCommission.hide(); // Clean data.
+
       this.commissionData = {
         Comision: '',
         Consejo: '',
         Imagen: ''
-      };
+      }; // Clean error.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
@@ -2134,6 +2137,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('name_commission', this.commissionData.Comision);
                 formData.append('id_student_council', this.commissionData.Consejo);
@@ -2325,12 +2329,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateCommissionModal: function hideUpdateCommissionModal() {
-      this.$refs.modalUpdateCommission.hide();
+      // Close modal.
+      this.$refs.modalUpdateCommission.hide(); // Clean data.
+
       this.commissionData = {
         Comision: '',
         Consejo: '',
         Imagen: ''
-      };
+      }; // Clean error.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
@@ -2389,6 +2396,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('name_commission', this.commissionData.Comision);
                 formData.append('id_student_council', this.commissionData.Consejo);

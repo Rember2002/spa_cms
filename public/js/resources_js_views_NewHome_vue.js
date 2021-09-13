@@ -1994,7 +1994,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file newHomeService that contains functions request routes.
 
  // Begin export default.
 
@@ -2005,7 +2005,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare newHomeData to use to send data in form.
       newhomeData: {
         Estado: '',
         Portada: ''
@@ -2088,7 +2088,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewNewHomeModal: function hideNewNewHomeModal() {
-      this.$refs.modalCreateNewHome.hide();
+      // Close modal.
+      this.$refs.modalCreateNewHome.hide(); // Clean data.
+
       this.newhomeData = {
         Estado: '',
         Portada: ''
@@ -2283,20 +2285,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateNewHomeModal: function hideUpdateNewHomeModal() {
-      this.$refs.modalUpdateNewHome.hide();
+      // Close modal.
+      this.$refs.modalUpdateNewHome.hide(); // Clean data.
+
       this.newhomeData = {
         Estado: '',
         Portada: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateNewHomeModal: function showUpdateNewHomeModal() {
+      // Show modal.
       this.$refs.modalUpdateNewHome.show();
     },
     // Capture dates into form update.
     updateDataNewHome: function updateDataNewHome(newhome) {
-      this.newhomeData = _objectSpread({}, newhome);
+      // Save data to use laod in inputs.
+      this.newhomeData = _objectSpread({}, newhome); // Show modal.
+
       this.showUpdateNewHomeModal();
     },
     // Method for update attach image in form.
@@ -2346,6 +2354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare in FormData.
                 formData = new FormData();
                 formData.append('status', this.newhomeData.Estado);
                 formData.append('image', this.newhomeData.Portada);

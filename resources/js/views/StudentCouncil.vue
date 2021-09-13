@@ -120,7 +120,7 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file studentCouncilService that contains functions request routes.
     import * as studentCouncilService from '../services/studentcouncil_service';
     
         // Begin export default.
@@ -135,7 +135,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare studentCouncilData to use to send data in form.
                 studentcouncilData: {
                     Año: '',
                     Portada: '',
@@ -230,22 +230,32 @@
 
                 // Close and clear data in form create.
             hideNewStudentCouncilModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateStudentCouncil.hide();
+
+                    // Clean data.
                 this.aboutusData = {
                     Año: '',
                     Portada: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewStudentCouncilModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateStudentCouncil.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterStudentCouncil: async function () {
-                let formData = new FormData();
+
+                        // Clean FormData.
+                    let formData = new FormData();
                 formData.append('year', this.studentcouncilData.Año);
                 formData.append('image', this.studentcouncilData.Portada);
 
@@ -410,22 +420,34 @@
 
                 // Close and clear data in form update.
             hideUpdateStudentCouncilModal(){
+                
+                    // Close modal.
                 this.$refs.modalUpdateStudentCouncil.hide();
+
+                    // Clean data.
                 this.studentcouncilData = {
                     Año: '',
                     Portada: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateStudentCouncilModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateStudentCouncil.show();
             },
 
                 // Capture dates into form update.
             updateDataStudentCouncil(studentcouncil) {
+
+                    // Save data to use load in inputs.
                 this.studentcouncilData = {...studentcouncil};
+
+                    // Show modals.
                 this.showUpdateStudentCouncilModal();
             },
 
@@ -475,6 +497,7 @@
                 // Function to use update register selected.
             updateRegisterStudentCouncil: async function() {
                 try {
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('year', this.studentcouncilData.Año);
                     formData.append('image', this.studentcouncilData.Portada);

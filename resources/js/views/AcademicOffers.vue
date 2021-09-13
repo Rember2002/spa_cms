@@ -31,7 +31,7 @@
                     <tr v-for="(academicoffer, index) in registers" :key="index">
                         <td>{{academicoffer.Id}}</td>
                         <td>{{academicoffer.Oferta}}</td>
-                        <td>{{academicoffer.Descripcion}}</td>
+                        <td  v-html="academicoffer.Descripcion"></td>
                         <td>
                             <img :src="`${$store.state.serverPath}/storage/${academicoffer.Portada}`" :alt="academicoffer.Titulo" class="table-image">
                         </td>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="academicofferData.Descripcion.length >= 1 && academicofferData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="academicofferData.Descripcion" placeholder="Ingresar Descripcion"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="academicofferData.Descripcion" :config="editorConfig"></ckeditor>
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
@@ -103,7 +103,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="academicofferData.Descripcion.length >= 1 && academicofferData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="academicofferData.Descripcion" placeholder="Ingresar Descripcion"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="academicofferData.Descripcion" :config="editorConfig"></ckeditor>
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
@@ -147,6 +147,9 @@
         // Import file academicOfferService that contains functions request routes.
     import * as academicOfferService from '../services/academicoffers_service';
 
+        // Import ClassicEditor to use in component long text.
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
         // Begin export default.
     export default {
 
@@ -155,11 +158,18 @@
             //Begin data.
         data(){
             return {
+                
+                    // Declare classic editor.
+                editor: ClassicEditor,
+               
+                editorConfig: {
+                    // The configuration of the editor.
+                },
 
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare academicOfferData to use to send data in form.
                 academicofferData: {
                     Oferta: '',
                     Descripcion: '',
@@ -254,25 +264,34 @@
 
                 // Close and clear data in form create.
             hideNewAcademicOfferModal() {
+                    
+                    // Close modal.
                 this.$refs.modalCreateAcademicOffer.hide();
+                    
+                    // Clean data.
                 this.academicofferData = {
                     Oferta: '',
                     Descripcion: '',
                     Portada: '',
                     Estado: '',
                 };
+
+                    // Clean error.
                 this.errors = {};
                 
             },
             
                 // Event open new modal with clean form create.
             showNewAcademicOfferModal() {
+
+                    // Open modal.
                 this.$refs.modalCreateAcademicOffer.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterAcademicOffer: async function () {
-                let formData = new FormData();
+                        // Delcare Form Data.
+                    let formData = new FormData();
                 formData.append('name_offer', this.academicofferData.Oferta);
                 formData.append('description', this.academicofferData.Descripcion);
                 formData.append('image', this.academicofferData.Portada);
@@ -441,24 +460,36 @@
 
                 // Close and clear data in form update.
             hideUpdateAcademicOfferModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateAcademicOffer.hide();
+                    
+                    // Clean data.
                 this.academicofferData = {
                     Oferta: '',
                     Descripcion: '',
                     Portada: '',
                     Estado: '',
                 };
+
+                    // Clean error.
                 this.errors = {};
             },
             
                 // Event open update modal with clean form.
             showUpdateAcademicOfferModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateAcademicOffer.show();
             },
 
                 // Capture dates into form update.
             updateDataAcademicOffer(academicoffer) {
+
+                    // Save data to use load.
                 this.academicofferData = academicoffer;
+
+                    // Show modal.
                 this.showUpdateAcademicOfferModal();
             },
 
@@ -510,6 +541,8 @@
                 // Function to use update register selected.
             updateRegisterAcademicOffer: async function() {
                 try {
+                        
+                            // Decalre FormData.
                         let formData = new FormData();
                     formData.append('name_offer', this.academicofferData.Oferta);
                     formData.append('description', this.academicofferData.Descripcion);

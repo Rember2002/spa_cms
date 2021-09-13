@@ -135,7 +135,7 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file serviceHomeService that contains functions request routes.
     import * as serviceHomeService from '../services/servicehome_service';
     
         // Begin export default.
@@ -150,7 +150,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare serviceHomeData to use to send data in form.
                 servicehomeData: {
                     Portada: '',
                     Estado: '',
@@ -246,23 +246,32 @@
 
                 // Close and clear data in form create.
             hideNewServiceHomeModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateServiceHome.hide();
+
+                    // Clean data.
                 this.servicehomeData = {
                     Portada: '',
                     Estado: '',
                     Enlace: '',
                 };
+                    // Clean error.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewServiceHomeModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateServiceHome.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterServiceHome: async function () {
-                let formData = new FormData();
+
+                        // Declare FormData.
+                    let formData = new FormData();
                 formData.append('image', this.servicehomeData.Portada);
                 formData.append('state', this.servicehomeData.Estado);
                 formData.append('link', this.servicehomeData.Enlace);
@@ -428,23 +437,34 @@
 
                 // Close and clear data in form update.
             hideUpdateServiceHomeModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateServiceHome.hide();
+
+                    // Clean data.
                 this.servicehomeData = {
                     Portada: '',
                     Estado: '',
                     Enlace: '',
                 };
+                    // Clean errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateServiceHomeModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateServiceHome.show();
             },
 
                 // Capture dates into form update.
             updateDataServiceHome(servicehome) {
+
+                    // Save data to use load in inputs.
                 this.servicehomeData = {...servicehome};
+
+                    // Show modal.
                 this.showUpdateServiceHomeModal();
             },
 
@@ -494,6 +514,8 @@
                 // Function to use update register selected.
             updateRegisterServiceHome: async function() {
                 try {
+
+                            // Declare FormData
                         let formData = new FormData();
                     formData.append('image', this.servicehomeData.Portada);
                     formData.append('state', this.servicehomeData.Estado);

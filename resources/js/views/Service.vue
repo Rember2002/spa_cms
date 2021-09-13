@@ -80,7 +80,7 @@
 
         <!-- End show table modal -->
 
-        <!-- Begin show table modal create -->
+        <!-- Begin table modal create -->
 
     <b-modal ref="modalCreateCategorieService" hide-footer size="sm" title="Agregar Categoria">
         <div class="d-block">
@@ -94,7 +94,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="categorieServiceData.Descripcion.length >= 1 && categorieServiceData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="categorieServiceData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="categorieServiceData.Descripcion" :config="editorConfig"></ckeditor>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <b-form-input id="id_service" v-model="categorieServiceData.ServicioId" class="hidden"></b-form-input>
@@ -109,11 +109,13 @@
         </div>
     </b-modal>
 
-    <!-- Begin show table modal update -->
+        <!-- End table modal create -->
+
+        <!-- Begin show modal update -->
 
     <b-modal ref="modalUpdateCategorieService" hide-footer size="sm" title="Modificar Categoria">
         <div class="d-block">
-            <!-- Form modal create. -->
+            <!-- Form modal update. -->
             <form v-on:submit.prevent="updateRegisterCategorieService">
                 <div class="form-row">
                     <div class="form-group col-md-12">
@@ -123,7 +125,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="categorieServiceData.Descripcion.length >= 1 && categorieServiceData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="categorieServiceData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="categorieServiceData.Descripcion" :config="editorConfig"></ckeditor>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <b-form-input id="id_service" v-model="categorieServiceData.ServicioId" class="hidden"></b-form-input>
@@ -134,11 +136,11 @@
                     <button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Aceptar</button>
                 </div>
             </form> 
-                <!-- End form modal create. -->
+                <!-- End form modal update. -->
         </div>
     </b-modal>
 
-        <!-- End show table modal update -->    
+        <!-- End show modal update -->    
 
         <!-- Content modal create. -->
     <b-modal ref="modalCreateService" hide-footer size="xl" title="Agregar Nuevo Registro">
@@ -153,7 +155,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="serviceData.Descripcion.length >= 1 && serviceData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="serviceData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="serviceData.Descripcion" :config="editorConfig"></ckeditor>                 }
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
@@ -192,7 +194,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="serviceData.Descripcion.length >= 1 && serviceData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="serviceData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="serviceData.Descripcion" :config="editorConfig"></ckeditor>                 }
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
@@ -232,11 +234,14 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file academicOfferService that contains functions request routes.
+        // Import file servicesService that contains functions request routes.
     import * as servicesService from '../services/services_service';
 
-        // Import file academicOfferService that contains functions request routes.
+        // Import file categorieServicesService that contains functions request routes.
     import * as categorieservicesService from '../services/categorieservices_service';
+
+        // Import ClassicEditor to use in component long text.
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
         // Begin export default.
     export default {
@@ -246,6 +251,13 @@
             //Begin data.
         data(){
             return {
+
+                    // Declare classic editor.
+                editor: ClassicEditor,
+               
+                editorConfig: {
+                    // The configuration of the editor.
+                },
 
                     // Declare registers to use to save display data.
                 categories: [],
@@ -314,39 +326,56 @@
 
                 // Close and clear data in form create.
             hideNewServiceModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateService.hide();
+
+                    // Clean data.
                 this.serviceData = {
                     Servicio: '',
                     Descripcion: '',
                     Enlace: '',
                     Estado: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
                 
             },
             
                 // Event open new modal with clean form create.
             showNewServiceModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateService.show();
             },
 
                 // Close and clear data in form create.
             hideNewCategorieServiceModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateCategorieService.hide();
+
+                    // Clean data.
                 this.categorieServiceData = {
                     Categoria: '',
                     Descripcion: '',
                     ServicioId: '',
                     Servicio: '',
                 },
+
+                    // Clean errors.
                 this.errors = {};
                 
             },
             
                 // Event open new modal with clean form create.
             showNewCategorieServiceModal(service) {
+
+                    // Show modal.
                 this.$refs.modalCreateCategorieService.show();
 
+                    // Save data to load in inputs.
                 this.categorieServiceData.ServicioId = service.Id;
             },
 
@@ -361,8 +390,10 @@
             },
             
                 // Function use for save data forma to send request.
-            createRegisterService: async function () {
-                let formData = new FormData();
+            createRegisterService: async function () { 
+
+                            // Declare FormData.
+                        let formData = new FormData();
                     formData.append('name_service', this.serviceData.Servicio);
                     formData.append('description', this.serviceData.Descripcion);
                     formData.append('link', this.serviceData.Enlace);
@@ -424,7 +455,9 @@
             
                 // Function use for save data forma to send request.
             createRegisterCategorieService: async function () {
-                let formData = new FormData();
+
+                            // Declare FormData.
+                        let formData = new FormData();
                     formData.append('name_categorie', this.categorieServiceData.Categoria);
                     formData.append('description', this.categorieServiceData.Descripcion);
                     formData.append('id_service', this.categorieServiceData.ServicioId)
@@ -664,18 +697,26 @@
 
                 // Close and clear data in form update.
             hideUpdateServiceModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateService.hide();
+
+                    // Clean data.
                 this.serviceData = {
                     Servicio: '',
                     Descripcion: '',
                     Enlace: '',
                     Estado: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
             
                 // Event open update modal with clean form.
             showUpdateServiceModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateService.show();
             },
 
@@ -702,24 +743,35 @@
             
                 // Event open update modal with clean form.
             showUpdateCategorieServiceModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateCategorieService.show();
             },
 
                 // Capture dates into form update.
             updateDataService(service) {
+
+                    // Save data to use load in inputs.
                 this.serviceData = {...service};
+                
+                    // Show modal.
                 this.showUpdateServiceModal();
             },
 
                 // Capture dates into form update.
             updateDataCategorieService(service) {
+
+                    // Save data to use laod in inputs.
                 this.categorieServiceData = {...service};
+
+                    // Modal show.
                 this.showUpdateCategorieServiceModal();
             },
 
                 // Function to use update register selected.
             updateRegisterService: async function() {
-                try {
+                try {       
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_service', this.serviceData.Servicio);
                     formData.append('description', this.serviceData.Descripcion);
@@ -783,7 +835,8 @@
                 // Function to use update register selected.
             updateRegisterCategorieService: async function() {
 
-                try {
+                try {   
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_categorie', this.categorieServiceData.Categoria);
                     formData.append('description', this.categorieServiceData.Descripcion);

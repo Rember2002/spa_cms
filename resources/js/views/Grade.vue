@@ -96,7 +96,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="categorieGradeData.Descripcion.length >= 1 && categorieGradeData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="categorieGradeData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="categorieGradeData.Descripcion" :config="editorConfig"></ckeditor>                       
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <b-form-input id="id_grades" v-model="categorieGradeData.GradoId" class="hidden"></b-form-input>
@@ -125,7 +125,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="categorieGradeData.Descripcion.length >= 1 && categorieGradeData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="categorieGradeData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="categorieGradeData.Descripcion" :config="editorConfig"></ckeditor>                       
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <b-form-input id="id_grade" v-model="categorieGradeData.GradoId" class="hidden"></b-form-input>
@@ -246,14 +246,17 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file gradeService that contains functions request routes.
     import * as gradeService from '../services/grade_service';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file academicOfferService that contains functions request routes.
     import * as academicOfferService from '../services/academicoffers_service';
 
         // Import file categorieGradeService that contains functions request rules.
     import * as categorieGradeService from '../services/categoriegrade_service';
+
+        // Import ClassicEditor to use in component long text.
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     
         // Begin export default.
     export default {
@@ -264,13 +267,20 @@
         data(){
             return {
 
+                    // Declare classic editor.
+                editor: ClassicEditor,
+               
+                editorConfig: {
+                    // The configuration of the editor.
+                },
+
                     // Declare categories to use to save display data.
                 categories: [],
                 
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare Grade to use to send data in form.
+                    // Declare gradeData to use to send data in form.
                 gradeData: {
                     Grado: '',
                     Descripcion: '',
@@ -382,7 +392,11 @@
 
                 // Close and clear data in form create.
             hideNewGradeModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateGrade.hide();
+
+                    // Clean data.
                 this.aboutusData = {
                     Grado: '',
                     Descripcion: '',
@@ -390,32 +404,42 @@
                     Academica: '',
                     AcademicaId: '',
                 };
+                    // Clean error.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewGradeModal() {
+                    // Show modal.
                 this.$refs.modalCreateGrade.show();
             },
 
 
             // Close and clear data in form create.
             hideNewCategorieGradeModal() {
+                    // Close modal.
                 this.$refs.modalCreateCategorieGrade.hide();
+
+                    // Clean data.
                 this.categorieGradeData = {
                     Categoria: '',
                     Descripcion: '',
                     GradoId: '',
                     Grado: '',
                 },
+
+                    // Clean error.
                 this.errors = {};
                 
             },
             
                 // Event open new modal with clean form create.
             showNewCategorieGradeModal(grade) {
+
+                    // Show modal.
                 this.$refs.modalCreateCategorieGrade.show();
 
+                    // Save data to use load in inputs.
                 this.categorieGradeData.GradoId = grade.Id;
             },
 
@@ -431,7 +455,9 @@
             
                 // Function use for save data forma to send request.
             createRegisterGrade: async function () {
-                let formData = new FormData();
+
+                            // Declare FormData.
+                        let formData = new FormData();
                     formData.append('name_grade', this.gradeData.Grado);
                     formData.append('description', this.gradeData.Descripcion);
                     formData.append('id_academic_offer', this.gradeData.AcademicaId);
@@ -492,7 +518,8 @@
 
                 // Function use for save data forma to send request.
             createRegisterCategorieGrade: async function () {
-                let formData = new FormData();
+                            // Declare FormData.
+                        let formData = new FormData();
                     formData.append('name_categorie', this.categorieGradeData.Categoria);
                     formData.append('description', this.categorieGradeData.Descripcion);
                     formData.append('id_grade', this.categorieGradeData.GradoId)
@@ -683,7 +710,7 @@
                 });
             },
 
-            // Function use to delete register select.
+                // Function use to delete register select.
             deleteCategorieGradeRegister(grade) {
                 
                 // Swet alert to use question delete register. 
@@ -747,7 +774,11 @@
 
                 // Close and clear data in form update.
             hideUpdateGradeModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateGrade.hide();
+
+                    // Clean data.
                  this.gradeData = {
                     Grado: '',
                     Descripcion: '',
@@ -755,11 +786,15 @@
                     Academica: '',
                     AcademicaId: '',
                 };
+
+                    // Clean error.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateGradeModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateGrade.show();
             },
 
@@ -786,11 +821,15 @@
             
                 // Event open update modal with clean form.
             showUpdateCategorieGradeModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateCategorieGrade.show();
             },
 
                 // Capture dates into form update.
             updateDataGrade(grade) {
+
+                    // Save data to use load in inputs.
                 this.gradeData = {...grade};
                 this.showUpdateGradeModal();
             },
@@ -840,14 +879,19 @@
 
                 // Capture dates into form update.
             updateDataCategorieGrade(grade) {
+
+                    // Save data to use load in inputs.
                 this.categorieGradeData = {...grade};
+
+                    // Show modal.
                 this.showUpdateCategorieGradeModal();
             },
 
              // Function to use update register selected.
             updateRegisterCategorieGrade: async function() {
 
-                try {
+                try {   
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_categorie', this.categorieGradeData.Categoria);
                     formData.append('description', this.categorieGradeData.Descripcion);
@@ -907,6 +951,7 @@
                 // Function to use update register selected.
             updateRegisterGrade: async function() {
                 try {
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_grade', this.gradeData.Grado);
                     formData.append('description', this.gradeData.Descripcion);

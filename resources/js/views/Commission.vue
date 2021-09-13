@@ -141,10 +141,10 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file commissionService that contains functions request routes.
     import * as commissionService from '../services/commission_service';
 
-         // Import file aboutUsService that contains functions request routes.
+         // Import file studentCouncilService that contains functions request routes.
     import * as studentcouncilService from '../services/studentcouncil_service';
     
         // Begin export default.
@@ -159,7 +159,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare commissionData to use to send data in form.
                 commissionData: {
                     Comision: '',
                     Consejo: '',
@@ -263,12 +263,18 @@
 
                 // Close and clear data in form create.
             hideNewCommissionModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateCommission.hide();
+
+                    // Clean data.
                 this.commissionData = {
                     Comision: '',
                     Consejo: '',
                     Imagen: '',
                 };
+
+                    // Clean error.
                 this.errors = {};
             },
             
@@ -279,7 +285,9 @@
             
                 // Function use for save data forma to send request.
             createRegisterCommission: async function () {
-                let formData = new FormData();
+                
+                        // Declare FormData.
+                    let formData = new FormData();
                 formData.append('name_commission', this.commissionData.Comision);
                 formData.append('id_student_council', this.commissionData.Consejo);
                 formData.append('image', this.commissionData.Imagen);
@@ -461,12 +469,18 @@
 
                 // Close and clear data in form update.
             hideUpdateCommissionModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateCommission.hide();
+
+                    // Clean data.
                 this.commissionData = {
                     Comision: '',
                     Consejo: '',
                     Imagen: '',
                 };
+
+                    // Clean error.
                 this.errors = {};
             },
 
@@ -528,6 +542,7 @@
                 // Function to use update register selected.
             updateRegisterCommission: async function() {
                 try {
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_commission', this.commissionData.Comision);
                     formData.append('id_student_council', this.commissionData.Consejo);

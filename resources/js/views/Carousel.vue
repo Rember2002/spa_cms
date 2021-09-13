@@ -135,7 +135,7 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file carosuelService that contains functions request routes.
     import * as carouselService from '../services/carousel_service';
     
         // Begin export default.
@@ -150,7 +150,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare carouselData to use to send data in form.
                 carouselData: {
                     Titulo: '',
                     Estado: '',
@@ -248,23 +248,33 @@
 
                 // Close and clear data in form create.
             hideNewCarouselModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateCarousel.hide();
+
+                    // Clean data.
                 this.carouselData = {
                     Titulo: '',
                     Estado: '',
                     Imagen: '',
                 };
+
+                    // Clean error.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewCarouselModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateCarousel.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterCarousel: async function () {
-                let formData = new FormData();
+
+                        // Declare FormData.
+                    let formData = new FormData();
                 formData.append('name', this.carouselData.Titulo);
                 formData.append('state', this.carouselData.Estado);
                 formData.append('image', this.carouselData.Imagen);
@@ -428,23 +438,33 @@
 
                 // Close and clear data in form update.
             hideUpdateCarouselModal(){
+                    // Close modal.
                 this.$refs.modalUpdateCarousel.hide();
+
+                    // Clean data.
                 this.carouselData = {
                     Titulo: '',
                     Estado: '',
                     Imagen: '',
                 };
+                    // Clean error.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateCarouselModal(){
+
+                    //  Show modal.
                 this.$refs.modalUpdateCarousel.show();
             },
 
                 // Capture dates into form update.
             updateDataCarousel(carousel) {
+
+                    // Save data to use load in inputs.
                 this.carouselData = {...carousel};
+
+                    // Show modal.
                 this.showUpdateCarouselModal();
             },
 
@@ -494,6 +514,7 @@
                 // Function to use update register selected.
             updateRegisterCarousel: async function() {
                 try {
+                            // Declare FormData.
                        let formData = new FormData();
                     formData.append('name', this.carouselData.Titulo);
                     formData.append('state', this.carouselData.Estado);

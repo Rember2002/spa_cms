@@ -140,7 +140,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare questionsData to use to send data in form.
                 questionsData: {
                     Pregunta: '',
                     Respuesta: '',
@@ -192,22 +192,32 @@
 
                 // Close and clear data in form create.
             hideNewQuestionsModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateQuestions.hide();
+
+                    // Clean data.
                 this.questionsData = {
                     Pregunta: '',
                     Respuesta: '',
                     Año: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewQuestionsModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateQuestions.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterQuestions: async function () {
+
+                        // Declare FormData.
                     let formData = new FormData();
                 formData.append('question', this.questionsData.Pregunta);
                 formData.append('answer', this.questionsData.Respuesta);
@@ -374,29 +384,42 @@
 
                 // Close and clear data in form update.
             hideUpdateQuestionsModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateQuestions.hide();
+
+                    // Clean data.
                 this.questionsData = {
                     Pregunta: '',
                     Respuesta: '',
                     Año: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateQuestionsModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateQuestions.show();
             },
 
                 // Capture dates into form update.
             updateDataQuestions(question) {
+
+                    // Save data to use load in inputs.
                 this.questionsData = {...question};
+
+                    // Show modal.
                 this.showUpdateQuestionsModal();
             },
 
                 // Function to use update register selected.
             updateRegisterQuestions: async function() {
-                try {
+                try {       
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('question', this.questionsData.Pregunta);
                     formData.append('answer', this.questionsData.Respuesta);

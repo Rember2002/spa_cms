@@ -1991,7 +1991,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
- // Import file aboutUsService that contains functions request routes.
+ // Import file studentCouncilService that contains functions request routes.
 
  // Begin export default.
 
@@ -2002,7 +2002,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare studentCouncilData to use to send data in form.
       studentcouncilData: {
         Año: '',
         Portada: ''
@@ -2085,15 +2085,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewStudentCouncilModal: function hideNewStudentCouncilModal() {
-      this.$refs.modalCreateStudentCouncil.hide();
+      // Close modal.
+      this.$refs.modalCreateStudentCouncil.hide(); // Clean data.
+
       this.aboutusData = {
         Año: '',
         Portada: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewStudentCouncilModal: function showNewStudentCouncilModal() {
+      // Show modal.
       this.$refs.modalCreateStudentCouncil.show();
     },
     // Function use for save data forma to send request.
@@ -2104,6 +2108,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Clean FormData.
                 formData = new FormData();
                 formData.append('year', this.studentcouncilData.Año);
                 formData.append('image', this.studentcouncilData.Portada);
@@ -2280,20 +2285,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateStudentCouncilModal: function hideUpdateStudentCouncilModal() {
-      this.$refs.modalUpdateStudentCouncil.hide();
+      // Close modal.
+      this.$refs.modalUpdateStudentCouncil.hide(); // Clean data.
+
       this.studentcouncilData = {
         Año: '',
         Portada: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateStudentCouncilModal: function showUpdateStudentCouncilModal() {
+      // Show modal.
       this.$refs.modalUpdateStudentCouncil.show();
     },
     // Capture dates into form update.
     updateDataStudentCouncil: function updateDataStudentCouncil(studentcouncil) {
-      this.studentcouncilData = _objectSpread({}, studentcouncil);
+      // Save data to use load in inputs.
+      this.studentcouncilData = _objectSpread({}, studentcouncil); // Show modals.
+
       this.showUpdateStudentCouncilModal();
     },
     // Method for update attach image in form.
@@ -2343,6 +2354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('year', this.studentcouncilData.Año);
                 formData.append('image', this.studentcouncilData.Portada);

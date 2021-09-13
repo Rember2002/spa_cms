@@ -66,7 +66,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="salesianexperienceData.Descripcion.length >= 1 && salesianexperienceData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="salesianexperienceData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="salesianexperienceData.Descripcion" :config="editorConfig"></ckeditor>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="col-md-6">
@@ -117,7 +117,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <b-form-textarea :state="salesianexperienceData.Descripcion.length >= 1 && salesianexperienceData.Descripcion.length < 1000" type="text" class="form-control" id="description" v-model="salesianexperienceData.Descripcion" placeholder="Ingresar Descripcion" autocomplete="off"></b-form-textarea>                 
+                        <ckeditor id="description" :editor="editor" v-model="salesianexperienceData.Descripcion" :config="editorConfig"></ckeditor>                 
                         <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
@@ -169,8 +169,11 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file salesianExperience that contains functions request routes.
     import * as salesianexperienceService from '../services/salesianexperience_service';
+
+        // Import ClassicEditor to use in component long text.
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     
         // Begin export default.
     export default {
@@ -202,6 +205,13 @@
             
             return {
 
+                    // Declare classic editor.
+                editor: ClassicEditor,
+               
+                editorConfig: {
+                    // The configuration of the editor.
+                },
+
                     // Declare min value for component datepicker.
                 min: minDate,
                 
@@ -211,7 +221,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare salesianExperienceData to use to send data in form.
                 salesianexperienceData: {
                     Evento: '',
                     Descripcion: '',
@@ -319,7 +329,11 @@
 
                 // Close and clear data in form create.
             hideNewSalesianExperienceModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateSalesianExperience.hide();
+                    
+                    // Clean data.
                 this.salesianexperienceData = {
                     Evento: '',
                     Descripcion: '',
@@ -328,17 +342,23 @@
                     Portada: '',
                     Vivencia: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewSalesianExperienceModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateSalesianExperience.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterSalesianExperience: async function () {
-                let formData = new FormData();
+
+                        // Declare FormData.
+                    let formData = new FormData();
                 formData.append('name_event', this.salesianexperienceData.Evento);
                 formData.append('description', this.salesianexperienceData.Descripcion);
                 formData.append('date', this.salesianexperienceData.Fecha);
@@ -507,7 +527,11 @@
 
                 // Close and clear data in form update.
             hideUpdateSalesianExperienceModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateSalesianExperience.hide();
+
+                    // Clean data.
                 this.salesianexperienceData = {
                     Evento: '',
                     Descripcion: '',
@@ -516,17 +540,25 @@
                     Portada: '',
                     Vivencia: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateSalesianExperienceModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateSalesianExperience.show();
             },
 
                 // Capture dates into form update.
             updateDataSalesianExperience(salesianexperience) {
+
+                    // Save data to use load in inputs.
                 this.salesianexperienceData = {...salesianexperience};
+
+                    // Show modal.
                 this.showUpdateSalesianExperienceModal();
             },
 
@@ -575,7 +607,8 @@
 
                 // Function to use update register selected.
             updateRegisterSalesianExperience: async function() {
-                try {
+                try {       
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name_event', this.salesianexperienceData.Evento);
                     formData.append('description', this.salesianexperienceData.Descripcion);

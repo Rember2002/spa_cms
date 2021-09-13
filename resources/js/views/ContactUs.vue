@@ -125,7 +125,7 @@
         // Impoort jquery to use plugin DataTable.
     import $ from 'jquery';
 
-        // Import file aboutUsService that contains functions request routes.
+        // Import file contacUsService that contains functions request routes.
     import * as contactUsService from '../services/contactus_service';
     
         // Begin export default.
@@ -140,7 +140,7 @@
                     // Declare registers to use to save display data.
                 registers: [],
 
-                    // Declare aboutusData to use to send data in form.
+                    // Declare contactUsData to use to send data in form.
                 contactusData: {
                     Telefono: '',
                     Direccion: '',
@@ -192,22 +192,32 @@
 
                 // Close and clear data in form create.
             hideNewContactUsModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateContactUs.hide();
+
+                    // Clean data.
                 this.contactusData = {
                     Telefono: '',
                     Direccion: '',
                     Correspondiente: '',
                 };
+
+                    // Clena error.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewContactUsModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateContactUs.show();
             },
             
                 // Function use for save data forma to send request.
             createRegisterContactUs: async function () {
+
+                        // Declare FormData.
                     let formData = new FormData();
                 formData.append('phone', this.contactusData.Telefono);
                 formData.append('direction', this.contactusData.Direccion);
@@ -374,12 +384,18 @@
 
                 // Close and clear data in form update.
             hideUpdateContactUsModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateContactUs.hide();
+
+                    // Clean data.
                 this.contactusData = {
                     Telefono: '',
                     Direccion: '',
                     Correspondiente: '',
                 };
+
+                    // Clean error.
                 this.errors = {};
             },
 
@@ -390,13 +406,18 @@
 
                 // Capture dates into form update.
             updateDataContactUs(contactus) {
+
+                    // Save data to use load in inputs.
                 this.contactusData = {...contactus};
+
+                    // Show modal.
                 this.showUpdateContactUsModal();
             },
 
                 // Function to use update register selected.
             updateRegisterContactUs: async function() {
                 try {
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('phone', this.contactusData.Telefono);
                     formData.append('direction', this.contactusData.Direccion);

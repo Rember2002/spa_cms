@@ -2041,11 +2041,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
  // Import file aboutUsService that contains functions request routes.
 
+ // Import ClassicEditor to use in component long text.
 
  // Begin export default.
 
@@ -2157,18 +2159,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewAboutUsModal: function hideNewAboutUsModal() {
-      this.$refs.modalCreateAboutUs.hide();
+      // Close modal.
+      this.$refs.modalCreateAboutUs.hide(); // Clean data.
+
       this.aboutusData = {
         Titulo: '',
         Contenido: '',
         Tipo: '',
         Año: '',
         Portada: ''
-      };
+      }; // CLean errores.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewAboutUsModal: function showNewAboutUsModal() {
+      // Show modal.
       this.$refs.modalCreateAboutUs.show();
     },
     // Function use for save data forma to send request.
@@ -2358,23 +2364,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateAboutUsModal: function hideUpdateAboutUsModal() {
-      this.$refs.modalUpdateAboutUs.hide();
+      // Close modal.
+      this.$refs.modalUpdateAboutUs.hide(); // Clean data.
+
       this.aboutusData = {
         Titulo: '',
         Contenido: '',
         Tipo: '',
         Año: '',
         Portada: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateAboutUsModal: function showUpdateAboutUsModal() {
+      // Show modal.
       this.$refs.modalUpdateAboutUs.show();
     },
     // Capture dates into form update.
     updateDataAboutUs: function updateDataAboutUs(aboutus) {
-      this.aboutusData = _objectSpread({}, aboutus);
+      // Save data to use load.
+      this.aboutusData = _objectSpread({}, aboutus); // Show modal.
+
       this.showUpdateAboutUsModal();
     },
     // Method for update attach image in form.
@@ -2424,6 +2436,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('name', this.aboutusData.Titulo);
                 formData.append('description', this.aboutusData.Contenido);

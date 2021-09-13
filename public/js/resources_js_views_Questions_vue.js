@@ -2007,7 +2007,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // Declare registers to use to save display data.
       registers: [],
-      // Declare aboutusData to use to send data in form.
+      // Declare questionsData to use to send data in form.
       questionsData: {
         Pregunta: '',
         Respuesta: '',
@@ -2053,16 +2053,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form create.
     hideNewQuestionsModal: function hideNewQuestionsModal() {
-      this.$refs.modalCreateQuestions.hide();
+      // Close modal.
+      this.$refs.modalCreateQuestions.hide(); // Clean data.
+
       this.questionsData = {
         Pregunta: '',
         Respuesta: '',
         Año: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open new modal with clean form create.
     showNewQuestionsModal: function showNewQuestionsModal() {
+      // Show modal.
       this.$refs.modalCreateQuestions.show();
     },
     // Function use for save data forma to send request.
@@ -2073,6 +2077,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('question', this.questionsData.Pregunta);
                 formData.append('answer', this.questionsData.Respuesta);
@@ -2250,21 +2255,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Close and clear data in form update.
     hideUpdateQuestionsModal: function hideUpdateQuestionsModal() {
-      this.$refs.modalUpdateQuestions.hide();
+      // Close modal.
+      this.$refs.modalUpdateQuestions.hide(); // Clean data.
+
       this.questionsData = {
         Pregunta: '',
         Respuesta: '',
         Año: ''
-      };
+      }; // Clean errors.
+
       this.errors = {};
     },
     // Event open update modal with clean form.
     showUpdateQuestionsModal: function showUpdateQuestionsModal() {
+      // Show modal.
       this.$refs.modalUpdateQuestions.show();
     },
     // Capture dates into form update.
     updateDataQuestions: function updateDataQuestions(question) {
-      this.questionsData = _objectSpread({}, question);
+      // Save data to use load in inputs.
+      this.questionsData = _objectSpread({}, question); // Show modal.
+
       this.showUpdateQuestionsModal();
     },
     // Function to use update register selected.
@@ -2276,6 +2287,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
+                // Declare FormData.
                 formData = new FormData();
                 formData.append('question', this.questionsData.Pregunta);
                 formData.append('answer', this.questionsData.Respuesta);

@@ -110,7 +110,8 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="description">Descripcion:</label>
-                        <ckeditor id="description" :editor="editor" v-model="aboutusData.Contenido" :config="editorConfig"></ckeditor>                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
+                        <ckeditor id="description" :editor="editor" v-model="aboutusData.Contenido" :config="editorConfig"></ckeditor>                        
+                        <div class="invalid-feedback-validation" v-if="errors.description">{{errors.description[0]}}</div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="type">Tipo:</label>
@@ -159,6 +160,7 @@
         // Import file aboutUsService that contains functions request routes.
     import * as aboutUsService from '../services/aboutus_service';
 
+        // Import ClassicEditor to use in component long text.
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     
         // Begin export default.
@@ -205,8 +207,10 @@
 
             // Mounted data for registers in datatable.
         mounted() {
+                
                 // Call method function to use load data.
             this.loadRegisterAboutUs();
+            
             },
             // End mounted data.
 
@@ -285,7 +289,11 @@
 
                 // Close and clear data in form create.
             hideNewAboutUsModal() {
+
+                    // Close modal.
                 this.$refs.modalCreateAboutUs.hide();
+                    
+                    // Clean data.
                 this.aboutusData = {
                     Titulo: '',
                     Contenido: '',
@@ -293,11 +301,14 @@
                     Año: '',
                     Portada: '',
                 };
+                    // CLean errores.
                 this.errors = {};
             },
             
                 // Event open new modal with clean form create.
             showNewAboutUsModal() {
+
+                    // Show modal.
                 this.$refs.modalCreateAboutUs.show();
             },
             
@@ -337,6 +348,7 @@
                     case 422:
                             // Load error validations.
                         this.errors = error.response.data.errors;
+                            
                             // Show swet alert indicate succeso to load data.
                         this.$swal.fire({
                             icon: 'error',
@@ -352,6 +364,7 @@
                     default:
                             // Clean and close form. 
                         this.hideNewAboutUsModal();
+                            
                             // Open swet alert to indicate errors.
                         this.$swal.fire({
                             icon: 'error',
@@ -471,7 +484,11 @@
 
                 // Close and clear data in form update.
             hideUpdateAboutUsModal(){
+
+                    // Close modal.
                 this.$refs.modalUpdateAboutUs.hide();
+
+                    // Clean data.
                 this.aboutusData = {
                     Titulo: '',
                     Contenido: '',
@@ -479,17 +496,25 @@
                     Año: '',
                     Portada: '',
                 };
+
+                    // Clean errors.
                 this.errors = {};
             },
 
                 // Event open update modal with clean form.
             showUpdateAboutUsModal(){
+
+                    // Show modal.
                 this.$refs.modalUpdateAboutUs.show();
             },
 
                 // Capture dates into form update.
             updateDataAboutUs(aboutus) {
+
+                    // Save data to use load.
                 this.aboutusData = {...aboutus};
+
+                    // Show modal.
                 this.showUpdateAboutUsModal();
             },
 
@@ -539,6 +564,7 @@
                 // Function to use update register selected.
             updateRegisterAboutUs: async function() {
                 try {
+                            // Declare FormData.
                         let formData = new FormData();
                     formData.append('name', this.aboutusData.Titulo);
                     formData.append('description', this.aboutusData.Contenido);
