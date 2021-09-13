@@ -2010,7 +2010,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 // Import plugin CloudTables.
  // Impoort jquery to use plugin DataTable.
 
@@ -30135,7 +30134,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _vm.integrantData.Perfil.name
-                      ? _c("div", [
+                      ? _c("div", { staticClass: "text-center" }, [
                           _c("img", {
                             ref: "imageIntegrantDisplay",
                             attrs: { src: "", width: "225", height: "225" }
@@ -30308,8 +30307,6 @@ var render = function() {
                         2
                       ),
                       _vm._v(" "),
-                      _c("h1", [_vm._v(_vm._s(_vm.integrantData.ComisionId))]),
-                      _vm._v(" "),
                       _vm.errors.id_commission
                         ? _c(
                             "div",
@@ -30326,7 +30323,7 @@ var render = function() {
                       _vm._v("Perfil:")
                     ]),
                     _vm._v(" "),
-                    _c("div", [
+                    _c("div", { staticClass: "text-center" }, [
                       _c("img", {
                         ref: "updateImageIntegrantDisplay",
                         attrs: {
